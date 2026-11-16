@@ -3,7 +3,6 @@ import { isFloatField, parse, Reference, type Document, type Row } from "ison-ts
 import { IgsError } from "./errors.js";
 
 const INT_TEXT = /^-?[0-9]+$/;
-const CANONICAL_INT = /^(0|-?[1-9][0-9]*)$/;
 const SAFE_MAX = BigInt(Number.MAX_SAFE_INTEGER);
 const SAFE_MIN = -SAFE_MAX;
 
@@ -43,7 +42,11 @@ function qualifyProfile(doc: Document): boolean {
 function qualifyNodes(doc: Document): Map<string, Set<string>> {
   const strings = new Map<string, Set<string>>();
   const keys = new Map<string, Set<string>>();
-  const spellings = new Map<string, Map<string, string>>();
+  // Integer values (as canonical text) and digit-string values (by the integer they denote) seen per type. Core 1.4.1 compares a
+  // digit string by parseInt, so "007" is the twin of 7 and "-0" of 0, but only when the integer was added first. The adapter
+  // rejects both orders (ID_TWIN) so that the verdict never depends on row order.
+  const intValues = new Map<string, Set<string>>();
+  const digitStringValues = new Map<string, Set<string>>();
   for (const block of doc.blocks) {
     if (block.kind !== "nodes") continue;
     const type = block.name;
@@ -53,27 +56,32 @@ function qualifyNodes(doc: Document): Map<string, Set<string>> {
       // ison-ts rounds an unquoted float token such as 1.0 to the number 1 but records the token kind. Never accept it as an integer.
       if (isFloatField(row, "id")) throw new IgsError("INVALID_NODE_ID", "NOT_INT64_OR_STRING", path);
       let key: string;
-      let spelling: string | undefined;
+      let intValue: string | undefined;
+      let digitStringValue: string | undefined;
       if (typeof id === "string") {
         key = `s:${id}`;
-        spelling = CANONICAL_INT.test(id) ? id : undefined;
+        if (INT_TEXT.test(id)) digitStringValue = BigInt(id).toString();
         if (!strings.has(type)) strings.set(type, new Set());
         strings.get(type)!.add(id);
       } else if (typeof id === "number") {
         if (!Number.isInteger(id)) throw new IgsError("INVALID_NODE_ID", "NOT_INT64_OR_STRING", path);
         if (!Number.isSafeInteger(id)) throw new IgsError("INEXACT_NODE_ID", "OUT_OF_SAFE_RANGE", path);
         key = `i:${id}`;
-        spelling = String(id);
+        intValue = String(id);
       } else {
         throw new IgsError("INVALID_NODE_ID", "NOT_INT64_OR_STRING", path);
       }
       if (!keys.has(type)) keys.set(type, new Set());
-      if (!spellings.has(type)) spellings.set(type, new Map());
       if (keys.get(type)!.has(key)) throw new IgsError("DUPLICATE_NODE", undefined, path);
-      if (spelling !== undefined) {
-        const other = spellings.get(type)!.get(spelling);
-        if (other !== undefined && other !== key) throw new IgsError("ID_TWIN", undefined, path);
-        spellings.get(type)!.set(spelling, key);
+      if (!intValues.has(type)) intValues.set(type, new Set());
+      if (!digitStringValues.has(type)) digitStringValues.set(type, new Set());
+      if (intValue !== undefined) {
+        if (digitStringValues.get(type)!.has(intValue)) throw new IgsError("ID_TWIN", undefined, path);
+        intValues.get(type)!.add(intValue);
+      }
+      if (digitStringValue !== undefined) {
+        if (intValues.get(type)!.has(digitStringValue)) throw new IgsError("ID_TWIN", undefined, path);
+        digitStringValues.get(type)!.add(digitStringValue);
       }
       keys.get(type)!.add(key);
     });

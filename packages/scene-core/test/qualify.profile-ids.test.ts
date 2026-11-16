@@ -84,6 +84,22 @@ describe("node ids (A5)", () => {
     expect(igsError(() => qualify("nodes.p\nid\n0\n-0\n")).code).toBe("DUPLICATE_NODE");
     expect(igsError(() => qualify("nodes.p\nid\n7\n007\n")).code).toBe("DUPLICATE_NODE");
   });
+
+  it("rejects an integer id and a digit-string id of the same value as ID_TWIN in either row order", () => {
+    // Core 1.4.1 compares a digit string by parseInt, so "007" equals 7, "-0" equals 0 and "0042" equals 42, but only when the
+    // integer was added first. The adapter makes the verdict independent of row order by rejecting both orders.
+    const pairs: [string, string][] = [["7", '"007"'], ["0", '"-0"'], ["42", '"0042"'], ["1", '"1"']];
+    for (const [i, s] of pairs) {
+      for (const text of [`nodes.p\nid\n${i}\n${s}\n`, `nodes.p\nid\n${s}\n${i}\n`]) {
+        expect(igsError(() => qualify(text)).code, JSON.stringify(text)).toBe("ID_TWIN");
+      }
+    }
+  });
+
+  it("keeps digit strings of equal value apart when no integer is involved, and across types", () => {
+    expect(() => qualify('nodes.p\nid\n"7"\n"007"\n"-0"\n"0"\n')).not.toThrow();
+    expect(() => qualify('nodes.p\nid\n7\n\nnodes.q\nid\n"007"\n')).not.toThrow();
+  });
 });
 
 describe("edge references (A6)", () => {
