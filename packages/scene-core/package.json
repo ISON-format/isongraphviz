@@ -1,0 +1,25 @@
+{
+  "name": "isongraph-visualize-scene-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "IGS/1 Core scene compiler (V1a)",
+  "engines": { "node": ">=22" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": { "ison-graph-ts": "1.4.1", "ison-ts": "1.2.0" },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.65.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

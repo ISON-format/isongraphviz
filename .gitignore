@@ -6,4 +6,3 @@ packages/*/coverage/
 # tool scratch
 .superpowers/
 .playwright-mcp/
-# packaged duplicate of docs/.../oracles (the directory is the source of truth)
