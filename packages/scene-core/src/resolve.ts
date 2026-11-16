@@ -28,10 +28,13 @@ export function resolveInScene(scene: Scene, address: WireNodeRef | WireEdgeAddr
   throw new IgsError("UNRESOLVED_ADDRESS", undefined, undefined, describeAddress(address));
 }
 
+const MAX_DETAIL = 256;
+
 /** Error text for an address that named nothing. It must not throw: the address is untrusted (circular, BigInt, hostile toJSON). */
 function describeAddress(address: unknown): string {
   try {
-    return JSON.stringify(address, (_key, v: unknown) => (typeof v === "bigint" ? `${v}n` : v)) ?? String(address);
+    const text = JSON.stringify(address, (_key, v: unknown) => (typeof v === "bigint" ? `${v}n` : v)) ?? String(address);
+    return text.length > MAX_DETAIL ? `${text.slice(0, MAX_DETAIL)}...` : text; // bounded: a huge string must not make the error itself fail
   } catch {
     return "<address cannot be described>";
   }

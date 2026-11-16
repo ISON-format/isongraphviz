@@ -203,7 +203,14 @@ describe("resolveInScene never leaks a TypeError from its error detail (M2)", ()
     const { scene } = await scenePromise;
     const e = igsError(() => resolveInScene(scene, { id: 1n, type: "person" } as never));
     expect(e.code).toBe("UNRESOLVED_ADDRESS");
-    expect(e.message.startsWith("UNRESOLVED_ADDRESS")).toBe(true);
+    expect(e.message).toBe('UNRESOLVED_ADDRESS | {"id":"1n","type":"person"}'); // the BigInt is described, not just survived
+  });
+
+  it("returns UNRESOLVED_ADDRESS, with a bounded message, for an address holding a very long string", async () => {
+    const { scene } = await scenePromise;
+    const e = igsError(() => resolveInScene(scene, { id: "x".repeat(2 ** 29 - 64), type: "p" }));
+    expect(e.code).toBe("UNRESOLVED_ADDRESS");
+    expect(e.message.length).toBeLessThan(1000);
   });
 
   it("returns UNRESOLVED_ADDRESS when serializing the address itself throws", async () => {

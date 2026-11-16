@@ -39,6 +39,8 @@ function qualifyBlocks(doc: Document): void {
     // M7: ison-ts assigns row[column] = value, so a column named __proto__ re-parents the row to that value (a Reference, which has
     // `id` and `type`) and the row then appears to hold columns it does not have. No other column name changes a row's prototype.
     if (block.fields.includes("__proto__")) throw new IgsError("MALFORMED_SOURCE", "PROTOTYPE_FIELD", path);
+    // R1: a repeated column name makes the parser keep only the last cell (row[column] = value), so the earlier cell is lost silently.
+    if (new Set(block.fields).size !== block.fields.length) throw new IgsError("MALFORMED_SOURCE", "DUPLICATE_FIELD", path);
     if (block.summaryRows.length > 0) throw new IgsError("MALFORMED_SOURCE", "SUMMARY_ROWS", path);
     if (block.kind === "meta") {
       if (block.name !== "graph" && block.name.toLowerCase() === "graph") throw profileError("MALFORMED_META", `block name ${block.name}`);
