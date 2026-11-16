@@ -1,5 +1,5 @@
 // packages/scene-core/src/qualify.ts
-import { isFloatField, parse, Reference, type Document } from "ison-ts";
+import { isFloatField, parse, Reference, type Document, type Row } from "ison-ts";
 import { IgsError } from "./errors.js";
 
 const INT_TEXT = /^-?[0-9]+$/;
@@ -89,18 +89,58 @@ function requireExactRef(r: Reference, strings: Map<string, Set<string>>, path: 
   if (v > SAFE_MAX || v < SAFE_MIN) throw new IgsError("INEXACT_NODE_ID", "OUT_OF_SAFE_RANGE", path);
 }
 
-export interface Qualified { directed: boolean }
+/**
+ * The endpoint identity Core's resolver gives a reference: an existing string id of that type wins, otherwise
+ * integer text is that integer. A6 has already shown integer text to be within +/-(2^53-1) unless it names a string.
+ * Keys are structured (JSON tuples), never delimiter-joined text.
+ */
+export function endpointKey(r: Reference, strings: Map<string, Set<string>>): string {
+  const type = r.type as string;
+  if (strings.get(type)?.has(r.id)) return JSON.stringify([type, "s", r.id]);
+  if (INT_TEXT.test(r.id)) return JSON.stringify([type, "i", BigInt(r.id).toString()]); // BigInt("-0") is 0n, BigInt("007") is 7n
+  return JSON.stringify([type, "s", r.id]);
+}
 
-export function qualify(text: string): Qualified {
-  let doc: Document;
-  try {
-    doc = parse(text);
-  } catch (e) {
-    throw new IgsError("MALFORMED_SOURCE", "PARSE_ERROR", undefined, (e as Error).message);
+export const pairKey = (a: string, b: string): string => JSON.stringify([a, b]);
+
+function bagOf(row: Row): Map<string, unknown> {
+  const m = new Map<string, unknown>();
+  for (const [k, v] of Object.entries(row)) {
+    if (k === "source" || k === "target" || v === null) continue; // null members are elided (Semantic/2 1.3)
+    m.set(k, v);
   }
-  const directed = qualifyProfile(doc);
-  const strings = qualifyNodes(doc);
-  // Edge pass: Task 7 replaces this loop with qualifyEdges (duplicates and mirror pairs).
+  return m;
+}
+
+const unverifiable = (v: unknown): boolean => typeof v === "number" && Number.isInteger(v) && !Number.isSafeInteger(v);
+
+function sameValue(a: unknown, b: unknown): boolean {
+  if (a instanceof Reference || b instanceof Reference) {
+    return a instanceof Reference && b instanceof Reference && a.type === b.type && a.id === b.id;
+  }
+  return typeof a === typeof b && a === b; // 0 === -0; 1 and 1.0 are both the number 1
+}
+
+function compareMirror(r1: Row, r2: Row, path: string): void {
+  const a = bagOf(r1);
+  const b = bagOf(r2);
+  for (const v of [...a.values(), ...b.values()]) {
+    if (unverifiable(v)) throw new IgsError("UNDIRECTED_EDGE_CONFLICT", "UNVERIFIABLE_PROPERTY_VALUE", path);
+  }
+  if (a.size !== b.size) throw new IgsError("UNDIRECTED_EDGE_CONFLICT", "PROPERTY_MISMATCH", path);
+  for (const [k, v] of a) {
+    if (!b.has(k) || !sameValue(v, b.get(k))) throw new IgsError("UNDIRECTED_EDGE_CONFLICT", "PROPERTY_MISMATCH", path);
+  }
+}
+
+interface EdgeRow { row: Row; path: string; src: string; tgt: string }
+
+/**
+ * A6 + A7 on the Document rows. Rows are collected per RELATION across the whole document (a relation may be
+ * split over several `edges.<rel>` blocks), then duplicates are rejected first, then mirror pairs are compared.
+ */
+function qualifyEdges(doc: Document, directed: boolean, strings: Map<string, Set<string>>): void {
+  const byRel = new Map<string, EdgeRow[]>();
   for (const block of doc.blocks) {
     if (block.kind !== "edges") continue;
     block.rows.forEach((row, i) => {
@@ -112,8 +152,47 @@ export function qualify(text: string): Qualified {
       }
       requireExactRef(s, strings, `${path}.source`);
       requireExactRef(t, strings, `${path}.target`);
+      const list = byRel.get(block.name) ?? [];
+      list.push({ row, path, src: endpointKey(s, strings), tgt: endpointKey(t, strings) });
+      byRel.set(block.name, list);
     });
   }
+
+  const firsts = new Map<string, Map<string, number>>();
+  for (const [rel, list] of byRel) {
+    const first = new Map<string, number>();
+    list.forEach((e, i) => {
+      const key = pairKey(e.src, e.tgt);
+      if (first.has(key)) throw new IgsError("DUPLICATE_EDGE", undefined, e.path); // same orientation, even with equal properties
+      first.set(key, i);
+    });
+    firsts.set(rel, first);
+  }
+  if (directed) return;
+
+  for (const [rel, list] of byRel) {
+    const first = firsts.get(rel) as Map<string, number>;
+    list.forEach((e, i) => {
+      if (e.src === e.tgt) return; // a single self-loop row: nothing to compare
+      const j = first.get(pairKey(e.tgt, e.src));
+      if (j === undefined || j < i) return; // no mirror row, or already compared from the other side
+      compareMirror(e.row, (list[j] as EdgeRow).row, `${e.path}/${(list[j] as EdgeRow).path}`);
+    });
+  }
+}
+
+export interface Qualified { directed: boolean }
+
+export function qualify(text: string): Qualified {
+  let doc: Document;
+  try {
+    doc = parse(text);
+  } catch (e) {
+    throw new IgsError("MALFORMED_SOURCE", "PARSE_ERROR", undefined, (e as Error).message);
+  }
+  const directed = qualifyProfile(doc);
+  const strings = qualifyNodes(doc);
+  qualifyEdges(doc, directed, strings);
   return { directed };
 }
 
