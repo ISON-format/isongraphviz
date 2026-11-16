@@ -22,24 +22,49 @@ function quote(s: string): string {
   return JSON.stringify(s);
 }
 
-export function canonicalize(v: CJValue): string {
+function serialize(v: CJValue, signed: boolean): string {
   if (typeof v === "string") return quote(v);
   if (typeof v === "boolean") return v ? "true" : "false";
   if (typeof v === "number") {
-    if (!Number.isSafeInteger(v) || v < 0 || Object.is(v, -0)) throw new IgsError("INVALID_SCENE", "INVALID_NUMBER");
+    if (!Number.isSafeInteger(v) || (!signed && v < 0) || Object.is(v, -0)) throw new IgsError("INVALID_SCENE", "INVALID_NUMBER");
     return String(v);
   }
-  if (Array.isArray(v)) return `[${v.map((x) => canonicalize(x)).join(",")}]`;
+  if (Array.isArray(v)) return `[${v.map((x) => serialize(x, signed)).join(",")}]`;
   if (v !== null && typeof v === "object") {
     const keys = Object.keys(v).sort(); // default sort = UTF-16 code units = RFC 8785 key order
     const parts = keys.map((k) => {
       const item = v[k];
       if (item === undefined) throw new IgsError("INVALID_SCENE", "INVALID_VALUE", k);
-      return `${quote(k)}:${canonicalize(item)}`;
+      return `${quote(k)}:${serialize(item, signed)}`;
     });
     return `{${parts.join(",")}}`;
   }
   throw new IgsError("INVALID_SCENE", "INVALID_VALUE");
 }
 
+/** IGS-CJ/1. Unchanged: no negative numbers. */
+export function canonicalize(v: CJValue): string { return serialize(v, false); }
+/** IGL-CJ/1: IGS-CJ/1 plus negative safe integers (never -0). Deliberately a separate name; scenes must never use it. */
+export function canonicalizeSigned(v: CJValue): string { return serialize(v, true); }
 export const canonicalBytes = (v: CJValue): Uint8Array => new TextEncoder().encode(canonicalize(v));
+export const canonicalBytesSigned = (v: CJValue): Uint8Array => new TextEncoder().encode(canonicalizeSigned(v));
+
+export interface CJLimits { signed: boolean; maxDepth: number }
+export interface CJViolation { reason: "INVALID_STRING" | "INVALID_NUMBER" | "TOO_DEEP" | "INVALID_VALUE"; path: string }
+/** First violation of the canonical value domain, or null. Never throws. `maxDepth` nested arrays/objects are allowed. */
+export function cjViolation(v: unknown, path: string, limits: CJLimits, depth = 0): CJViolation | null {
+  if (typeof v === "string") return hasLoneSurrogate(v) ? { reason: "INVALID_STRING", path } : null;
+  if (typeof v === "boolean") return null;
+  if (typeof v === "number") return Number.isSafeInteger(v) && (limits.signed || v >= 0) && !Object.is(v, -0) ? null : { reason: "INVALID_NUMBER", path };
+  if (Array.isArray(v)) {
+    if (depth >= limits.maxDepth) return { reason: "TOO_DEEP", path };
+    for (let i = 0; i < v.length; i++) { const r = cjViolation(v[i], `${path}[${i}]`, limits, depth + 1); if (r) return r; }
+    return null;
+  }
+  if (typeof v === "object" && v !== null) {
+    if (depth >= limits.maxDepth) return { reason: "TOO_DEEP", path };
+    for (const [k, x] of Object.entries(v)) { const r = cjViolation(x, `${path}.${k}`, limits, depth + 1); if (r) return r; }
+    return null;
+  }
+  return { reason: "INVALID_VALUE", path };
+}
