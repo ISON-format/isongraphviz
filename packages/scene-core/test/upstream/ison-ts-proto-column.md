@@ -1,6 +1,6 @@
 # ison-ts: a `__proto__` column re-parents the row and invents `id`/`type`
 
-Draft issue for `ISON-format/ison` (package `ison-ts`). **Not filed**: filing is publication, which the owner has not authorized.
+Draft issue for `ISON-format/ison` (package `ison-ts`). **Reported privately** on 2026-11-16 as the draft security advisory GHSA-4q46-pwrh-hhf9 (maintainers only). This public text is held back until the maintainers have triaged it; the source location is `ison-ts/src/index.ts:548`.
 Verified against `ison-ts` 1.2.0 on Node 22.23.5 and 24.18.0.
 
 ## Summary

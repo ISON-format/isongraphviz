@@ -233,12 +233,17 @@ describe("resolveInScene never leaks a TypeError from its error detail (M2)", ()
   });
 });
 
-// Post-closure hardening: the identity key is built with JSON.stringify, so an object with a toJSON() that returns the right
-// string used to resolve as if it were that string. Every address component must be a primitive string before any key is built.
+// Post-closure hardening: the identity key is built with JSON.stringify, and decodeNodeId duck-types its input, so an object with a
+// toJSON() (or with startsWith/slice/toString) that yields the right string used to resolve as if it were that string. Every address
+// component must be a primitive string, read ONCE, before any key is built. Each case below was checked to resolve (a real node or edge)
+// when its own check is removed, so a regression in any single check fails a test.
 describe("resolveInScene accepts only primitive-string address components", () => {
   const scenePromise = compileScene(bytesOf("o1-basic.source.ison"), "ison-v1");
-  const impostor = <T extends string>(real: T) => ({ toJSON: () => real });
-  const stringObject = <T extends string>(real: T) => new String(real); // eslint-disable-line no-new-wrappers
+  const jsonImpostor = (real: string) => ({ toJSON: () => real });
+  const duckId = (real: string) => ({ startsWith: (p: string) => real.startsWith(p), slice: (n: number) => real.slice(n), toString: () => real });
+  /** A component that is a string on its first read and an impostor on every later read (check-then-use race). */
+  const flipping = (first: unknown, later: unknown) => { let n = 0; return () => (n++ === 0 ? first : later); };
+  const withGetter = (o: object, key: string, get: () => unknown) => Object.defineProperty({ ...o }, key, { enumerable: true, get });
 
   it("the unmodified stored addresses still resolve (control)", async () => {
     const { scene } = await scenePromise;
@@ -246,30 +251,61 @@ describe("resolveInScene accepts only primitive-string address components", () =
     expect(resolveInScene(scene, structuredClone(scene.edges[0]!.ref))).toBe(scene.edges[0]);
   });
 
-  it("rejects a node address whose type or id is an object that serializes to the right string", async () => {
+  it("rejects a node address whose type, or whose id, only looks like the right string", async () => {
     const { scene } = await scenePromise;
     const ref = scene.nodes[0]!.ref;
-    for (const [name, a] of [
-      ["type with toJSON", { id: ref.id, type: impostor(ref.type) }],
-      ["id with toJSON", { id: impostor(ref.id), type: ref.type }],
-      ["type as String object", { id: ref.id, type: stringObject(ref.type) }],
-      ["type as one-element array", { id: ref.id, type: [ref.type] }],
-    ] as const) {
-      expect(igsError(() => resolveInScene(scene, a as never)).code, name).toBe("UNRESOLVED_ADDRESS");
-    }
+    expect(igsError(() => resolveInScene(scene, { id: ref.id, type: jsonImpostor(ref.type) } as never)).code).toBe("UNRESOLVED_ADDRESS");
+    expect(igsError(() => resolveInScene(scene, { id: duckId(ref.id), type: ref.type } as never)).code).toBe("UNRESOLVED_ADDRESS");
   });
 
-  it("rejects an edge address whose rel, ord or endpoint type is such an object", async () => {
+  it("rejects an edge address whose rel, ord, or endpoint type or id only looks like the right string", async () => {
     const { scene } = await scenePromise;
     const e = scene.edges[0]!.ref;
-    for (const [name, a] of [
-      ["rel with toJSON", { ...e, rel: impostor(e.rel) }],
-      ["ord with toJSON", { ...e, ord: impostor(e.ord) }],
-      ["ord as the number 0", { ...e, ord: 0 }],
-      ["src.type with toJSON", { ...e, src: { ...e.src, type: impostor(e.src.type) } }],
-      ["tgt.id with toJSON", { ...e, tgt: { ...e.tgt, id: impostor(e.tgt.id) } }],
-    ] as const) {
-      expect(igsError(() => resolveInScene(scene, a as never)).code, name).toBe("UNRESOLVED_ADDRESS");
-    }
+    for (const a of [
+      { ...e, rel: jsonImpostor(e.rel) },
+      { ...e, ord: jsonImpostor(e.ord) },
+      { ...e, src: { ...e.src, type: jsonImpostor(e.src.type) } },
+      { ...e, src: { ...e.src, id: duckId(e.src.id) } },
+      { ...e, tgt: { ...e.tgt, type: jsonImpostor(e.tgt.type) } },
+      { ...e, tgt: { ...e.tgt, id: duckId(e.tgt.id) } },
+    ]) expect(igsError(() => resolveInScene(scene, a as never)).code).toBe("UNRESOLVED_ADDRESS");
+  });
+
+  it("reads each component exactly once, so the key is built from the value that was checked", async () => {
+    const { scene } = await scenePromise;
+    const n = scene.nodes[0]!.ref;
+    const e = scene.edges[0]!.ref;
+    const counted = (o: object, key: string, value: unknown, reads: Record<string, number>) => withGetter(o, key, () => { reads[key] = (reads[key] ?? 0) + 1; return value; });
+    const nodeReads: Record<string, number> = {};
+    const node = counted(counted({}, "id", n.id, nodeReads), "type", n.type, nodeReads);
+    expect(resolveInScene(scene, node as never)).toBe(scene.nodes[0]);
+    expect(nodeReads).toEqual({ id: 1, type: 1 });
+    const edgeReads: Record<string, number> = {};
+    let edge: object = counted({}, "ord", e.ord, edgeReads);
+    for (const [k, v] of [["rel", e.rel], ["src", e.src], ["tgt", e.tgt]] as const) edge = counted(edge, k, v, edgeReads);
+    expect(resolveInScene(scene, edge as never)).toBe(scene.edges[0]);
+    expect(edgeReads).toEqual({ ord: 1, rel: 1, src: 1, tgt: 1 });
+  });
+
+  it("rejects an address whose FIRST read is an impostor even if later reads would be the right string", async () => {
+    const { scene } = await scenePromise;
+    const n = scene.nodes[0]!.ref;
+    const e = scene.edges[0]!.ref;
+    const cases: object[] = [
+      withGetter({ id: n.id }, "type", flipping(jsonImpostor(n.type), n.type)),
+      withGetter({ type: n.type }, "id", flipping(duckId(n.id), n.id)),
+      withGetter(e, "rel", flipping(jsonImpostor(e.rel), e.rel)),
+      withGetter(e, "ord", flipping(jsonImpostor(e.ord), e.ord)),
+      withGetter(e, "src", flipping({ ...e.src, type: jsonImpostor(e.src.type) }, e.src)),
+      withGetter(e, "tgt", flipping({ ...e.tgt, id: duckId(e.tgt.id) }, e.tgt)),
+    ];
+    for (const a of cases) expect(igsError(() => resolveInScene(scene, a as never)).code).toBe("UNRESOLVED_ADDRESS");
+  });
+
+  it("still resolves an address whose getters return the same string every time", async () => {
+    const { scene } = await scenePromise;
+    const n = scene.nodes[0]!.ref;
+    const stable = withGetter({ id: n.id }, "type", () => n.type);
+    expect(resolveInScene(scene, stable as never)).toBe(scene.nodes[0]);
   });
 });

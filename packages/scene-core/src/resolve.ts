@@ -11,32 +11,42 @@ const isEdgeAddress = (a: WireNodeRef | WireEdgeAddress): a is WireEdgeAddress =
 const isEdgeObject = (o: SceneNode | SceneEdge): o is SceneEdge => "src" in o.ref;
 
 /**
- * The identity key is built with JSON.stringify, which would turn an object with a toJSON() (or a String object, or a one-element
- * array) into the string it returns, so such a value could resolve as if it were that string. Every component of an address must
- * therefore be a primitive string BEFORE any key is built. Whether the strings are well formed is decided later, as before.
+ * Each component of an address is read exactly ONCE into an owned copy, and it must be a primitive string. The identity key is built
+ * from the copy only. Reading twice would let a getter or Proxy answer with a string for the check and an impostor for the key, and an
+ * object with a toJSON() (which JSON.stringify honours) or with startsWith/slice/toString (which decodeNodeId duck-types) would resolve
+ * as if it were that string. Whether the strings are well formed is decided later, as before.
  */
-const isWireNodeStrings = (n: unknown): boolean => {
-  if (typeof n !== "object" || n === null) return false;
-  const o = n as Record<string, unknown>;
-  return typeof o["id"] === "string" && typeof o["type"] === "string";
+function stringsOf(o: unknown, keys: readonly string[]): Record<string, string> {
+  if (typeof o !== "object" || o === null) throw new TypeError("address must be an object");
+  const read = o as Record<string, unknown>;
+  const copy: Record<string, string> = {};
+  for (const k of keys) {
+    const v = read[k];
+    if (typeof v !== "string") throw new TypeError(`address component ${k} must be a string`);
+    copy[k] = v;
+  }
+  return copy;
+}
+const nodeSnapshot = (n: unknown): WireNodeRef => {
+  const c = stringsOf(n, ["id", "type"]);
+  return { id: c["id"]!, type: c["type"]! };
 };
-const isWireEdgeStrings = (e: unknown): boolean => {
-  if (typeof e !== "object" || e === null) return false;
-  const o = e as Record<string, unknown>;
-  return typeof o["ord"] === "string" && typeof o["rel"] === "string" && isWireNodeStrings(o["src"]) && isWireNodeStrings(o["tgt"]);
-};
+function edgeSnapshot(e: unknown): WireEdgeAddress {
+  if (typeof e !== "object" || e === null) throw new TypeError("address must be an object");
+  const r = e as Record<string, unknown>;
+  const c = stringsOf(r, ["ord", "rel"]);
+  return { ord: c["ord"]!, rel: c["rel"]!, src: nodeSnapshot(r["src"]), tgt: nodeSnapshot(r["tgt"]) };
+}
 
 /** The stored SceneNode or SceneEdge with this typed address (`18` section 9), or UNRESOLVED_ADDRESS. */
 export function resolveInScene(scene: Scene, address: WireNodeRef | WireEdgeAddress): SceneNode | SceneEdge {
   try {
     if (isEdgeAddress(address)) {
-      if (!isWireEdgeStrings(address)) throw new TypeError("address components must be strings");
-      const key = edgeKey(edgeFromWire(address));
+      const key = edgeKey(edgeFromWire(edgeSnapshot(address)));
       const hit = scene.edges.find((e) => edgeKey(edgeFromWire(e.ref)) === key);
       if (hit) return hit;
     } else {
-      if (!isWireNodeStrings(address)) throw new TypeError("address components must be strings");
-      const key = nodeKey(nodeRefFromWire(address));
+      const key = nodeKey(nodeRefFromWire(nodeSnapshot(address)));
       const hit = scene.nodes.find((n) => nodeKey(nodeRefFromWire(n.ref)) === key);
       if (hit) return hit;
     }
