@@ -17,13 +17,24 @@ const bad = (reason: string, path?: string, detail?: string): IgsError => new Ig
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === "object" && v !== null && !Array.isArray(v);
 
+/** An extension value may nest this deep. A fixed cap keeps hostile input from overflowing the stack, and makes the verdict independent of the host. */
+const MAX_EXTENSION_DEPTH = 64;
+
 /** Extension values must stay inside the IGS-CJ/1 value domain. */
-function assertCJ(v: unknown, path: string): void {
+function assertCJ(v: unknown, path: string, depth = 0): void {
   if (typeof v === "string") { if (hasLoneSurrogate(v)) throw bad("INVALID_STRING", path); return; }
   if (typeof v === "boolean") return;
   if (typeof v === "number") { if (!Number.isSafeInteger(v) || v < 0 || Object.is(v, -0)) throw bad("INVALID_NUMBER", path); return; }
-  if (Array.isArray(v)) { v.forEach((x, i) => assertCJ(x, `${path}[${i}]`)); return; }
-  if (isObj(v)) { for (const [k, x] of Object.entries(v)) assertCJ(x, `${path}.${k}`); return; }
+  if (Array.isArray(v)) {
+    if (depth >= MAX_EXTENSION_DEPTH) throw bad("TOO_DEEP", path);
+    v.forEach((x, i) => assertCJ(x, `${path}[${i}]`, depth + 1));
+    return;
+  }
+  if (isObj(v)) {
+    if (depth >= MAX_EXTENSION_DEPTH) throw bad("TOO_DEEP", path);
+    for (const [k, x] of Object.entries(v)) assertCJ(x, `${path}.${k}`, depth + 1);
+    return;
+  }
   throw bad("INVALID_VALUE", path);
 }
 

@@ -240,6 +240,17 @@ describe("canonical form and schema", () => {
     await expectInvalid(new TextEncoder().encode(JSON.stringify(b)), "INVALID_SCENE");
   });
 
+  it("answers a deeply nested extension value with a structured error, never a stack overflow (final-review I2)", async () => {
+    const base = textOf("o1-basic.scene.json").trim();
+    const withExt = (value: string) => new TextEncoder().encode(`${base.slice(0, -1)},"x-a":${value}}`);
+    const arrays = "[".repeat(2000) + "]".repeat(2000);
+    const objects = '{"a":'.repeat(2000) + "1" + "}".repeat(2000);
+    for (const v of [arrays, objects]) {
+      const e = await igsErrorAsync(() => verifyScene(withExt(v)));
+      expect([e.code, e.reason]).toEqual(["INVALID_SCENE", "TOO_DEEP"]);
+    }
+  });
+
   it("has no layout field, so layout cannot change the scene hash (scene/layout-independence)", async () => {
     const o = load("o1-basic.scene.json"); o.layout = { x: 1 };
     await expectInvalid(bytes(o), "INVALID_SCENE", "UNKNOWN_FIELD");

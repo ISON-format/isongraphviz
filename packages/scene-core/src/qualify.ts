@@ -1,6 +1,7 @@
 // packages/scene-core/src/qualify.ts
 import { isFloatField, parse, Reference, type Document, type Row } from "ison-ts";
 import { IgsError } from "./errors.js";
+import { IDENTIFIER } from "./identity.js";
 
 const INT_TEXT = /^-?[0-9]+$/;
 const SAFE_MAX = BigInt(Number.MAX_SAFE_INTEGER);
@@ -19,6 +20,25 @@ export function decodeSource(bytes: Uint8Array): string {
 }
 
 const profileError = (reason: string, detail?: string): IgsError => new IgsError("UNSUPPORTED_GRAPH_PROFILE", reason, "meta.graph", detail);
+
+/**
+ * A9 (no silent drop, 18 Law 3). Everything the parser read must be something the compiler reads. The parser keeps a line such as
+ * `main.py` as a new block header and everything after `---` as summary rows, and Core ignores unknown block kinds, so without this
+ * check a document could lose nodes or edges and still receive a hash. Only `nodes`, `edges` and `meta` blocks are accepted, none of
+ * them may have summary rows, and a `meta.graph` look-alike (`meta.Graph`) is refused because Core would ignore its profile marker.
+ */
+function qualifyBlocks(doc: Document): void {
+  for (const block of doc.blocks) {
+    const path = `${block.kind}.${block.name}`;
+    if (block.kind !== "nodes" && block.kind !== "edges" && block.kind !== "meta") throw new IgsError("MALFORMED_SOURCE", "UNSUPPORTED_BLOCK", path);
+    if (block.summaryRows.length > 0) throw new IgsError("MALFORMED_SOURCE", "SUMMARY_ROWS", path);
+    if (block.kind === "meta") {
+      if (block.name !== "graph" && block.name.toLowerCase() === "graph") throw profileError("MALFORMED_META", `block name ${block.name}`);
+    } else if (!IDENTIFIER.test(block.name)) {
+      throw new IgsError("MALFORMED_SOURCE", "INVALID_BLOCK_NAME", path);
+    }
+  }
+}
 
 /** A4: the profile is read from the structured block, never from the raw text. */
 function qualifyProfile(doc: Document): boolean {
@@ -198,6 +218,7 @@ export function qualify(text: string): Qualified {
   } catch (e) {
     throw new IgsError("MALFORMED_SOURCE", "PARSE_ERROR", undefined, (e as Error).message);
   }
+  qualifyBlocks(doc);
   const directed = qualifyProfile(doc);
   const strings = qualifyNodes(doc);
   qualifyEdges(doc, directed, strings);
