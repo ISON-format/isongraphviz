@@ -6,3 +6,6 @@ packages/*/coverage/
 # tool scratch
 .superpowers/
 .playwright-mcp/
+# design docs (kept local)
+docs/isongraph-visualize-blueprint/
+docs/superpowers/
