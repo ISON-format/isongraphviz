@@ -25,7 +25,16 @@ export function resolveInScene(scene: Scene, address: WireNodeRef | WireEdgeAddr
   } catch {
     /* a malformed address cannot name an object */
   }
-  throw new IgsError("UNRESOLVED_ADDRESS", undefined, undefined, JSON.stringify(address));
+  throw new IgsError("UNRESOLVED_ADDRESS", undefined, undefined, describeAddress(address));
+}
+
+/** Error text for an address that named nothing. It must not throw: the address is untrusted (circular, BigInt, hostile toJSON). */
+function describeAddress(address: unknown): string {
+  try {
+    return JSON.stringify(address, (_key, v: unknown) => (typeof v === "bigint" ? `${v}n` : v)) ?? String(address);
+  } catch {
+    return "<address cannot be described>";
+  }
 }
 
 const malformedRef = (path: string, detail: string): IgsError => new IgsError("UNRESOLVED_ADDRESS", "MALFORMED_REFERENCE", path, detail);

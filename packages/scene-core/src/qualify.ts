@@ -21,6 +21,11 @@ export function decodeSource(bytes: Uint8Array): string {
 
 const profileError = (reason: string, detail?: string): IgsError => new IgsError("UNSUPPORTED_GRAPH_PROFILE", reason, "meta.graph", detail);
 
+/** A required column is read from the row's own properties only; an inherited value is never a column (M7, defence in depth). */
+export function ownValue(row: Readonly<Record<string, unknown>>, key: string): unknown {
+  return Object.prototype.hasOwnProperty.call(row, key) ? row[key] : undefined;
+}
+
 /**
  * A9 (no silent drop, 18 Law 3). Everything the parser read must be something the compiler reads. The parser keeps a line such as
  * `main.py` as a new block header and everything after `---` as summary rows, and Core ignores unknown block kinds, so without this
@@ -31,6 +36,9 @@ function qualifyBlocks(doc: Document): void {
   for (const block of doc.blocks) {
     const path = `${block.kind}.${block.name}`;
     if (block.kind !== "nodes" && block.kind !== "edges" && block.kind !== "meta") throw new IgsError("MALFORMED_SOURCE", "UNSUPPORTED_BLOCK", path);
+    // M7: ison-ts assigns row[column] = value, so a column named __proto__ re-parents the row to that value (a Reference, which has
+    // `id` and `type`) and the row then appears to hold columns it does not have. No other column name changes a row's prototype.
+    if (block.fields.includes("__proto__")) throw new IgsError("MALFORMED_SOURCE", "PROTOTYPE_FIELD", path);
     if (block.summaryRows.length > 0) throw new IgsError("MALFORMED_SOURCE", "SUMMARY_ROWS", path);
     if (block.kind === "meta") {
       if (block.name !== "graph" && block.name.toLowerCase() === "graph") throw profileError("MALFORMED_META", `block name ${block.name}`);
@@ -49,11 +57,11 @@ function qualifyProfile(doc: Document): boolean {
   if (meta.rows.length !== 1) throw profileError("MALFORMED_META", "meta.graph must have exactly one row");
   const row = meta.rows[0];
   if (meta.fields.includes("format")) {
-    const f: unknown = row["format"];
+    const f: unknown = ownValue(row, "format");
     if (f === "ison-graph-multigraph-v1") throw profileError("MULTIGRAPH");
     throw profileError(typeof f === "string" ? "UNKNOWN_FORMAT" : "MALFORMED_META");
   }
-  const directed: unknown = row["directed"];
+  const directed: unknown = ownValue(row, "directed");
   if (meta.fields.length !== 1 || meta.fields[0] !== "directed" || typeof directed !== "boolean") throw profileError("MALFORMED_META");
   return directed;
 }
@@ -72,7 +80,7 @@ function qualifyNodes(doc: Document): Map<string, Set<string>> {
     const type = block.name;
     block.rows.forEach((row, i) => {
       const path = `nodes.${type}[${i}].id`;
-      const id: unknown = row["id"];
+      const id: unknown = ownValue(row, "id");
       // ison-ts rounds an unquoted float token such as 1.0 to the number 1 but records the token kind. Never accept it as an integer.
       if (isFloatField(row, "id")) throw new IgsError("INVALID_NODE_ID", "NOT_INT64_OR_STRING", path);
       let key: string;
@@ -173,8 +181,8 @@ function qualifyEdges(doc: Document, directed: boolean, strings: Map<string, Set
     if (block.kind !== "edges") continue;
     block.rows.forEach((row, i) => {
       const path = `edges.${block.name}[${i}]`;
-      const s = row["source"];
-      const t = row["target"];
+      const s = ownValue(row, "source");
+      const t = ownValue(row, "target");
       if (!(s instanceof Reference) || !(t instanceof Reference) || s.type === undefined || t.type === undefined) {
         throw new IgsError("INVALID_EDGE_ENDPOINT", undefined, path);
       }

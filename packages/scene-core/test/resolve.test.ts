@@ -184,3 +184,44 @@ describe("the requested identity is snapshotted with the bytes (owner requiremen
     }
   });
 });
+
+// Stabilization finding M2: the error detail used JSON.stringify, which throws on a circular object or a BigInt. The documented
+// outcome for any address that names nothing is UNRESOLVED_ADDRESS, never a raw TypeError.
+describe("resolveInScene never leaks a TypeError from its error detail (M2)", () => {
+  const scenePromise = compileScene(bytesOf("o1-basic.source.ison"), "ison-v1");
+
+  it("returns UNRESOLVED_ADDRESS for a circular address", async () => {
+    const { scene } = await scenePromise;
+    const circular: Record<string, unknown> = { type: "person" };
+    circular["id"] = circular;
+    const e = igsError(() => resolveInScene(scene, circular as never));
+    expect(e.code).toBe("UNRESOLVED_ADDRESS");
+    expect(e.message.startsWith("UNRESOLVED_ADDRESS")).toBe(true);
+  });
+
+  it("returns UNRESOLVED_ADDRESS for an address that holds a BigInt", async () => {
+    const { scene } = await scenePromise;
+    const e = igsError(() => resolveInScene(scene, { id: 1n, type: "person" } as never));
+    expect(e.code).toBe("UNRESOLVED_ADDRESS");
+    expect(e.message.startsWith("UNRESOLVED_ADDRESS")).toBe(true);
+  });
+
+  it("returns UNRESOLVED_ADDRESS when serializing the address itself throws", async () => {
+    const { scene } = await scenePromise;
+    const hostile = { id: "i:1", type: "nope", toJSON() { throw new Error("boom"); } };
+    const e = igsError(() => resolveInScene(scene, hostile as never));
+    expect(e.code).toBe("UNRESOLVED_ADDRESS");
+  });
+
+  it("keeps a readable detail for an ordinary unresolved address", async () => {
+    const { scene } = await scenePromise;
+    const e = igsError(() => resolveInScene(scene, { id: "i:99", type: "person" }));
+    expect(e.message).toBe('UNRESOLVED_ADDRESS | {"id":"i:99","type":"person"}');
+  });
+
+  it("reports the same structured error through resolveInSource for an unresolvable well-formed address", async () => {
+    const { artifactSha256 } = await scenePromise;
+    const e = await igsErrorAsync(() => resolveInSource(bytesOf("o1-basic.source.ison"), { artifact_sha256: artifactSha256, address: { id: "i:99", type: "person" } }));
+    expect(e.code).toBe("UNRESOLVED_ADDRESS");
+  });
+});
