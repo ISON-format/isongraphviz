@@ -1,0 +1,10 @@
+# dependencies and build output (the prototype's committed out/ is kept as baseline evidence)
+node_modules/
+packages/*/dist/
+packages/*/coverage/
+*.tsbuildinfo
+# tool scratch
+.superpowers/
+.playwright-mcp/
+# packaged duplicate of docs/.../oracles (the directory is the source of truth)
+docs/isongraph-visualize-blueprint/oracles.zip

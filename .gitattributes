@@ -1,0 +1,3 @@
+# Byte exactness is part of the contract (artifact_sha256 hashes exact bytes; oracles and fixtures are frozen bytes).
+# No line-ending conversion anywhere in this repository.
+* -text
