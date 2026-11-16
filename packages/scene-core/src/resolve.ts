@@ -10,14 +10,32 @@ import type { ObjectRef, ResolvedIdentity, Scene, SceneEdge, SceneNode, WireEdge
 const isEdgeAddress = (a: WireNodeRef | WireEdgeAddress): a is WireEdgeAddress => "src" in a;
 const isEdgeObject = (o: SceneNode | SceneEdge): o is SceneEdge => "src" in o.ref;
 
+/**
+ * The identity key is built with JSON.stringify, which would turn an object with a toJSON() (or a String object, or a one-element
+ * array) into the string it returns, so such a value could resolve as if it were that string. Every component of an address must
+ * therefore be a primitive string BEFORE any key is built. Whether the strings are well formed is decided later, as before.
+ */
+const isWireNodeStrings = (n: unknown): boolean => {
+  if (typeof n !== "object" || n === null) return false;
+  const o = n as Record<string, unknown>;
+  return typeof o["id"] === "string" && typeof o["type"] === "string";
+};
+const isWireEdgeStrings = (e: unknown): boolean => {
+  if (typeof e !== "object" || e === null) return false;
+  const o = e as Record<string, unknown>;
+  return typeof o["ord"] === "string" && typeof o["rel"] === "string" && isWireNodeStrings(o["src"]) && isWireNodeStrings(o["tgt"]);
+};
+
 /** The stored SceneNode or SceneEdge with this typed address (`18` section 9), or UNRESOLVED_ADDRESS. */
 export function resolveInScene(scene: Scene, address: WireNodeRef | WireEdgeAddress): SceneNode | SceneEdge {
   try {
     if (isEdgeAddress(address)) {
+      if (!isWireEdgeStrings(address)) throw new TypeError("address components must be strings");
       const key = edgeKey(edgeFromWire(address));
       const hit = scene.edges.find((e) => edgeKey(edgeFromWire(e.ref)) === key);
       if (hit) return hit;
     } else {
+      if (!isWireNodeStrings(address)) throw new TypeError("address components must be strings");
       const key = nodeKey(nodeRefFromWire(address));
       const hit = scene.nodes.find((n) => nodeKey(nodeRefFromWire(n.ref)) === key);
       if (hit) return hit;

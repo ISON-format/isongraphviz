@@ -232,3 +232,44 @@ describe("resolveInScene never leaks a TypeError from its error detail (M2)", ()
     expect(e.code).toBe("UNRESOLVED_ADDRESS");
   });
 });
+
+// Post-closure hardening: the identity key is built with JSON.stringify, so an object with a toJSON() that returns the right
+// string used to resolve as if it were that string. Every address component must be a primitive string before any key is built.
+describe("resolveInScene accepts only primitive-string address components", () => {
+  const scenePromise = compileScene(bytesOf("o1-basic.source.ison"), "ison-v1");
+  const impostor = <T extends string>(real: T) => ({ toJSON: () => real });
+  const stringObject = <T extends string>(real: T) => new String(real); // eslint-disable-line no-new-wrappers
+
+  it("the unmodified stored addresses still resolve (control)", async () => {
+    const { scene } = await scenePromise;
+    expect(resolveInScene(scene, structuredClone(scene.nodes[0]!.ref))).toBe(scene.nodes[0]);
+    expect(resolveInScene(scene, structuredClone(scene.edges[0]!.ref))).toBe(scene.edges[0]);
+  });
+
+  it("rejects a node address whose type or id is an object that serializes to the right string", async () => {
+    const { scene } = await scenePromise;
+    const ref = scene.nodes[0]!.ref;
+    for (const [name, a] of [
+      ["type with toJSON", { id: ref.id, type: impostor(ref.type) }],
+      ["id with toJSON", { id: impostor(ref.id), type: ref.type }],
+      ["type as String object", { id: ref.id, type: stringObject(ref.type) }],
+      ["type as one-element array", { id: ref.id, type: [ref.type] }],
+    ] as const) {
+      expect(igsError(() => resolveInScene(scene, a as never)).code, name).toBe("UNRESOLVED_ADDRESS");
+    }
+  });
+
+  it("rejects an edge address whose rel, ord or endpoint type is such an object", async () => {
+    const { scene } = await scenePromise;
+    const e = scene.edges[0]!.ref;
+    for (const [name, a] of [
+      ["rel with toJSON", { ...e, rel: impostor(e.rel) }],
+      ["ord with toJSON", { ...e, ord: impostor(e.ord) }],
+      ["ord as the number 0", { ...e, ord: 0 }],
+      ["src.type with toJSON", { ...e, src: { ...e.src, type: impostor(e.src.type) } }],
+      ["tgt.id with toJSON", { ...e, tgt: { ...e.tgt, id: impostor(e.tgt.id) } }],
+    ] as const) {
+      expect(igsError(() => resolveInScene(scene, a as never)).code, name).toBe("UNRESOLVED_ADDRESS");
+    }
+  });
+});
