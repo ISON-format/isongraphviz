@@ -12,7 +12,10 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run",
-    "check": "npm run typecheck && npm test && npm run build"
+    "check": "npm run typecheck && npm test && npm run build",
+    "smoke": "node scripts/smoke.mjs",
+    "smoke:browser": "node scripts/browser-smoke.mjs",
+    "bench": "node scripts/bench-compile.mjs"
   },
   "dependencies": { "ison-graph-ts": "1.4.1", "ison-ts": "1.2.0" },
   "devDependencies": {
