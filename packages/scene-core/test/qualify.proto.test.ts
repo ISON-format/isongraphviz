@@ -1,8 +1,6 @@
 // packages/scene-core/test/qualify.proto.test.ts
-// Rule A10: ison-ts stores a row as a plain object and assigns row[column] = value. A column named __proto__ with a
-// reference value therefore makes the row INHERIT from that Reference, so `row.id` reads the reference's id and a node with no id
-// column appears to have one. The adapter must fail closed before Core sees such a document.
-import { Reference } from "ison-ts";
+// Rule A10 (docs/conformance/README.md): a block that declares a prototype-sensitive column name (__proto__) is refused before any
+// scene is built. These are regression tests for the refusal; every other name stays ordinary data.
 import { describe, expect, it } from "vitest";
 import { compileSceneFromText } from "../src/compile.js";
 import { loadModel } from "../src/model.js";
@@ -15,35 +13,27 @@ const reject = (text: string, code: string, reason: string) => {
   expect([e.code, e.reason], JSON.stringify(text)).toEqual([code, reason]);
 };
 
-describe("a __proto__ column cannot fabricate graph content (A10)", () => {
-  it("rejects a node row whose id would be inherited from a __proto__ reference", () => {
-    reject("nodes.p\n__proto__ name\n:q:77 a\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
+describe("a __proto__ column is refused (A10)", () => {
+  it("in a nodes block, alone or beside a real id column", () => {
+    reject("nodes.p\n__proto__ name\nx a\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
+    reject("nodes.p\nid __proto__\n1 x\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
   });
 
-  it("rejects the column even when the row also has a real id (the prototype is still replaced)", () => {
-    reject("nodes.p\nid __proto__\n1 :q:77\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
+  it("in an edges block", () => {
+    reject("nodes.p\nid\n1\n2\n\nedges.r\n__proto__ w\nx 3\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
   });
 
-  it("rejects a __proto__ column on an edge block, with or without real endpoints", () => {
-    reject("nodes.p\nid\n1\n2\n\nedges.r\n__proto__ w\n:p:1 3\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
-    reject("nodes.p\nid\n1\n2\n\nedges.r\nsource target __proto__\n:p:1 :p:2 :p:9\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
-  });
-
-  it("rejects a __proto__ column in meta.graph, so the graph profile cannot be influenced", () => {
-    reject("meta.graph\n__proto__\n:a:b\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
-    reject("meta.graph\ndirected __proto__\nfalse :a:b\n\nnodes.p\nid\n1\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
-  });
-
-  it("rejects the column in a non-graph meta block too (the whole row set is read by the same parser)", () => {
-    reject("meta.info\n__proto__\n:a:b\n\nnodes.p\nid\n1\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
+  it("in a meta block, including meta.graph", () => {
+    reject("meta.graph\n__proto__\nx\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
+    reject("meta.info\n__proto__\nx\n\nnodes.p\nid\n1\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
   });
 
   it("reports the offending block in the error path", () => {
-    expect(igsError(() => qualify("nodes.p\n__proto__\n:q:77\n")).path).toBe("nodes.p");
+    expect(igsError(() => qualify("nodes.p\n__proto__\nx\n")).path).toBe("nodes.p");
   });
 
-  it("fails closed on every public entry, never producing a scene for the fabricated node", async () => {
-    const text = "nodes.p\n__proto__ name\n:q:77 a\n";
+  it("on every public entry, so no scene is produced", async () => {
+    const text = "nodes.p\n__proto__ name\nx a\n";
     expect((await igsErrorAsync(() => compileSceneFromText(text, "ison-v1"))).reason).toBe("PROTOTYPE_FIELD");
     expect(igsError(() => loadModel(enc(text))).reason).toBe("PROTOTYPE_FIELD");
   });
@@ -53,7 +43,6 @@ describe("required columns are read from own properties only", () => {
   it("ownValue returns an own value and ignores an inherited one", () => {
     expect(ownValue({ id: "5" }, "id")).toBe("5");
     expect(ownValue(Object.create({ id: "77" }) as Record<string, unknown>, "id")).toBeUndefined();
-    expect(ownValue(Object.create(new Reference("77", "q")) as Record<string, unknown>, "id")).toBeUndefined();
   });
 
   it("ownValue does not treat Object.prototype members as column values", () => {

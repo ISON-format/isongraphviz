@@ -36,8 +36,7 @@ function qualifyBlocks(doc: Document): void {
   for (const block of doc.blocks) {
     const path = `${block.kind}.${block.name}`;
     if (block.kind !== "nodes" && block.kind !== "edges" && block.kind !== "meta") throw new IgsError("MALFORMED_SOURCE", "UNSUPPORTED_BLOCK", path);
-    // A10: ison-ts assigns row[column] = value, so a column named __proto__ re-parents the row to that value (a Reference, which has
-    // `id` and `type`) and the row then appears to hold columns it does not have. No other column name changes a row's prototype.
+    // A10: a column named __proto__ is prototype-sensitive and is refused rather than interpreted (see docs/conformance/README.md).
     if (block.fields.includes("__proto__")) throw new IgsError("MALFORMED_SOURCE", "PROTOTYPE_FIELD", path);
     // A11: a repeated column name makes the parser keep only the last cell (row[column] = value), so the earlier cell is lost silently.
     if (new Set(block.fields).size !== block.fields.length) throw new IgsError("MALFORMED_SOURCE", "DUPLICATE_FIELD", path);

@@ -50,7 +50,7 @@ Rules for using the corpus honestly: an expected file is **never regenerated to 
 ## Run the reference implementation's tests
 
 ```bash
-cd packages/scene-core  && npm ci && npm run build && npm test     # 283 tests
+cd packages/scene-core  && npm ci && npm run build && npm test     # 279 tests
 cd ../layout-core       && npm ci && npm run build && npm test     # 282 tests
 ```
 
@@ -73,6 +73,12 @@ The reference implementation compiles ISON text through the published parser and
 | A9 | no silent drop: only `nodes`, `edges` and `meta` blocks; no summary rows; block names are identifiers; look-alike `meta` blocks are refused | `MALFORMED_SOURCE` / `UNSUPPORTED_BLOCK`, `SUMMARY_ROWS` |
 | A10 | a block that declares a column named `__proto__` is refused (prototype-sensitive column names) | `MALFORMED_SOURCE` / `PROTOTYPE_FIELD` |
 | A11 | a block that repeats a column name is refused, so no cell is silently dropped | `MALFORMED_SOURCE` / `DUPLICATE_FIELD` |
+
+## Implementation qualifications of IGS/1 (informative)
+
+[IGS-1](../specs/IGS-1.md) is frozen and this section does not change it. It records a behaviour of the reference implementation that the frozen text does not state.
+
+* **Extension-value nesting depth.** IGS-1 §3 requires `x-` values to lie inside the IGS-CJ/1 value domain but states no bound on how deeply arrays and objects may nest. The reference implementation refuses an extension value nested more than **64 levels** of arrays/objects with `INVALID_SCENE` / `TOO_DEEP` (64 levels are accepted, 65 are refused; `packages/scene-core/test/verify.test.ts`). The cap keeps hostile input from overflowing the stack and makes the verdict independent of the host. It is an implementation limit, not a rule of IGS/1: an implementation without such a cap would accept a scene that this one rejects, and no IGS/1 oracle exercises the boundary. The IGL/1 layout verifier states the same 64-level limit as part of its own contract ([IGL-1 §3](../specs/IGL-1.md); rows V20 and V41).
 
 ## Implementation notes (informative)
 

@@ -13,7 +13,7 @@ Every stage is deterministic and byte-exact: the same input always gives the sam
 
 | Path | What it is | Status |
 |---|---|---|
-| `packages/scene-core` | IGS/1 scene compiler: `compileScene`, `verifyScene`, address resolution in the source and in the scene | done, 283 tests |
+| `packages/scene-core` | IGS/1 scene compiler: `compileScene`, `verifyScene`, address resolution in the source and in the scene | done, 279 tests |
 | `packages/layout-core` | IGL/1 layout contract: `computeForceLayout`, `computeFixedLayout`, `computeLayout`, `verifyLayout`, `bindLayout`, `verifyReproducible` | done, 282 tests |
 | `docs/specs` | the public editions of the frozen specifications: [IGS/1 (scene)](docs/specs/IGS-1.md) and [IGL/1 (layout)](docs/specs/IGL-1.md) | frozen |
 | `docs/conformance` | [how to verify the corpora and an independent implementation](docs/conformance/README.md) | |

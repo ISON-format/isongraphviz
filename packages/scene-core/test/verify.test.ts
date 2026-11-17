@@ -251,6 +251,14 @@ describe("canonical form and schema", () => {
     }
   });
 
+  it("pins the extension-value nesting limit of the reference implementation: 64 levels are accepted, 65 are TOO_DEEP (conformance guide, implementation qualification)", async () => {
+    const base = textOf("o1-basic.scene.json").trim();
+    const nest = (levels: number) => new TextEncoder().encode(`${base.slice(0, -1)},"x-a":${"[".repeat(levels)}${"]".repeat(levels)}}`);
+    await expect(verifyScene(nest(64))).resolves.toBeDefined();
+    const e = await igsErrorAsync(() => verifyScene(nest(65)));
+    expect([e.code, e.reason]).toEqual(["INVALID_SCENE", "TOO_DEEP"]);
+  });
+
   it("has no layout field, so layout cannot change the scene hash (scene/layout-independence)", async () => {
     const o = load("o1-basic.scene.json"); o.layout = { x: 1 };
     await expectInvalid(bytes(o), "INVALID_SCENE", "UNKNOWN_FIELD");
