@@ -1,6 +1,6 @@
 # IGL/1 oracle corpus
 
-Status: **GENERATED AND CHECKED 2026-11-16; AWAITING THE FOCUSED RE-AUDIT. Not yet labelled frozen or qualified** (owner instruction: "Do not label the corpus frozen or qualified until it is generated, checked and reviewed"). It is the qualification corpus for `21-IGL1-DESIGN.md` rev 1 (with the 2026-11-16 closure errata) and `packages/layout-core`. History: 76 rows were independently audited (receipt: `../igl-evidence/independent-audit/`; every verdict and every positive layout was reproduced); the audit found the FORCE budget unsafe for long identifiers, and 16 rows were added under the owner's remediation ruling (F13, X04, X05, V42-V46, S14-S20, B08). The original 76 files are byte-identical to the audited ones.
+Status: **FROZEN 2026-11-16 (IGL/1 rev 1; 92 rows).** Frozen after two independent audits by reviewers who did not write the code or the corpus: (1) a full audit of the original 76 rows (every positive layout rebuilt from the contract text with independent code, every negative row judged against the contract before the implementation was run, regeneration and checksums verified); (2) a focused re-audit of the 16 rows added by the closure remediation (F13, X04, X05 rebuilt byte for byte from the contract text; S14-S20, V42-V46 and B08 judged for the right reason), of the changed execution safeguards, and of the published tree. Neither audit left an unresolved Critical or Important finding. The audit receipts are kept with the project's design documents and are not part of this repository. The 76 original files are byte-identical to the audited ones. It is the qualification corpus for `packages/layout-core` and for the IGL/1 contract (rev 1 plus the 2026-11-16 closure errata). **Not established by this corpus:** behaviour on graphs above 2,000 nodes, on engines other than V8, on hosts other than Windows 11, and wall-clock time (the FORCE budget limits estimated work, not seconds).
 
 ## What it is
 
@@ -16,14 +16,14 @@ Status: **GENERATED AND CHECKED 2026-11-16; AWAITING THE FOCUSED RE-AUDIT. Not y
 
 `SHA256SUMS` lists every file except `tools/` and itself. Directory layout: `sources/` (ISON text), `scenes/` (IGS/1 scene bytes), `layouts/` (expected IGL/1 bytes and `.layout.sha256`), `fixed/` (position inputs), `verify/` (V files), `bind/` (B layouts).
 
-## Generation rules (frozen with the corpus once it is accepted)
+## Generation rules (frozen with the corpus)
 
 1. Expected layout bytes are produced by **Python only**: Core Python `ison_graph.viz.compute_layout` (read-only import of the sibling checkout), a Python implementation of the section 4 quantizer, a Python IGL-CJ/1 writer (keys in UTF-16 order, nodes in NodeRef/2 order) and `hashlib`. No TypeScript produces an expected byte.
 2. **The UTF-16 transcoding is a compatibility shim, not evidence that unmodified Core Python behaves identically.** Core TypeScript orders node ids by UTF-16 code units and Core Python by code points; for ids mixing characters at or above U+10000 with U+E000–U+FFFF they disagree (reported upstream: ISON-format/isongraph#6). The generator feeds Core Python each id transcoded to one character per UTF-16 code unit, which makes Python's code-point order equal TypeScript's UTF-16 order without changing any Core code. Rows F09 and S13 depend on it.
 3. Scene bytes for the compiled sources come from the V1a compiler (independently frozen); the hand-written scenes (S01–S20, keybound, B06 and B07) are written by the Python generator and must be accepted by `verifyScene` (asserted by `packages/layout-core/test/oracles.test.ts`).
 4. Re-running the tools reproduces every file byte for byte (checked: regenerating into a copy and `diff -r` is empty).
 5. A TypeScript/Python mismatch is a finding to explain. **An expected file is never regenerated to make TypeScript pass.**
-6. After owner acceptance the set is frozen; later additions get new ids.
+6. The set is frozen; later additions get new ids and the existing files never change.
 
 ## Regenerate
 

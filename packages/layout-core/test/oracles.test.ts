@@ -1,4 +1,4 @@
-// packages/layout-core/test/oracles.test.ts - the IGL/1 oracle corpus (fixtures/oracles-igl): generated and checked, NOT yet labelled frozen or qualified (owner instruction).
+// packages/layout-core/test/oracles.test.ts - the IGL/1 oracle corpus (fixtures/oracles-igl): FROZEN 2026-11-16 after two independent audits (see fixtures/oracles-igl/README.md).
 // Expected layout bytes were produced by Python only (tools/make_oracles.py); nothing here regenerates them.
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -32,7 +32,7 @@ function walk(dir: string, out: string[] = []): string[] {
   return out;
 }
 
-describe("the IGL oracle corpus (generated and checked; not yet labelled frozen)", () => {
+describe("the IGL oracle corpus (frozen)", () => {
   it("the manifest has 92 rows (F 13, X 5, V 46, S 20, B 8)", () => {
     expect(rows).toHaveLength(92);
     expect(Object.fromEntries(["force", "fixed", "verify", "scene", "bind"].map((g) => [g, by(g).length]))).toEqual({ force: 13, fixed: 5, verify: 46, scene: 20, bind: 8 });
