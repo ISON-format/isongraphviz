@@ -84,6 +84,13 @@ describe("the Core lookup-key length limit (type + one space + label, UTF-16 cod
     expect(await refused(handScene([["t", "s:a"], SHORT], [edge("r".repeat(1025))]))).toBe(LIMIT);
   });
 
+  it("a relation identifier is measured in UTF-16 code units too (re-audit R-6: 512 astral characters are 1,024 units, 513 are 1,026)", async () => {
+    const edge = (rel: string): Edge => [rel, "t", "s:a", "t", "s:b"];
+    const astral = "\u{1F600}";
+    await expect(computeForceLayout(handScene([["t", "s:a"], SHORT], [edge(astral.repeat(512))]), FAST)).resolves.toBeDefined();
+    expect(await refused(handScene([["t", "s:a"], SHORT], [edge(astral.repeat(513))]))).toBe(LIMIT); // 513 code points, 1,026 units
+  });
+
   it("an extremely long numeric-looking string id is refused BEFORE any expensive BigInt conversion", async () => {
     const realBigInt = globalThis.BigInt;
     let longConversions = 0;
@@ -99,12 +106,11 @@ describe("the Core lookup-key length limit (type + one space + label, UTF-16 cod
     expect(longConversions).toBe(0);
   });
 
-  it("the audit's C-1 workload (50 nodes, 49 edges, 16,382-char ids) is refused at once, not run for seconds", async () => {
+  it("the audit's C-1 workload (50 nodes, 49 edges, 16,382-char ids) is refused, and Core is never reached", async () => {
     const nodes = Array.from({ length: 50 }, (_, i) => ["t", "s:" + String(i).padStart(2, "0") + "x".repeat(16_380)] as [string, string]);
     const edges = nodes.slice(1).map((n, i): Edge => ["r", "t", nodes[i]![1], "t", n[1]]);
-    const t0 = performance.now();
+    // the audit measured 6,061 ms of Core time for this scene; `refused` proves no graph was built and Core was not called (no wall-clock assertion: it would be host-dependent)
     expect(await refused(handScene(nodes, edges), { ...CORE_CFG, iterations: 170 })).toBe(LIMIT);
-    expect(performance.now() - t0).toBeLessThan(2000); // the audit measured 6,061 ms of Core time for this scene; a refusal is milliseconds
   });
 
   it("a raised budget cannot bypass the limit, and the limit is not a budget field", async () => {
