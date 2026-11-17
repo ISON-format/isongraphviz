@@ -57,6 +57,29 @@ export function checkBudget(nodeCount: number, edgeCount: number, iterations: nu
   if (w > BigInt(budget.maxWork)) throw new LayoutError("RESOURCE_LIMIT", "WORK_LIMIT", undefined, `work ${w} > ${budget.maxWork}`);
 }
 
+/**
+ * Hard FORCE lookup-key length limit (V2 closure audit C-1; owner ruling 2026-11-16): 1,024 UTF-16 code units, inclusive.
+ * Core keys its Maps by strings built from identifiers: layoutKey `${type} ${id}` (positions, displacements), the spring pair `${ka}|${kb}`,
+ * graph storage keyed by type, id and relation. The audit measured the same 50-node scene at 0.26 s with 16,381-character ids and 6.06 s with
+ * 16,382, at the same `W`: the work model has no identifier term, so cost is bounded by refusing long keys, not by modelling them.
+ * Measured in UTF-16 code units (how JavaScript holds the key), of the COMPLETE node key `${type} ${label}`, and of every relation
+ * identifier. A node key at the limit makes the longest derived Core key (the spring pair, two node keys and a separator) 2,049 units and an
+ * edge key under about 3,100: far inside the measured cliff. A hard safety limit of the producer, not a budget field: `options.budget` cannot
+ * raise it. It is an execution control for `igl-force/1` only; IGS/1 identity, `igl-fixed/1` and `verifyLayout` accept longer identifiers.
+ * It runs before any identifier conversion, graph construction or Core call. 21-IGL1-DESIGN.md 7.3.
+ */
+export const MAX_CORE_KEY_UNITS = 1024;
+
+export function preflightCoreKeys(scene: Scene): void {
+  const refuse = (what: string, units: number): LayoutError => new LayoutError("RESOURCE_LIMIT", "CORE_KEY_LENGTH", undefined, `${what}: ${units} UTF-16 code units > ${MAX_CORE_KEY_UNITS}`);
+  for (const n of scene.nodes) {
+    // the wire id is `s:` + id or `i:` + canonical decimal (verified), so the label is the wire id minus its two-unit tag: no decoding, no BigInt
+    const units = n.ref.type.length + 1 + (n.ref.id.length - 2);
+    if (units > MAX_CORE_KEY_UNITS) throw refuse("node key", units);
+  }
+  for (const e of scene.edges) if (e.ref.rel.length > MAX_CORE_KEY_UNITS) throw refuse("relation identifier", e.ref.rel.length);
+}
+
 const CORE_ID = /^[^\s:|]+$/; // ison-graph-ts _checkIdentifier for node ids
 const DIGITS = /^-?[0-9]+$/;
 const SAFE = BigInt(Number.MAX_SAFE_INTEGER);
@@ -162,6 +185,7 @@ export async function produceForce(input: Uint8Array, policy: Policy, budget: Fo
   const cfg = policy.config as unknown as ForceConfig;
   const { scene, sceneSha256 } = await verifyScene(input);
   checkBudget(scene.nodes.length, physicalEdgeCount(scene), cfg.iterations, budget); // before anything is built; Core is synchronous and cannot be cancelled
+  preflightCoreKeys(scene); // hard limit, not a budget field: before any identifier conversion (preflightForce) or Core graph
   preflightForce(scene.nodes);
   preflightForceEdges(scene);
   let raw: Map<string, [number, number]>;
