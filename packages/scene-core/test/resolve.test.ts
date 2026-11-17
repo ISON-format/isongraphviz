@@ -111,7 +111,7 @@ describe("resolveInSource failures and the input snapshot", () => {
   });
 });
 
-describe("the requested identity is snapshotted with the bytes ", () => {
+describe("the requested identity is snapshotted with the bytes", () => {
   it("resolves the address it was given, even if the caller mutates the reference while the call is pending", async () => {
     const bytes = bytesOf("o1-basic.source.ison");
     const { scene, artifactSha256 } = await compileScene(bytes, "ison-v1");

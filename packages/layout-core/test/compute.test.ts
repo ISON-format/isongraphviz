@@ -33,7 +33,7 @@ describe("computeLayout (generic entry)", () => {
   });
 });
 
-describe("verifyReproducible (design 6.3): conformance of the coordinates is NOT implied by a valid artifact", () => {
+describe("verifyReproducible (docs/specs/IGL-1.md §6.3): conformance of the coordinates is NOT implied by a valid artifact", () => {
   it("a genuine FORCE layout is reproduced", async () => {
     const o1 = await o1Scene(); const r = await computeLayout(o1.sceneBytes, forcePolicy);
     await expect(verifyReproducible(o1.sceneBytes, r.layoutBytes)).resolves.toBe("reproduced");

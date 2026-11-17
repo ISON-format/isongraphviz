@@ -16,7 +16,7 @@ export async function computeLayout(sceneBytes: Uint8Array, policy: Policy, opti
   return produceForce(input, p, budget);
 }
 
-/** Explicit recomputation (design 6.3): binds, recomputes with the artifact's own policy, compares bytes. */
+/** Explicit recomputation (docs/specs/IGL-1.md §6.3): binds, recomputes with the artifact's own policy, compares bytes. */
 export async function verifyReproducible(sceneBytes: Uint8Array, layoutBytes: Uint8Array, options?: ForceOptions): Promise<"reproduced" | "not-recomputable"> {
   const s = snapshotBytes(sceneBytes);
   const l = snapshotBytes(layoutBytes);

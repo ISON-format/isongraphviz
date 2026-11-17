@@ -1,6 +1,6 @@
 # IGS/1 — Scene contract
 
-Status: **frozen** (IGS/1, revision 2, with the clarifications F1, F2 and F3 incorporated below). Changing a frozen section later is a new spec version (`IGS/2`), never an edit, except where §11 allows a qualified extension. This is the public edition of the frozen contract. Section numbers are stable: the reference implementation (`packages/scene-core`) cites them.
+Status: **frozen** (IGS/1, revision 2, with the clarifications F1, F2 and F3 incorporated below). Changing a frozen section later is a new spec version (`IGS/2`), never an edit, except where §11 allows a qualified extension. This is the public edition of the frozen contract. Section numbers are stable: the reference implementation (`packages/scene-core`) cites them. This edition was curated from the frozen design document: internal history was removed and a few project-specific terms were replaced by equivalent public ones ("core producer", "core consumer"); no rule, default, address encoding, canonical byte, error meaning or version identifier changed. One transcription error in the frozen text is corrected: the escape listing in §12.
 
 The byte-exact examples are **normative files** under [`fixtures/oracles/`](../../fixtures/oracles/) (§12); the text quoted here is a reading aid, and the files win if they ever differ. [`docs/conformance/README.md`](../conformance/README.md) explains how to verify them. The companion layout contract is [IGL/1](IGL-1.md).
 
@@ -277,7 +277,7 @@ Accessible names are pure functions of the scene so that every renderer produces
   Core's loader swallows both silently in undirected graphs (fixtures n15, n16), so this is the only place they are caught.
 - **A mirror pair is exactly two rows with reversed endpoints** (`A→B` and `B→A`, `A ≠ B`). Each orientation may appear once, so a third row for the same logical edge necessarily repeats an orientation and is a `DUPLICATE_EDGE`; there is no separate "too many records" case.
 - A logical edge with a single row is one edge; its properties are never compared. A mirror pair's two rows are compared, after normalization, as follows.
-- **Normalization** follows Semantic/2 §1: null members elided; `1` equals `1.0` and `0` equals `-0.0`; floats compared as exact binary64; strings exact; booleans distinct from numbers; references compared by (type, id text).
+- **Normalization** (after Semantic/2 §1, a draft specification that is not part of this repository; the list that follows is what the reference implementation implements and what the oracles test): null members elided; `1` equals `1.0` and `0` equals `-0.0`; floats compared as exact binary64; strings exact; booleans distinct from numbers; references compared by (type, id text).
 - **Conflict.** Differing normalized bags: `UNDIRECTED_EDGE_CONFLICT` / `PROPERTY_MISMATCH`.
 - **Unverifiable values.** If either row holds an integer-valued number outside ±(2^53−1), the parser cannot show whether the source token was exact, so equality after parsing proves nothing. The pair is rejected: `UNDIRECTED_EDGE_CONFLICT` / `UNVERIFIABLE_PROPERTY_VALUE`. This applies when the two values look equal **and** when they look different, and only to mirrored pairs; property values anywhere else are never read.
 - This is a comparison rule on already-parsed rows. It is not a parser and not a reason to reimplement one.
@@ -348,7 +348,7 @@ O1 canonical bytes (504 bytes):
 {"address_scheme":"igs-addr/1","edges":[{"label":"KNOWS","ref":{"ord":"0","rel":"KNOWS","src":{"id":"i:1","type":"person"},"tgt":{"id":"s:ann","type":"person"}}}],"graph":{"directed":true,"profile":"simple"},"igs":"IGS/1","nodes":[{"category":"person","label":"1","ref":{"id":"i:1","type":"person"}},{"category":"person","label":"ann","ref":{"id":"s:ann","type":"person"}}],"source":{"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a","serialization_profile":"ison-v1"}}
 ```
 
-O5 is defined by the code-point list in `fixtures/oracles/o5-string-stress.codepoints.json` (the value of `x-test`) and its canonical bytes are the file; its hexadecimal form is the byte-level reference for the escape rules (`22 5c 22` is `\"`, `5c 5c` is `\\`, `5c 75 30 30 30 37` is `\u0007`, `7f` is a raw DEL, `e2 80 a8` is a raw U+2028, `f0 9f 98 80` is a raw U+1F600, `5c 75 30 30 30 30` is `\u0000`).
+O5 is defined by the code-point list in `fixtures/oracles/o5-string-stress.codepoints.json` (the value of `x-test`) and its canonical bytes are the file; its hexadecimal form is the byte-level reference for the escape rules (`5c 22` is `\"`, `5c 5c` is `\\`, `5c 75 30 30 30 37` is `\u0007`, `7f` is a raw DEL, `e2 80 a8` is a raw U+2028, `f0 9f 98 80` is a raw U+1F600, `5c 75 30 30 30 30` is `\u0000`).
 
 ### 12.1 How independent the oracles are, honestly
 
@@ -375,7 +375,7 @@ Each fixture has an expected verdict. Before they were frozen, each was run thro
 | Duplicate edges | `n15` undirected, two rows with the **same orientation** and identical properties; `n16` undirected, the same self-loop twice; `n17` directed duplicate (control) | `DUPLICATE_EDGE` for all three. Core swallows n15 and n16 silently (they load as if valid) and rejects n17 itself. |
 | Encoding | `n12` byte-order mark, `n13` invalid UTF-8 | `MALFORMED_SOURCE` / `INVALID_ENCODING` |
 
-`n09` is the refinement-C negative vector: Core TS loads it without complaint and both edges carry the same rounded number, which is exactly the false equality the rule forbids.
+`n09` is the negative vector for unverifiable mirrored values: Core TS loads it without complaint and both edges carry the same rounded number, which is exactly the false equality the rule forbids.
 
 ### 13.2 Further vector groups
 

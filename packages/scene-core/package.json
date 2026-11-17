@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "IGS/1 Core scene compiler (V1a)",
+  "description": "IGS/1 core scene compiler",
   "engines": { "node": ">=22" },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

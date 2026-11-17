@@ -5,7 +5,7 @@ Two frozen corpora let you check an implementation of the scene contract ([IGS/1
 | Corpus | Path | Contents | Checksums | `SHA256SUMS` digest |
 |---|---|---|---|---|
 | IGS/1 oracles | [`fixtures/oracles/`](../../fixtures/oracles/) | 4 golden scenes with their ISON sources (O1, O2, O4, O5) and 23 acceptance fixtures (`fixtures/oracles/fixtures/`, expectations in `EXPECT.tsv`) | 32 files | `e21e295dabe68707fcb18aecd07be68e5dae9f8cc350b884210489500ba01842` |
-| IGL/1 corpus | [`fixtures/oracles-igl/`](../../fixtures/oracles-igl/) | 92 manifest rows (`EXPECT.tsv`): 13 FORCE layouts, 5 FIXED layouts, 46 verification vectors, 20 scene vectors, 8 binding pairs | 144 files | `819eb4c7dd4f3ee3c75fc97026d0ca98dab30b1bd61100ab0e593587b73565e1` |
+| IGL/1 corpus | [`fixtures/oracles-igl/`](../../fixtures/oracles-igl/) | 92 manifest rows (`EXPECT.tsv`): 13 FORCE layouts, 5 FIXED layouts, 46 verification vectors, 20 scene vectors, 8 binding pairs | 144 files | `dd99281ee8bf1d501e0cb44f353c787b0feb14b200505519bbdb41612160a01c` |
 
 Both are **frozen**: existing files never change; later additions get new ids.
 
@@ -23,7 +23,7 @@ cd fixtures/oracles-igl && sha256sum -c SHA256SUMS      # 144 files: OK
 ## Check an implementation of IGS/1
 
 1. **Golden scenes.** For `o1-basic`, `o2-ids-ordering`, `o4-undirected`: compile `*.source.ison` with the `ison-v1` profile and compare your canonical bytes to `*.scene.json` byte for byte; the SHA-256 of the scene bytes is the `scene_sha256` in [IGS-1 §12](../specs/IGS-1.md). `o2-ids-ordering` needs the full INT64 range: an adapter limited to 53-bit integers must reject it with `INEXACT_NODE_ID` (that is the expected behaviour of the reference adapter). `o5-string-stress` is schema-level: it exercises the serializer only, from the code-point list `o5-string-stress.codepoints.json`.
-2. **Acceptance fixtures.** `fixtures/oracles/fixtures/EXPECT.tsv` has the columns `file`, `verdict` (`accept` or `reject`), `code` and `reason`. Run each `*.source.ison` and compare. The expectations were checked against `ison-ts` 1.2.0 and `ison-graph-ts` 1.4.1 before they were frozen.
+2. **Acceptance fixtures.** `fixtures/oracles/fixtures/EXPECT.tsv` has the columns `file`, `verdict` (`accept` or `reject`), `code` and `reason`; `-` marks an empty field (an `accept` row has no code, and a code such as `DUPLICATE_EDGE` has no reason). Run each `*.source.ison` and compare. The expectations were checked against `ison-ts` 1.2.0 and `ison-graph-ts` 1.4.1 before they were frozen.
 3. **Scene verification.** The negative cases of [IGS-1 §5.8](../specs/IGS-1.md) are unit-tested in `packages/scene-core/test/verify.test.ts`.
 
 ## Check an implementation of IGL/1
@@ -34,7 +34,7 @@ cd fixtures/oracles-igl && sha256sum -c SHA256SUMS      # 144 files: OK
 |---|---|---|---|
 | `force` | F01–F13 | lay out `scene` with the policy in `input` (a JSON config) | `layouts/<id>.layout.json`, byte for byte; its SHA-256 is in `layouts/<id>.layout.sha256` |
 | `fixed` | X01–X05 | lay out `scene` with the positions file in `input` (layout units, not thousandths) | `layouts/<id>.layout.json` |
-| `verify` | V01–V46 | run `verifyLayout` on `verify/<id>.layout.json` | the `error` column (`CODE/REASON`), or success when it is empty (V21, V24, V45, V46) |
+| `verify` | V01–V46 | run `verifyLayout` on `verify/<id>.layout.json` | the `error` column (`CODE/REASON`; a code without a reason is written `CODE/`, for example `UNSUPPORTED_FAMILY/`), or success when it is empty (V21, V24, V45, V46) |
 | `scene` | S01–S20 | lay out the hand-written `scene` with FORCE | the `error` column (`CODE/REASON`), or `layouts/<id>.layout.json` for the controls |
 | `bind` | B01–B08 | `bindLayout(scene, layout)` | the `error` column; `IGS:CODE/REASON` means the scene library's error; empty means success |
 
@@ -58,7 +58,7 @@ Node 22 or newer. Both suites passed on Node 22.23.5 and 24.18.0; the browser sm
 
 ## Adapter rules of the reference implementation (informative)
 
-The reference implementation compiles ISON text through the published parser and graph library. Its source comments refer to these adapter rules; they are checks made *before* a scene is built, and none changes the contract of [IGS/1](../specs/IGS-1.md).
+The reference implementation compiles ISON text through the published parser and graph library. Its source comments refer to these adapter rules; they are checks made *before* a scene is built, and none changes the contract of [IGS/1](../specs/IGS-1.md). Rules A9–A11 refuse sources with `MALFORMED_SOURCE` reasons (`UNSUPPORTED_BLOCK`, `SUMMARY_ROWS`, `INVALID_BLOCK_NAME`, `PROTOTYPE_FIELD`, `DUPLICATE_FIELD`) that extend the two reasons listed for that code in [IGS-1 §8](../specs/IGS-1.md): the IGS/1 error table is not exhaustive for adapter-side rejections of a source.
 
 | Rule | Check | Error |
 |---|---|---|

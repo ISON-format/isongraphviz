@@ -4,7 +4,7 @@ import copy, hashlib, json, math, os, struct, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(HERE)                                         # .../oracles-igl
-V1A = os.path.join(OUT, "..", "oracles")                            # frozen IGS/1 oracles (read-only)
+IGS_ORACLES = os.path.join(OUT, "..", "oracles")                            # frozen IGS/1 oracles (read-only)
 PY_SRC = os.environ.get("ISON_GRAPH_PY_SRC", os.path.normpath(os.path.join(OUT, "..", "..", "..", "..", "isongraph", "ison-graph", "src")))
 sys.path.insert(0, PY_SRC)
 from ison_graph import ISONGraph            # read-only import of Core Python
@@ -70,7 +70,7 @@ def emit_layout(rel, obj):
 
 def main():
     sc = lambda name: os.path.join(OUT, "scenes", name + ".scene.json")
-    o1, o4 = os.path.join(V1A, "o1-basic.scene.json"), os.path.join(V1A, "o4-undirected.scene.json")
+    o1, o4 = os.path.join(IGS_ORACLES, "o1-basic.scene.json"), os.path.join(IGS_ORACLES, "o4-undirected.scene.json")
 
     def hand_scene(nodes, edges=()):
         ns = sorted(({"category": t, "label": i[2:], "ref": {"id": i, "type": t}} for t, i in nodes), key=lambda n: ref_key(n["ref"]))

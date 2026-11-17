@@ -23,7 +23,7 @@ describe("quantize (docs/specs/IGL-1.md §4)", () => {
   it("rejects non-finite and non-number inputs as NOT_FINITE", () => {
     for (const v of [Number.NaN, Infinity, -Infinity, "1", null, undefined, 1n]) expect(code(() => quantize(v)), String(v)).toBe("INVALID_COORDINATE/NOT_FINITE");
   });
-  it("the safe-integer boundary is a binary64 fact : the decimal 9007199254740.991 is not a double", () => {
+  it("the safe-integer boundary is a binary64 fact: the decimal 9007199254740.991 is not a double", () => {
     // The nearest double is 9007199254740.990234375 (spacing 2^-9 at this magnitude); times 1000 it rounds to ...990, not ...991.
     expect(9007199254740.991).toBe(9007199254740.990234375);
     expect(quantize(9007199254740.991)).toBe(9007199254740990);
