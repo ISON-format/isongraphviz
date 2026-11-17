@@ -1,0 +1,1 @@
+{"address_scheme":"igs-addr/1","igl":"IGL/1","nodes":[{"ref":{"id":"i:1","type":"n"},"x":0,"y":0},{"ref":{"id":"i:2","type":"n"},"x":10,"y":10},{"ref":{"id":"i:3","type":"n"},"x":20,"y":20}],"policy":{"algorithm":"igl-fixed/1","config":{},"family":"FIXED"},"scale":1000,"scene_sha256":"633df6b6d02aa621b0b1b2e6c81abeb0bf2971858eb506f67b68ee62cb1e0d4f"}

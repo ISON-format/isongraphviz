@@ -1,0 +1,10 @@
+export { computeStableLayout } from "./compute.js";
+export { diffScenes } from "./diff.js";
+export { StableLayoutError } from "./errors.js";
+export type { StableErrorCode } from "./errors.js";
+export { COORD_LIMIT, DEFAULT_STABLE_BUDGET, MAX_NODE_KEY_UNITS, MAX_REL_UNITS } from "./limits.js";
+export { measureDisplacement } from "./measure.js";
+export { RECOMMENDED_PLACEMENT } from "./placement.js";
+export { snapshotLayout } from "./snapshot.js";
+export type * from "./types.js";
+export { verifyDisplacementReport, verifyStable, verifyStableReproducible } from "./verify.js";

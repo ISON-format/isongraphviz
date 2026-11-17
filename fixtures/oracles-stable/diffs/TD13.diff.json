@@ -1,0 +1,1 @@
+{"directed":{"next":true,"previous":true},"edges":{"added":[{"ord":"0","rel":"e","src":{"id":"i:1","type":"n"},"tgt":{"id":"i:2","type":"n"}}],"common":0,"removed":[]},"identical":false,"igls_diff":"IGLS-DIFF/1","nodes":{"added":[{"id":"i:1","type":"n"},{"id":"i:2","type":"n"}],"kept":[],"removed":[]}}

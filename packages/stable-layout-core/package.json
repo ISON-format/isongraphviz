@@ -1,0 +1,21 @@
+{
+  "name": "isongraph-visualize-stable-layout-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "IGLS/1 stable and incremental layout",
+  "engines": { "node": ">=22" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test && npm run build",
+    "corpus": "node scripts/corpus-check.mjs",
+    "mutate": "node scripts/mutate.mjs"
+  },
+  "dependencies": { "isongraph-visualize-scene-core": "file:../scene-core", "isongraph-visualize-layout-core": "file:../layout-core" },
+  "devDependencies": { "@types/node": "22.20.5", "typescript": "5.9.3", "vitest": "4.1.12" }
+}
