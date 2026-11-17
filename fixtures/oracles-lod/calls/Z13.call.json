@@ -1,0 +1,1 @@
+{"api":"ops","args":{"ops":[{"api":"expandGroup","args":{"target":{"members":[{"id":"s:a","type":"t"},{"id":"s:b","type":"t"}]}}}]}}

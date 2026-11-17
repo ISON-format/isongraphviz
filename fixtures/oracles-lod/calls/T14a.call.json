@@ -1,0 +1,1 @@
+{"api":"suggestGroups","args":{"rules":[{"min_leaves":2,"rule":"pendant-fold/1"},{"min_size":2,"rule":"components/1"},{"min_leaves":2,"rule":"pendant-fold/1"},{"min_leaves":3,"rule":"pendant-fold/1"},{"min_size":3,"rule":"components/1"}]}}

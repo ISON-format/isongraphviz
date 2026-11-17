@@ -1,0 +1,222 @@
+{
+ "address_scheme": "igs-addr/1",
+ "edges": [
+  {
+   "label": "q",
+   "ref": {
+    "ord": "0",
+    "rel": "q",
+    "src": {
+     "id": "i:1",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:b",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "i:1",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "i:2",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "i:1",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:a",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "i:1",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:b",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:a",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:b",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:b",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:a",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:c",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "i:2",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:c",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:c",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:d",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:c",
+     "type": "t"
+    }
+   }
+  },
+  {
+   "label": "r",
+   "ref": {
+    "ord": "0",
+    "rel": "r",
+    "src": {
+     "id": "s:e",
+     "type": "t"
+    },
+    "tgt": {
+     "id": "s:c",
+     "type": "t"
+    }
+   }
+  }
+ ],
+ "graph": {
+  "directed": true,
+  "profile": "simple"
+ },
+ "igs": "IGS/1",
+ "nodes": [
+  {
+   "category": "t",
+   "label": "1",
+   "ref": {
+    "id": "i:1",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "2",
+   "ref": {
+    "id": "i:2",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "a",
+   "ref": {
+    "id": "s:a",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "b",
+   "ref": {
+    "id": "s:b",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "c",
+   "ref": {
+    "id": "s:c",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "d",
+   "ref": {
+    "id": "s:d",
+    "type": "t"
+   }
+  },
+  {
+   "category": "t",
+   "label": "e",
+   "ref": {
+    "id": "s:e",
+    "type": "t"
+   }
+  }
+ ],
+ "source": {
+  "artifact_sha256": "b46dc3b5ed2a0f46e52a96b8f35791f607faceb7488ae85488741fb13c5003e4",
+  "serialization_profile": "ison-v1"
+ }
+}

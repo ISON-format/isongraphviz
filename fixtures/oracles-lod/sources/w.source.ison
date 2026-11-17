@@ -1,0 +1,25 @@
+nodes.t
+id
+1
+2
+a
+b
+c
+d
+e
+
+edges.r
+source target
+:t:1 :t:2
+:t:1 :t:a
+:t:1 :t:b
+:t:a :t:b
+:t:b :t:a
+:t:c :t:c
+:t:c :t:2
+:t:d :t:c
+:t:e :t:c
+
+edges.q
+source target
+:t:1 :t:b
