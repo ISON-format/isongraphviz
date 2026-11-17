@@ -11,7 +11,7 @@ function checkIdentifier(s: string, path: string): void {
   if (hasLoneSurrogate(s)) throw new IgsError("INVALID_SCENE", "INVALID_STRING", path);
 }
 
-/** The §1.2 contract, so the producer never emits what the consumer (`verifyScene`) rejects. */
+/** The IGS/1 §1.2 contract (docs/specs/IGS-1.md), so the producer never emits what the consumer (`verifyScene`) rejects. */
 function checkNodeRef(r: NodeRef, path: string): void {
   checkIdentifier(r.type, `${path}.type`);
   if (r.id.kind === "str" && hasLoneSurrogate(r.id.value)) throw new IgsError("INVALID_SCENE", "INVALID_STRING", `${path}.id`);

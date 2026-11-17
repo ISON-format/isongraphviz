@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes the IGL/1 oracle SOURCE files (ISON text). Deterministic; the 20-node mixed graph uses the same LCG as igl-evidence/ts-vs-python.mjs."""
+"""Writes the IGL/1 oracle SOURCE files (ISON text). Deterministic; the 20-node mixed graph uses a fixed linear congruential generator (state * 1664525 + 1013904223 mod 2^32)."""
 import os
 
 OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

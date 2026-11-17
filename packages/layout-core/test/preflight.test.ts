@@ -6,7 +6,7 @@ import { LayoutError } from "../src/errors.js";
 const N = (id: string, type = "p") => ({ category: type, label: id.slice(2), ref: { id, type } });
 const verdict = (...nodes: ReturnType<typeof N>[]): string => { try { preflightForce(nodes); } catch (e) { if (e instanceof LayoutError) return `${e.code}/${e.reason}`; throw e; } return "ok"; };
 
-describe("preflightForce refuses every Core representation limit (design 7.1; soundness measured in igl-evidence/order-and-collisions)", () => {
+describe("preflightForce refuses every Core representation limit (docs/specs/IGL-1.md §7.1)", () => {
   const refuse: Array<[string, ReturnType<typeof N>[], string]> = [
     ["S01 i:7 + s:7 share a Core layout key", [N("i:7"), N("s:7")], "UNSUPPORTED_SCENE/AMBIGUOUS_ORDER_KEY"],
     ["S01b same pair, other row order", [N("s:7"), N("i:7")], "UNSUPPORTED_SCENE/AMBIGUOUS_ORDER_KEY"],
@@ -38,7 +38,7 @@ describe("preflightForce refuses every Core representation limit (design 7.1; so
   it("the empty node set is acceptable", () => expect(verdict()).toBe("ok"));
 });
 
-// Review finding I-2: Core's graph.edges() overflows the call stack at ~125k physical edges in ONE relation (igl-evidence/core-edge-limit.out.txt),
+// Core's graph.edges() overflows the call stack at ~125k physical edges in ONE relation (docs/specs/IGL-1.md §7.1),
 // and the threshold depends on the host's stack size. The preflight refuses far below it, so the verdict is the same on every host.
 describe("preflightForceEdges: a cap on physical edges per relation, below Core's stack-overflow threshold", () => {
   const sceneWith = (rels: Record<string, number>, directed = true): Scene =>

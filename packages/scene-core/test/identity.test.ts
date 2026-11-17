@@ -39,7 +39,7 @@ describe("tagged node ids", () => {
     expect(edgeFromWire(edgeToWire(a))).toEqual(a);
     expect(nodeKey(a.src)).not.toBe(nodeKey({ type: "p", id: { kind: "str", value: "1" } }));
   });
-  // V2 closure audit, finding m-3 + owner ruling 2026-11-16: an oversized invalid `i:` token must be refused by LENGTH before any BigInt conversion
+  // An oversized invalid `i:` token must be refused by LENGTH before any BigInt conversion
   // (BigInt of a 4,000,000-digit string took 1.2-12 s). Behaviour for every valid or invalid token is unchanged.
   describe("INT64 decoding is bounded before conversion", () => {
     const realBigInt = globalThis.BigInt;

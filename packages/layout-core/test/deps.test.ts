@@ -23,7 +23,7 @@ describe("dependency boundary", () => {
     expect(g.version).toBe("1.4.1");
     expect(g.integrity).toBe("sha512-fgud0iClGwmCouOH6Lajpk6Ad+YSjUEXyAUVfN7S1onk16wYI7l3fkas5vRj7lafzUyntm4JbPtpy9GCsl//sg==");
   });
-  it("pins EVERY file of Core's dist (review finding M-3): a change here is a REQUALIFICATION event for igl-force/1, not an update", () => {
+  it("pins EVERY file of Core's dist: a change here is a REQUALIFICATION event for igl-force/1, not an update", () => {
     // The ESM entry we load (viz.mjs) is a stub that imports chunk-DKY73OIR.mjs, where the layout algorithm lives; ISONGraph is in index.mjs.
     const PINNED: Record<string, string> = {
       "chunk-DKY73OIR.mjs": "87c47c469758dfdd421f35e5399f3281e386fd1954fcc38dfd30fee2ff85abb2",

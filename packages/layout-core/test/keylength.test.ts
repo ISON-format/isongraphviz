@@ -1,5 +1,5 @@
-// test/keylength.test.ts - V2 closure audit finding C-1 and the owner ruling of 2026-11-16: a hard FORCE lookup-key length limit.
-// Core keys its Maps by `${type} ${id}`; the audit measured n=50 / 16,381-char ids at 0.26 s and the SAME scene with 16,382-char ids at 6 s,
+// test/keylength.test.ts - the hard FORCE lookup-key length limit (docs/specs/IGL-1.md §7.3).
+// Core keys its Maps by `${type} ${id}`; an independent audit measured n=50 / 16,381-char ids at 0.26 s and the SAME scene with 16,382-char ids at 6 s,
 // both at 0.32% of the work budget. `W` has no identifier term, so the producer refuses long keys outright, before any conversion or Core call.
 import { verifyScene } from "isongraph-visualize-scene-core";
 import { canonicalBytes, compareNodeRef, compareUtf8, nodeRefFromWire } from "isongraph-visualize-scene-core/primitives";
@@ -84,7 +84,7 @@ describe("the Core lookup-key length limit (type + one space + label, UTF-16 cod
     expect(await refused(handScene([["t", "s:a"], SHORT], [edge("r".repeat(1025))]))).toBe(LIMIT);
   });
 
-  it("a relation identifier is measured in UTF-16 code units too (re-audit R-6: 512 astral characters are 1,024 units, 513 are 1,026)", async () => {
+  it("a relation identifier is measured in UTF-16 code units too (512 astral characters are 1,024 units, 513 are 1,026)", async () => {
     const edge = (rel: string): Edge => [rel, "t", "s:a", "t", "s:b"];
     const astral = "\u{1F600}";
     await expect(computeForceLayout(handScene([["t", "s:a"], SHORT], [edge(astral.repeat(512))]), FAST)).resolves.toBeDefined();
@@ -106,10 +106,10 @@ describe("the Core lookup-key length limit (type + one space + label, UTF-16 cod
     expect(longConversions).toBe(0);
   });
 
-  it("the audit's C-1 workload (50 nodes, 49 edges, 16,382-char ids) is refused, and Core is never reached", async () => {
+  it("the 50-node long-identifier workload (50 nodes, 49 edges, 16,382-char ids) is refused, and Core is never reached", async () => {
     const nodes = Array.from({ length: 50 }, (_, i) => ["t", "s:" + String(i).padStart(2, "0") + "x".repeat(16_380)] as [string, string]);
     const edges = nodes.slice(1).map((n, i): Edge => ["r", "t", nodes[i]![1], "t", n[1]]);
-    // the audit measured 6,061 ms of Core time for this scene; `refused` proves no graph was built and Core was not called (no wall-clock assertion: it would be host-dependent)
+    // an independent audit measured 6,061 ms of Core time for this scene; `refused` proves no graph was built and Core was not called (no wall-clock assertion: it would be host-dependent)
     expect(await refused(handScene(nodes, edges), { ...CORE_CFG, iterations: 170 })).toBe(LIMIT);
   });
 

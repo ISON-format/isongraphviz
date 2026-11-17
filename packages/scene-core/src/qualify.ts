@@ -21,13 +21,13 @@ export function decodeSource(bytes: Uint8Array): string {
 
 const profileError = (reason: string, detail?: string): IgsError => new IgsError("UNSUPPORTED_GRAPH_PROFILE", reason, "meta.graph", detail);
 
-/** A required column is read from the row's own properties only; an inherited value is never a column (M7, defence in depth). */
+/** A required column is read from the row's own properties only; an inherited value is never a column (rule A10, defence in depth). */
 export function ownValue(row: Readonly<Record<string, unknown>>, key: string): unknown {
   return Object.prototype.hasOwnProperty.call(row, key) ? row[key] : undefined;
 }
 
 /**
- * A9 (no silent drop, 18 Law 3). Everything the parser read must be something the compiler reads. The parser keeps a line such as
+ * A9 (no silent drop, docs/specs/IGS-1.md Law 3). Everything the parser read must be something the compiler reads. The parser keeps a line such as
  * `main.py` as a new block header and everything after `---` as summary rows, and Core ignores unknown block kinds, so without this
  * check a document could lose nodes or edges and still receive a hash. Only `nodes`, `edges` and `meta` blocks are accepted, none of
  * them may have summary rows, and a `meta.graph` look-alike (`meta.Graph`) is refused because Core would ignore its profile marker.
@@ -36,10 +36,10 @@ function qualifyBlocks(doc: Document): void {
   for (const block of doc.blocks) {
     const path = `${block.kind}.${block.name}`;
     if (block.kind !== "nodes" && block.kind !== "edges" && block.kind !== "meta") throw new IgsError("MALFORMED_SOURCE", "UNSUPPORTED_BLOCK", path);
-    // M7: ison-ts assigns row[column] = value, so a column named __proto__ re-parents the row to that value (a Reference, which has
+    // A10: ison-ts assigns row[column] = value, so a column named __proto__ re-parents the row to that value (a Reference, which has
     // `id` and `type`) and the row then appears to hold columns it does not have. No other column name changes a row's prototype.
     if (block.fields.includes("__proto__")) throw new IgsError("MALFORMED_SOURCE", "PROTOTYPE_FIELD", path);
-    // R1: a repeated column name makes the parser keep only the last cell (row[column] = value), so the earlier cell is lost silently.
+    // A11: a repeated column name makes the parser keep only the last cell (row[column] = value), so the earlier cell is lost silently.
     if (new Set(block.fields).size !== block.fields.length) throw new IgsError("MALFORMED_SOURCE", "DUPLICATE_FIELD", path);
     if (block.summaryRows.length > 0) throw new IgsError("MALFORMED_SOURCE", "SUMMARY_ROWS", path);
     if (block.kind === "meta") {

@@ -4,7 +4,7 @@ import { LayoutError } from "../src/errors.js";
 
 const err = (f: () => unknown) => { try { f(); } catch (e) { if (e instanceof LayoutError) return `${e.code}/${e.reason ?? ""}`; throw e; } return "no error"; };
 
-describe("FORCE execution budget (design 7.3; numbers from igl-evidence/budget-measurement)", () => {
+describe("FORCE execution budget (docs/specs/IGL-1.md §7.3)", () => {
   it("the default is the measured one", () => {
     expect(DEFAULT_FORCE_BUDGET).toEqual({ maxNodes: 2000, maxWork: 100_000_000 });
     expect(Object.isFrozen(DEFAULT_FORCE_BUDGET)).toBe(true);
@@ -23,13 +23,13 @@ describe("FORCE execution budget (design 7.3; numbers from igl-evidence/budget-m
   it("does not overflow where doubles would: 2^31 iterations x 2,000 nodes", () => {
     expect(forceWork(2000, 4000, 2 ** 31 - 1)).toBe(BigInt(2 ** 31 - 1) * (1999000n + 12000n + 16000n + 4n) + 200n * 6000n);
   });
-  it("review finding I-3: a TINY graph with a huge iteration count is refused (Core pays per iteration per node and edge)", () => {
+  it("a TINY graph with a huge iteration count is refused (Core pays per iteration per node and edge)", () => {
     // n = 2, 1 edge: 24 units per iteration. The first formula charged 2, so 99,999,600 iterations passed and blocked for 13.6 s.
     expect(err(() => checkBudget(2, 1, 99_999_600, DEFAULT_FORCE_BUDGET))).toBe("RESOURCE_LIMIT/WORK_LIMIT");
     expect(err(() => checkBudget(2, 1, 4_000_000, DEFAULT_FORCE_BUDGET))).toBe("no error"); // 96,000,600
     expect(err(() => checkBudget(2, 1, 4_200_000, DEFAULT_FORCE_BUDGET))).toBe("RESOURCE_LIMIT/WORK_LIMIT"); // 100,800,600
   });
-  it("the revised per-iteration charge dominates the measured cost at every recorded point (igl-evidence/budget-iteration-model.out.txt)", () => {
+  it("the revised per-iteration charge dominates the measured cost at every recorded point (docs/specs/IGL-1.md §7.3)", () => {
     // [n, E, measured units of 17 ns per iteration, Node 24 and Node 22 maxima]
     const measured: Array<[number, number, number]> = [[2, 0, 7.5], [2, 2, 10.2], [3, 3, 15.0], [5, 5, 35.3], [5, 15, 52.0], [10, 0, 69.5], [10, 20, 116.3], [20, 40, 307.8], [50, 100, 1292.0], [100, 0, 4212.4], [100, 200, 4765.1], [200, 400, 18734.7]];
     for (const [n, e, units] of measured) {
@@ -61,7 +61,7 @@ describe("FORCE execution budget (design 7.3; numbers from igl-evidence/budget-m
     expect(err(() => checkBudget(1000, 2000, 170, DEFAULT_FORCE_BUDGET))).toBe("no error");
     expect(err(() => checkBudget(1100, 2200, 170, DEFAULT_FORCE_BUDGET))).toBe("RESOURCE_LIMIT/WORK_LIMIT"); // 105.4M + construction
   });
-  it("zero iterations is NOT zero cost (owner re-review): an edge-heavy input is refused by the construction term", () => {
+  it("zero iterations is NOT zero cost: an edge-heavy input is refused by the construction term", () => {
     expect(err(() => checkBudget(2000, 4000, 0, DEFAULT_FORCE_BUDGET))).toBe("no error"); // 200 x 6,000 = 1.2M
     expect(err(() => checkBudget(2000, 400_000, 0, DEFAULT_FORCE_BUDGET))).toBe("no error"); // 200 x 402,000 = 80.4M
     expect(err(() => checkBudget(2000, 500_000, 0, DEFAULT_FORCE_BUDGET))).toBe("RESOURCE_LIMIT/WORK_LIMIT"); // 100.4M

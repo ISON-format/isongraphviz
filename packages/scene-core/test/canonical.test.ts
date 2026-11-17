@@ -26,7 +26,7 @@ describe("IGS-CJ/1 values", () => {
   });
 });
 
-describe("IGS-CJ/1 strings (spec 5.4)", () => {
+describe("IGS-CJ/1 strings (docs/specs/IGS-1.md §5.4)", () => {
   it("escapes quote and backslash", () => {
     expect(canonicalize('a"b')).toBe('"a\\"b"');
     expect(canonicalize("a\\b")).toBe('"a\\\\b"');

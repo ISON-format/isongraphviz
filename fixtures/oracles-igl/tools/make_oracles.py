@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Independent IGL/1 oracle generator (plan Task 9). Python only: no TypeScript produces an expected byte."""
+"""Independent IGL/1 oracle generator. Python only: no TypeScript produces an expected byte."""
 import copy, hashlib, json, math, os, struct, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.dirname(HERE)                                         # .../oracles-igl
-V1A = os.path.join(OUT, "..", "oracles")                            # frozen V1a oracles (read-only)
+V1A = os.path.join(OUT, "..", "oracles")                            # frozen IGS/1 oracles (read-only)
 PY_SRC = os.environ.get("ISON_GRAPH_PY_SRC", os.path.normpath(os.path.join(OUT, "..", "..", "..", "..", "isongraph", "ison-graph", "src")))
 sys.path.insert(0, PY_SRC)
 from ison_graph import ISONGraph            # read-only import of Core Python
@@ -79,7 +79,7 @@ def main():
                     key=lambda e: (ref_key(e["ref"]["src"]), e["ref"]["rel"].encode("utf-8"), ref_key(e["ref"]["tgt"]), e["ref"]["ord"]))
         return cj({"address_scheme": "igs-addr/1", "edges": es, "graph": {"directed": True, "profile": "simple"}, "igs": "IGS/1", "nodes": ns, "source": {"artifact_sha256": "0" * 64, "serialization_profile": "ison-v1"}}).encode("utf-8")
     ASTRAL = "\U0001F600"
-    # V2 closure additions (owner ruling 2026-11-16): FORCE lookup keys exactly AT the 1,024-unit limit are accepted (F13). Key = `type label`, UTF-16 units.
+    # FORCE lookup keys exactly AT the 1,024-unit limit are accepted (F13). Key = `type label`, UTF-16 units.
     put("scenes/keybound.scene.json", hand_scene(
         [("t", "s:" + "a" * 1022), ("t", "s:" + ASTRAL * 511), ("t", "s:c"), ("u" * 1022, "s:x"), ("t", "s:" + "\u20ac" * 1022), ("w" * 1006, "i:-9007199254740991")],
         [("r" * 1024, "t", "s:c", "t", "s:" + "a" * 1022), ("r", "t", "s:c", "u" * 1022, "s:x")]))
@@ -160,8 +160,8 @@ def main():
         ("V38", obj(lambda o: cfgo(o).update({"x-n": 1})), "INVALID_POLICY/UNKNOWN_KEY"),
         ("V39", json.dumps(json.loads(obj(lambda o: cfgo(o).update(seed=2 ** 32))), indent=1), "INVALID_LAYOUT/NON_CANONICAL"),
         ("V40", obj(lambda o: pol(o).update({"x-n": 1})), "INVALID_LAYOUT/UNKNOWN_FIELD"),
-        ("V41", must(T, '"family":"FORCE"', '"family":' + "[" * 2000 + "]" * 2000), "INVALID_LAYOUT/TOO_DEEP"),   # review finding I-1: no host-dependent RangeError
-        # V2 closure additions (owner ruling 2026-11-16, audit m-5); expectations derived from sections 6.1 and 9, not from the implementation
+        ("V41", must(T, '"family":"FORCE"', '"family":' + "[" * 2000 + "]" * 2000), "INVALID_LAYOUT/TOO_DEEP"),   # no host-dependent RangeError
+        # V42-V46: expectations derived from the specification (sections 6.1 and 9), not from the implementation
         ("V42", obj(lambda o: pol(o).update(algorithm="igl-force/2")), "INVALID_POLICY/UNKNOWN_ALGORITHM"),
         ("V43", obj(lambda o: pol(o).update(config=[])), "INVALID_POLICY/SCHEMA"),
         ("V44", must(T, '"scale":1000,', '"scale":1000,"scale":1000,'), "INVALID_LAYOUT/NON_CANONICAL"),
@@ -180,7 +180,7 @@ def main():
          ("S09", [("p", "s:")], "UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID"),
          ("S10", [("p", "s:7"), ("q", "s:7")], "ok"), ("S11", [("p", "s:007"), ("p", "s:7")], "ok"), ("S12", [("p", "s:-0"), ("p", "s:0")], "ok"),
          ("S13", [("p", "s:\uFF5E"), ("p", "s:\U0001F600")], "ok"),
-         # V2 closure additions: the FORCE lookup-key limit (type + space + label, UTF-16 units, inclusive 1,024) and two uncovered representation refusals
+         # the FORCE lookup-key limit (type + space + label, UTF-16 units, inclusive 1,024) and two uncovered representation refusals
          ("S14", [("t", "s:" + "a" * 1023), ("t", "s:b")], "RESOURCE_LIMIT/CORE_KEY_LENGTH"),          # key 1 + 1 + 1023 = 1025
          ("S15", [("t" * 1023, "s:a"), ("t", "s:b")], "RESOURCE_LIMIT/CORE_KEY_LENGTH"),                # short id, long type: key 1023 + 1 + 1 = 1025
          ("S16", [("t", "s:" + ASTRAL * 512), ("t", "s:b")], "RESOURCE_LIMIT/CORE_KEY_LENGTH"),         # 512 code points but 1,024 units: key 1,026

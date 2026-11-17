@@ -1,6 +1,6 @@
 import { LayoutError } from "./errors.js";
 
-/** 21-IGL1-DESIGN.md section 4, rule 2. Ran in igl-evidence/quantize-crosscheck.mjs (0 disagreements with Python on 200,015 doubles). */
+/** docs/specs/IGL-1.md §4, rule 2 (0 disagreements with an independent Python implementation on 200,015 doubles). */
 export function quantize(v: unknown): number {
   if (typeof v !== "number" || !Number.isFinite(v)) throw new LayoutError("INVALID_COORDINATE", "NOT_FINITE");
   const s = v * 1000;

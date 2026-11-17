@@ -1,4 +1,4 @@
-// test/edge-limit.test.ts - V2 closure audit m-5 (owner ruling 2026-11-16): CORE_EDGE_LIMIT end to end, with REAL scene bytes through
+// test/edge-limit.test.ts - CORE_EDGE_LIMIT end to end, with REAL scene bytes through
 // computeForceLayout. The scenes are generated here (no multi-megabyte artifact is checked in). preflight.test.ts covers the same cap
 // on fabricated Scene objects; this proves the boundary holds through verifyScene, the budget and the producer.
 import { describe, expect, it } from "vitest";

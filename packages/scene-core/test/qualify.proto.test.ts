@@ -1,5 +1,5 @@
 // packages/scene-core/test/qualify.proto.test.ts
-// Stabilization finding M7: ison-ts stores a row as a plain object and assigns row[column] = value. A column named __proto__ with a
+// Rule A10: ison-ts stores a row as a plain object and assigns row[column] = value. A column named __proto__ with a
 // reference value therefore makes the row INHERIT from that Reference, so `row.id` reads the reference's id and a node with no id
 // column appears to have one. The adapter must fail closed before Core sees such a document.
 import { Reference } from "ison-ts";
@@ -15,7 +15,7 @@ const reject = (text: string, code: string, reason: string) => {
   expect([e.code, e.reason], JSON.stringify(text)).toEqual([code, reason]);
 };
 
-describe("a __proto__ column cannot fabricate graph content (M7)", () => {
+describe("a __proto__ column cannot fabricate graph content (A10)", () => {
   it("rejects a node row whose id would be inherited from a __proto__ reference", () => {
     reject("nodes.p\n__proto__ name\n:q:77 a\n", "MALFORMED_SOURCE", "PROTOTYPE_FIELD");
   });

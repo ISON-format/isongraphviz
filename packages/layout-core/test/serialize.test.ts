@@ -15,7 +15,7 @@ const text = (l: Layout) => new TextDecoder().decode(layoutToBytes(l));
 const code = (f: () => unknown) => { try { f(); } catch (e) { if (e instanceof LayoutError) return `${e.code}/${e.reason}`; throw e; } return "no error"; };
 
 describe("layoutToBytes", () => {
-  it("reproduces the 398-byte example of 21-IGL1-DESIGN.md section 2, sorting nodes", async () => {
+  it("reproduces the 398-byte example of docs/specs/IGL-1.md §2, sorting nodes", async () => {
     const bytes = layoutToBytes(o1());
     expect(new TextDecoder().decode(bytes)).toBe(EXAMPLE);
     expect(bytes.length).toBe(398);

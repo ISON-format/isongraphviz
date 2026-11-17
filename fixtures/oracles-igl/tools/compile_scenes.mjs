@@ -1,4 +1,4 @@
-// Compiles oracles-igl/sources/*.source.ison to oracles-igl/scenes/*.scene.json with the V1a compiler (independently frozen).
+// Compiles oracles-igl/sources/*.source.ison to oracles-igl/scenes/*.scene.json with the IGS/1 reference compiler (its own oracles are independently frozen).
 // Run from packages/scene-core after `npm run build`:  node ../../fixtures/oracles-igl/tools/compile_scenes.mjs
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";

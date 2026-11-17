@@ -58,7 +58,7 @@ export async function verifyLayout(bytes: Uint8Array): Promise<{ layout: Layout;
   if (top["scale"] !== 1000) throw inv("INVALID_SCALE", "$.scale");
   if (typeof top["scene_sha256"] !== "string" || !HEX64.test(top["scene_sha256"])) throw inv("INVALID_HASH", "$.scene_sha256");
   closed(top["policy"], "$.policy", ["algorithm", "config", "family"], { allowX: false });
-  // review finding I-1: the values of policy are inside the canonical domain and at most 64 levels deep BEFORE structuredClone or any
+  // the values of policy are inside the canonical domain and at most 64 levels deep BEFORE structuredClone or any
   // recursion runs, so a hostile nesting is a LayoutError on every host (it used to be a stack-size-dependent RangeError)
   const pv = cjViolation(top["policy"], "$.policy", { signed: true, maxDepth: MAX_DEPTH });
   if (pv) throw inv(pv.reason, pv.path);

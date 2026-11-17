@@ -157,7 +157,7 @@ describe("computeForceLayout refuses without calling Core (Review Focus 2 and 3)
     expect(vi.mocked(coreSpy)).not.toHaveBeenCalled();
     await expect(computeForceLayout(o1.sceneBytes, zero, { budget: { maxWork: 600 } })).resolves.toBeDefined();
   });
-  it("review finding I-2: a relation above the physical-edge cap is refused before Core runs, the same on every host", async () => {
+  it("a relation above the physical-edge cap is refused before Core runs, the same on every host", async () => {
     const n = 300, edgesOver = 50_001;
     let t = `nodes.p\nid\n${Array.from({ length: n }, (_, i) => i).join("\n")}\n\nedges.R\nsource target\n`;
     let k = 0;
@@ -195,7 +195,7 @@ describe("computeForceLayout refuses without calling Core (Review Focus 2 and 3)
     cfg.seed = 1; cfg.width = 1;
     expect((await pending).layoutSha256).toBe(expected);
   });
-  it("invalid scene bytes raise V1a's IgsError; a TypeError for non-bytes", async () => {
+  it("invalid scene bytes raise the scene library's IgsError; a TypeError for non-bytes", async () => {
     await expect(computeForceLayout(enc("{}"), CORE_CFG)).rejects.toMatchObject({ name: "IgsError" });
     await expect(computeForceLayout("x" as never, CORE_CFG)).rejects.toBeInstanceOf(TypeError);
   });

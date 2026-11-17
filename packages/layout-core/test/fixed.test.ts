@@ -75,7 +75,7 @@ describe("computeFixedLayout", () => {
     expect(r.layout.nodes[0]!.x).toBe(5000);
     expect(reads).toBe(1);
   });
-  it("invalid scene bytes raise V1a's IgsError", async () => {
+  it("invalid scene bytes raise the scene library's IgsError", async () => {
     await expect(computeFixedLayout(new TextEncoder().encode("{}"), [])).rejects.toMatchObject({ name: "IgsError" });
   });
   it("snapshots the scene bytes (regression guard)", async () => {

@@ -1,4 +1,4 @@
-// packages/scene-core/src/primitives.ts — shared primitives for sibling packages (V2 layout). Additive: nothing here changes a V1a byte.
+// packages/scene-core/src/primitives.ts — shared primitives for sibling packages (the layout package). Additive: nothing here changes an IGS/1 byte.
 export { canonicalBytes, canonicalBytesSigned, canonicalize, canonicalizeSigned, cjViolation, hasLoneSurrogate } from "./canonical.js";
 export type { CJLimits, CJValue, CJViolation } from "./canonical.js";
 export { sha256Hex } from "./hash.js";

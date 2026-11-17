@@ -37,7 +37,7 @@ describe("bindLayout", () => {
     expect(await layoutError(() => bindLayout(sceneI7, layoutToBytes({ ...mk("s:7"), scene_sha256: sceneSha256 })))).toBe("INCOMPLETE_LAYOUT/MISSING_NODE");
     await expect(bindLayout(sceneI7, layoutToBytes({ ...mk("i:7"), scene_sha256: sceneSha256 }))).resolves.toBeDefined();
   });
-  it("scene bytes that are not canonical raise V1a's IgsError unchanged", async () => {
+  it("scene bytes that are not canonical raise the scene library's IgsError unchanged", async () => {
     const a = await compileScene(src(":n:a :n:b"), "ison-v1");
     const pretty = enc(JSON.stringify(a.scene, null, 1));
     await expect(bindLayout(pretty, layoutFor(a.sceneSha256, ["s:a", "s:b", "s:c"]))).rejects.toMatchObject({ name: "IgsError", code: "INVALID_SCENE", reason: "NON_CANONICAL" });

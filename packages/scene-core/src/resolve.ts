@@ -38,7 +38,7 @@ function edgeSnapshot(e: unknown): WireEdgeAddress {
   return { ord: c["ord"]!, rel: c["rel"]!, src: nodeSnapshot(r["src"]), tgt: nodeSnapshot(r["tgt"]) };
 }
 
-/** The stored SceneNode or SceneEdge with this typed address (`18` section 9), or UNRESOLVED_ADDRESS. */
+/** The stored SceneNode or SceneEdge with this typed address (docs/specs/IGS-1.md §9), or UNRESOLVED_ADDRESS. */
 export function resolveInScene(scene: Scene, address: WireNodeRef | WireEdgeAddress): SceneNode | SceneEdge {
   try {
     if (isEdgeAddress(address)) {

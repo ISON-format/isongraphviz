@@ -1,5 +1,5 @@
 // packages/scene-core/test/qualify.duplicates.test.ts
-// Stabilization review finding R1 (same class as A9 / 18 Law 3): ison-ts builds a row with row[column] = value, so when a header
+// Rule A11 (same class as A9 / docs/specs/IGS-1.md Law 3): ison-ts builds a row with row[column] = value, so when a header
 // repeats a column name the last cell wins and the earlier cell vanishes. Core sees the same row. The document would compile to a
 // graph that differs from what the text says, with a valid hash.
 import { describe, expect, it } from "vitest";

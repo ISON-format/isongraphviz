@@ -9,19 +9,19 @@ import { validatePolicy } from "./policy.js";
 import { quantize } from "./quantize.js";
 import type { ForceBudget, ForceConfig, ForceOptions, LayoutNode, LayoutResult, Policy } from "./types.js";
 
-/** Measured, not a performance target: igl-evidence/budget-measurement.out.txt, 21-IGL1-DESIGN.md 7.3. */
+/** Measured, not a performance target: docs/specs/IGL-1.md §7.3. */
 export const DEFAULT_FORCE_BUDGET: Readonly<ForceBudget> = Object.freeze({ maxNodes: 2000, maxWork: 100_000_000 });
 
 /**
- * Graph construction and Core's per-edge setup cost something even with zero iterations (owner, 2026-11-16 re-review). Measured on
+ * Graph construction and Core's per-edge setup cost something even with zero iterations. Measured on
  * Core 1.4.1: about 1.7 us to build and 1.2 us to set up per node or edge, about 3 us together, about 180 pair-interaction units at the
- * 17 ns median; rounded up to 200. An execution control only: never in the artifact. 21-IGL1-DESIGN.md 7.3.
+ * 17 ns median; rounded up to 200. An execution control only: never in the artifact. docs/specs/IGL-1.md §7.3.
  */
 export const CONSTRUCTION_UNITS = 200n;
 
 /**
- * Core's per-iteration cost is not only the n(n-1)/2 pair interactions (review finding I-3): it also pays per edge and per node every
- * iteration (displacement map, spring loop). Measured on Core 1.4.1 on Node 22 and 24 (igl-evidence/budget-iteration-model.out.txt),
+ * Core's per-iteration cost is not only the n(n-1)/2 pair interactions: it also pays per edge and per node every
+ * iteration (displacement map, spring loop). Measured on Core 1.4.1 on Node 22 and 24 (docs/specs/IGL-1.md §7.3),
  * 12 points from n=2 to n=200: the first formula (pairs + E) undercounted at 8 of 12; pairs + 3E + 8n + 4 covers all 12. Core returns
  * at once for n <= 1, so the iteration term is charged only for n >= 2. `edgeCount` is the PHYSICAL entry count (physicalEdgeCount).
  */
@@ -58,15 +58,15 @@ export function checkBudget(nodeCount: number, edgeCount: number, iterations: nu
 }
 
 /**
- * Hard FORCE lookup-key length limit (V2 closure audit C-1; owner ruling 2026-11-16): 1,024 UTF-16 code units, inclusive.
+ * Hard FORCE lookup-key length limit: 1,024 UTF-16 code units, inclusive.
  * Core keys its Maps by strings built from identifiers: layoutKey `${type} ${id}` (positions, displacements), the spring pair `${ka}|${kb}`,
- * graph storage keyed by type, id and relation. The audit measured the same 50-node scene at 0.26 s with 16,381-character ids and 6.06 s with
+ * graph storage keyed by type, id and relation. An independent audit measured the same 50-node scene at 0.26 s with 16,381-character ids and 6.06 s with
  * 16,382, at the same `W`: the work model has no identifier term, so cost is bounded by refusing long keys, not by modelling them.
  * Measured in UTF-16 code units (how JavaScript holds the key), of the COMPLETE node key `${type} ${label}`, and of every relation
  * identifier. A node key at the limit makes the longest derived Core key (the spring pair, two node keys and a separator) 2,049 units and an
  * edge key under about 3,100: far inside the measured cliff. A hard safety limit of the producer, not a budget field: `options.budget` cannot
  * raise it. It is an execution control for `igl-force/1` only; IGS/1 identity, `igl-fixed/1` and `verifyLayout` accept longer identifiers.
- * It runs before any identifier conversion, graph construction or Core call. 21-IGL1-DESIGN.md 7.3.
+ * It runs before any identifier conversion, graph construction or Core call. docs/specs/IGL-1.md §7.3.
  */
 export const MAX_CORE_KEY_UNITS = 1024;
 
@@ -85,7 +85,7 @@ const DIGITS = /^-?[0-9]+$/;
 const SAFE = BigInt(Number.MAX_SAFE_INTEGER);
 const unsupported = (reason: string, n: SceneNode): LayoutError => new LayoutError("UNSUPPORTED_SCENE", reason, undefined, `${n.ref.type} ${n.ref.id}`);
 
-/** Qualifies the WHOLE node set against the pinned Core's representation limits before any Core graph exists (design 7.1). Ran as `preflight` in igl-evidence/order-and-collisions.mjs. */
+/** Qualifies the WHOLE node set against the pinned Core's representation limits before any Core graph exists (docs/specs/IGL-1.md §7.1). */
 export function preflightForce(nodes: readonly SceneNode[]): void {
   const keys = new Set<string>();
   const ints = new Map<string, Set<string>>();
@@ -119,7 +119,7 @@ function logicalEdgeKey(directed: boolean, rel: string, a: WireNodeRef, b: WireN
 
 /**
  * The rebuilt Core graph must retain every scene node and every scene edge by LOGICAL identity, for directed and undirected scenes
- * alike (owner finding P2). The pinned Core 1.4.1 stores an undirected edge as TWO physical entries (one per orientation; a
+ * alike. The pinned Core 1.4.1 stores an undirected edge as TWO physical entries (one per orientation; a
  * self-loop once) and refuses an explicit mirror add (DuplicateEdgeError), so a bare `edgeCount() === scene.edges.length` is wrong
  * for undirected scenes (measured). This compares each logical edge's expected physical multiplicity with what Core holds.
  */
@@ -163,8 +163,8 @@ export function buildCoreGraph(scene: Scene): ISONGraph {
 
 /**
  * Core 1.4.1 builds graph.edges() with `edgeList.push(...edges)`, which overflows the call stack once ONE relation holds about 125,000
- * physical edges (124,860 on Node 24, 125,191 on Node 22; igl-evidence/core-edge-limit.out.txt), and the exact threshold depends on the
- * host's stack size (review finding I-2). The producer therefore refuses, on every host alike, far below it: 50,000 physical edges
+ * physical edges (124,860 on Node 24, 125,191 on Node 22), and the exact threshold depends on the
+ * host's stack size (docs/specs/IGL-1.md §7.1). The producer therefore refuses, on every host alike, far below it: 50,000 physical edges
  * per relation (about 40% of the measured threshold). Undirected edges count twice (Core stores both orientations; a self-loop is
  * counted twice, conservatively). A Core representation limit, like the node checks; never in the artifact.
  */
@@ -192,7 +192,7 @@ export async function produceForce(input: Uint8Array, policy: Policy, budget: Fo
   try {
     const graph = buildCoreGraph(scene);
     verifyCoreGraph(scene, graph); // logical-edge equivalence, directed and undirected (not a raw count)
-    // radii and spacing are deliberately never passed: igl-force/1 is Core's plain layout (owner D4)
+    // radii and spacing are deliberately never passed: igl-force/1 is Core's plain layout (docs/specs/IGL-1.md §7.1)
     raw = coreComputeLayout(graph, { width: cfg.width, height: cfg.height, iterations: cfg.iterations, seed: cfg.seed, margin: cfg.margin });
   } catch (e) {
     if (e instanceof LayoutError) throw e;

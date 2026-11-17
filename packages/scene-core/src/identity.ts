@@ -20,7 +20,7 @@ export function decodeNodeId(wire: string): NodeId {
   if (wire.startsWith("i:")) {
     const digits = wire.slice(2);
     // INT64 text is at most 20 characters ("-9223372036854775808"); anything longer is out of range, so it is refused BEFORE the regex or any
-    // BigInt conversion (V2 closure audit m-3: BigInt of a multi-million-digit token took seconds). Valid and invalid verdicts are unchanged.
+    // BigInt conversion (BigInt of a multi-million-digit token takes seconds). Valid and invalid verdicts are unchanged.
     if (digits.length > MAX_INT64_TEXT || !CANONICAL_INT.test(digits)) throw new IgsError("INVALID_SCENE", "INVALID_ID", undefined, wire);
     const value = BigInt(digits);
     if (value < INT64_MIN || value > INT64_MAX) throw new IgsError("INVALID_SCENE", "INVALID_ID", undefined, wire);

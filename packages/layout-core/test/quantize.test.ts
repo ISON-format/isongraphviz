@@ -4,7 +4,7 @@ import { quantize, wireCoordinate } from "../src/quantize.js";
 
 const code = (f: () => unknown) => { try { f(); } catch (e) { if (e instanceof LayoutError) return `${e.code}/${e.reason}`; throw e; } return "no error"; };
 
-describe("quantize (21-IGL1-DESIGN.md section 4)", () => {
+describe("quantize (docs/specs/IGL-1.md §4)", () => {
   it("rounds ordinary coordinates (values from the O1 evidence run)", () => {
     expect(quantize(173.9612052509673)).toBe(173961);
     expect(quantize(81.2025957008565)).toBe(81203);
@@ -23,7 +23,7 @@ describe("quantize (21-IGL1-DESIGN.md section 4)", () => {
   it("rejects non-finite and non-number inputs as NOT_FINITE", () => {
     for (const v of [Number.NaN, Infinity, -Infinity, "1", null, undefined, 1n]) expect(code(() => quantize(v)), String(v)).toBe("INVALID_COORDINATE/NOT_FINITE");
   });
-  it("the safe-integer boundary is a binary64 fact (owner finding P1): the decimal 9007199254740.991 is not a double", () => {
+  it("the safe-integer boundary is a binary64 fact : the decimal 9007199254740.991 is not a double", () => {
     // The nearest double is 9007199254740.990234375 (spacing 2^-9 at this magnitude); times 1000 it rounds to ...990, not ...991.
     expect(9007199254740.991).toBe(9007199254740.990234375);
     expect(quantize(9007199254740.991)).toBe(9007199254740990);
@@ -35,7 +35,7 @@ describe("quantize (21-IGL1-DESIGN.md section 4)", () => {
     expect(code(() => quantize(-9007199254740.992))).toBe("INVALID_COORDINATE/OUT_OF_RANGE");
     expect(quantize(-9007199254740.99)).toBe(-9007199254740990);
   });
-  // V2 closure audit m-6 / owner ruling 2026-11-16: the shortcut floor(s + 0.5) is wrong above 2^52 thousandths (section 4 names it as wrong).
+  // The shortcut floor(s + 0.5) is wrong above 2^52 thousandths (docs/specs/IGL-1.md §4 names it as wrong).
   // There s is an exact integer and s + 0.5 is not representable: it rounds to even, which moves odd integers (and, for negatives, even ones).
   it("is NOT floor(s + 0.5): the frozen formula and the shortcut differ near 4.5e12 layout units, in both signs", () => {
     const shortcut = (v: number): number => Math.floor(v * 1000 + 0.5);
@@ -77,7 +77,7 @@ describe("wireCoordinate", () => {
   it("carries the path", () => {
     try { wireCoordinate(1.5, "$.nodes[3].x"); } catch (e) { expect((e as LayoutError).path).toBe("$.nodes[3].x"); }
   });
-  it("matches the Python quantizer on the recorded cross-check (see igl-evidence/quantize-crosscheck.out.txt)", () => {
+  it("matches the Python quantizer on the recorded cross-check (see docs/specs/IGL-1.md §4)", () => {
     // The 200,015-value cross-language comparison is a recorded evidence run; this pins two of its constructed ties.
     expect(quantize(0.0005)).toBe(1);
     expect(quantize(-0.0015)).toBe(-1);

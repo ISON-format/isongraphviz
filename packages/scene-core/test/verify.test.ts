@@ -143,7 +143,7 @@ describe("F3 agreement with the scene's own references", () => {
     await expectInvalid(bytes(o), "INVALID_SCENE", "UNEXPECTED_ORDINAL");
   });
 
-  it("does not let a presentation label change the V1a label: display_label stays a reserved name", async () => {
+  it("does not let a presentation label change the core label: display_label stays a reserved name", async () => {
     const o = load("o1-basic.scene.json"); o.nodes[0].display_label = "Alice";
     await expectInvalid(bytes(o), "INVALID_SCENE", "RESERVED_FIELD");
   });
@@ -233,7 +233,7 @@ describe("canonical form and schema", () => {
     await expectInvalid(new Uint8Array([0xef, 0xbb, 0xbf, 0x7b, 0x7d]), "INVALID_SCENE", "INVALID_ENCODING");
   });
 
-  it("rejects a number in the V1a schema and a null in an extension value", async () => {
+  it("rejects a number in the core schema and a null in an extension value", async () => {
     const a = load("o1-basic.scene.json"); a.nodes[0].label = 5;
     await expectInvalid(bytes(a), "INVALID_SCENE");
     const b = load("o1-basic.scene.json"); b.nodes[0]["x-test"] = null;

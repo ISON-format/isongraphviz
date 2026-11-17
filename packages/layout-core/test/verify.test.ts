@@ -14,7 +14,7 @@ describe("verifyLayout rejects (one test per rule; the same rows are frozen as o
   }
 });
 
-describe("review finding I-1: policy VALUES are domain- and depth-checked before any recursion", () => {
+describe("policy VALUES are domain- and depth-checked before any recursion", () => {
   const deep = (d: number) => "[".repeat(d) + "]".repeat(d);
   const withFamily = (d: number) => enc(T.replace('"family":"FORCE"', '"family":' + deep(d)));
   it("a policy value nested 65 levels or more is INVALID_LAYOUT/TOO_DEEP at EVERY depth - never a host-dependent raw RangeError", async () => {

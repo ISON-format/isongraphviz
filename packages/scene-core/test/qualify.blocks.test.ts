@@ -1,5 +1,5 @@
 // packages/scene-core/test/qualify.blocks.test.ts
-// Final-review finding I1: content that ison-ts and Core read but ignore must not become a valid scene with a hash.
+// Content that ison-ts and Core read but ignore must not become a valid scene with a hash.
 import { describe, expect, it } from "vitest";
 import { compileSceneFromText } from "../src/compile.js";
 import { qualify } from "../src/qualify.js";

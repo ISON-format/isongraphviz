@@ -1,5 +1,5 @@
 // packages/scene-core/test/upstream.ison-ts.test.ts
-// Canary for an upstream defect (see test/upstream/ison-ts-proto-column.md). These tests assert what ison-ts 1.2.0 DOES today, so
+// Canary for an upstream parser behaviour that the adapter guards against (rule A10). These tests assert what ison-ts 1.2.0 DOES today, so
 // that an upgrade which fixes it is noticed. If one fails after a dependency bump, the parser changed: re-read the adapter guard
 // (qualifyBlocks PROTOTYPE_FIELD, ownValue) before deciding whether it can be relaxed. It never needs relaxing to stay correct.
 import { parse, Reference } from "ison-ts";

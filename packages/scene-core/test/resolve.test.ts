@@ -111,7 +111,7 @@ describe("resolveInSource failures and the input snapshot", () => {
   });
 });
 
-describe("the requested identity is snapshotted with the bytes (owner requirement)", () => {
+describe("the requested identity is snapshotted with the bytes ", () => {
   it("resolves the address it was given, even if the caller mutates the reference while the call is pending", async () => {
     const bytes = bytesOf("o1-basic.source.ison");
     const { scene, artifactSha256 } = await compileScene(bytes, "ison-v1");
@@ -185,9 +185,9 @@ describe("the requested identity is snapshotted with the bytes (owner requiremen
   });
 });
 
-// Stabilization finding M2: the error detail used JSON.stringify, which throws on a circular object or a BigInt. The documented
+// The error detail used JSON.stringify, which throws on a circular object or a BigInt. The documented
 // outcome for any address that names nothing is UNRESOLVED_ADDRESS, never a raw TypeError.
-describe("resolveInScene never leaks a TypeError from its error detail (M2)", () => {
+describe("resolveInScene never leaks a TypeError from its error detail", () => {
   const scenePromise = compileScene(bytesOf("o1-basic.source.ison"), "ison-v1");
 
   it("returns UNRESOLVED_ADDRESS for a circular address", async () => {
@@ -233,7 +233,7 @@ describe("resolveInScene never leaks a TypeError from its error detail (M2)", ()
   });
 });
 
-// Post-closure hardening: the identity key is built with JSON.stringify, and decodeNodeId duck-types its input, so an object with a
+// Hardening: the identity key is built with JSON.stringify, and decodeNodeId duck-types its input, so an object with a
 // toJSON() (or with startsWith/slice/toString) that yields the right string used to resolve as if it were that string. Every address
 // component must be a primitive string, read ONCE, before any key is built. Each case below was checked to resolve (a real node or edge)
 // when its own check is removed, so a regression in any single check fails a test.

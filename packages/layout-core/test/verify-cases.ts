@@ -51,7 +51,7 @@ export const REJECT: Array<[string, string | Uint8Array, string]> = [
   ["V39 non-canonical AND bad policy: canonical form is reported first", pretty(obj((o) => { ((o["policy"] as Record<string, unknown>)["config"] as Record<string, unknown>)["seed"] = 2 ** 32; })), "INVALID_LAYOUT/NON_CANONICAL"],
   ["V41 policy value nested 2000 levels (host-independent TOO_DEEP)", T.replace('"family":"FORCE"', '"family":' + "[".repeat(2000) + "]".repeat(2000)), "INVALID_LAYOUT/TOO_DEEP"],
   ["V40 x- key inside policy", obj((o) => { (o["policy"] as Record<string, unknown>)["x-n"] = 1; }), "INVALID_LAYOUT/UNKNOWN_FIELD"],
-  // V2 closure additions (owner ruling 2026-11-16, audit m-5): uncovered error paths of section 9
+  // Further error paths of §9 (V42-V46)
   ["V42 unknown algorithm id for a qualified family (igl-force/2)", obj((o) => { (o["policy"] as Record<string, unknown>)["algorithm"] = "igl-force/2"; }), "INVALID_POLICY/UNKNOWN_ALGORITHM"],
   ["V43 policy.config is not an object", obj((o) => { (o["policy"] as Record<string, unknown>)["config"] = []; }), "INVALID_POLICY/SCHEMA"],
   ["V44 duplicate JSON key (bytes differ from the canonical re-serialization)", must(T, '"scale":1000,', '"scale":1000,"scale":1000,'), "INVALID_LAYOUT/NON_CANONICAL"],

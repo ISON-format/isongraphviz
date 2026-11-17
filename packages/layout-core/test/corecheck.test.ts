@@ -26,7 +26,7 @@ describe("the pinned Core stores an undirected edge as two physical entries (why
   });
 });
 
-describe("verifyCoreGraph: logical-edge equivalence against the pinned Core (owner finding P2)", () => {
+describe("verifyCoreGraph: logical-edge equivalence against the pinned Core", () => {
   it("O4-style: an undirected source with BOTH mirror rows and a self-loop is 2 logical edges, 3 physical entries, and matches", async () => {
     const scene = await sceneOf(UND);
     expect(scene.edges).toHaveLength(2);
