@@ -35,6 +35,18 @@ describe("quantize (21-IGL1-DESIGN.md section 4)", () => {
     expect(code(() => quantize(-9007199254740.992))).toBe("INVALID_COORDINATE/OUT_OF_RANGE");
     expect(quantize(-9007199254740.99)).toBe(-9007199254740990);
   });
+  // V2 closure audit m-6 / owner ruling 2026-11-16: the shortcut floor(s + 0.5) is wrong above 2^52 thousandths (section 4 names it as wrong).
+  // There s is an exact integer and s + 0.5 is not representable: it rounds to even, which moves odd integers (and, for negatives, even ones).
+  it("is NOT floor(s + 0.5): the frozen formula and the shortcut differ near 4.5e12 layout units, in both signs", () => {
+    const shortcut = (v: number): number => Math.floor(v * 1000 + 0.5);
+    const v = 4503599627370.497;
+    expect(v * 1000).toBe(4503599627370497);          // an exact integer in binary64 (above 2^52 the spacing is 1)
+    expect(quantize(v)).toBe(4503599627370497);       // IGL/1: f = s, s - f = 0 < 0.5, so q = s
+    expect(shortcut(v)).toBe(4503599627370498);       // the incorrect shortcut: s + 0.5 ties to even and moves an odd integer
+    expect(quantize(-v)).toBe(-4503599627370497);
+    expect(shortcut(-v)).toBe(-4503599627370496);
+    expect(quantize(v)).not.toBe(shortcut(v));
+  });
   it("is the same formula on 10,000 generated doubles (guards against a library round())", () => {
     let s = 99;
     const rnd = () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; };

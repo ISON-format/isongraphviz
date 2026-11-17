@@ -14,7 +14,7 @@ import { ORACLES_IGL, layoutError, read } from "./helpers.js";
 import { ACCEPT, REJECT, enc } from "./verify-cases.js";
 
 interface Row { id: string; group: string; scene: string; input: string; expected: string; error: string }
-const rows: Row[] = readFileSync(join(ORACLES_IGL, "EXPECT.tsv"), "utf8").trim().split("\n").slice(1).map((l) => {
+const rows: Row[] = readFileSync(join(ORACLES_IGL, "EXPECT.tsv"), "utf8").replace(/\n$/, "").split("\n").slice(1) /* not trim(): the last row may end in an empty, tab-terminated field */.map((l) => {
   const [id, group, scene, input, expected, error] = l.split("\t") as string[];
   return { id: id!, group: group!, scene: scene!, input: input!, expected: expected!, error: error! };
 });
@@ -33,10 +33,10 @@ function walk(dir: string, out: string[] = []): string[] {
 }
 
 describe("the IGL oracle corpus (generated and checked; not yet labelled frozen)", () => {
-  it("the manifest has 76 rows (F 12, X 3, V 41, S 13, B 7)", () => {
-    expect(rows).toHaveLength(76);
-    expect(Object.fromEntries(["force", "fixed", "verify", "scene", "bind"].map((g) => [g, by(g).length]))).toEqual({ force: 12, fixed: 3, verify: 41, scene: 13, bind: 7 });
-    expect(new Set(rows.map((r) => r.id)).size).toBe(76);
+  it("the manifest has 92 rows (F 13, X 5, V 46, S 20, B 8)", () => {
+    expect(rows).toHaveLength(92);
+    expect(Object.fromEntries(["force", "fixed", "verify", "scene", "bind"].map((g) => [g, by(g).length]))).toEqual({ force: 13, fixed: 5, verify: 46, scene: 20, bind: 8 });
+    expect(new Set(rows.map((r) => r.id)).size).toBe(92);
   });
 
   it("SHA256SUMS lists exactly the committed files (no stray, no missing) and every digest matches", () => {
@@ -72,21 +72,21 @@ describe("the IGL oracle corpus (generated and checked; not yet labelled frozen)
     }
   });
 
-  it("verify rows: each file gives exactly its expected verdict (two verify, thirty-nine are rejected)", async () => {
+  it("verify rows: each file gives exactly its expected verdict (four verify: V21, V24 and the coordinate-range boundaries V45, V46; forty-two are rejected)", async () => {
     let accepted = 0;
     for (const r of by("verify")) {
       const got = verdict(await layoutError(() => verifyLayout(read(at(r.input)))));
       if (!r.error) accepted++;
       expect(got, r.id).toBe(r.error);
     }
-    expect(accepted).toBe(2);
+    expect(accepted).toBe(4);
   });
 
   it("the Python-written V files are BYTE-IDENTICAL to the TypeScript mutation table (two independent mutation implementations)", () => {
     const table = new Map<string, Uint8Array>();
     for (const [name, input] of REJECT) table.set(name.slice(0, 3), typeof input === "string" ? enc(input) : input);
     for (const [name, input] of ACCEPT) table.set(name.slice(0, 3), enc(input));
-    expect(table.size).toBe(41);
+    expect(table.size).toBe(46);
     for (const r of by("verify")) expect(same(table.get(r.id)!, read(at(r.input))), `${r.id} differs between the TS table and the Python file`).toBe(true);
   });
 
