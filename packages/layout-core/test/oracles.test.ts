@@ -1,4 +1,4 @@
-// packages/layout-core/test/oracles.test.ts - the IGL/1 oracle corpus (docs/isongraph-visualize-blueprint/oracles-igl): generated and checked, NOT yet labelled frozen or qualified (owner instruction).
+// packages/layout-core/test/oracles.test.ts - the IGL/1 oracle corpus (fixtures/oracles-igl): generated and checked, NOT yet labelled frozen or qualified (owner instruction).
 // Expected layout bytes were produced by Python only (tools/make_oracles.py); nothing here regenerates them.
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";

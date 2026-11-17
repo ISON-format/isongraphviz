@@ -1,0 +1,93 @@
+id	group	scene	input	expected_layout	error
+F01	force	../oracles/o1-basic.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F01.layout.json	
+F02	force	../oracles/o4-undirected.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F02.layout.json	
+F03	force	scenes/parity5.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F03.layout.json	
+F04	force	scenes/mixed20.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F04.layout.json	
+F05	force	scenes/mixed20.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 7, "width": 900}	layouts/F05.layout.json	
+F06	force	scenes/mixed20.scene.json	{"height": 300, "iterations": 60, "margin": 20, "seed": 42, "width": 400}	layouts/F06.layout.json	
+F07	force	scenes/empty.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F07.layout.json	
+F08	force	scenes/single.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F08.layout.json	
+F09	force	scenes/unicode.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F09.layout.json	
+F10	force	scenes/mixed20.scene.json	{"height": 600, "iterations": 0, "margin": 60, "seed": 42, "width": 900}	layouts/F10.layout.json	
+F11	force	scenes/bind-a.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F11.layout.json	
+F12	force	scenes/bind-b.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F12.layout.json	
+F13	force	scenes/keybound.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/F13.layout.json	
+X01	fixed	../oracles/o1-basic.scene.json	fixed/X01.positions.json	layouts/X01.layout.json	
+X02	fixed	../oracles/o1-basic.scene.json	fixed/X02.positions.json	layouts/X02.layout.json	
+X03	fixed	scenes/empty.scene.json	fixed/X03.positions.json	layouts/X03.layout.json	
+X04	fixed	../oracles/o1-basic.scene.json	fixed/X04.positions.json	layouts/X04.layout.json	
+X05	fixed	scenes/S18.scene.json	fixed/X05.positions.json	layouts/X05.layout.json	
+V01	verify		verify/V01.layout.json		INVALID_COORDINATE/NOT_INTEGER
+V02	verify		verify/V02.layout.json		INVALID_COORDINATE/NEGATIVE_ZERO
+V03	verify		verify/V03.layout.json		INVALID_COORDINATE/OUT_OF_RANGE
+V04	verify		verify/V04.layout.json		INVALID_COORDINATE/NOT_FINITE
+V05	verify		verify/V05.layout.json		INVALID_LAYOUT/SCHEMA
+V06	verify		verify/V06.layout.json		INVALID_LAYOUT/NON_CANONICAL
+V07	verify		verify/V07.layout.json		INVALID_LAYOUT/DUPLICATE_NODE_REF
+V08	verify		verify/V08.layout.json		INVALID_LAYOUT/UNKNOWN_FIELD
+V09	verify		verify/V09.layout.json		INVALID_LAYOUT/RESERVED_FIELD
+V10	verify		verify/V10.layout.json		INVALID_LAYOUT/RESERVED_FIELD
+V11	verify		verify/V11.layout.json		INVALID_LAYOUT/MISSING_FIELD
+V12	verify		verify/V12.layout.json		INVALID_LAYOUT/UNSUPPORTED_VERSION
+V13	verify		verify/V13.layout.json		INVALID_LAYOUT/UNSUPPORTED_ADDRESS_SCHEME
+V14	verify		verify/V14.layout.json		INVALID_LAYOUT/INVALID_SCALE
+V15	verify		verify/V15.layout.json		INVALID_LAYOUT/INVALID_HASH
+V16	verify		verify/V16.layout.json		INVALID_LAYOUT/NON_CANONICAL
+V17	verify		verify/V17.layout.json		INVALID_LAYOUT/INVALID_ENCODING
+V18	verify		verify/V18.layout.json		INVALID_LAYOUT/INVALID_ENCODING
+V19	verify		verify/V19.layout.json		INVALID_LAYOUT/INVALID_STRING
+V20	verify		verify/V20.layout.json		INVALID_LAYOUT/TOO_DEEP
+V21	verify		verify/V21.layout.json		
+V22	verify		verify/V22.layout.json		INVALID_LAYOUT/UNKNOWN_FIELD
+V23	verify		verify/V23.layout.json		INVALID_LAYOUT/INVALID_NUMBER
+V24	verify		verify/V24.layout.json		
+V25	verify		verify/V25.layout.json		INVALID_LAYOUT/MISSING_FIELD
+V26	verify		verify/V26.layout.json		INVALID_LAYOUT/INVALID_ID
+V27	verify		verify/V27.layout.json		INVALID_LAYOUT/INVALID_IDENTIFIER
+V28	verify		verify/V28.layout.json		INVALID_LAYOUT/SCHEMA
+V29	verify		verify/V29.layout.json		INVALID_LAYOUT/MISSING_FIELD
+V30	verify		verify/V30.layout.json		INVALID_LAYOUT/UNKNOWN_FAMILY
+V31	verify		verify/V31.layout.json		UNSUPPORTED_FAMILY/
+V32	verify		verify/V32.layout.json		INVALID_POLICY/ALGORITHM_FAMILY_MISMATCH
+V33	verify		verify/V33.layout.json		INVALID_POLICY/UNKNOWN_KEY
+V34	verify		verify/V34.layout.json		INVALID_POLICY/MISSING_KEY
+V35	verify		verify/V35.layout.json		INVALID_POLICY/INVALID_VALUE
+V36	verify		verify/V36.layout.json		INVALID_POLICY/MARGIN_TOO_LARGE
+V37	verify		verify/V37.layout.json		INVALID_LAYOUT/INVALID_VALUE
+V38	verify		verify/V38.layout.json		INVALID_POLICY/UNKNOWN_KEY
+V39	verify		verify/V39.layout.json		INVALID_LAYOUT/NON_CANONICAL
+V40	verify		verify/V40.layout.json		INVALID_LAYOUT/UNKNOWN_FIELD
+V41	verify		verify/V41.layout.json		INVALID_LAYOUT/TOO_DEEP
+V42	verify		verify/V42.layout.json		INVALID_POLICY/UNKNOWN_ALGORITHM
+V43	verify		verify/V43.layout.json		INVALID_POLICY/SCHEMA
+V44	verify		verify/V44.layout.json		INVALID_LAYOUT/NON_CANONICAL
+V45	verify		verify/V45.layout.json		
+V46	verify		verify/V46.layout.json		
+S01	scene	scenes/S01.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/AMBIGUOUS_ORDER_KEY
+S02	scene	scenes/S02.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_ID_TWIN
+S03	scene	scenes/S03.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_ID_TWIN
+S04	scene	scenes/S04.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_ID_TWIN
+S05	scene	scenes/S05.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/UNSAFE_NODE_ID
+S06	scene	scenes/S06.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/UNSAFE_NODE_ID
+S07	scene	scenes/S07.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID
+S08	scene	scenes/S08.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID
+S09	scene	scenes/S09.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID
+S10	scene	scenes/S10.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/S10.layout.json	
+S11	scene	scenes/S11.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/S11.layout.json	
+S12	scene	scenes/S12.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/S12.layout.json	
+S13	scene	scenes/S13.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}	layouts/S13.layout.json	
+S14	scene	scenes/S14.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		RESOURCE_LIMIT/CORE_KEY_LENGTH
+S15	scene	scenes/S15.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		RESOURCE_LIMIT/CORE_KEY_LENGTH
+S16	scene	scenes/S16.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		RESOURCE_LIMIT/CORE_KEY_LENGTH
+S17	scene	scenes/S17.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		RESOURCE_LIMIT/CORE_KEY_LENGTH
+S18	scene	scenes/S18.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		RESOURCE_LIMIT/CORE_KEY_LENGTH
+S19	scene	scenes/S19.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID
+S20	scene	scenes/S20.scene.json	{"height": 600, "iterations": 170, "margin": 60, "seed": 42, "width": 900}		UNSUPPORTED_SCENE/CORE_UNREPRESENTABLE_ID
+B01	bind	scenes/bind-a.scene.json		bind/B01.layout.json	SCENE_MISMATCH/
+B02	bind	scenes/bind-a.scene.json		bind/B02.layout.json	
+B03	bind	scenes/bind-a.scene.json		bind/B03.layout.json	INCOMPLETE_LAYOUT/MISSING_NODE
+B04	bind	scenes/bind-a.scene.json		bind/B04.layout.json	INCOMPLETE_LAYOUT/UNKNOWN_NODE
+B05	bind	scenes/bind-a.scene.json		bind/B05.layout.json	INCOMPLETE_LAYOUT/MISSING_NODE
+B06	bind	scenes/B06.scene.json		bind/B06.layout.json	INCOMPLETE_LAYOUT/MISSING_NODE
+B07	bind	scenes/B07.scene.json		layouts/F11.layout.json	IGS:INVALID_SCENE/NON_CANONICAL
+B08	bind	scenes/S18.scene.json		layouts/X05.layout.json	

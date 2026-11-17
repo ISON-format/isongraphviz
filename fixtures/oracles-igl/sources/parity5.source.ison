@@ -1,0 +1,26 @@
+nodes.person
+id name age
+alice Alice 30
+bob Bob 25
+carol Carol 35
+
+nodes.company
+id name
+acme Acme
+
+nodes.project
+id name
+p1 Alpha
+
+edges.KNOWS
+source target
+:person:alice :person:bob
+:person:bob :person:carol
+
+edges.WORKS_AT
+source target
+:person:alice :company:acme
+
+edges.WORKS_ON
+source target
+:person:carol :project:p1

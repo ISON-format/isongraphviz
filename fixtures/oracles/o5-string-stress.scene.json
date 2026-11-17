@@ -1,0 +1,1 @@
+{"address_scheme":"igs-addr/1","edges":[],"graph":{"directed":true,"profile":"simple"},"igs":"IGS/1","nodes":[{"category":"person","label":"1","ref":{"id":"i:1","type":"person"},"x-test":"q\" b\\ t\t n\n bell\u0007 del ls  eé smile😀 nul\u0000"}],"source":{"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a","serialization_profile":"ison-v1"}}

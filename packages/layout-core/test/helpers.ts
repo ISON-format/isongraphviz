@@ -6,9 +6,9 @@ import { LayoutError } from "../src/errors.js";
 import { layoutToBytes } from "../src/serialize.js";
 import type { Layout } from "../src/types.js";
 
-export const BLUEPRINT = fileURLToPath(new URL("../../../docs/isongraph-visualize-blueprint/", import.meta.url));
-export const ORACLES = join(BLUEPRINT, "oracles/");
-export const ORACLES_IGL = join(BLUEPRINT, "oracles-igl/");
+export const FIXTURES = fileURLToPath(new URL("../../../fixtures/", import.meta.url));
+export const ORACLES = join(FIXTURES, "oracles/");          // the frozen IGS/1 oracles (V1a)
+export const ORACLES_IGL = join(FIXTURES, "oracles-igl/");  // the IGL/1 corpus (V2)
 export const read = (path: string): Uint8Array => new Uint8Array(readFileSync(path));
 export const SCENE_O1 = "e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc";
 export const CORE_CFG = { width: 900, height: 600, iterations: 170, margin: 60, seed: 42 };

@@ -1,0 +1,55 @@
+{
+ "address_scheme": "igs-addr/1",
+ "edges": [
+  {
+   "label": "R",
+   "ref": {
+    "ord": "0",
+    "rel": "R",
+    "src": {
+     "id": "s:a",
+     "type": "n"
+    },
+    "tgt": {
+     "id": "s:b",
+     "type": "n"
+    }
+   }
+  }
+ ],
+ "graph": {
+  "directed": true,
+  "profile": "simple"
+ },
+ "igs": "IGS/1",
+ "nodes": [
+  {
+   "category": "n",
+   "label": "a",
+   "ref": {
+    "id": "s:a",
+    "type": "n"
+   }
+  },
+  {
+   "category": "n",
+   "label": "b",
+   "ref": {
+    "id": "s:b",
+    "type": "n"
+   }
+  },
+  {
+   "category": "n",
+   "label": "c",
+   "ref": {
+    "id": "s:c",
+    "type": "n"
+   }
+  }
+ ],
+ "source": {
+  "artifact_sha256": "871200e831982b8510a8012f90b0452b22252677a42cb14328ae94c391d827fb",
+  "serialization_profile": "ison-v1"
+ }
+}

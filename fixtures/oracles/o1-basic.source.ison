@@ -1,0 +1,8 @@
+nodes.person
+id name
+1 Alice
+ann Ann
+
+edges.KNOWS
+source target
+:person:1 :person:ann

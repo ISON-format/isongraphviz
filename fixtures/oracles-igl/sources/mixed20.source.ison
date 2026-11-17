@@ -1,0 +1,78 @@
+nodes.person
+id
+n0
+3
+6
+9
+12
+n15
+18
+
+nodes.company
+id
+1
+4
+7
+n10
+13
+16
+19
+
+nodes.project
+id
+2
+n5
+8
+11
+14
+17
+
+edges.R0
+source target
+:company:4 :project:11
+:person:n0 :person:n15
+:person:3 :company:7
+:company:7 :project:11
+:project:n5 :person:3
+:project:8 :person:n15
+:person:3 :project:11
+:person:6 :person:3
+:project:8 :company:4
+:company:7 :project:n5
+
+edges.R1
+source target
+:project:17 :person:n15
+:person:3 :person:n15
+:project:n5 :person:6
+:person:n15 :person:18
+:project:n5 :person:9
+:company:19 :project:8
+:project:n5 :person:12
+
+edges.R2
+source target
+:company:7 :project:17
+:company:n10 :project:14
+:project:11 :company:4
+:project:17 :company:19
+:person:3 :person:12
+:project:17 :person:3
+:company:1 :person:n15
+:project:2 :company:n10
+:company:n10 :project:2
+:person:6 :project:17
+
+edges.R3
+source target
+:person:12 :company:7
+:company:13 :person:18
+:project:8 :person:9
+:project:2 :person:9
+:company:13 :person:n0
+:project:n5 :company:13
+:project:8 :company:16
+:project:2 :person:18
+:company:16 :project:8
+:person:18 :project:8
+

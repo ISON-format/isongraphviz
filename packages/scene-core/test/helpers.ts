@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { IgsError } from "../src/errors.js";
 
 /** The frozen oracles are read in place: one source of truth. */
-export const ORACLES = fileURLToPath(new URL("../../../docs/isongraph-visualize-blueprint/oracles/", import.meta.url));
+export const ORACLES = fileURLToPath(new URL("../../../fixtures/oracles/", import.meta.url));
 export const bytesOf = (rel: string): Uint8Array => new Uint8Array(readFileSync(join(ORACLES, rel)));
 export const textOf = (rel: string): string => readFileSync(join(ORACLES, rel), "utf8");
 
