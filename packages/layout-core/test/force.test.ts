@@ -157,6 +157,16 @@ describe("computeForceLayout refuses without calling Core (Review Focus 2 and 3)
     expect(vi.mocked(coreSpy)).not.toHaveBeenCalled();
     await expect(computeForceLayout(o1.sceneBytes, zero, { budget: { maxWork: 600 } })).resolves.toBeDefined();
   });
+  it("review finding I-2: a relation above the physical-edge cap is refused before Core runs, the same on every host", async () => {
+    const n = 300, edgesOver = 50_001;
+    let t = `nodes.p\nid\n${Array.from({ length: n }, (_, i) => i).join("\n")}\n\nedges.R\nsource target\n`;
+    let k = 0;
+    for (let i = 0; i < n && k < edgesOver; i++) for (let j = 0; j < n && k < edgesOver; j++) if (i !== j) { t += `:p:${i} :p:${j}\n`; k++; }
+    const big = await compile(t);
+    expect(big.scene.edges).toHaveLength(edgesOver);
+    expect(await layoutError(() => computeForceLayout(big.sceneBytes, { ...CORE_CFG, iterations: 0 }))).toBe("UNSUPPORTED_SCENE/CORE_EDGE_LIMIT");
+    expect(vi.mocked(coreSpy)).not.toHaveBeenCalled();
+  }, 60_000);
   it("an UNDIRECTED scene pays for both stored orientations: O4 (2 nodes, a mirrored pair + a self-loop = 2 logical edges, counted as 4 physical) costs 200 x (2 + 4) = 1200 at zero iterations", async () => {
     const o4 = await compileScene(read(join(ORACLES, "o4-undirected.source.ison")), "ison-v1");
     const zero = { ...CORE_CFG, iterations: 0 };

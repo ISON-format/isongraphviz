@@ -14,6 +14,32 @@ describe("verifyLayout rejects (one test per rule; the same rows are frozen as o
   }
 });
 
+describe("review finding I-1: policy VALUES are domain- and depth-checked before any recursion", () => {
+  const deep = (d: number) => "[".repeat(d) + "]".repeat(d);
+  const withFamily = (d: number) => enc(T.replace('"family":"FORCE"', '"family":' + deep(d)));
+  it("a policy value nested 65 levels or more is INVALID_LAYOUT/TOO_DEEP at EVERY depth - never a host-dependent raw RangeError", async () => {
+    for (const d of [65, 100, 1800, 2000, 20_000]) {
+      expect(await layoutError(() => verifyLayout(withFamily(d))), `depth ${d}`).toBe("INVALID_LAYOUT/TOO_DEEP");
+    }
+  });
+  it("the bound is 64 levels counted from the policy object: 63 arrays inside family pass the depth check (then an unknown family), 64 do not", async () => {
+    expect(await layoutError(() => verifyLayout(withFamily(63)))).toBe("INVALID_LAYOUT/UNKNOWN_FAMILY");
+    expect(await layoutError(() => verifyLayout(withFamily(64)))).toBe("INVALID_LAYOUT/TOO_DEEP");
+  });
+  it("the same holds for values inside policy.config", async () => {
+    const t = T.replace('"seed":42', '"seed":' + deep(2000));
+    expect(await layoutError(() => verifyLayout(enc(t)))).toBe("INVALID_LAYOUT/TOO_DEEP");
+  });
+  it("and it propagates unchanged through bindLayout and verifyReproducible", async () => {
+    const { bindLayout } = await import("../src/bind.js");
+    const { verifyReproducible } = await import("../src/compute.js");
+    const { o1Scene } = await import("./helpers.js");
+    const o1 = await o1Scene();
+    expect(await layoutError(() => bindLayout(o1.sceneBytes, withFamily(2000)))).toBe("INVALID_LAYOUT/TOO_DEEP");
+    expect(await layoutError(() => verifyReproducible(o1.sceneBytes, withFamily(2000)))).toBe("INVALID_LAYOUT/TOO_DEEP");
+  });
+});
+
 describe("verifyLayout accepts", () => {
   it("the base layout, returning the parsed layout and the digest of the exact bytes", async () => {
     const r = await verifyLayout(enc(T));

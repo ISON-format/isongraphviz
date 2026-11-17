@@ -56,6 +56,19 @@ describe("verifyReproducible (design 6.3): conformance of the coordinates is NOT
     const f = await computeFixedLayout(o1.sceneBytes, [{ ref: { id: "i:1", type: "person" }, x: 1, y: 2 }, { ref: { id: "s:ann", type: "person" }, x: 3, y: 4 }]);
     await expect(verifyReproducible(o1.sceneBytes, f.layoutBytes)).resolves.toBe("not-recomputable");
   });
+  it("OWNERSHIP (discriminating): layout bytes mutated after the call starts do not change the verdict", async () => {
+    const o1 = await o1Scene(); const r = await computeLayout(o1.sceneBytes, forcePolicy);
+    const copy = new Uint8Array(r.layoutBytes);
+    const pending = verifyReproducible(o1.sceneBytes, copy); copy.fill(0);
+    await expect(pending).resolves.toBe("reproduced");
+  });
+  it("the budget option is read once, synchronously", async () => {
+    const o1 = await o1Scene(); const r = await computeLayout(o1.sceneBytes, forcePolicy);
+    let reads = 0;
+    const options = { get budget() { reads++; return { maxNodes: 100 }; } };
+    await verifyReproducible(o1.sceneBytes, r.layoutBytes, options as never);
+    expect(reads).toBe(1);
+  });
   it("applies the budget, and an unbound pair fails as bindLayout would", async () => {
     const o1 = await o1Scene(); const r = await computeLayout(o1.sceneBytes, forcePolicy);
     expect(await layoutError(() => verifyReproducible(o1.sceneBytes, r.layoutBytes, { budget: { maxNodes: 1 } }))).toBe("RESOURCE_LIMIT/NODE_LIMIT");

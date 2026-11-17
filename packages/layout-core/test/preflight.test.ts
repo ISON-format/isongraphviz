@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { preflightForce } from "../src/force.js";
+import type { Scene } from "isongraph-visualize-scene-core";
+import { MAX_PHYSICAL_EDGES_PER_RELATION, preflightForce, preflightForceEdges } from "../src/force.js";
 import { LayoutError } from "../src/errors.js";
 
 const N = (id: string, type = "p") => ({ category: type, label: id.slice(2), ref: { id, type } });
@@ -35,4 +36,30 @@ describe("preflightForce refuses every Core representation limit (design 7.1; so
   for (const [name, nodes] of accept) it(`accepts ${name}`, () => expect(verdict(...nodes)).toBe("ok"));
 
   it("the empty node set is acceptable", () => expect(verdict()).toBe("ok"));
+});
+
+// Review finding I-2: Core's graph.edges() overflows the call stack at ~125k physical edges in ONE relation (igl-evidence/core-edge-limit.out.txt),
+// and the threshold depends on the host's stack size. The preflight refuses far below it, so the verdict is the same on every host.
+describe("preflightForceEdges: a cap on physical edges per relation, below Core's stack-overflow threshold", () => {
+  const sceneWith = (rels: Record<string, number>, directed = true): Scene =>
+    ({ graph: { directed }, nodes: [], edges: Object.entries(rels).flatMap(([rel, k]) => Array.from({ length: k }, () => ({ label: rel, ref: { rel } }))) }) as unknown as Scene;
+  const edgeVerdict = (s: Scene): string => { try { preflightForceEdges(s); } catch (e) { if (e instanceof LayoutError) return `${e.code}/${e.reason}`; throw e; } return "ok"; };
+
+  it("the cap is 50,000, about 40% of the measured overflow threshold on the default stack", () => expect(MAX_PHYSICAL_EDGES_PER_RELATION).toBe(50_000));
+  it("a directed relation at the cap is accepted, one above it is refused", () => {
+    expect(edgeVerdict(sceneWith({ R: 50_000 }))).toBe("ok");
+    expect(edgeVerdict(sceneWith({ R: 50_001 }))).toBe("UNSUPPORTED_SCENE/CORE_EDGE_LIMIT");
+  });
+  it("the cap is per relation: two relations of 50,000 are accepted", () => {
+    expect(edgeVerdict(sceneWith({ R: 50_000, S: 50_000 }))).toBe("ok");
+    expect(edgeVerdict(sceneWith({ R: 50_000, S: 50_001 }))).toBe("UNSUPPORTED_SCENE/CORE_EDGE_LIMIT");
+  });
+  it("an undirected scene stores two physical entries per edge, so its cap is 25,000 logical edges", () => {
+    expect(edgeVerdict(sceneWith({ R: 25_000 }, false))).toBe("ok");
+    expect(edgeVerdict(sceneWith({ R: 25_001 }, false))).toBe("UNSUPPORTED_SCENE/CORE_EDGE_LIMIT");
+  });
+  it("no edges and small relations are accepted", () => {
+    expect(edgeVerdict(sceneWith({}))).toBe("ok");
+    expect(edgeVerdict(sceneWith({ R: 1 }))).toBe("ok");
+  });
 });

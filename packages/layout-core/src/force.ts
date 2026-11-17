@@ -19,10 +19,21 @@ export const DEFAULT_FORCE_BUDGET: Readonly<ForceBudget> = Object.freeze({ maxNo
  */
 export const CONSTRUCTION_UNITS = 200n;
 
+/**
+ * Core's per-iteration cost is not only the n(n-1)/2 pair interactions (review finding I-3): it also pays per edge and per node every
+ * iteration (displacement map, spring loop). Measured on Core 1.4.1 on Node 22 and 24 (igl-evidence/budget-iteration-model.out.txt),
+ * 12 points from n=2 to n=200: the first formula (pairs + E) undercounted at 8 of 12; pairs + 3E + 8n + 4 covers all 12. Core returns
+ * at once for n <= 1, so the iteration term is charged only for n >= 2. `edgeCount` is the PHYSICAL entry count (physicalEdgeCount).
+ */
+export const ITERATION_EDGE_UNITS = 3n;
+export const ITERATION_NODE_UNITS = 8n;
+export const ITERATION_BASE_UNITS = 4n;
+
 export function forceWork(nodeCount: number, edgeCount: number, iterations: number): bigint {
   const n = BigInt(nodeCount);
   const e = BigInt(edgeCount);
-  return BigInt(iterations) * ((n * (n - 1n)) / 2n + e) + CONSTRUCTION_UNITS * (n + e);
+  const perIteration = n < 2n ? 0n : (n * (n - 1n)) / 2n + ITERATION_EDGE_UNITS * e + ITERATION_NODE_UNITS * n + ITERATION_BASE_UNITS;
+  return BigInt(iterations) * perIteration + CONSTRUCTION_UNITS * (n + e);
 }
 
 export function resolveBudget(b: unknown): ForceBudget {
@@ -127,12 +138,32 @@ export function buildCoreGraph(scene: Scene): ISONGraph {
   return g;
 }
 
+/**
+ * Core 1.4.1 builds graph.edges() with `edgeList.push(...edges)`, which overflows the call stack once ONE relation holds about 125,000
+ * physical edges (124,860 on Node 24, 125,191 on Node 22; igl-evidence/core-edge-limit.out.txt), and the exact threshold depends on the
+ * host's stack size (review finding I-2). The producer therefore refuses, on every host alike, far below it: 50,000 physical edges
+ * per relation (about 40% of the measured threshold). Undirected edges count twice (Core stores both orientations; a self-loop is
+ * counted twice, conservatively). A Core representation limit, like the node checks; never in the artifact.
+ */
+export const MAX_PHYSICAL_EDGES_PER_RELATION = 50_000;
+
+export function preflightForceEdges(scene: Scene): void {
+  const per = scene.graph.directed ? 1 : 2;
+  const counts = new Map<string, number>();
+  for (const e of scene.edges) {
+    const k = (counts.get(e.ref.rel) ?? 0) + per;
+    if (k > MAX_PHYSICAL_EDGES_PER_RELATION) throw new LayoutError("UNSUPPORTED_SCENE", "CORE_EDGE_LIMIT", undefined, `relation ${e.ref.rel}: more than ${MAX_PHYSICAL_EDGES_PER_RELATION} physical edges`);
+    counts.set(e.ref.rel, k);
+  }
+}
+
 /** Shared by computeForceLayout, computeLayout and verifyReproducible. `input` is already an owned copy. */
 export async function produceForce(input: Uint8Array, policy: Policy, budget: ForceBudget): Promise<LayoutResult> {
   const cfg = policy.config as unknown as ForceConfig;
   const { scene, sceneSha256 } = await verifyScene(input);
   checkBudget(scene.nodes.length, physicalEdgeCount(scene), cfg.iterations, budget); // before anything is built; Core is synchronous and cannot be cancelled
   preflightForce(scene.nodes);
+  preflightForceEdges(scene);
   let raw: Map<string, [number, number]>;
   try {
     const graph = buildCoreGraph(scene);

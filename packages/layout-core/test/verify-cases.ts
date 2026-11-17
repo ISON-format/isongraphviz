@@ -49,6 +49,7 @@ export const REJECT: Array<[string, string | Uint8Array, string]> = [
   ["V37 null seed (null is outside the canonical value domain, reported before policy)", obj((o) => { ((o["policy"] as Record<string, unknown>)["config"] as Record<string, unknown>)["seed"] = null; }), "INVALID_LAYOUT/INVALID_VALUE"],
   ["V38 x- key inside config", obj((o) => { ((o["policy"] as Record<string, unknown>)["config"] as Record<string, unknown>)["x-n"] = 1; }), "INVALID_POLICY/UNKNOWN_KEY"],
   ["V39 non-canonical AND bad policy: canonical form is reported first", pretty(obj((o) => { ((o["policy"] as Record<string, unknown>)["config"] as Record<string, unknown>)["seed"] = 2 ** 32; })), "INVALID_LAYOUT/NON_CANONICAL"],
+  ["V41 policy value nested 2000 levels (host-independent TOO_DEEP)", T.replace('"family":"FORCE"', '"family":' + "[".repeat(2000) + "]".repeat(2000)), "INVALID_LAYOUT/TOO_DEEP"],
   ["V40 x- key inside policy", obj((o) => { (o["policy"] as Record<string, unknown>)["x-n"] = 1; }), "INVALID_LAYOUT/UNKNOWN_FIELD"],
 ];
 

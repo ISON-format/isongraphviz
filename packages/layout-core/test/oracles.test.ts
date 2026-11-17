@@ -1,4 +1,4 @@
-// packages/layout-core/test/oracles.test.ts - the frozen IGL/1 oracles (docs/isongraph-visualize-blueprint/oracles-igl).
+// packages/layout-core/test/oracles.test.ts - the IGL/1 oracle corpus (docs/isongraph-visualize-blueprint/oracles-igl): generated and checked, NOT yet labelled frozen or qualified (owner instruction).
 // Expected layout bytes were produced by Python only (tools/make_oracles.py); nothing here regenerates them.
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
@@ -32,11 +32,11 @@ function walk(dir: string, out: string[] = []): string[] {
   return out;
 }
 
-describe("the frozen IGL oracle corpus", () => {
-  it("the manifest has 75 rows (F 12, X 3, V 40, S 13, B 7)", () => {
-    expect(rows).toHaveLength(75);
-    expect(Object.fromEntries(["force", "fixed", "verify", "scene", "bind"].map((g) => [g, by(g).length]))).toEqual({ force: 12, fixed: 3, verify: 40, scene: 13, bind: 7 });
-    expect(new Set(rows.map((r) => r.id)).size).toBe(75);
+describe("the IGL oracle corpus (generated and checked; not yet labelled frozen)", () => {
+  it("the manifest has 76 rows (F 12, X 3, V 41, S 13, B 7)", () => {
+    expect(rows).toHaveLength(76);
+    expect(Object.fromEntries(["force", "fixed", "verify", "scene", "bind"].map((g) => [g, by(g).length]))).toEqual({ force: 12, fixed: 3, verify: 41, scene: 13, bind: 7 });
+    expect(new Set(rows.map((r) => r.id)).size).toBe(76);
   });
 
   it("SHA256SUMS lists exactly the committed files (no stray, no missing) and every digest matches", () => {
@@ -72,7 +72,7 @@ describe("the frozen IGL oracle corpus", () => {
     }
   });
 
-  it("verify rows: each file gives exactly its expected verdict (two verify, thirty-eight are rejected)", async () => {
+  it("verify rows: each file gives exactly its expected verdict (two verify, thirty-nine are rejected)", async () => {
     let accepted = 0;
     for (const r of by("verify")) {
       const got = verdict(await layoutError(() => verifyLayout(read(at(r.input)))));
@@ -86,7 +86,7 @@ describe("the frozen IGL oracle corpus", () => {
     const table = new Map<string, Uint8Array>();
     for (const [name, input] of REJECT) table.set(name.slice(0, 3), typeof input === "string" ? enc(input) : input);
     for (const [name, input] of ACCEPT) table.set(name.slice(0, 3), enc(input));
-    expect(table.size).toBe(40);
+    expect(table.size).toBe(41);
     for (const r of by("verify")) expect(same(table.get(r.id)!, read(at(r.input))), `${r.id} differs between the TS table and the Python file`).toBe(true);
   });
 
