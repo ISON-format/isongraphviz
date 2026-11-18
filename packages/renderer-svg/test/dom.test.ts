@@ -1,9 +1,12 @@
 // The DOM adapter (13) against a MINIMAL FAKE DOM in Node. This checks the adapter's own logic (mounting, commit, input mapping, errors, disposal);
 // it is not a browser test: `npm run smoke:browser` is the (single-engine) smoke run, and no browser qualification is claimed here.
 import { describe, expect, it } from "vitest";
-import { createDomSvgRenderer } from "../src/dom/index.js";
-import { svgManifest } from "../src/index.js";
-import { MIXED20, errOfAsync, loadModel, o1 } from "./helpers.js";
+import * as domEntry from "../src/dom/index.js";
+import { createDomSvgRenderer, type DomSvgRendererOptions } from "../src/dom/index.js";
+import { createSvgRenderer, svgManifest } from "../src/index.js";
+import { composeSvgRenderer } from "../src/renderer.js";
+import type { Intent } from "isongraph-visualize-renderer-core";
+import { MIXED20, errOf, errOfAsync, loadModel, o1 } from "./helpers.js";
 
 // ---- a fake DOM just large enough for the adapter -------------------------------------------------------------------------------
 class FakeNode {
@@ -314,5 +317,180 @@ describe("audit M-2: a failed commit leaves the state consistent and the API hon
     host.style.cursor = "pointer";
     await r.dispose();
     expect(host.style.cursor).toBe("crosshair");
+  });
+});
+
+// ---- CCR-V11-6 (design 32 18.2): the additive adapter options pointer, liveRegion, focusRestore ------------------------------------
+describe("adapter options pointer / liveRegion / focusRestore (CCR-V11-6)", () => {
+  const sel: Intent = { type: "select", mode: "replace", targets: [{ node: { id: "i:1", type: "person" } }] };
+  const firstG = (host: FakeNode): FakeNode => host.children[0]!.all().find((n) => n.tag === "g" && n.getAttribute("id")?.startsWith("igr-e-"))!;
+  const noListeners = (host: FakeNode): boolean => [...host.listeners.values()].every((l) => l.length === 0);
+
+  it("the dom entry exports exactly createDomSvgRenderer (the option type is a type only)", () => {
+    expect(Object.keys(domEntry)).toEqual(["createDomSvgRenderer"]);
+    const o: DomSvgRendererOptions = { pointer: "none", liveRegion: "none", focusRestore: "none", svg: { labels: false } };
+    expect(o.pointer).toBe("none");
+  });
+
+  it("the explicit defaults reproduce today's behaviour: status div, both pointer handlers, focus restored by id", async () => {
+    const { r, host, doc, events } = await mount({ pointer: "builtin", liveRegion: "builtin", focusRestore: "by-id" });
+    expect(host.children.map((c) => c.tag)).toEqual(["svg", "div"]);
+    expect(host.children[1]!.getAttribute("role")).toBe("status");
+    expect([...host.listeners.keys()].sort()).toEqual(["pointerdown", "pointermove"]);
+    r.dispatch(sel);
+    expect(host.children[1]!.textContent).toBe("1 selected.");
+    const id = firstG(host).getAttribute("id")!;
+    firstG(host).focus();
+    events.length = 0;
+    r.dispatch({ type: "pan", dx: 5, dy: 5 });
+    expect(doc.activeElement?.getAttribute("id")).toBe(id);
+    expect(doc.activeElement?.parentNode).not.toBeNull(); // the NEW element
+  });
+  it("the default output is byte-identical with and without the explicit defaults", async () => {
+    const a = await mount(), b = await mount({ pointer: "builtin", liveRegion: "builtin", focusRestore: "by-id" });
+    expect(b.r.svg()).toBe(a.r.svg());
+    expect(JSON.stringify(b.r.manifest)).toBe(JSON.stringify(a.r.manifest));
+  });
+  it("an own property whose value is undefined is absent (the defaults apply)", async () => {
+    const { host } = await mount({ pointer: undefined, liveRegion: undefined, focusRestore: undefined });
+    expect(host.children.map((c) => c.tag)).toEqual(["svg", "div"]);
+    expect([...host.listeners.keys()].sort()).toEqual(["pointerdown", "pointermove"]);
+  });
+
+  it("pointer none: no pointer listener of any kind, no cursor, and a press changes nothing", async () => {
+    const { r, host, events } = await mount({ pointer: "none" });
+    expect(noListeners(host)).toBe(true);
+    expect(host.children.map((c) => c.tag)).toEqual(["svg", "div"]); // the status line is independent
+    events.length = 0;
+    host.fire("pointerdown", ptr(host.children[0]!, 32, 193.5));
+    host.fire("pointermove", { target: firstG(host) });
+    expect(events).toEqual([]);
+    expect(r.getState().selection.nodes).toEqual([]);
+    expect(host.style.cursor).toBe("");
+    r.dispatch(sel); // dispatch still works and commits
+    expect(r.getState().selection.nodes).toHaveLength(1);
+    expect(host.children[1]!.textContent).toBe("1 selected.");
+  });
+  it("pointer none leaves a host cursor it did not set alone, and dispose restores it", async () => {
+    const { model } = await o1();
+    const doc = new FakeDoc();
+    const host = doc.createElement("div");
+    host.style.cursor = "crosshair";
+    doc.body.appendChild(host);
+    const r = createDomSvgRenderer({ pointer: "none" });
+    await r.initialize(env(host));
+    await r.loadScene(model);
+    expect(host.style.cursor).toBe("crosshair");
+    await r.dispose();
+    expect(host.style.cursor).toBe("crosshair");
+  });
+
+  it("liveRegion none: no status element is created or written, in any state, and the host children are restored on dispose", async () => {
+    const { model } = await o1();
+    const doc = new FakeDoc();
+    const host = doc.createElement("div");
+    const kept = doc.createElement("p");
+    host.appendChild(kept);
+    doc.body.appendChild(host);
+    const r = createDomSvgRenderer({ liveRegion: "none" });
+    await r.initialize(env(host));
+    expect(host.children).toHaveLength(0);
+    await r.loadScene(model);
+    expect(host.children.map((c) => c.tag)).toEqual(["svg"]);
+    r.dispatch(sel);
+    r.dispatch({ type: "clear-selection" });
+    expect(host.children.map((c) => c.tag)).toEqual(["svg"]);
+    expect(host.all().some((n) => n.getAttribute("role") === "status" || n.getAttribute("aria-live") !== null)).toBe(false);
+    expect([...host.listeners.keys()].sort()).toEqual(["pointerdown", "pointermove"]); // the pointer handling is independent
+    await r.dispose();
+    expect(host.children).toEqual([kept]);
+  });
+  it("liveRegion none: a later load re-mounts the document in place (no status sibling to insert before)", async () => {
+    const { r, host, model } = await mount({ liveRegion: "none" });
+    await r.loadScene(model);
+    expect(host.children.map((c) => c.tag)).toEqual(["svg"]);
+  });
+
+  it("focusRestore none: DOM focus is left alone after a commit (no remembered id, no focus() call)", async () => {
+    const { r, host, doc, events } = await mount({ focusRestore: "none" });
+    const old = firstG(host);
+    old.focus();
+    expect(doc.activeElement).toBe(old);
+    events.length = 0;
+    let focusCalls = 0;
+    const origFocus = FakeNode.prototype.focus;
+    FakeNode.prototype.focus = function (this: FakeNode) { focusCalls++; origFocus.call(this); };
+    try { r.dispatch({ type: "pan", dx: 5, dy: 5 }); } finally { FakeNode.prototype.focus = origFocus; }
+    expect(focusCalls).toBe(0);
+    expect(doc.activeElement).toBe(old); // still the replaced (now detached) element: the adapter did not touch it
+    expect(host.contains(old)).toBe(false); // the replaced document is detached
+    expect(events.includes("focus-changed")).toBe(false);
+    expect(host.children[0]!.all().some((n) => n === doc.activeElement)).toBe(false);
+  });
+  it("focusRestore none does not read the active element either", async () => {
+    const { r, doc } = await mount({ focusRestore: "none" });
+    let reads = 0;
+    Object.defineProperty(doc, "activeElement", { get() { reads++; return null; }, set() { /* ignored */ }, configurable: true });
+    r.dispatch(sel);
+    expect(reads).toBe(0);
+  });
+
+  it("the three options combine and leave the rest of the options working; the caller's object is not modified", async () => {
+    const opts: DomSvgRendererOptions = { pointer: "none", liveRegion: "none", focusRestore: "none", svg: { labels: false } };
+    const keys = Object.keys(opts).join();
+    const { r, host } = await mount(opts);
+    expect(Object.keys(opts).join()).toBe(keys);
+    expect(host.children.map((c) => c.tag)).toEqual(["svg"]);
+    expect(noListeners(host)).toBe(true);
+    expect(host.children[0]!.all().filter((n) => n.tag === "text")).toHaveLength(0); // svg.labels:false still applies
+    expect(r.svg()).not.toContain("<text ");
+    await r.dispose();
+    expect(host.children).toHaveLength(0);
+  });
+  it("dispose removes whatever was added: no listener, status or mounted document is left, with any combination", async () => {
+    for (const o of [undefined, { pointer: "none" }, { liveRegion: "none" }, { focusRestore: "none" }, { pointer: "none", liveRegion: "none", focusRestore: "none" }]) {
+      const { r, host } = await mount(o);
+      await r.dispose();
+      expect(host.children, JSON.stringify(o)).toHaveLength(0);
+      expect(noListeners(host), JSON.stringify(o)).toBe(true);
+      expect(host.style.cursor).toBe("");
+    }
+  });
+
+  it("a value outside the set of a known new key is INVALID_INPUT/INVALID_VALUE (any type, any case, the empty string, null)", () => {
+    const bads: unknown[] = ["x", "", "NONE", "Builtin", " none", 1, 0, true, false, null, {}, [], ["none"]];
+    const good: Record<string, string> = { pointer: "builtin", liveRegion: "builtin", focusRestore: "by-id" };
+    for (const k of Object.keys(good)) {
+      for (const v of bads) expect(errOf(() => createDomSvgRenderer({ [k]: v } as never)), `${k}=${JSON.stringify(v)}`).toBe("INVALID_INPUT/INVALID_VALUE");
+      expect(errOf(() => createDomSvgRenderer({ [k]: good[k] } as never)), k).toBe("none");
+    }
+    // the value sets are not interchangeable
+    expect(errOf(() => createDomSvgRenderer({ pointer: "by-id" } as never))).toBe("INVALID_INPUT/INVALID_VALUE");
+    expect(errOf(() => createDomSvgRenderer({ focusRestore: "builtin" } as never))).toBe("INVALID_INPUT/INVALID_VALUE");
+    expect(errOf(() => createDomSvgRenderer({ liveRegion: "by-id" } as never))).toBe("INVALID_INPUT/INVALID_VALUE");
+  });
+  it("canvasLabel is not an option of the SVG adapter: an unknown key stays SCHEMA", () => {
+    expect(errOf(() => createDomSvgRenderer({ canvasLabel: "none" } as never))).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("unknown keys stay SCHEMA at the dom wrapper, even beside valid new keys", () => {
+    expect(errOf(() => createDomSvgRenderer({ bogus: 1 } as never))).toBe("INVALID_INPUT/SCHEMA");
+    expect(errOf(() => createDomSvgRenderer({ pointer: "none", bogus: 1 } as never))).toBe("INVALID_INPUT/SCHEMA");
+    expect(errOf(() => createDomSvgRenderer({ Pointer: "none" } as never))).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("non-plain option containers are still the composer's SCHEMA", () => {
+    for (const o of [[], "none", 5, null, true, new (class X { pointer = "none"; })()]) expect(errOf(() => createDomSvgRenderer(o as never)), String(o)).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("the shared composer and the headless renderer still reject the new keys with SCHEMA", () => {
+    for (const k of ["pointer", "liveRegion", "focusRestore", "canvasLabel"]) {
+      expect(errOf(() => createSvgRenderer({ [k]: "none" } as never)), `headless ${k}`).toBe("INVALID_INPUT/SCHEMA");
+      expect(errOf(() => composeSvgRenderer("dom", { [k]: "none" } as never)), `composer ${k}`).toBe("INVALID_INPUT/SCHEMA");
+      expect(errOf(() => composeSvgRenderer("headless", { [k]: "builtin" } as never)), `composer headless ${k}`).toBe("INVALID_INPUT/SCHEMA");
+    }
+  });
+  it("each property is read once (an accessor is called once per key)", () => {
+    let n = 0;
+    const o = { get pointer() { n++; return "none"; } };
+    createDomSvgRenderer(o as never);
+    expect(n).toBe(1);
   });
 });

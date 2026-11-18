@@ -18,6 +18,48 @@ function isElement(v: unknown): v is Element {
   return typeof v === "object" && v !== null && (v as { nodeType?: unknown }).nodeType === 1 && typeof (v as { ownerDocument?: unknown }).ownerDocument === "object" && (v as { ownerDocument?: unknown }).ownerDocument !== null;
 }
 
+/** The DOM-only options of the adapter (CCR-V11-6, design 32 18.2); each default reproduces the behaviour of the adapter without the option. */
+export type DomCanvasRendererOptions = CanvasRendererOptions & {
+  /** "builtin" (default): the adapter's own pointerdown handler on the canvas; "none": no pointer listener of any kind. */
+  pointer?: "builtin" | "none";
+  /** "builtin" (default): the adapter's status div (role="status", aria-live="polite"); "none": no status element is created or written. */
+  liveRegion?: "builtin" | "none";
+  /** "builtin" (default): role="img" and an aria-label of summary plus status on the canvas; "none": aria-hidden="true" and no role or aria-label. */
+  canvasLabel?: "builtin" | "none";
+};
+
+interface DomOnly { pointer: boolean; liveRegion: boolean; canvasLabel: boolean }
+const DOM_KEYS = ["pointer", "liveRegion", "canvasLabel"] as const;
+const DOM_VALUES: Record<(typeof DOM_KEYS)[number], readonly [string, string]> = { pointer: ["builtin", "none"], liveRegion: ["builtin", "none"], canvasLabel: ["builtin", "none"] };
+
+/**
+ * Reads, validates and REMOVES the DOM-only keys with a closed own-property check; the rest goes to the shared composer unchanged, whose own
+ * closed key set still rejects every unknown key (INVALID_INPUT/SCHEMA). A value outside the set of a known key is INVALID_INPUT/INVALID_VALUE.
+ * Anything that is not a plain object is left to the composer (SCHEMA). Each property is read once; an own property whose value is undefined is absent.
+ */
+function splitDomOptions(options: unknown): { rest: unknown; dom: DomOnly } {
+  const dom: DomOnly = { pointer: true, liveRegion: true, canvasLabel: true };
+  if (typeof options !== "object" || options === null || Array.isArray(options)) return { rest: options, dom };
+  const proto: unknown = Object.getPrototypeOf(options);
+  if (proto !== Object.prototype && proto !== null) return { rest: options, dom };
+  const own = Object.keys(options);
+  if (!own.some((k) => (DOM_KEYS as readonly string[]).includes(k))) return { rest: options, dom };
+  const rest: Record<string, unknown> = {};
+  const given: Partial<Record<(typeof DOM_KEYS)[number], unknown>> = {};
+  for (const k of own) {
+    const v: unknown = (options as Record<string, unknown>)[k];
+    if ((DOM_KEYS as readonly string[]).includes(k)) { if (v !== undefined) given[k as (typeof DOM_KEYS)[number]] = v; }
+    else rest[k] = v;
+  }
+  for (const k of DOM_KEYS) {
+    if (!(k in given)) continue;
+    const v = given[k];
+    if (typeof v !== "string" || !DOM_VALUES[k].includes(v)) throw bad("INVALID_VALUE", `options.${k}`, `one of ${DOM_VALUES[k].join(" | ")} expected`);
+    dom[k] = v === DOM_VALUES[k][0];
+  }
+  return { rest, dom };
+}
+
 /** dprMilli = clamp(quantizePx(devicePixelRatio * 1000), 250, 8000): a ratio is environment, not state (6.4). */
 function dprMilliOf(ratio: unknown): number {
   const v = typeof ratio === "number" && Number.isFinite(ratio * 1000) ? quantizePx(ratio * 1000) : 1000;
@@ -25,8 +67,10 @@ function dprMilliOf(ratio: unknown): number {
 }
 
 /** The DOM Canvas renderer: CanvasRenderer with host "dom"; env.host is the container Element. */
-export function createDomCanvasRenderer(options?: CanvasRendererOptions): CanvasRenderer {
-  const composed = composeCanvasRenderer("dom", options);
+export function createDomCanvasRenderer(options?: DomCanvasRendererOptions): CanvasRenderer {
+  const split = splitDomOptions(options);
+  const composed = composeCanvasRenderer("dom", split.rest as CanvasRendererOptions | undefined);
+  const builtinPointer = split.dom.pointer, builtinLive = split.dom.liveRegion, builtinLabel = split.dom.canvasLabel;
   const core = composed.renderer;
   const ropts = composed.options;
 
@@ -80,7 +124,7 @@ export function createDomCanvasRenderer(options?: CanvasRendererOptions): Canvas
       list = core.displayList();
       replayCanvas(list, ctx as unknown as Canvas2DLike, { dprMilli: e, ink: ropts.ink });
       failure = undefined;
-      canvas.setAttribute("aria-label", `${summaryText(graphSummary(model))} ${statusText(model, state)}`);
+      if (builtinLabel) canvas.setAttribute("aria-label", `${summaryText(graphSummary(model))} ${statusText(model, state)}`);
     } catch (err) {
       try { clear(); } catch { /* a context that throws cannot be cleared either */ }
       failure = failureToken(err);
@@ -122,14 +166,18 @@ export function createDomCanvasRenderer(options?: CanvasRendererOptions): Canvas
       size(e.size.width, e.size.height);
       saved = Array.from(h.childNodes);
       for (const n of saved) h.removeChild(n);
-      c.setAttribute("role", "img");
-      status = d.createElement("div");
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
+      if (builtinLabel) c.setAttribute("role", "img"); else c.setAttribute("aria-hidden", "true"); // the companion is then the accessible surface
       h.appendChild(c);
-      h.appendChild(status);
-      c.addEventListener("pointerdown", onPointerDown); // the canvas's, not the host's: a press elsewhere in the host is not a press on the graph (audit M-6)
-      unbind.push(() => c.removeEventListener("pointerdown", onPointerDown));
+      if (builtinLive) {
+        status = d.createElement("div");
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
+        h.appendChild(status);
+      }
+      if (builtinPointer) {
+        c.addEventListener("pointerdown", onPointerDown); // the canvas's, not the host's: a press elsewhere in the host is not a press on the graph (audit M-6)
+        unbind.push(() => c.removeEventListener("pointerdown", onPointerDown));
+      }
       phase = "initialized";
     },
     async loadScene(m: RenderModel, initial?: SemanticState): Promise<void> {

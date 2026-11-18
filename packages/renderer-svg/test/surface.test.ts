@@ -126,6 +126,11 @@ describe("security audit (11)", () => {
     expect(d).toContain("DOMParser");
     expect(d).not.toMatch(/\.style\.(?!cursor)/);
   });
+  it("CCR-V11-6: the adapter-only option names live in the ./dom entry alone; the shared core never names them (a headless renderer given one is SCHEMA)", () => {
+    const d = code(join(SRC, "dom", "index.ts"));
+    for (const k of ["pointer", "liveRegion", "focusRestore"]) { expect(d, k).toContain(`"${k}"`); for (const f of coreFiles) expect(code(f), `${k} in ${f}`).not.toContain(`"${k}"`); }
+    expect(d).not.toContain('"canvasLabel"'); // Canvas and WebGL only
+  });
 });
 
 describe("naming and files", () => {

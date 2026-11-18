@@ -23,6 +23,48 @@ function isElement(v: unknown): v is Element {
   return typeof v === "object" && v !== null && (v as { nodeType?: unknown }).nodeType === 1 && typeof (v as { ownerDocument?: unknown }).ownerDocument === "object" && (v as { ownerDocument?: unknown }).ownerDocument !== null;
 }
 
+/** The DOM-only options of the adapter (CCR-V11-6, design 32 18.2); each default reproduces the behaviour of the adapter without the option. */
+export type DomWebglRendererOptions = WebglRendererOptions & {
+  /** "builtin" (default): the adapter's own pointerdown handler on the canvas; "none": no pointer listener of any kind. */
+  pointer?: "builtin" | "none";
+  /** "builtin" (default): the adapter's status div (role="status", aria-live="polite"); "none": no status element is created or written. */
+  liveRegion?: "builtin" | "none";
+  /** "builtin" (default): role="img" and an aria-label of summary plus status on the canvas; "none": aria-hidden="true" and no role or aria-label. */
+  canvasLabel?: "builtin" | "none";
+};
+
+interface DomOnly { pointer: boolean; liveRegion: boolean; canvasLabel: boolean }
+const DOM_KEYS = ["pointer", "liveRegion", "canvasLabel"] as const;
+const DOM_VALUES: Record<(typeof DOM_KEYS)[number], readonly [string, string]> = { pointer: ["builtin", "none"], liveRegion: ["builtin", "none"], canvasLabel: ["builtin", "none"] };
+
+/**
+ * Reads, validates and REMOVES the DOM-only keys with a closed own-property check; the rest goes to the shared composer unchanged, whose own
+ * closed key set still rejects every unknown key (INVALID_INPUT/SCHEMA). A value outside the set of a known key is INVALID_INPUT/INVALID_VALUE.
+ * Anything that is not a plain object is left to the composer (SCHEMA). Each property is read once; an own property whose value is undefined is absent.
+ */
+function splitDomOptions(options: unknown): { rest: unknown; dom: DomOnly } {
+  const dom: DomOnly = { pointer: true, liveRegion: true, canvasLabel: true };
+  if (typeof options !== "object" || options === null || Array.isArray(options)) return { rest: options, dom };
+  const proto: unknown = Object.getPrototypeOf(options);
+  if (proto !== Object.prototype && proto !== null) return { rest: options, dom };
+  const own = Object.keys(options);
+  if (!own.some((k) => (DOM_KEYS as readonly string[]).includes(k))) return { rest: options, dom };
+  const rest: Record<string, unknown> = {};
+  const given: Partial<Record<(typeof DOM_KEYS)[number], unknown>> = {};
+  for (const k of own) {
+    const v: unknown = (options as Record<string, unknown>)[k];
+    if ((DOM_KEYS as readonly string[]).includes(k)) { if (v !== undefined) given[k as (typeof DOM_KEYS)[number]] = v; }
+    else rest[k] = v;
+  }
+  for (const k of DOM_KEYS) {
+    if (!(k in given)) continue;
+    const v = given[k];
+    if (typeof v !== "string" || !DOM_VALUES[k].includes(v)) throw bad("INVALID_VALUE", `options.${k}`, `one of ${DOM_VALUES[k].join(" | ")} expected`);
+    dom[k] = v === DOM_VALUES[k][0];
+  }
+  return { rest, dom };
+}
+
 /** dprMilli = clamp(quantizePx(devicePixelRatio * 1000), 250, 8000): a ratio is environment, not state (6.4). */
 function dprMilliOf(ratio: unknown): number {
   const v = typeof ratio === "number" && Number.isFinite(ratio * 1000) ? quantizePx(ratio * 1000) : 1000;
@@ -36,8 +78,10 @@ function blankPlan(width: number, height: number): GlPlan {
 }
 
 /** The DOM WebGL renderer: WebglRenderer with host "dom"; env.host is the container Element. */
-export function createDomWebglRenderer(options?: WebglRendererOptions): WebglRenderer {
-  const composed = composeWebglRenderer("dom", options);
+export function createDomWebglRenderer(options?: DomWebglRendererOptions): WebglRenderer {
+  const split = splitDomOptions(options);
+  const composed = composeWebglRenderer("dom", split.rest as WebglRendererOptions | undefined);
+  const builtinPointer = split.dom.pointer, builtinLive = split.dom.liveRegion, builtinLabel = split.dom.canvasLabel;
   const core = composed.renderer;
   const ropts = composed.options;
 
@@ -70,6 +114,7 @@ export function createDomWebglRenderer(options?: WebglRendererOptions): WebglRen
   const relabel = (): void => {
     if (!glCanvas) return;
     const unavailable = controller !== undefined && (controller.status().phase === "lost" || controller.status().phase === "failed");
+    if (!builtinLabel) return; // canvasLabel "none": the canvases are aria-hidden and carry no role or label
     glCanvas.setAttribute("aria-label", (unavailable ? "Graph display unavailable. " : "") + summary);
   };
 
@@ -194,17 +239,21 @@ export function createDomWebglRenderer(options?: WebglRendererOptions): WebglRen
       lc.style.left = "0";
       lc.style.top = "0";
       lc.style.pointerEvents = "none";
-      gc.setAttribute("role", "img");
-      lc.setAttribute("aria-hidden", "true");
+      if (builtinLabel) gc.setAttribute("role", "img");
+      for (const c of builtinLabel ? [lc] : [lc, gc]) c.setAttribute("aria-hidden", "true"); // canvasLabel "none": the companion is the accessible surface
       wrapper.appendChild(gc);
       wrapper.appendChild(lc);
-      status = d.createElement("div");
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
       h.appendChild(wrapper);
-      h.appendChild(status);
-      gc.addEventListener("pointerdown", onPointerDown); // the GL canvas's, not the host's: a press elsewhere in the host is not a press on the graph (audit M-2)
-      unbind.push(() => gc.removeEventListener("pointerdown", onPointerDown));
+      if (builtinLive) {
+        status = d.createElement("div");
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
+        h.appendChild(status);
+      }
+      if (builtinPointer) {
+        gc.addEventListener("pointerdown", onPointerDown); // the GL canvas's, not the host's: a press elsewhere in the host is not a press on the graph (audit M-2)
+        unbind.push(() => gc.removeEventListener("pointerdown", onPointerDown));
+      }
       failure = undefined;
     },
     async loadScene(m: RenderModel, initial?: SemanticState): Promise<void> {

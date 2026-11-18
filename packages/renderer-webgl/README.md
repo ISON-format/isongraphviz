@@ -16,6 +16,8 @@ Core entry `.` (DOM-free; no `node:*`, no DOM lib):
 
 Subpath `./dom`: `createDomWebglRenderer(options?)`, the thin browser adapter: it probes on detached scratch canvases, requests the live `webgl2` context (the closed option `contextAttributes.failIfMajorPerformanceCaveat` reaches both the probe and `getContext`), stacks a 2D label canvas over the GL canvas, checks the drawing-buffer size, listens to `webglcontextlost`/`webglcontextrestored`, redraws the whole frame at every commit and maps one `pointerdown` through `pickDrawn`. A refused commit (a coordinate beyond 2^40 milli-pixels) **clears both canvases**, reports through `env.onError` and sets `status().failure`. No keyboard, wheel, move, focus or hover handler; **not claimed accessible** (design 8.3). It never calls `getError` or `readPixels`. It claims no conformance level.
 
+`createDomWebglRenderer` also takes three additive adapter-only options (CCR-V11-6 of design 32, for hosts that bring their own input layer and accessible companion): `pointer: "builtin" | "none"` (default `"builtin"`; `"none"` registers no pointer listener; the context-loss listeners stay), `liveRegion: "builtin" | "none"` (default `"builtin"`; `"none"` creates and writes no status `div`) and `canvasLabel: "builtin" | "none"` (default `"builtin"`; `"none"` sets `aria-hidden="true"` on both canvases and writes no `role="img"` or `aria-label`, also after a context loss). The wrapper reads, validates (a bad value is `INVALID_INPUT/INVALID_VALUE`) and strips them; the shared composer and `createWebglRenderer` still reject them as unknown keys (`INVALID_INPUT/SCHEMA`). The type is `DomWebglRendererOptions`.
+
 All constants are PROVISIONAL and UNMEASURED.
 
 ## Commands

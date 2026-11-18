@@ -12,13 +12,57 @@ import { renderSvg } from "../write.js";
 const bad = (reason: string, path: string, detail?: string): IgrError => new IgrError("INVALID_INPUT", reason, path, detail);
 const SVG_NS = "http://www.w3.org/2000/svg";
 
+/** The DOM-only options of the adapter (CCR-V11-6, design 32 18.2); each default reproduces the behaviour of the adapter without the option. */
+export type DomSvgRendererOptions = SvgRendererOptions & {
+  /** "builtin" (default): the adapter's own pointerdown and pointermove handlers and cursor; "none": no pointer listener and no cursor. */
+  pointer?: "builtin" | "none";
+  /** "builtin" (default): the adapter's status div (role="status", aria-live="polite"); "none": no status element is created or written. */
+  liveRegion?: "builtin" | "none";
+  /** "by-id" (default): DOM focus is restored to the previously focused element id after every commit (13.2); "none": the adapter neither remembers the id nor calls focus(). */
+  focusRestore?: "by-id" | "none";
+};
+
+interface DomOnly { pointer: boolean; liveRegion: boolean; focusRestore: boolean }
+const DOM_KEYS = ["pointer", "liveRegion", "focusRestore"] as const;
+const DOM_VALUES: Record<(typeof DOM_KEYS)[number], readonly [string, string]> = { pointer: ["builtin", "none"], liveRegion: ["builtin", "none"], focusRestore: ["by-id", "none"] };
+
+/**
+ * Reads, validates and REMOVES the DOM-only keys with a closed own-property check; the rest goes to the shared composer unchanged, whose own
+ * closed key set still rejects every unknown key (INVALID_INPUT/SCHEMA). A value outside the set of a known key is INVALID_INPUT/INVALID_VALUE.
+ * Anything that is not a plain object is left to the composer (SCHEMA). Each property is read once; an own property whose value is undefined is absent.
+ */
+function splitDomOptions(options: unknown): { rest: unknown; dom: DomOnly } {
+  const dom: DomOnly = { pointer: true, liveRegion: true, focusRestore: true };
+  if (typeof options !== "object" || options === null || Array.isArray(options)) return { rest: options, dom };
+  const proto: unknown = Object.getPrototypeOf(options);
+  if (proto !== Object.prototype && proto !== null) return { rest: options, dom };
+  const own = Object.keys(options);
+  if (!own.some((k) => (DOM_KEYS as readonly string[]).includes(k))) return { rest: options, dom };
+  const rest: Record<string, unknown> = {};
+  const given: Partial<Record<(typeof DOM_KEYS)[number], unknown>> = {};
+  for (const k of own) {
+    const v: unknown = (options as Record<string, unknown>)[k];
+    if ((DOM_KEYS as readonly string[]).includes(k)) { if (v !== undefined) given[k as (typeof DOM_KEYS)[number]] = v; }
+    else rest[k] = v;
+  }
+  for (const k of DOM_KEYS) {
+    if (!(k in given)) continue;
+    const v = given[k];
+    if (typeof v !== "string" || !DOM_VALUES[k].includes(v)) throw bad("INVALID_VALUE", `options.${k}`, `one of ${DOM_VALUES[k].join(" | ")} expected`);
+    dom[k] = v === DOM_VALUES[k][0];
+  }
+  return { rest, dom };
+}
+
 function isElement(v: unknown): v is Element {
   return typeof v === "object" && v !== null && (v as { nodeType?: unknown }).nodeType === 1 && typeof (v as { ownerDocument?: unknown }).ownerDocument === "object" && (v as { ownerDocument?: unknown }).ownerDocument !== null;
 }
 
 /** The dom renderer: Renderer & { svg() } with host "dom"; env.host is the container Element (13.1). */
-export function createDomSvgRenderer(options?: SvgRendererOptions): SvgRenderer {
-  const composed = composeSvgRenderer("dom", options);
+export function createDomSvgRenderer(options?: DomSvgRendererOptions): SvgRenderer {
+  const split = splitDomOptions(options);
+  const composed = composeSvgRenderer("dom", split.rest as SvgRendererOptions | undefined);
+  const builtinPointer = split.dom.pointer, builtinLive = split.dom.liveRegion, restoreFocus = split.dom.focusRestore;
   const core = composed.renderer;
   const svgOptions = composed.svgOptions; // the RESOLVED options (dom defaults: 8 MiB, the capacity label budget): the mounted document is what svg() returns
   const prefix = svgOptions.idPrefix ?? "igr";
@@ -44,7 +88,7 @@ export function createDomSvgRenderer(options?: SvgRendererOptions): SvgRenderer 
     const text = renderSvg(model, state, svgOptions);
     const parsed = new (doc.defaultView as unknown as { DOMParser: typeof DOMParser }).DOMParser().parseFromString(text, "image/svg+xml");
     if (parsed.getElementsByTagName("parsererror").length > 0 || parsed.documentElement.namespaceURI !== SVG_NS) throw bad("SCHEMA", "svg", "generated SVG is not well-formed");
-    const hadFocus = mounted !== undefined && host.contains(doc.activeElement);
+    const hadFocus = restoreFocus && mounted !== undefined && host.contains(doc.activeElement);
     const focusedId = hadFocus ? doc.activeElement?.getAttribute("id") ?? undefined : undefined;
     const imported = doc.importNode(parsed.documentElement, true) as Element;
     if (mounted) host.replaceChild(imported, mounted); else host.insertBefore(imported, status ?? null);
@@ -97,16 +141,20 @@ export function createDomSvgRenderer(options?: SvgRendererOptions): SvgRenderer 
       if (dup && !h.contains(dup)) throw bad("INVALID_VALUE", "env.host", `the page already has an element with id ${prefix}-title`);
       await core.initialize(e);
       host = h; doc = d; env = e;
-      prevCursor = (h as HTMLElement).style.cursor;
+      if (builtinPointer) prevCursor = (h as HTMLElement).style.cursor;
       saved = Array.from(h.childNodes);
       for (const n of saved) h.removeChild(n);
-      status = d.createElement("div");
-      status.setAttribute("role", "status");
-      status.setAttribute("aria-live", "polite");
-      h.appendChild(status);
-      h.addEventListener("pointerdown", onPointerDown);
-      h.addEventListener("pointermove", onPointerMove);
-      unbind.push(() => h.removeEventListener("pointerdown", onPointerDown), () => h.removeEventListener("pointermove", onPointerMove));
+      if (builtinLive) {
+        status = d.createElement("div");
+        status.setAttribute("role", "status");
+        status.setAttribute("aria-live", "polite");
+        h.appendChild(status);
+      }
+      if (builtinPointer) {
+        h.addEventListener("pointerdown", onPointerDown);
+        h.addEventListener("pointermove", onPointerMove);
+        unbind.push(() => h.removeEventListener("pointerdown", onPointerDown), () => h.removeEventListener("pointermove", onPointerMove));
+      }
     },
     async loadScene(m: RenderModel, initial?: SemanticState): Promise<void> {
       pendingLoads++;
@@ -144,7 +192,7 @@ export function createDomSvgRenderer(options?: SvgRendererOptions): SvgRenderer 
           if (mounted && mounted.parentNode === host) host.removeChild(mounted);
           if (status && status.parentNode === host) host.removeChild(status);
           for (const n of saved) host.appendChild(n);
-          (host as HTMLElement).style.cursor = prevCursor;
+          if (builtinPointer) (host as HTMLElement).style.cursor = prevCursor;
         }
         mounted = undefined; status = undefined; host = undefined; model = undefined; stale = false;
       }

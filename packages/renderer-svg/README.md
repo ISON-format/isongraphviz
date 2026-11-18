@@ -15,6 +15,8 @@ Core entry `.` (DOM-free; no `node:*`, no DOM lib):
 
 Subpath `./dom`: `createDomSvgRenderer(options?)`, the thin browser adapter (mount, `pointerdown` mapping through `pickElement`, live status line). It renders with the same resolved options as `svg()` (the dom defaults: 8 MiB document, 262,144 label units). If a commit fails after the core state advanced (an over-limit or ill-formed document) the call still succeeds, the error goes to `env.onError`, the old document stays mounted and the next dispatch catches up; a failed `loadScene` commit rejects but leaves model and state consistent. It claims no conformance level.
 
+`createDomSvgRenderer` also takes three additive adapter-only options (CCR-V11-6 of design 32, for hosts that bring their own input layer): `pointer: "builtin" | "none"` (default `"builtin"`; `"none"` registers no pointer listener and sets no cursor), `liveRegion: "builtin" | "none"` (default `"builtin"`; `"none"` creates and writes no status `div`) and `focusRestore: "by-id" | "none"` (default `"by-id"`; `"none"` neither remembers the focused id nor calls `focus()` after a commit). The wrapper reads, validates (a bad value is `INVALID_INPUT/INVALID_VALUE`) and strips them; the shared composer and `createSvgRenderer` still reject them as unknown keys (`INVALID_INPUT/SCHEMA`). The type is `DomSvgRendererOptions`.
+
 Everything geometric is integer (`bigint`) arithmetic; the numbers in the output are fixed-point text produced from integers. All constants are PROVISIONAL and UNMEASURED; changing one is `igr-svg/2`.
 
 ## Commands

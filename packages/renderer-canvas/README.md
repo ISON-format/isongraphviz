@@ -14,6 +14,8 @@ Core entry `.` (DOM-free; no `node:*`, no DOM lib):
 
 Subpath `./dom`: `createDomCanvasRenderer(options?)`, the thin browser adapter (one `<canvas>` sized through `backingSize` and the CSSOM, whole-frame replay at every commit, one `pointerdown` handler through `pickDrawn`, a live status line, `role="img"` and an `aria-label`). A refused commit (a coordinate beyond 2^40 milli-pixels, a throwing context) **clears the canvas**, reports through `env.onError` and sets `status().failure`. It has no keyboard, wheel, move, focus or hover handler, is **not claimed accessible** (design 8.3) and claims no conformance level.
 
+`createDomCanvasRenderer` also takes three additive adapter-only options (CCR-V11-6 of design 32, for hosts that bring their own input layer and accessible companion): `pointer: "builtin" | "none"` (default `"builtin"`; `"none"` registers no pointer listener), `liveRegion: "builtin" | "none"` (default `"builtin"`; `"none"` creates and writes no status `div`) and `canvasLabel: "builtin" | "none"` (default `"builtin"`; `"none"` sets `aria-hidden="true"` on the canvas and writes no `role="img"` or `aria-label`). The wrapper reads, validates (a bad value is `INVALID_INPUT/INVALID_VALUE`) and strips them; the shared composer and `createCanvasRenderer` still reject them as unknown keys (`INVALID_INPUT/SCHEMA`). The type is `DomCanvasRendererOptions`.
+
 All constants are PROVISIONAL and UNMEASURED.
 
 ## Commands

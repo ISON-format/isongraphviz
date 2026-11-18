@@ -2,9 +2,12 @@
 // disposal); it is not a browser test: `npm run smoke:browser` is the single-engine smoke run, and no browser qualification is claimed here.
 import { describe, expect, it } from "vitest";
 import { createRecordingContext } from "isongraph-visualize-display-list/canvas2d";
-import { createDomCanvasRenderer } from "../src/dom/index.js";
+import * as domEntry from "../src/dom/index.js";
+import { createDomCanvasRenderer, type DomCanvasRendererOptions } from "../src/dom/index.js";
+import type { Intent } from "isongraph-visualize-renderer-core";
+import { composeCanvasRenderer } from "../src/renderer.js";
 import { canvasManifest, createCanvasRenderer } from "../src/index.js";
-import { LOOPS2, O1, O4, errOfAsync, loadModel, o1, readState } from "./helpers.js";
+import { LOOPS2, O1, O4, errOf, errOfAsync, loadModel, o1, readState } from "./helpers.js";
 
 // ---- a fake DOM just large enough for the adapter -------------------------------------------------------------------------------------
 class FakeNode {
@@ -242,5 +245,167 @@ describe("the dom adapter equals the headless renderer on everything but mountin
     await h.loadScene(model, state);
     expect(text(r.displayListBytes())).toBe(text(h.displayListBytes()));
     expect(text(r.canvasCalls())).toBe(text(h.canvasCalls()));
+  });
+});
+
+// ---- CCR-V11-6 (design 32 18.2): the additive adapter options pointer, liveRegion, canvasLabel ------------------------------------
+describe("adapter options pointer / liveRegion / canvasLabel (CCR-V11-6)", () => {
+  const sel: Intent = { type: "select", mode: "replace", targets: [{ node: { id: "i:1", type: "person" } }] };
+  const noListeners = (n: FakeNode): boolean => [...n.listeners.values()].every((l) => l.length === 0);
+  const ALL = { pointer: "none", liveRegion: "none", canvasLabel: "none" };
+
+  it("the dom entry exports exactly createDomCanvasRenderer (the option type is a type only)", () => {
+    expect(Object.keys(domEntry)).toEqual(["createDomCanvasRenderer"]);
+    const o: DomCanvasRendererOptions = { pointer: "none", liveRegion: "none", canvasLabel: "none", dl: { labels: false } };
+    expect(o.canvasLabel).toBe("none");
+  });
+
+  it("the explicit defaults reproduce today's behaviour: role img + label, status div, pointerdown handler", async () => {
+    const { host, canvas, status, r } = await mount({ pointer: "builtin", liveRegion: "builtin", canvasLabel: "builtin" });
+    expect(host.children.map((c) => c.tag)).toEqual(["canvas", "div"]);
+    expect(canvas.getAttribute("role")).toBe("img");
+    expect(canvas.getAttribute("aria-hidden")).toBeNull();
+    expect(canvas.getAttribute("aria-label")).toBe("Directed graph with 2 nodes and 1 edge. Node categories: person (2). 0 selected, 0 hidden.");
+    expect(status.getAttribute("role")).toBe("status");
+    expect(canvas.listeners.get("pointerdown")).toHaveLength(1);
+    r.dispatch(sel);
+    expect(status.textContent).toBe("1 selected.");
+    expect(canvas.getAttribute("aria-label")).toContain("1 selected");
+  });
+  it("the default output (list, stream, probe) is identical with and without the explicit defaults and with the none options", async () => {
+    const a = await mount(), b = await mount({ pointer: "builtin", liveRegion: "builtin", canvasLabel: "builtin" }), c = await mount(ALL);
+    for (const x of [b, c]) {
+      expect(text(x.r.displayListBytes())).toBe(text(a.r.displayListBytes()));
+      expect(text(x.r.canvasCalls())).toBe(text(a.r.canvasCalls()));
+      expect(text(x.canvas.rec.bytes())).toBe(text(a.canvas.rec.bytes()));
+      expect(JSON.stringify(x.r.manifest)).toBe(JSON.stringify(a.r.manifest));
+    }
+  });
+  it("an own property whose value is undefined is absent (the defaults apply)", async () => {
+    const { host, canvas } = await mount({ pointer: undefined, liveRegion: undefined, canvasLabel: undefined });
+    expect(host.children.map((c) => c.tag)).toEqual(["canvas", "div"]);
+    expect(canvas.getAttribute("role")).toBe("img");
+    expect(canvas.listeners.get("pointerdown")).toHaveLength(1);
+  });
+
+  it("pointer none: no pointer listener of any kind on the canvas or the host, and a press changes nothing", async () => {
+    const { host, canvas, r, events } = await mount({ pointer: "none" });
+    expect(noListeners(canvas)).toBe(true);
+    expect(noListeners(host)).toBe(true);
+    events.length = 0;
+    press(host, 32.072, 193.6);
+    host.fire("pointerdown", { isPrimary: true, button: 0, clientX: 32.072, clientY: 193.6 });
+    expect(events).toEqual([]);
+    expect(r.getState().selection.nodes).toEqual([]);
+    expect(canvas.style["cursor"]).toBeUndefined();
+    r.dispatch(sel); // dispatch still repaints and announces
+    expect(r.getState().selection.nodes).toHaveLength(1);
+    expect(host.children[1]!.textContent).toBe("1 selected.");
+    expect(host.children[0]!.getAttribute("role")).toBe("img"); // the label is independent
+  });
+
+  it("liveRegion none: no status element is created or written; the canvas and its label are independent", async () => {
+    const doc = new FakeDoc();
+    const keep = doc.createElement("p");
+    doc.body.appendChild(keep);
+    const r = createDomCanvasRenderer({ liveRegion: "none" });
+    await r.initialize(env(doc.body));
+    expect(doc.body.children.map((c) => c.tag)).toEqual(["canvas"]);
+    await r.loadScene(await loadModel(O1.scene, O1.layout));
+    r.dispatch(sel);
+    r.dispatch({ type: "clear-selection" });
+    expect(doc.body.children.map((c) => c.tag)).toEqual(["canvas"]);
+    expect(doc.body.children.some((c) => c.getAttribute("role") === "status" || c.getAttribute("aria-live") !== null)).toBe(false);
+    const canvas = doc.body.children[0]!;
+    expect(canvas.getAttribute("role")).toBe("img");
+    expect(canvas.listeners.get("pointerdown")).toHaveLength(1);
+    await r.dispose();
+    expect(doc.body.children).toEqual([keep]);
+  });
+
+  it("canvasLabel none: aria-hidden=\"true\" and no role and no aria-label, before and after commits; the status line stays", async () => {
+    const { host, canvas, r } = await mount({ canvasLabel: "none" });
+    const check = (): void => {
+      expect(canvas.getAttribute("aria-hidden")).toBe("true");
+      expect(canvas.getAttribute("role")).toBeNull();
+      expect(canvas.getAttribute("aria-label")).toBeNull();
+      expect([...canvas.attrs.keys()].sort()).toEqual(["aria-hidden"]);
+    };
+    check();
+    r.dispatch(sel);
+    expect(host.children[1]!.textContent).toBe("1 selected."); // the status line is independent of the label
+    check();
+    r.dispatch({ type: "resize", width: 400, height: 300 });
+    check();
+    expect(host.children[1]!.getAttribute("role")).toBe("status");
+    expect(canvas.listeners.get("pointerdown")).toHaveLength(1);
+  });
+  it("canvasLabel none: aria-hidden is set at initialize, before any scene is loaded", async () => {
+    const doc = new FakeDoc();
+    const r = createDomCanvasRenderer({ canvasLabel: "none" });
+    await r.initialize(env(doc.body));
+    expect(doc.body.children[0]!.getAttribute("aria-hidden")).toBe("true");
+    expect(doc.body.children[0]!.getAttribute("role")).toBeNull();
+  });
+
+  it("all three none: a bare canvas (aria-hidden only), no listener, no status; the frame is unchanged; dispose restores the host", async () => {
+    const doc = new FakeDoc();
+    const keep = doc.createElement("p");
+    doc.body.appendChild(keep);
+    const r = createDomCanvasRenderer({ ...ALL, dl: { labels: false } } as never);
+    await r.initialize(env(doc.body));
+    await r.loadScene(await loadModel(O1.scene, O1.layout));
+    const canvas = doc.body.children[0]!;
+    expect(doc.body.children.map((c) => c.tag)).toEqual(["canvas"]);
+    expect(noListeners(canvas) && noListeners(doc.body)).toBe(true);
+    expect([...canvas.attrs.keys()]).toEqual(["aria-hidden"]);
+    expect(text(canvas.rec.bytes()).length).toBeGreaterThan(0);
+    await r.dispose();
+    expect(doc.body.children).toEqual([keep]);
+    expect(r.status().phase).toBe("disposed");
+  });
+  it("dispose removes whatever was added, with any combination", async () => {
+    for (const o of [undefined, { pointer: "none" }, { liveRegion: "none" }, { canvasLabel: "none" }, ALL]) {
+      const { r, host, canvas } = await mount(o);
+      await r.dispose();
+      expect(host.children, JSON.stringify(o)).toHaveLength(0);
+      expect(noListeners(canvas), JSON.stringify(o)).toBe(true);
+      expect(noListeners(host), JSON.stringify(o)).toBe(true);
+    }
+  });
+
+  it("a value outside the set of a known new key is INVALID_INPUT/INVALID_VALUE (any type, any case, the empty string, null)", () => {
+    const bads: unknown[] = ["x", "", "NONE", "Builtin", " none", 1, 0, true, false, null, {}, [], ["none"], "by-id"];
+    for (const k of ["pointer", "liveRegion", "canvasLabel"]) {
+      for (const v of bads) expect(errOf(() => createDomCanvasRenderer({ [k]: v } as never)), `${k}=${JSON.stringify(v)}`).toBe("INVALID_INPUT/INVALID_VALUE");
+      expect(errOf(() => createDomCanvasRenderer({ [k]: "builtin" } as never)), k).toBe("none");
+      expect(errOf(() => createDomCanvasRenderer({ [k]: "none" } as never)), k).toBe("none");
+    }
+  });
+  it("focusRestore is not an option of the Canvas adapter (it restores no focus): an unknown key stays SCHEMA", () => {
+    expect(errOf(() => createDomCanvasRenderer({ focusRestore: "none" } as never))).toBe("INVALID_INPUT/SCHEMA");
+    expect(errOf(() => createDomCanvasRenderer({ focusRestore: "by-id" } as never))).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("unknown keys stay SCHEMA at the dom wrapper, even beside valid new keys", () => {
+    expect(errOf(() => createDomCanvasRenderer({ bogus: 1 } as never))).toBe("INVALID_INPUT/SCHEMA");
+    expect(errOf(() => createDomCanvasRenderer({ pointer: "none", bogus: 1 } as never))).toBe("INVALID_INPUT/SCHEMA");
+    expect(errOf(() => createDomCanvasRenderer({ Pointer: "none" } as never))).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("non-plain option containers are still the composer's SCHEMA", () => {
+    for (const o of [[], "none", 5, null, true, new (class X { pointer = "none"; })()]) expect(errOf(() => createDomCanvasRenderer(o as never)), String(o)).toBe("INVALID_INPUT/SCHEMA");
+  });
+  it("the shared composer and the headless renderer still reject the new keys with SCHEMA", () => {
+    for (const k of ["pointer", "liveRegion", "canvasLabel", "focusRestore"]) {
+      expect(errOf(() => createCanvasRenderer({ [k]: "none" } as never)), `headless ${k}`).toBe("INVALID_INPUT/SCHEMA");
+      expect(errOf(() => composeCanvasRenderer("dom", { [k]: "none" } as never)), `composer ${k}`).toBe("INVALID_INPUT/SCHEMA");
+      expect(errOf(() => composeCanvasRenderer("headless", { [k]: "builtin" } as never)), `composer headless ${k}`).toBe("INVALID_INPUT/SCHEMA");
+    }
+  });
+  it("the caller's object is not modified and each property is read once", () => {
+    let n = 0;
+    const o = { get pointer() { n++; return "none"; }, dl: { labels: false } };
+    createDomCanvasRenderer(o as never);
+    expect(n).toBe(1);
+    expect(Object.keys(o)).toEqual(["pointer", "dl"]);
   });
 });

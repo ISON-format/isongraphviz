@@ -62,6 +62,10 @@ describe("the core is DOM-free; no renderer imports another renderer", () => {
       "deleteGlResources", "executePlan", "glManifest", "glWitness", "parseGlPlan", "planGl", "probeWebgl", "readGlPlan", "readoutFromGl", "releaseGlContext", "serializePlan", "shaderSetBytes",
     ]);
     expect(Object.keys(dom).sort()).toEqual(["createDomWebglRenderer"]);
+    // CCR-V11-6: the adapter-only option names live in the ./dom entry alone; the shared core never names them (a headless renderer given one is SCHEMA)
+    const domSrc = code(join(SRC, "dom", "index.ts"));
+    for (const k of ["pointer", "liveRegion", "canvasLabel"]) { expect(domSrc, k).toContain(`"${k}"`); for (const f of coreFiles) expect(code(f), `${k} in ${f}`).not.toContain(`"${k}"`); }
+    expect(domSrc).not.toContain('"focusRestore"'); // SVG only
     const foreign = new Set([...Object.keys(rendererCore), ...Object.keys(displayList)]);
     for (const k of [...Object.keys(core), ...Object.keys(dom)]) expect(foreign.has(k), k).toBe(false);
   });

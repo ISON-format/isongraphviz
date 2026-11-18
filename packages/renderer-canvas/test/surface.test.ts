@@ -59,6 +59,10 @@ describe("the core is DOM-free; no renderer imports another renderer", () => {
   it("the public value exports are the list of design 2, and none equals a renderer-core or display-list export", () => {
     expect(Object.keys(core).sort()).toEqual(["canvasManifest", "createCanvasRenderer", "createCanvasSubject"]);
     expect(Object.keys(dom).sort()).toEqual(["createDomCanvasRenderer"]);
+    // CCR-V11-6: the adapter-only option names live in the ./dom entry alone; the shared core never names them (a headless renderer given one is SCHEMA)
+    const domSrc = code(join(SRC, "dom", "index.ts"));
+    for (const k of ["pointer", "liveRegion", "canvasLabel"]) { expect(domSrc, k).toContain(`"${k}"`); for (const f of coreFiles) expect(code(f), `${k} in ${f}`).not.toContain(`"${k}"`); }
+    expect(domSrc).not.toContain('"focusRestore"'); // SVG only
     const foreign = new Set([...Object.keys(rendererCore), ...Object.keys(displayList)]);
     for (const k of [...Object.keys(core), ...Object.keys(dom)]) expect(foreign.has(k), k).toBe(false);
   });
@@ -76,7 +80,7 @@ describe("security audit (11.1, 11.2)", () => {
   });
   it("the adapter sets only the attributes of 8.2 and the canvas size: setAttribute is role, aria-live and aria-label; the CSSOM gets String(int) + px", () => {
     const d = code(join(SRC, "dom", "index.ts"));
-    expect([...d.matchAll(/setAttribute\(\s*"([^"]+)"/g)].map((m) => m[1]).sort()).toEqual(["aria-label", "aria-live", "role", "role"]);
+    expect([...d.matchAll(/setAttribute\(\s*"([^"]+)"/g)].map((m) => m[1]).sort()).toEqual(["aria-hidden", "aria-label", "aria-live", "role", "role"]); // aria-hidden: canvasLabel "none" (CCR-V11-6)
     expect([...d.matchAll(/\.style\.(\w+)/g)].map((m) => m[1]).sort()).toEqual(["height", "width"]);
     expect(d).toContain('String(width) + "px"');
     expect(d).toContain("textContent");
