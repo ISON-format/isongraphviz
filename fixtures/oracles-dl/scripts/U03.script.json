@@ -1,0 +1,55 @@
+{
+ "calls": [
+  {
+   "expect": "INVALID_LIFECYCLE/NOT_INITIALIZED",
+   "op": "displayList"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED",
+   "op": "displayList"
+  },
+  {
+   "await": false,
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/BUSY",
+   "op": "displayList"
+  },
+  {
+   "expect": "ok",
+   "op": "render"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U03.c6.dl",
+   "op": "displayList"
+  },
+  {
+   "expect": "ok",
+   "op": "dispose"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/DISPOSED",
+   "op": "displayList"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

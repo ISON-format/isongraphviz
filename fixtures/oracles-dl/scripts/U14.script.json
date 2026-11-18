@@ -1,0 +1,74 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "arg": {
+    "x": 867.928,
+    "y": 381.4
+   },
+   "expect": "ok",
+   "expect_hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:2",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    }
+   },
+   "op": "pick"
+  },
+  {
+   "arg": {
+    "x": 867.928,
+    "y": 381.4
+   },
+   "expect": "ok",
+   "expect_hit": null,
+   "op": "hitTest"
+  },
+  {
+   "arg": {
+    "x": 10,
+    "y": 10
+   },
+   "expect": "ok",
+   "expect_hit": null,
+   "op": "pick"
+  },
+  {
+   "arg": {
+    "x": 10,
+    "y": 10
+   },
+   "expect": "ok",
+   "expect_hit": null,
+   "op": "hitTest"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F02.layout.json",
+  "scene": "../oracles/o4-undirected.scene.json"
+ }
+}

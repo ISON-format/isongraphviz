@@ -1,0 +1,54 @@
+{
+ "calls": [
+  {
+   "arg": {
+    "capacity": {
+     "maxNodes": 1
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "arg": {
+    "model": {
+     "layout": "../oracles-igl/layouts/F08.layout.json",
+     "scene": "../oracles-igl/scenes/single.scene.json"
+    }
+   },
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U08.c3.dl",
+   "op": "displayList"
+  },
+  {
+   "expect": "RESOURCE_LIMIT/NODE_LIMIT",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U08.c5.dl",
+   "op": "displayList"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

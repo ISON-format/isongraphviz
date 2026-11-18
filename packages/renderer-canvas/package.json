@@ -1,0 +1,48 @@
+{
+  "name": "isongraph-visualize-renderer-canvas",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "IGR-CV/1 Canvas 2D renderer",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./dom": {
+      "types": "./dist/dom/index.d.ts",
+      "import": "./dist/dom/index.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.core.json && tsc --noEmit -p tsconfig.dom.json",
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.build.dom.json",
+    "test": "node scripts/vitest.mjs run",
+    "test:slow": "node scripts/vitest.mjs run --config vitest.slow.config.ts",
+    "mutants": "node scripts/mutate.mjs",
+    "check": "npm run typecheck && npm test && npm run test:slow && npm run build && npm run smoke && npm run demo:check",
+    "smoke": "node scripts/smoke.mjs",
+    "demo": "node scripts/render-ison.mjs",
+    "demo:build": "node demo/build-demo.mjs",
+    "demo:check": "node scripts/demo-check.mjs",
+    "smoke:browser": "node scripts/browser-smoke.mjs"
+  },
+  "dependencies": {
+    "isongraph-visualize-display-list": "file:../display-list",
+    "isongraph-visualize-renderer-core": "file:../renderer-core"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "isongraph-visualize-layout-core": "file:../layout-core",
+    "isongraph-visualize-scene-core": "file:../scene-core",
+    "playwright-core": "1.65.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

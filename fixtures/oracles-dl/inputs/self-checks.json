@@ -1,0 +1,482 @@
+{
+ "c_v5_parity_vs_oracles_svg_documents": {
+  "G01~svg:G01": true,
+  "G02~svg:G02": true,
+  "G03~svg:G03": true,
+  "G04~svg:G04": true,
+  "G05~svg:G05": true,
+  "G06~svg:G06": true,
+  "G07~svg:G07": true,
+  "G08~svg:G08": true,
+  "G09~svg:G09": true,
+  "G10~svg:G10": true,
+  "G11~svg:N08": true,
+  "N01~svg:N01": true,
+  "N02~svg:N02": true,
+  "N05~svg:N07": true,
+  "N06~svg:N04": true,
+  "N09~svg:N09": true,
+  "N10~svg:N10": true,
+  "N15~svg:N13": true,
+  "N16~svg:N03": true,
+  "N17~svg:N15": true,
+  "X01~svg:X03": true,
+  "X02~svg:X12": true,
+  "X03~svg:X10": true,
+  "X04~svg:X11": true,
+  "X05~svg:X08": true,
+  "X06~svg:X07": true,
+  "X07~svg:X14": true,
+  "X08~svg:X06": true,
+  "X10~svg:X13": true,
+  "X13~svg:X15": true,
+  "Y01~svg:Y01": true,
+  "Y02~svg:Y02": true,
+  "Y03~svg:Y03": true,
+  "Y04~svg:Y04": true,
+  "Y05~svg:Y05": true,
+  "Y06~svg:Y06": true,
+  "Y07~svg:Y07": true,
+  "Y08~svg:Y08": true,
+  "Y10~svg:Y10": true,
+  "Y11~svg:Y11": true,
+  "Y12~svg:Y12": true,
+  "Y13~svg:Y13": true,
+  "Y16~svg:Y16": true,
+  "Y17~svg:Y17": true
+ },
+ "d_rows": {
+  "D01": {
+   "checked": 116,
+   "ok": true
+  },
+  "D02": {
+   "ok": true
+  },
+  "D03": {
+   "cases": 60,
+   "ok": true
+  },
+  "D04": {
+   "ok": true
+  },
+  "D05": {
+   "ok": true
+  },
+  "D06": {
+   "caught": true,
+   "reference_catches": true
+  },
+  "U10": [
+   true,
+   true,
+   true
+  ]
+ },
+ "fidelity_vs_svg_corpus": {
+  "G01~svg:G01": true,
+  "G02~svg:G02": true,
+  "G03~svg:G03": true,
+  "G04~svg:G04": true,
+  "G05~svg:G05": true,
+  "G06~svg:G06": true,
+  "G07~svg:G07": true,
+  "G08~svg:G08": true,
+  "G09~svg:G09": true,
+  "G10~svg:G10": true,
+  "G11~svg:N08": true,
+  "N01~svg:N01": true,
+  "N02~svg:N02": true,
+  "N05~svg:N07": true,
+  "N09~svg:N09": true,
+  "N10~svg:N10": true,
+  "N16~svg:N03": true,
+  "N17~svg:N15": true,
+  "X01~svg:X03": true,
+  "X02~svg:X12": true,
+  "X03~svg:X10": true,
+  "X04~svg:X11": true,
+  "X05~svg:X08": true,
+  "X06~svg:X07": true,
+  "X07~svg:X14": true,
+  "X08~svg:X06": true,
+  "X10~svg:X13": true,
+  "X13~svg:X15": true,
+  "Y01~svg:Y01": true,
+  "Y07~svg:Y07": true,
+  "Y08~svg:Y08": true,
+  "Y12~svg:Y12": true,
+  "Y13~svg:Y13": true,
+  "Y17~svg:Y17": true
+ },
+ "lists_accepted_by_reader": {
+  "dl/F01.dl": true,
+  "dl/F04.dl": true,
+  "dl/G01.dl": true,
+  "dl/G02.dl": true,
+  "dl/G03.dl": true,
+  "dl/G04.dl": true,
+  "dl/G05.dl": true,
+  "dl/G06.dl": true,
+  "dl/G07.dl": true,
+  "dl/G08.dl": true,
+  "dl/G09.dl": true,
+  "dl/G10.dl": true,
+  "dl/G11.dl": true,
+  "dl/N01.dl": true,
+  "dl/N02.dl": true,
+  "dl/N03.dl": true,
+  "dl/N04.dl": true,
+  "dl/N05.dl": true,
+  "dl/N06.dl": true,
+  "dl/N06b.dl": true,
+  "dl/N06c.dl": true,
+  "dl/N07.dl": true,
+  "dl/N08.dl": true,
+  "dl/N09.dl": true,
+  "dl/N10.dl": true,
+  "dl/N13.dl": true,
+  "dl/N15.dl": true,
+  "dl/N16.dl": true,
+  "dl/N17.dl": true,
+  "dl/O01.dl": true,
+  "dl/O02.dl": true,
+  "dl/O03.dl": true,
+  "dl/O04.dl": true,
+  "dl/O05.dl": true,
+  "dl/O06.dl": true,
+  "dl/O15.dl": true,
+  "dl/X01.dl": true,
+  "dl/X02.dl": true,
+  "dl/X03.dl": true,
+  "dl/X04.dl": true,
+  "dl/X05.dl": true,
+  "dl/X06.dl": true,
+  "dl/X07.dl": true,
+  "dl/X08.dl": true,
+  "dl/X09.dl": true,
+  "dl/X10.dl": true,
+  "dl/X11.dl": true,
+  "dl/X12.dl": true,
+  "dl/X13.dl": true,
+  "dl/Y01.dl": true,
+  "dl/Y02.dl": true,
+  "dl/Y03.dl": true,
+  "dl/Y04.dl": true,
+  "dl/Y05.dl": true,
+  "dl/Y06.dl": true,
+  "dl/Y07.dl": true,
+  "dl/Y08.dl": true,
+  "dl/Y09.dl": true,
+  "dl/Y10.dl": true,
+  "dl/Y11.dl": true,
+  "dl/Y12.dl": true,
+  "dl/Y13.dl": true,
+  "dl/Y16.dl": true,
+  "dl/Y17.dl": true
+ },
+ "single_fault": {
+  "S02": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "kind"
+   ]
+  },
+  "S03": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "kind"
+   ]
+  },
+  "S04": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "format"
+   ]
+  },
+  "S05": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "count"
+   ]
+  },
+  "S06": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "order"
+   ]
+  },
+  "S07": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "canon_table"
+   ]
+  },
+  "S08": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "dup"
+   ]
+  },
+  "S09": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "pid_e"
+   ]
+  },
+  "S10": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "pid_n"
+   ]
+  },
+  "S11": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "flags"
+   ]
+  },
+  "S12": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "form"
+   ]
+  },
+  "S13": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "ncoords"
+   ]
+  },
+  "S14": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "a_presence"
+   ]
+  },
+  "S15": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "a_presence"
+   ]
+  },
+  "S16": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "a_geom"
+   ]
+  },
+  "S17": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "a_adjacent"
+   ]
+  },
+  "S18": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "order"
+   ]
+  },
+  "S19": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_role"
+   ]
+  },
+  "S20": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_text"
+   ]
+  },
+  "S21": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_text"
+   ]
+  },
+  "S22": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_text"
+   ]
+  },
+  "S23": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_order"
+   ]
+  },
+  "S24": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_once"
+   ]
+  },
+  "S25": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "ebound"
+   ]
+  },
+  "S26": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "wh"
+   ]
+  },
+  "S27": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "hash"
+   ]
+  },
+  "S28": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "cr"
+   ]
+  },
+  "S29": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "indent"
+   ]
+  },
+  "S30": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "finallf"
+   ]
+  },
+  "S31": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "blank"
+   ]
+  },
+  "S32": {
+   "accepted_with_only_named_rules_off": "INVALID_INPUT/SCHEMA",
+   "judged_by": "rejected (declared exception, 4.7)",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "nesting"
+   ]
+  },
+  "S33": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "canon_num"
+   ]
+  },
+  "S34": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "canon_num"
+   ]
+  },
+  "S35": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "canon_num"
+   ]
+  },
+  "S36": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "kind"
+   ]
+  },
+  "S40": {
+   "accepted_with_only_named_rules_off": "INVALID_INPUT/SCHEMA",
+   "judged_by": "rejected (declared exception, 4.7)",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "t_text"
+   ]
+  },
+  "S41": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "kcls"
+   ]
+  },
+  "S42": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "pid_e"
+   ]
+  },
+  "S43": {
+   "accepted_with_only_named_rules_off": "ok",
+   "rejected": "INVALID_INPUT/SCHEMA",
+   "rules": [
+    "tbound"
+   ]
+  }
+ },
+ "states_equal_oracles_svg": {
+  "Y01": true,
+  "Y02": true,
+  "Y03": true,
+  "Y04": true,
+  "Y05": true,
+  "Y06": true,
+  "Y07": true,
+  "Y08": true,
+  "Y09": true,
+  "Y10": true,
+  "Y11": true,
+  "Y12": true,
+  "Y13": true,
+  "Y14": true,
+  "Y15": true,
+  "Y16": true,
+  "Y17": true
+ },
+ "xr_parity": {
+  "R12==R01": true,
+  "R13==R05": true,
+  "R14==R30": true,
+  "R15==readout(X01)": true,
+  "R16==R01": true,
+  "R39==R30": true
+ }
+}

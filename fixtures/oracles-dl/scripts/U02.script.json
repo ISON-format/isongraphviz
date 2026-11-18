@@ -1,0 +1,61 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "arg": {
+    "height": 300,
+    "type": "resize",
+    "width": 400
+   },
+   "expect": "ok",
+   "expect_state": "states/U02.c2.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U02.c3.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "center_x": 383554,
+    "center_y": 134563,
+    "type": "set-viewport",
+    "zoom": 1000
+   },
+   "expect": "ok",
+   "expect_state": "states/U02.c4.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U02.c5.dl",
+   "op": "displayList"
+  },
+  {
+   "expect": "ok",
+   "expect_calls": "calls/U02.c6.calls",
+   "op": "canvasCalls"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

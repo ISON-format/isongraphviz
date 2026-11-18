@@ -1,0 +1,123 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c2.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ],
+    "type": "select"
+   },
+   "expect": "ok",
+   "expect_state": "states/U01.c3.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c4.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "delta": 1,
+    "type": "focus-step"
+   },
+   "expect": "ok",
+   "expect_state": "states/U01.c5.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c6.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "hidden": true,
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ],
+    "type": "set-hidden"
+   },
+   "expect": "ok",
+   "expect_state": "states/U01.c7.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c8.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "hidden": false,
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ],
+    "type": "set-hidden"
+   },
+   "expect": "ok",
+   "expect_state": "states/U01.c9.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c10.dl",
+   "op": "displayList"
+  },
+  {
+   "arg": {
+    "type": "clear-selection"
+   },
+   "expect": "ok",
+   "expect_state": "states/U01.c11.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_dl": "dl/U01.c12.dl",
+   "op": "displayList"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

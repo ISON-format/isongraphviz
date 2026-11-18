@@ -1,0 +1,52 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "arg": "scene",
+   "expect": "ok",
+   "expect_bytes_sha256": "e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc",
+   "expect_media_type": "application/octet-stream",
+   "op": "export"
+  },
+  {
+   "arg": "svg",
+   "expect": "UNSUPPORTED_CAPABILITY/NOT_SUPPORTED",
+   "op": "export"
+  },
+  {
+   "arg": "png",
+   "expect": "UNSUPPORTED_CAPABILITY/NOT_SUPPORTED",
+   "op": "export"
+  },
+  {
+   "arg": "SVG",
+   "expect": "INVALID_INPUT/UNKNOWN_FORMAT",
+   "op": "export"
+  },
+  {
+   "arg": "",
+   "expect": "INVALID_INPUT/UNKNOWN_FORMAT",
+   "op": "export"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

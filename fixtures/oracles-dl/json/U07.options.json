@@ -1,0 +1,112 @@
+[
+ {
+  "options": {
+   "dl": {
+    "bogus": true
+   }
+  },
+  "result": "INVALID_INPUT/SCHEMA"
+ },
+ {
+  "options": {
+   "dl": {
+    "labels": "yes"
+   }
+  },
+  "result": "INVALID_INPUT/SCHEMA"
+ },
+ {
+  "options": {
+   "dl": {
+    "maxDrawnLabelUnits": 1.5
+   }
+  },
+  "result": "INVALID_INPUT/INVALID_VALUE"
+ },
+ {
+  "options": {
+   "dl": {
+    "maxDrawnLabelUnits": "NaN"
+   }
+  },
+  "result": "INVALID_INPUT/NOT_FINITE"
+ },
+ {
+  "options": {
+   "dl": {
+    "maxDrawnLabelUnits": -1
+   }
+  },
+  "result": "INVALID_INPUT/OUT_OF_RANGE"
+ },
+ {
+  "options": {
+   "dl": []
+  },
+  "result": "INVALID_INPUT/SCHEMA"
+ },
+ {
+  "options": {
+   "dprMilli": 249
+  },
+  "result": "INVALID_INPUT/OUT_OF_RANGE"
+ },
+ {
+  "options": {
+   "dprMilli": 1000.5
+  },
+  "result": "INVALID_INPUT/INVALID_VALUE"
+ },
+ {
+  "options": {
+   "ink": [
+    256,
+    0,
+    0
+   ]
+  },
+  "result": "INVALID_INPUT/OUT_OF_RANGE"
+ },
+ {
+  "options": {
+   "ink": "red"
+  },
+  "result": "INVALID_INPUT/SCHEMA"
+ },
+ {
+  "options": {
+   "capacity": {
+    "maxDrawnLabelUnits": 5
+   },
+   "dl": {
+    "maxDrawnLabelUnits": 6
+   }
+  },
+  "result": "INVALID_INPUT/INVALID_VALUE"
+ },
+ {
+  "options": {
+   "capacity": {
+    "maxDrawnLabelUnits": 6
+   },
+   "dl": {
+    "maxDrawnLabelUnits": 6
+   }
+  },
+  "result": "ok"
+ },
+ {
+  "options": {
+   "capacity": {
+    "maxDrawnLabelUnits": 7
+   }
+  },
+  "result": "ok"
+ },
+ {
+  "options": {
+   "name": "x-canvas"
+  },
+  "result": "ok"
+ }
+]

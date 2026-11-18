@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas renderer demo: click to source address</title>
+<style>
+  :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+  body { margin: 1rem auto; max-width: 960px; padding: 0 1rem; }
+  #graph { border: 1px solid currentColor; width: 900px; max-width: 100%; height: 600px; overflow: hidden; position: relative; }
+  #graph canvas { display: block; }
+  #graph [role="status"] { position: absolute; left: -10000px; }
+  pre#result { white-space: pre-wrap; word-break: break-all; border: 1px solid currentColor; padding: .5rem; min-height: 3rem; }
+  button { margin-right: .5rem; }
+</style>
+</head>
+<body>
+<h1>Click to source address</h1>
+<p>Non-normative demo of the IGR-CV/1 Canvas renderer. Source text, scene and layout are embedded by <code>scripts/render-ison.mjs --demo</code>; the display
+list is painted on a <code>canvas</code> by the 2D replay. A click goes through <code>pickDrawn</code> (so a self-loop and every parallel member are reachable)
+and shows the typed address and the identity that <code>resolveSelection</code> finds in the embedded source. Build once with
+<code>npm run demo -- ../../fixtures/oracles/o1-basic.source.ison --demo --layout force</code> and <code>npm run demo:build</code>, then serve this folder from
+<code>localhost</code> (hashing needs a secure context). The canvas is not keyboard-operable and is not claimed accessible (design 8.3).</p>
+<div><button id="fit">fit</button><button id="zin">zoom in</button><button id="zout">zoom out</button></div>
+<div id="graph"></div>
+<pre id="result">loading ...</pre>
+<script src="out/data.js"></script>
+<script src="out/demo.js"></script>
+</body>
+</html>

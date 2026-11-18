@@ -1,0 +1,194 @@
+mutant	description	named_killers	killing_named_rows	named_not_killing	other_changed_rows	verdict
+K01	m-px by truncation toward zero	N01	N01		G01,G02,G05,G07,G08,G09,G10,N02,N03,N04,N05,N07,N09,N10,N15,N16,N17,X01,X06,X08,X09,X10,X11,X12,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,P01,P02,B01,B02,C01,C02,C03,C04,C05,C06,C07,C09,C13,C16,C18,C20,R01,R02,R05,R07,R08,R09,R10,R30,R31,R32,R33,R34,R35,U01,U02,U03,U14	killed
+K02	m-px by `floorDiv` instead of `divRound`	N01	N01		G01,G02,G05,G07,G08,G09,G10,N02,N03,N04,N05,N07,N09,N10,N15,N16,N17,X01,X06,X08,X09,X10,X11,X12,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,P01,P02,B01,B02,C01,C02,C03,C04,C05,C06,C07,C09,C13,C16,C18,C20,R01,R02,R05,R07,R08,R09,R10,R30,R31,R32,R33,R34,R35,U01,U02,U03,U14	killed
+K03	node centre from `w/2` with integer division	G09,G10	G09,G10		R09,R10	killed
+K04	centre or pan sign wrong in `X`	G01,Y13	G01,Y13		G02,G04,G05,G06,G07,G08,G09,G10,G11,N02,N04,N05,N06,N07,N08,N09,N10,N13,N14,N15,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y10,Y11,Y12,Y16,Y17,O01,O02,O03,O04,O05,O06,O15,F01,F04,P01,P02,P03,P04,P05,P06,P07,P08,P09,P10,P14,P15,B01,B02,B03,C01,C02,C03,C04,C05,C06,C07,C09,C10,C13,C16,C18,C19,C20,R01,R02,R04,R05,R06,R07,R08,R09,R10,R11,R21,R22,R28,R30,R31,R32,R33,R34,R35,U01,U02,U03,U08,U14	killed
+K05	trim 11 px instead of 12	G01	G01		G02,G05,G07,G08,G10,N03,N04,N05,N06,N07,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,P01,P02,P13,B01,B02,C01,C02,C03,C04,C05,C06,C07,C09,C10,C13,C18,C20,U01,U02,U03	killed
+K05b	trim 13 px instead of 12	G01	G01		G02,G05,G07,G08,G10,N03,N04,N05,N06,N07,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,P01,P02,B01,B02,C01,C02,C03,C04,C05,C06,C07,C09,C10,C13,C18,C20,U01,U02,U03	killed
+K06	trim with the nearest-integer root (V1)	N16	N16			killed
+K07	trim with `floorDiv` (V2)	N16	N16		N17,F04	killed
+K08	trim computed in doubles (V3)	N16	N16			killed
+K09	straight anchor with `floorDiv` (V4)	N17	N17			killed
+K10	parallel anchor with `floorDiv` (V5)	N17	N17			killed
+K11	parallel control point with `floorDiv` (V6)	N17	N17			killed
+K12	degenerate anchor with `floorDiv` (V7)	N17	N17			killed
+K13	parallel midpoint with `floorDiv` (V8)	N17	N17			killed
+K14	parallel frame root nearest-integer (V9)	N17	N17			killed
+K15	degenerate test `<` instead of `<=`	N06	N06			killed
+K16	degenerate edge trimmed anyway	N06	N06		G08,G09,N02,N17,F04,B02	killed
+K17	coincident nodes divide by zero	N05	N05			killed
+K18	parallel offset sign flipped for reversed edges	N09,G05	N09,G05		G08,N04,N10,N17,X06,Y08,Y11,Y12,P02,P06,C03,C07	killed
+K19	grouping by ordered pair	G05,N09	G05,N09		G08,N04,N10,N17,Y08,Y11,Y12,P02,P06,P13,C03,C07	killed
+K20	group counts hidden members	N10	N10		Y08	killed
+K21	loop rank counted globally	N08,G11	N08,G11		P03,B03,C19	killed
+K22	wrong loop label anchor	G11	G11		N08,C19	killed
+K23	arrow tip is not the last point of the route	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F02,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K24	arrow length 9 px instead of 10	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K24b	arrow length 11 px instead of 10	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K25	arrow half-width 4 px instead of 5	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K25b	arrow half-width 6 px instead of 5	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K26	arrow corner `b2` computed as the negation of `b1`'s offset	N03	N03		S01	killed
+K27	arrow base centre with `floorDiv`	N03	N03		G01,G05,G08,G10,G11,N04,N06,N08,N09,N10,N15,N16,N17,X01,X06,X08,X09,X10,X11,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,S01,S37,U01,U02,U03	killed
+K28	arrow direction from the unrounded µpx points	N03	N03		G05,G08,G09,N09,N16,N17,X11,Y08,Y11,Y12,Y17,F04,C03,C07,D01	killed
+K29	zero-length direction left as (0, 0)	N05	N05		N07,S01	killed
+K30	zero-length direction (0, 1)	N05,N07	N05,N07		S01	killed
+K31	arrow on a form-1 edge uses the chord	N04	N04		G05,G08,N09,N10,N17,X06,Y08,Y11,Y12,C03,C07,S01	killed
+K32	arrow on a form-2 edge uses the first control point	N04,G11	N04,G11		N08,C10,C19,S01	killed
+K33	`A` emitted on an undirected graph	G02	G02		N02,C04,R02,R35	killed
+K34	`A` omitted on a directed graph	G01	G01		G05,G07,G08,G09,G10,G11,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F02,F04,C01,C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,R01,R05,R07,R08,R09,R10,R11,R21,R22,R30,R31,R32,R33,U01,U02,U03,D01,D02	killed
+K35	all `A` after all `E`	G11,N09	G11,N09		G05,G07,G08,N03,N04,N05,N06,N08,N10,N16,N17,X01,X02,X03,X04,X05,X06,X08,X10,X11,X12,Y08,Y11,Y12,Y17,F04,D01,D02	killed
+K36	truncation at 25 units or ellipsis not counted	X01	X01		G07,F04,R07,D02	killed
+K37	truncation splits a surrogate pair	X01	X01		G07,R07	killed
+K38	TAB, LF, CR kept in the text	X03	X03		X08,D02	killed
+K39	XML-illegal scalar kept	X04	X04		D02	killed
+K40	XML-illegal scalar deleted instead of U+FFFD	X04	X04			killed
+K41	text NFC-normalized	X06	X06		C10	killed
+K42	empty label emits a `T`	X05	X05		D02	killed
+K43	label budget boundary exclusive	O03	O03		X09	killed
+K44	label budget not monotone	O06	O06			killed
+K45	budget walk takes edge labels before node labels	X09	X09		G01,G02,G05,G07,G08,G09,G10,G11,N02,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O03,O04,O15,F01,F04,C01,C02,C03,C04,C05,C06,C07,C10,C13,C16,C18,C19,C20,U01,U02,U03,U10,U11,D01,D02	killed
+K46	text XML-escaped	X02	X02		X08,C10	killed
+K47	`edgeLabels` default false	G01	G01		G02,G05,G07,G08,G09,G10,G11,N02,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O03,O15,F01,F02,F04,C01,C02,C03,C04,C05,C06,C07,C10,C13,C16,C18,C19,C20,R01,R02,R05,R07,R08,R09,R10,R11,R21,R22,R30,R31,R32,R33,R35,U01,U02,U03,U04	killed
+K48	node and edge `T` ranges mixed (edge labels before node labels in file order)	G01	G01		G02,G05,G07,G08,G09,G10,G11,N02,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O03,O15,F01,F04,C01,C02,C03,C04,C05,C06,C07,C10,C13,C16,C18,C19,C20,U01,U02,U03,U10,U11,D01,D02	killed
+K49	hidden element in the table	Y07	Y07		X11,Y09,Y10,Y12,Y17,R34,U01,D01	killed
+K50	hide does not cascade to incident edges	Y07	Y07		X11,Y09,Y10,Y12,Y17,R34,U01	killed
+K51	selected and focused bits swapped	Y03	Y03		Y01,Y02,Y04,Y05,Y11,Y12,C02,C03,C19,C20,R30,R31,U01,D01	killed
+K52	focus bit missing on edges	Y05	Y05		Y16,C03,R31,R33	killed
+K53	pid is the scene index, not the table position	Y10	Y10		N10,X11,Y08,Y12,Y17,D01	killed
+K54	category class by index modulo 8	X10	X10		C20	killed
+K55	category class over visible nodes only	Y17,X11	Y17,X11			killed
+K56	header counts include hidden elements	Y07	Y07		N10,X11,Y08,Y09,Y10,Y12,Y17,U01,D01	killed
+K57	header size from the layout bounds	G08,G09	G08,G09		G01,G02,G04,G05,G06,G07,G10,G11,N01,N02,N03,N04,N05,N06,N07,N08,N09,N10,N13,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y09,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O06,O15,F01,F04,C01,C02,C03,C04,C05,C06,C07,C09,C10,C13,C16,C18,C19,C20,C22,R01,R02,R04,R10,R11,R16,R21,R22,R28,R30,R31,R32,R33,R35,R39,R41,R42,R43,R44,U01,U02,U03,U08	killed
+K58	header scene and layout hashes swapped	G01	G01		G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,N01,N02,N03,N04,N05,N06,N07,N08,N09,N10,N13,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y09,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O06,O15,F01,F04,U01,U02,U03,U08	killed
+K59	edges before nodes in the table	G01	G01		G02,G05,G07,G08,G09,G10,G11,N02,N03,N04,N05,N06,N07,N08,N09,N10,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y08,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O15,F01,F04,U01,U02,U03,D01,D02	killed
+K60	`readoutFromList` takes `marked.selected` from the focused bit (the two flag bits swapped in the readout)	R30	R30		R31,D01	killed
+K61	final LF missing	G01	G01		G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,N01,N02,N03,N04,N05,N06,N07,N08,N09,N10,N13,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X08,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y09,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O06,O15,F01,F04,U01,U02,U03,U08,D01,D02,D04	killed
+K62	table address with spaces or unsorted keys	G01,X08	G01,X08		G02,G04,G05,G06,G07,G08,G09,G10,G11,N01,N02,N03,N04,N05,N06,N07,N08,N09,N10,N13,N15,N16,N17,X01,X02,X03,X04,X05,X06,X07,X09,X10,X11,X12,X13,Y01,Y02,Y03,Y04,Y05,Y06,Y07,Y08,Y10,Y11,Y12,Y13,Y16,Y17,O01,O02,O03,O04,O05,O06,O15,F01,F04,U01,U02,U03,U08,D01,D02	killed
+K63	U+2028 or DEL written as an escape in a string	X08	X08		D02	killed
+K64	coordinate limit exclusive (a coordinate of exactly `2^40` refused)	N13	N13			killed
+K65	coordinate limit not enforced	N14,N11	N14,N11		N12	killed
+K66	unknown option key ignored	O07	O07		U07	killed
+K67	options array accepted	O12	O12		U07	killed
+K68	state not validated	Y14,Y15	Y14,Y15			killed
+K69	`maxBytes` boundary exclusive	F01	F01		F04,D04	killed
+K70	`maxBytes` boundary accepts one byte more	F02	F02		D04	killed
+K71	a refused document partially returned	F03	F03		F02,F05	killed
+K72	reader accepts CRLF	S28	S28			killed
+K73	reader accepts an indented or a blank line	S29,S31	S29,S31			killed
+K74	reader does not require the final LF	S30	S30			killed
+K75	reader skips the header checks (format, `W`, hash shape)	S04,S26,S27	S04,S26,S27			killed
+K76	reader does not check the header counts against the table	S05	S05			killed
+K77	reader skips the table canonical check	S07	S07			killed
+K78	reader allows a repeated address	S08	S08			killed
+K79	reader skips the `E` and `N` pid rules	S09,S10,S42	S09,S10,S42			killed
+K80	reader skips the range of `flags` and `form` and the coordinate count	S11,S12,S13	S11,S12,S13			killed
+K81	reader skips the `A` presence rule	S14,S15	S14,S15			killed
+K82	reader skips the `A` consistency rule	S16	S16			killed
+K83	reader skips the `A` adjacency rule (accepts `E E A A`)	S17	S17			killed
+K84	reader skips the `T` order and role rules	S18,S19,S23,S24	S18,S19,S23,S24		S06	killed
+K85	reader skips the `T` text rules	S20,S21,S22	S20,S21,S22			killed
+K86	reader skips the `E`/`N` coordinate bound	S25	S25			killed
+K87	reader does not enforce the order of the kinds (D2)	S06	S06		S18	killed
+K88	reader accepts non-canonical number spellings	S33,S34,S35	S33,S34,S35			killed
+K89	reader accepts an unknown kind	S36	S36		S02,S03	killed
+K90	reader's `maxBytes` boundary exclusive	S37	S37			killed
+K90b	reader's `maxBytes` boundary accepts one byte more	S38	S38			killed
+K91	reader has no `maxLineUnits` bound	S39	S39			killed
+K92	reader skips the `kcls` range	S41	S41			killed
+K93	flatten with `floorDiv`	P02,P03	P02,P03		B03	killed
+K94	flatten with 15 segments	P03	P03		P02,B03,U14	killed
+K94b	flatten with 17 segments	P03	P03		P02,B03,U14	killed
+K95	pick without the endpoint branches	P08	P08		P05,P06,U14,D05	killed
+K96	pick tolerance 5 px	P04,P07	P04,P07		P08,D05	killed
+K97	pick tolerance 7 px	P04,P07	P04,P07		P13,D05	killed
+K98	pick boundary open	P07	P07		P04	killed
+K99	pick tie goes to the highest index	P09	P09			killed
+K100	pick takes the nearest edge before a node within 12 px	P10	P10		D05	killed
+K101	pick uses the frozen chord for edges	P05,P06	P05,P06		P13,U14,D05	killed
+K102	pointer converted to whole pixels	P04	P04		P07,P15,D05	killed
+K103	hidden element pickable	P11	P11			killed
+K104	pick returns a pid instead of an address	P05	P05		P04,P06,P07,P08,P09,P14,P15,U14,D05	killed
+K105	a frozen edge hit is honoured	P13	P13			killed
+K106	node bound ±18000	B01	B01		B02,B03	killed
+K107	edge bound without the 6000 expansion	B02	B02		B01,B03	killed
+K108	loop bound from its end points only	B03	B03			killed
+K109	rings painted after the discs	C02	C02		C03,C19,C20,D01	killed
+K110	halos painted after the line	C02	C02		C03,D01	killed
+K111	arrowheads painted before the lines	C01	C01		C02,C03,C05,C06,C07,C09,C10,C13,C18,C19,C20,U02,U10,U11,D01	killed
+K112	style cache disabled	C01,C07	C01,C07		C02,C03,C04,C05,C06,C09,C10,C13,C18,C19,C20,U02	killed
+K113	style cache not reset between replays	C13	C13			killed
+K114	dash not reassigned for the disc stroke	C02	C02		C19	killed
+K115	`setTransform` missing or `dprMilli` ignored	C05	C05			killed
+K116	`clearRect` missing	C01	C01		C02,C03,C04,C05,C06,C07,C08,C09,C10,C13,C16,C18,C19,C20,C22,U02	killed
+K117	label text altered (trimmed, normalized or wrapped)	C10	C10			killed
+K118	font string differs	C01	C01		C02,C03,C04,C05,C06,C07,C10,C13,C16,C18,C19,C20,U02	killed
+K119	`ink` ignored	C06	C06			killed
+K120	witness reads `probe()` instead of the stream	U11	U11			killed
+K121	manifest differs from the renderer's, or `labels.edge` supported with edge labels off	U06,U12	U06,U12			killed
+K122	`export("svg")` returns bytes though declared unsupported	U05	U05			killed
+K123	`displayList()` does not throw `BUSY`	U03	U03			killed
+K124	`displayList()` returns the previous state's list	U01	U01		U02	killed
+K125	`pick` calls the frozen `hitTest` for edges	U14	U14			killed
+K126	`capacity` and `dl` label budgets may differ	U07	U07			killed
+K127	`probe().fidelity.labels` `full` while truncating	U04	U04			killed
+K128	`render()` builds the list	U13	U13			killed
+K129	`dprMilli` not validated	C11,C12	C11,C12		U07	killed
+K130	`ink` not validated	C14,C15	C14,C15		C21,U07	killed
+K131	`layers` not validated	C17	C17		C23,C24	killed
+K132	arc end angle `Math.PI` instead of `2π`	C01	C01		C02,C03,C04,C05,C06,C07,C09,C10,C13,C18,C19,C20,U02	killed
+K133	all edges of a layer stroked in one path	C03	C03		C01,C02,C04,C05,C06,C07,C09,C10,C13,C19,C20,U02,U10,D01	killed
+K134	`save`/`restore` used	C01	C01		C02,C03,C04,C05,C06,C07,C09,C10,C13,C18,C19,C20,U02	killed
+K135	text styles assigned when there is no label	C08,C09	C08,C09			killed
+K136	element markers missing or with the wrong layer	C01	C01		C02,C03,C04,C05,C06,C07,C09,C10,C13,C16,C19,C20,U02,U10,U11,D01	killed
+K137	the 2D calls differ without `onElement`	C18	C18			killed
+K138	`readoutFromSvgReadout` parses decimals through a float and truncates	R20	R20		R13,R15,R23,R25,R27	killed
+K139	`nodes_far` guard-box rule ignored in a readout	R21,R29	R21,R29			killed
+K140	`compareReadouts` path or reference rule wrong	R17	R17			killed
+K141	`compareReadouts` compares readouts with different hashes	R18	R18			killed
+K142	stream readout lists an element whose marker has no painting call as drawn	R44	R44			killed
+K143	`label_units` counts code points	R22	R22		R06,R07	killed
+K144	`readoutFromList` puts the focus under the wrong key (node/edge)	R31,R32	R31,R32		R30,R33,D01	killed
+K145	stream readout takes the selected nodes from layer 7 (every node)	R39	R39		R16,R40,R41,R42,R43,R44,D01	killed
+K146	stream readout takes the focus from layer 5 instead of layer 6	R39	R39		R40,R41,D01	killed
+K147	stream readout takes the arrows from layer 3 (every edge)	R42	R42			killed
+K148	stream readout takes node centres from the layer-8 anchors	R16	R16		R39,R40,R41,R42,R43,R44,D01	killed
+K149	stream readout counts `label_units` in bytes	R43	R43			killed
+K150	`readoutFromList` classifies `nodes_at` by the viewport rectangle instead of the guard box	R28	R28		R09,R20	killed
+K151	option error class `INVALID_VALUE` instead of `SCHEMA` for a non-boolean `labels`	O08	O08		O13,O17,U07	killed
+K152	numeric option error classes confused (`NOT_FINITE`, `INVALID_VALUE`, `OUT_OF_RANGE`)	O09,O10,O11	O09,O10,O11		O16,U07	killed
+K153	`null` option accepted as absent	O13	O13			killed
+K154	a non-model is not rejected	O14	O14			killed
+K155	`maxDrawnLabelUnits` boundary 2^31 exclusive	O15	O15			killed
+K155b	`maxDrawnLabelUnits` 2^31 + 1 accepted	O16	O16			killed
+K156	options validated in a different order than alphabetical	O17	O17			killed
+K157	`pickDrawn` without the closed-viewport rule	P14,P15	P14,P15			killed
+K158	`pickDrawn` border test on the raw point instead of the quantized one	P15	P15			killed
+K159	`pickDrawn` point validation missing	P12	P12			killed
+K160	reader skips the `T` coordinate bound	S43	S43			killed
+K161	reader's nesting scan is not string-aware	S01	S01			killed
+K162	reader splits lines with `splitlines` (also on U+2028)	S01	S01		S28,D02	killed
+K163	`backingSize` floors instead of `divRound`	Z01	Z01			killed
+K164	`backingSize` without the per-side cap	Z02	Z02			killed
+K165	`backingSize` without the area cap	Z03	Z03			killed
+K166	`backingSize` does not validate `dprMilli`	Z05,Z06	Z05,Z06			killed
+K167	`ink` length not validated	C21	C21			killed
+K168	empty `layers` rejected	C22	C22			killed
+K169	`layers` range not validated	C23	C23			killed
+K170	`layers` duplicates accepted	C24	C24			killed
+K171	`onElement` type not validated	C25	C25			killed
+K172	layer-8 text styles assigned after the first marker	C01	C01		C02,C03,C04,C05,C06,C07,C10,C13,C16,C19,C20,U02	killed
+K173	a `PALETTE` entry among k3-k8 wrong	C20	C20			killed
+K174	halo-foc width or dash wrong	C03	C03			killed
+K175	ring-foc dash wrong	C02,C19	C02,C19			killed
+K176	dash tokens not multiplied by 1000	C02	C02		C03,C19	killed
+K177	form-2 route drawn with `quadraticCurveTo`	C19	C19		C04,C10	killed
+K178	form-1 route drawn with `bezierCurveTo`	C03	C03		C07	killed
+K179	`compareReadouts` checks the version before the schema (one entry has both defects)	R19	R19			killed
+K180	`compareReadouts` accepts an inconsistent `nodes_at`/`nodes_far` partition	R36	R36			killed
+K181	`readoutFromSvgReadout` accepts a non-canonical or `-0` decimal	R23,R25,R27	R23,R25,R27			killed
+K182	`readoutFromSvgReadout` swaps the selected and focused marks	R14	R14			killed
+K183	`compareReadouts` reads a caller-owned `__proto__` key	R38	R38			killed
+K184	`labels: false` still emits node `T` records	O01	O01		C09	killed
+K185	`edgeLabels: false` still emits edge `T` records	O02	O02			killed
+K186	`backingSize` accepts a zero width	Z07	Z07			killed
+K187	`readoutFromSvgReadout` accepts a printed value that is not a number	R24,R26	R24,R26			killed

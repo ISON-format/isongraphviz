@@ -1,0 +1,28 @@
+item	result	detail
+A.1 G01 bytes equal the A.1 block (X1)	REPRODUCED	637 bytes
+A.1 size 637 and SHA-256 of the block	REPRODUCED	637 / 62e9d45ed682602b4b4dae6503a92029566fb0cabf6e73f8a9a50893fcff4ebd
+A.2 (row Y03) figure without a gated block	REPRODUCED	637 / 48c82389e35751c8db74db13e12c1345222d3dd01df16791fb9bd2bec931194e
+A.2 difference block (three lines) equals the lines of Y03 that differ from G01	REPRODUCED	
+A.3 G11 bytes equal the A.3 block (X1)	REPRODUCED	1553 bytes
+A.3 size 1553 and SHA-256	REPRODUCED	
+A.4 C01 stream equals the A.4 block (X1)	REPRODUCED	1042 bytes
+A.4 size 1042 and SHA-256 of C01	REPRODUCED	
+A.4 C02 stream (figure without a gated block)	REPRODUCED	1455 / 6cbb962e795d29790254341af0cd2fce66f3afafe6ae8ee14dad2bb2083abfd6
+A.6 P01 pick buffer equals the block (X1)	REPRODUCED	104 bytes
+A.6 P01 size 104 and SHA-256	REPRODUCED	
+A.6 bounds block equals B01 (X1)	REPRODUCED	105 bytes
+A.6 bounds size 105 and SHA-256	REPRODUCED	
+A.6 first loop of G11: the 17-point polyline equals P03's line of pid 3	REPRODUCED	
+A.6 pick (500,308) -> the KNOWS edge; (500,300) -> none	REPRODUCED	
+A.6 quantizePx(-2^-11 * 1000) = 0 (inside) and quantizePx(-2^-10 * 1000) = -1 (outside)	REPRODUCED	
+A.6 loops: (32.1,275.0) -> loop pid 3 with hitTest none; (32.1,266.0) -> pid 4; (32.1,280.0) -> pid 3	REPRODUCED	
+A.7 R01 readout equals the block (X1)	REPRODUCED	975 bytes
+A.7 size 975 and SHA-256	REPRODUCED	
+A.7 the same bytes from the SVG scrape (R12) and from the stream (R16)	REPRODUCED	
+A.5 (gl: item) the element-table and text lines of the printed plan prefix equal the n, e, T lines of G01	REPRODUCED	plan assembly itself is an oracles-gl matter
+A.8 (gl: item)	not applicable	shader digests: oracles-gl
+A.10 (gl: item)	not applicable	plan guard rule: oracles-gl
+A.5.1-A.5.3 (gl: items)	not applicable	executor logs: oracles-gl
+A.9 option sizes labels:false 548, edgeLabels:false 605, 9 -> 637, 8 -> 605, 4 -> 605, 0 -> 548, Y07 319	REPRODUCED	O01=548, O02=605, O03=637, O04=605, X09=605, O05=548, Y07=319
+A.9 F01 (maxBytes 637) accepted and equals G01; F02 (636) RESOURCE_LIMIT/BYTES_LIMIT	REPRODUCED	
+A.11 device sizes Z01-Z04	REPRODUCED	

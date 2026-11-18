@@ -1,0 +1,16 @@
+{
+ "capacity": {
+  "maxDrawnLabelUnits": 1048576,
+  "maxEdges": 40000,
+  "maxNodes": 5
+ },
+ "fidelity_agrees_with_manifest": true,
+ "labels_edge": {
+  "degradations": [
+   "EDGE_LABELS_OMITTED"
+  ],
+  "status": "degraded"
+ },
+ "manifest_bytes_equal": true,
+ "manifest_valid": true
+}
