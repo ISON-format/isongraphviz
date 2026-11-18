@@ -1,0 +1,1 @@
+{"final_state":{"gesture":"idle","last_t":30,"mode":"normal","pointers":[],"rem_x":0,"rem_y":0,"wheel_acc":-20000},"steps":[{"handled":true,"outputs":[]},{"handled":true,"outputs":[]},{"handled":true,"outputs":[]},{"handled":true,"outputs":[{"intent":{"anchor":{"x":450,"y":300},"factor_milli":1250,"type":"zoom"},"kind":"intent"}]}]}

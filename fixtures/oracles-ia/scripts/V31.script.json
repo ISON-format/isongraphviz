@@ -1,0 +1,17 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/g_d0.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "ArrowDown",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

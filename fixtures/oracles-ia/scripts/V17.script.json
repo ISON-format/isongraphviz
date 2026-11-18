@@ -1,0 +1,41 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/g_e.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "Home",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "End",
+    "mods": 0,
+    "t": 1,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "PageDown",
+    "mods": 0,
+    "t": 2,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "PageUp",
+    "mods": 0,
+    "t": 3,
+    "type": "key"
+   }
+  }
+ ]
+}

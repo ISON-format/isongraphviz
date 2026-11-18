@@ -1,0 +1,37 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 0,
+    "mods": 0,
+    "ptype": "mouse",
+    "t": 0,
+    "target": {
+     "node": {
+      "id": "s:constructor",
+      "type": "p"
+     }
+    },
+    "type": "pointerdown",
+    "x": 100000,
+    "y": 100000
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 80,
+    "type": "pointerup",
+    "x": 100000,
+    "y": 100000
+   }
+  }
+ ]
+}

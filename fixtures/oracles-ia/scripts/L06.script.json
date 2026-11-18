@@ -1,0 +1,27 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "key": "m",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   },
+   "state": "states/g_a.state.json"
+  },
+  {
+   "event": {
+    "key": "ArrowRight",
+    "mods": 0,
+    "t": 1,
+    "type": "key"
+   },
+   "state": "states/g_a.state.json"
+  }
+ ]
+}

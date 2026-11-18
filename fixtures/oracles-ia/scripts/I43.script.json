@@ -1,0 +1,42 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "dy": -60000,
+    "mods": 0,
+    "t": 0,
+    "type": "wheel",
+    "unit": 0,
+    "x": 450000,
+    "y": 300000
+   }
+  },
+  {
+   "event": {
+    "dy": 0,
+    "mods": 0,
+    "t": 10,
+    "type": "wheel",
+    "unit": 0,
+    "x": 450000,
+    "y": 300000
+   }
+  },
+  {
+   "event": {
+    "dy": -60000,
+    "mods": 0,
+    "t": 20,
+    "type": "wheel",
+    "unit": 0,
+    "x": 450000,
+    "y": 300000
+   }
+  }
+ ]
+}

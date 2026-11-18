@@ -1,0 +1,41 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 0,
+    "mods": 4,
+    "ptype": "mouse",
+    "t": 0,
+    "type": "pointerdown",
+    "x": 500000,
+    "y": 350000
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 4,
+    "t": 10,
+    "type": "pointermove",
+    "x": 150000,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 4,
+    "t": 20,
+    "type": "pointerup",
+    "x": 150000,
+    "y": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 1,
+    "mods": 0,
+    "ptype": "touch",
+    "t": 0,
+    "type": "pointerdown",
+    "x": 100000,
+    "y": 100000
+   }
+  },
+  {
+   "event": {
+    "id": 1,
+    "mods": 0,
+    "t": 100,
+    "type": "pointermove",
+    "x": 105000,
+    "y": 100000
+   }
+  },
+  {
+   "event": {
+    "t": 600,
+    "type": "tick"
+   }
+  }
+ ]
+}

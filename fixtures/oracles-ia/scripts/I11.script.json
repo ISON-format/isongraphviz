@@ -1,0 +1,20 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "dy": -7000,
+    "mods": 0,
+    "t": 0,
+    "type": "wheel",
+    "unit": 1,
+    "x": 450000,
+    "y": 300000
+   }
+  }
+ ]
+}

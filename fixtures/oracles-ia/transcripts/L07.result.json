@@ -1,0 +1,1 @@
+{"final_state":{"gesture":"idle","last_t":1,"mode":"normal","pointers":[],"rem_x":0,"rem_y":0,"wheel_acc":0},"steps":[{"handled":true,"outputs":[{"event":{"type":"marquee-started"},"kind":"nav"}]},{"handled":true,"outputs":[{"event":{"count":8,"type":"lasso-too-large"},"kind":"nav"}]}]}

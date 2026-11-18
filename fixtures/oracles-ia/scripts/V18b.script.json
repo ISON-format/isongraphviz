@@ -1,0 +1,33 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "key": "Space",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "Enter",
+    "mods": 0,
+    "t": 1,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "ContextMenu",
+    "mods": 0,
+    "t": 2,
+    "type": "key"
+   }
+  }
+ ]
+}

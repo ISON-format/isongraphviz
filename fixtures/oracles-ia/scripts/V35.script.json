@@ -1,0 +1,20 @@
+{
+ "config": {
+  "maxTargets": 3
+ },
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "key": "a",
+    "mods": 2,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

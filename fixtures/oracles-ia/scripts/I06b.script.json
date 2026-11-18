@@ -1,0 +1,71 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 0,
+    "mods": 0,
+    "ptype": "mouse",
+    "t": 0,
+    "type": "pointerdown",
+    "x": 0,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 10,
+    "type": "pointermove",
+    "x": 5000,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 20,
+    "type": "pointermove",
+    "x": 5400,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 30,
+    "type": "pointermove",
+    "x": 5800,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 40,
+    "type": "pointermove",
+    "x": 6200,
+    "y": 0
+   }
+  },
+  {
+   "event": {
+    "id": 0,
+    "mods": 0,
+    "t": 50,
+    "type": "pointerup",
+    "x": 6200,
+    "y": 0
+   }
+  }
+ ]
+}

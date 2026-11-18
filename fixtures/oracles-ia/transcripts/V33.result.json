@@ -1,0 +1,1 @@
+{"final_state":{"gesture":"idle","last_t":0,"mode":"normal","pointers":[],"rem_x":0,"rem_y":0,"wheel_acc":0},"steps":[{"handled":true,"outputs":[{"intent":{"delta":1,"type":"focus-step"},"kind":"intent"},{"intent":{"dx":-110,"dy":0,"type":"pan"},"kind":"intent"}]}]}

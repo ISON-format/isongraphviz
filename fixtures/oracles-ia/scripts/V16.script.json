@@ -1,0 +1,20 @@
+{
+ "config": {
+  "wrap": true
+ },
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/g_edge8.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "PageDown",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

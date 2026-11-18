@@ -1,0 +1,17 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/g_c10448.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "e",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

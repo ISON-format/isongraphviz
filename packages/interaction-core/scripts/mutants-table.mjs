@@ -1,0 +1,144 @@
+// The K table of design 15.6 and 15.6a, restricted to the mutants whose named killer rows belong to interaction-core (rows E, I, V, L, B), as source patches:
+//   K01-K44, K72-K81, K84-K98, K122-K124, K126 (73 mutants).
+// The other 55 mutants of the corpus (K45-K71 companion, plan, gate, export; K82-K83 composed manifests; K99-K121, K125, K127, K128) are the business of
+// a11y-companion and export-core. Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/interaction-core/src; production code
+// has no switchable variants and src/ is never modified. A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring
+// of src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of 15.6a.
+const P = (file, find, replace, count = 1) => ({ file, find, replace, count });
+const m = (id, desc, patches) => ({ id, desc, patches });
+
+const SEL = "const mode = selectMode(p.mods0);";
+const DRAG = "if (dx * dx + dy * dy > BigInt(DRAG_THRESHOLD_MILLI) ** 2n) {";
+const ACC = "const dx = noNegZero(divRoundN(bx, 1000)), dy = noNegZero(divRoundN(by, 1000));";
+const NODE_PICK = "const t = cmd.delta === 1 ? list[0]! : list[list.length - 1]!;";
+const KEYSPATIAL = "const key: [bigint, bigint, number] = [p * p + s * s, s, m.index];";
+
+export const MUTANTS = [
+  // ---- pointer, wheel, pinch, long press, lasso (rows I) ------------------------------------------------------------------------------------------
+  m("K01", "drag threshold >= instead of >", [P("machine.ts", DRAG, "if (dx * dx + dy * dy >= BigInt(DRAG_THRESHOLD_MILLI) ** 2n) {")]),
+  m("K02", "threshold by Chebyshev distance", [P("machine.ts", DRAG, "if (dx > 4000n || dx < -4000n || dy > 4000n || dy < -4000n) {")]),
+  m("K03", "pan remainder dropped each event", [P("machine.ts", "const bx = m.rem_x + ax, by = m.rem_y + ay;", "const bx = ax, by = ay;")]),
+  m("K04", "pan accumulation floorDiv instead of divRound", [
+    P("machine.ts", "addressOf, divRound, divRoundN, drawnElement,", "addressOf, divRound, divRoundN, floorDivN, drawnElement,"),
+    P("machine.ts", ACC, "const dx = noNegZero(floorDivN(bx, 1000)), dy = noNegZero(floorDivN(by, 1000));"),
+  ]),
+  m("K05", "pan accumulation truncates toward zero", [P("machine.ts", ACC, "const dx = noNegZero(Math.trunc(bx / 1000)), dy = noNegZero(Math.trunc(by / 1000));")]),
+  m("K06", "first pan excludes the press-to-threshold segment", [P("machine.ts", "m.gesture = \"pan\"; accumulate(m, ev.x - p.x0, ev.y - p.y0, out); }", "m.gesture = \"pan\"; accumulate(m, 0, 0, out); }")]),
+  m("K07", "click modifiers read at pointerup", [P("machine.ts", SEL, "const mode = selectMode(ev.mods);")]),
+  m("K08", "shift before ctrl: ctrl+shift click adds", [P("machine.ts", "((mods0 & 10) !== 0 ? \"toggle\" : (mods0 & 1) !== 0 ? \"add\" : \"replace\")", "((mods0 & 1) !== 0 ? \"add\" : (mods0 & 10) !== 0 ? \"toggle\" : \"replace\")")]),
+  m("K09", "meta is not a toggle modifier", [P("machine.ts", "((mods0 & 10) !== 0 ?", "((mods0 & 2) !== 0 ?")]),
+  m("K10", "modified click on empty space clears", [P("machine.ts", "} else if ((p.mods0 & 11) === 0) out.push(intent({ type: \"clear-selection\" }));", "} else out.push(intent({ type: \"clear-selection\" }));")]),
+  m("K11", "wheel accumulator kept across reversal", [P("machine.ts", "if (acc !== 0n && (acc < 0n) !== (d < 0n)) acc = 0n;", "")]),
+  m("K12", "wheel notch cap 16 instead of 8", [P("machine.ts", "notches < WHEEL_MAX_NOTCHES", "notches < 16")]),
+  m("K13", "wheel sign flipped", [P("machine.ts", "factor_milli: acc < 0n ? 1250 : 800", "factor_milli: acc < 0n ? 800 : 1250")]),
+  m("K14", "line unit 10 px", [P("machine.ts", "ev.unit === 1 ? 16n", "ev.unit === 1 ? 10n")]),
+  m("K15", "page unit uses viewport width", [P("machine.ts", "BigInt(viewOf(c).viewport.height)", "BigInt(viewOf(c).viewport.width)")]),
+  m("K16", "zoom anchor floor instead of divRound", [P("machine.ts", "const anchor = { x: Number(divRound(BigInt(ev.x), 1000n)), y: Number(divRound(BigInt(ev.y), 1000n)) };", "const anchor = { x: Number(floorDiv(BigInt(ev.x), 1000n)), y: Number(floorDiv(BigInt(ev.y), 1000n)) };")]),
+  m("K17", "pinch factor truncated", [P("machine.ts", "const f = divRound(d1 * 1000n, BigInt(pinch.d));", "const f = (d1 * 1000n) / BigInt(pinch.d);")]),
+  m("K18", "pinch emits zoom before pan", [P("machine.ts", "} else if (pinch.d === 0 && d1 > 0n) pinch.d = Number(d1);\n      break;", "} else if (pinch.d === 0 && d1 > 0n) pinch.d = Number(d1);\n      out.reverse();\n      break;")]),
+  m("K19", "pinch reference refreshed on every move", [P("machine.ts", "        if (factor !== 1000) {", "        pinch.d = Number(d1);\n        if (factor !== 1000) {")]),
+  m("K20", "third pointer replaces the first", [P("machine.ts", "if (m.pointers.length >= 2) return true; // a third pointer is ignored", "if (m.pointers.length >= 2) m.pointers.shift();")]),
+  m("K21", "long press needs more than 500 ms", [P("machine.ts", "m.last_t - p.t0 >= LONG_PRESS_MS", "m.last_t - p.t0 > LONG_PRESS_MS")]),
+  m("K22", "movement does not cancel a long press", [P("machine.ts", "p.ptype === \"touch\" && !p.moved && !p.long && m.last_t", "p.ptype === \"touch\" && !p.long && m.last_t")]),
+  m("K23", "a click follows a fired long press", [P("machine.ts", "if (g === \"press\" && !p.long) {", "if (g === \"press\") {")]),
+  m("K24", "click on a target that is no longer drawn selects it", [
+    P("machine.ts", "import { IgrError, isRenderModel } from \"isongraph-visualize-renderer-core\";", "import { IgrError, isRenderModel, lookupElement } from \"isongraph-visualize-renderer-core\";"),
+    P("machine.ts", "const el = drawnElement(viewOf(c), p.target);", "const el = lookupElement(c.model, p.target);"),
+  ]),
+  m("K25", "pointercancel clicks", [P("machine.ts", "case \"pointercancel\": handled = pointerCancel(m, ev, out); break;", "case \"pointercancel\": handled = pointerUp(c, m, { ...ev, x: 0, y: 0, mods: 0 } as never, out); break;")]),
+  m("K26", "context action drops the target", [P("machine.ts", "y: Number(divRound(BigInt(ev.y), 1000n)), ...(target === undefined ? {} : { target }) });", "y: Number(divRound(BigInt(ev.y), 1000n)) });")]),
+  m("K27", "lasso ctrl adds, shift toggles", [P("machine.ts", "else out.push(intent({ type: \"select\", mode: selectMode(p.mods0), targets }));", "else out.push(intent({ type: \"select\", mode: (p.mods0 & 10) !== 0 ? \"add\" : (p.mods0 & 1) !== 0 ? \"toggle\" : \"replace\", targets }));")]),
+  m("K28", "lasso rectangle not normalised", [
+    P("machine.ts", "const X0 = BigInt(Math.min(p.x0, ev.x)) * 1000n, X1 = BigInt(Math.max(p.x0, ev.x)) * 1000n;", "const X0 = BigInt(p.x0) * 1000n, X1 = BigInt(ev.x) * 1000n;"),
+    P("machine.ts", "const Y0 = BigInt(Math.min(p.y0, ev.y)) * 1000n, Y1 = BigInt(Math.max(p.y0, ev.y)) * 1000n;", "const Y0 = BigInt(p.y0) * 1000n, Y1 = BigInt(ev.y) * 1000n;"),
+  ]),
+  m("K29", "lasso rectangle open at its border", [P("lasso.ts", "if (X0 <= p.X && p.X <= X1 && Y0 <= p.Y && p.Y <= Y1)", "if (X0 < p.X && p.X < X1 && Y0 < p.Y && p.Y < Y1)")]),
+  m("K30", "lasso edge needs one endpoint inside", [P("lasso.ts", "inside[e.src] && inside[e.tgt]", "(inside[e.src] || inside[e.tgt])")]),
+  m("K31", "lasso includes hidden nodes", [
+    P("lasso.ts", "    if (!v.nodes[n.index]) continue;\n", ""),
+    P("lasso.ts", "if (v.edges[e.index] && inside[e.src] && inside[e.tgt])", "if (inside[e.src] && inside[e.tgt])"),
+  ]),
+  // ---- keyboard navigation (rows V) -------------------------------------------------------------------------------------------------------------
+  m("K32", "spatial navigation without the half-plane tier", [P("navigation.ts", "const tier = s <= p ? 1 : 2;", "const tier = s <= p ? 1 : 2;\n    if (tier === 2) continue;")]),
+  m("K33", "spatial tie to the highest index", [P("navigation.ts", "key[2] < best[2]", "key[2] > best[2]")]),
+  m("K34", "spatial cone open at 45 degrees", [P("navigation.ts", "const tier = s <= p ? 1 : 2;", "const tier = s < p ? 1 : 2;")]),
+  m("K35", "up and down swapped", [P("navigation.ts", "else if (dir === \"down\") { p = dy; s = abs(dx); } else { p = -dy; s = abs(dx); }", "else if (dir === \"down\") { p = -dy; s = abs(dx); } else { p = dy; s = abs(dx); }")]),
+  m("K36", "spatial from an edge uses its source", [P("navigation.ts", "ox = divRound(BigInt(a.x) + BigInt(b.x), 2n); oy = divRound(BigInt(a.y) + BigInt(b.y), 2n);", "ox = BigInt(a.x); oy = BigInt(a.y);")]),
+  m("K37", "incident +1 picks the last edge", [P("navigation.ts", NODE_PICK, "const t = cmd.delta === 1 ? list[list.length - 1]! : list[0]!;", 2)]),
+  m("K38", "incident navigation includes hidden edges", [P("navigation.ts", "if (v.edges[e.index] && (e.src === n || e.tgt === n)) out.push(e);", "if (e.src === n || e.tgt === n) out.push(e);")]),
+  m("K39", "a self-loop counted twice", [P("navigation.ts", "if (v.edges[e.index] && (e.src === n || e.tgt === n)) out.push(e);", "if (v.edges[e.index] && (e.src === n || e.tgt === n)) { out.push(e); if (e.src === e.tgt) out.push(e); }")]),
+  m("K40", "incident wraps without the option", [P("navigation.ts", "if (!o.wrap) return [nav({ type: \"nav-boundary\", nav: \"incident\", delta: cmd.delta })];", "")]),
+  m("K41", "wrap without nav-wrapped event", [P("navigation.ts", "[focusOn(t), nav({ type: \"nav-wrapped\", end: cmd.delta === 1 ? \"end\" : \"start\" })]", "[focusOn(t)]")]),
+  m("K42", "no focus: left/up focus the first element", [
+    P("navigation.ts", "case \"nav-step\": case \"nav-incident\": return cmd.delta === 1 ? \"first\" : \"last\";", "case \"nav-step\": case \"nav-incident\": return \"first\";"),
+    P("navigation.ts", "return cmd.dir === \"right\" || cmd.dir === \"down\" ? \"first\" : \"last\";", "return \"first\";"),
+  ]),
+  m("K43", "extend emits select before focus", [P("navigation.ts", "const out: Output[] = [focusOn(w)];\n      if (cmd.extend === true) out.push(intent({ type: \"select\", mode: \"add\", targets: [addressOf(w)] }));", "const out: Output[] = [];\n      if (cmd.extend === true) out.push(intent({ type: \"select\", mode: \"add\", targets: [addressOf(w)] }));\n      out.push(focusOn(w));")]),
+  m("K44", "select-all includes hidden elements", [P("machine.ts", "const all = traversal(v);", "const all = [...v.model.nodes, ...v.model.edges];")]),
+  // ---- bindings, tokens and event validation (rows B, E) ------------------------------------------------------------------------------------------
+  m("K72", "punctuation tokens compared with the shift bit", [P("bindings.ts", "const mask = shiftIgnored(key) ? 14 : 15;", "const mask = 15;")]),
+  m("K73", "marquee mode does not fall back to the normal table", [P("bindings.ts", "  return find(\"normal\");", "  return undefined;")]),
+  m("K74", "step ignores the wrap option", [P("navigation.ts", "o.wrap && cmd.delta === ", "false && cmd.delta === ", 2)]),
+  m("K75", "uppercase letters not lowercased", [P("bindings.ts", "    if (domKey >= \"A\" && domKey <= \"Z\") return domKey.toLowerCase();\n", "")]),
+  m("K76", "event field with a fraction accepted by rounding", [P("events.ts", "if (!Number.isInteger(v)) throw bad(\"NOT_INTEGER\", path);", "if (!Number.isInteger(v)) v = Math.round(v);")]),
+  m("K77", "time going backwards accepted", [P("events.ts", "if (t < lastT) throw bad(", "if (false) throw bad(")]),
+  m("K78", "key not checked against the token grammar", [P("events.ts", "if (!isKeyToken(v)) throw bad(\"UNKNOWN_KEY\", f);", "")]),
+  m("K79", "extra event key accepted", [P("events.ts", "if (k !== \"type\" && !(shape as readonly string[]).includes(k)) throw bad(", "if (false) throw bad(")]),
+  m("K80", "punctuation tokens compared with the shift bit in the duplicate check", [P("bindings.ts", "const id = JSON.stringify([mode, key, shiftIgnored(key) ? mods & 14 : mods]);", "const id = JSON.stringify([mode, key, mods]);")]),
+  m("K81", "`Tab` forbidden only in the normal mode", [P("bindings.ts", "if (key === \"Tab\") throw bad(\"TAB_BOUND\", p);", "if (key === \"Tab\" && mode === \"normal\") throw bad(\"TAB_BOUND\", p);")]),
+  m("K84", "TypeScript-only: element lookup through a plain object keyed by graph strings (the label), the `??=` index pattern", [P("geometry.ts", "  const e = lookupElement(v.model, wire);\n  return e !== undefined && isDrawn(v, e) ? e : undefined;", "  const byLabel: Record<string, Element> = {};\n  for (const n of v.model.nodes) byLabel[n.label] ??= n;\n  const id = (wire as { id?: string }).id;\n  const e = id === undefined ? lookupElement(v.model, wire) : byLabel[id.slice(2)];\n  return e !== undefined && isDrawn(v, e) ? e : undefined;")]),
+  m("K85", "a double click on an element does nothing", [P("machine.ts", "case \"dblclick\": out.push(intent({ type: \"fit\" })); break;", "case \"dblclick\": if (ev.target === undefined) out.push(intent({ type: \"fit\" })); break;")]),
+  m("K86", "spatial key without the secondary term (p^2 + s^2, index)", [P("navigation.ts", KEYSPATIAL, "const key: [bigint, bigint, number] = [p * p + s * s, 0n, m.index];")]),
+  m("K87", "spatial key lexicographic (p, s, index)", [P("navigation.ts", KEYSPATIAL, "const key: [bigint, bigint, number] = [p, s, m.index];")]),
+  m("K88", "spatial key Manhattan (p + s, s, index)", [P("navigation.ts", KEYSPATIAL, "const key: [bigint, bigint, number] = [p + s, s, m.index];")]),
+  m("K89", "spatial tie to the larger secondary", [P("navigation.ts", KEYSPATIAL, "const key: [bigint, bigint, number] = [p * p + s * s, -s, m.index];")]),
+  m("K90", "reveal margin 0 instead of 24", [P("navigation.ts", "Math.min(REVEAL_MARGIN_PX, floorDivN(Math.min(w, h) - 1, 2))", "Math.min(0, floorDivN(Math.min(w, h) - 1, 2))")]),
+  m("K91", "reveal pan sign flipped", [P("navigation.ts", "return { type: \"pan\", dx: Number(dx), dy: Number(dy) };", "return { type: \"pan\", dx: Number(-dx), dy: Number(-dy) };")]),
+  m("K92", "reveal not applied to focus-step", [P("navigation.ts", "[intent({ type: \"focus-step\", delta: cmd.delta })], t[pos + cmd.delta]);", "[intent({ type: \"focus-step\", delta: cmd.delta })], undefined);")]),
+  m("K93", "reveal applied although reveal is false", [P("navigation.ts", "if (o.reveal && target !== undefined &&", "if (target !== undefined &&")]),
+  // ---- pointer details (rows I) -------------------------------------------------------------------------------------------------------------------
+  m("K94", "a wheel event with dy = 0 resets the accumulator", [P("machine.ts", "if (d === 0n) return; // a horizontal-only swipe changes nothing: the sign of 0 is neither", "if (d === 0n) { m.wheel_acc = 0; return; }")]),
+  m("K95", "a move after a fired long press pans", [P("machine.ts", "      if (p.long) break; // a fired long press claims the pointer: never a drag, never a click\n", "")]),
+  m("K96", "no lasso-end on pointercancel", [P("machine.ts", "if (g === \"lasso\") out.push({ kind: \"lasso-end\" }); // a host that drew", "if (false) out.push({ kind: \"lasso-end\" }); // a host that drew")]),
+  m("K97", "wake_at kept after the pointer moved", [P("machine.ts", "if (p.ptype === \"touch\" && m.gesture === \"press\" && !p.moved && !p.long) return p.t0 + LONG_PRESS_MS;", "if (p.ptype === \"touch\" && !p.long) return p.t0 + LONG_PRESS_MS;")]),
+  m("K98", "a non-primary pointerdown is handled", [P("machine.ts", "if (ev.button !== 0) return false;", "if (ev.button !== 0) return true;")]),
+  // ---- reveal branches and the count boundary ---------------------------------------------------------------------------------------------------
+  m("K122", "reveal ignores the left and top branches", [P("navigation.ts", "(p < lo ? ceilDiv(lo - p, MICRO) : p > hi ?", "(p < lo ? 0n : p > hi ?")]),
+  m("K123", "an edge target reveals toward its source centre", [P("navigation.ts", "return { X: divRound(pa.X + pb.X, 2n), Y: divRound(pa.Y + pb.Y, 2n) };", "return { X: pa.X, Y: pa.Y };")]),
+  m("K124", "reveal margin not clamped for a tiny viewport", [P("navigation.ts", "Math.min(REVEAL_MARGIN_PX, floorDivN(Math.min(w, h) - 1, 2))", "REVEAL_MARGIN_PX")]),
+  m("K126", "lasso and select-all count boundary exclusive", [P("machine.ts", ".length > c.cfg.maxTargets", ".length >= c.cfg.maxTargets", 3)]),
+];
+
+/**
+ * Extra mutants (X01...), not in the corpus table: the behaviour added after the independent audit of stage A1 (reviews/32-code-audit-a1.md) and the sixteen
+ * mutants of the auditor's own set that survived every row and every test (M02, M03, M07, M08, M11, M20, M21, M23, M27, M28, M29, M39, M42, M43, M44, M47).
+ * They are killed by the ext: rows of test/oracle/ext.ts, which the harness runs besides the oracle rows.
+ */
+const MIDPOINT = "const midpoint = (a: MPointer, b: MPointer): { x: number; y: number } => ({ x: Number(floorDiv(BigInt(a.x) + BigInt(b.x), 2n)), y: Number(floorDiv(BigInt(a.y) + BigInt(b.y), 2n)) });";
+export const EXTRA_MUTANTS = [
+  m("X01", "audit I-1: a contextmenu (and pointerdown) target of the wrong kind is accepted", [P("machine.ts", "return el !== undefined && isEdge(el) === (\"edge\" in target) ? el : undefined;", "return el;")]),
+  m("X02", "audit M-1: a lone surrogate in a node address of a machine is accepted", [P("machine.ts", "  if (hasLoneSurrogate(id) || hasLoneSurrogate(type)) throw badMachine(\"an address string holds a lone surrogate\"); // never an IgsError from the serializer\n", "")]),
+  m("X03", "audit M-3: marquee-commit with no anchor is a silent no-op", [P("machine.ts", "const anchor = m.anchor === undefined ? undefined : drawnElement(v, m.anchor);", "if (m.anchor === undefined) return;\n  const anchor = drawnElement(v, m.anchor);")]),
+  m("X04", "audit M-5: the pointer x coordinate is not range-checked in readMachine", [P("machine.ts", "x: int(\"x\", -c, c)", "x: int(\"x\")")]),
+  m("X05", "audit M-5: t0 is not range-checked in readMachine", [P("machine.ts", "t0: int(\"t0\", 0, 2 ** 52)", "t0: int(\"t0\")")]),
+  m("X06", "audit M-6: the pointer id is not range-checked (a negative first id)", [P("machine.ts", "id: int(\"id\", 0, 2 ** 31 - 1)", "id: int(\"id\")")]),
+  m("X07", "audit M-5: the pinch distance is not range-checked", [P("machine.ts", " || d < 0 || d > 2 ** 41", "")]),
+  m("X08", "audit M-5: the pinch midpoint is not range-checked", [P("machine.ts", " || Math.abs(mx) > c || Math.abs(my) > c", "")]),
+  m("X09", "audit M-1: a lone surrogate in an edge address of a machine is accepted", [P("machine.ts", " || hasLoneSurrogate(ord) || hasLoneSurrogate(rel)", "")]),
+  m("X10", "audit M-10 M02: the pinch midpoint truncates toward zero", [P("machine.ts", MIDPOINT, "const midpoint = (a: MPointer, b: MPointer): { x: number; y: number } => ({ x: Number((BigInt(a.x) + BigInt(b.x)) / 2n), y: Number((BigInt(a.y) + BigInt(b.y)) / 2n) });")]),
+  m("X11", "audit M-10 M03: the pinch zoom without the reference distance guard", [P("machine.ts", "if (pinch.d > 0 && d1 > 0n) {", "if (d1 > 0n) {")]),
+  m("X12", "audit M-10 M07: the context-action position floors", [P("machine.ts", "x: Number(divRound(BigInt(ev.x), 1000n)), y: Number(divRound(BigInt(ev.y), 1000n)), ...(target === undefined ? {} : { target }) });", "x: Math.floor(ev.x / 1000), y: Math.floor(ev.y / 1000), ...(target === undefined ? {} : { target }) });")]),
+  m("X13", "audit M-10 M08: the long-press position floors", [P("machine.ts", "x: Number(divRound(BigInt(p.x), 1000n)), y: Number(divRound(BigInt(p.y), 1000n)) });", "x: Math.floor(p.x / 1000), y: Math.floor(p.y / 1000) });")]),
+  m("X14", "audit M-10 M11: the marquee rectangle is not normalized", [P("machine.ts", "lassoTargetsMicro(v, lo(a.X, b.X), lo(a.Y, b.Y), hi(a.X, b.X), hi(a.Y, b.Y))", "lassoTargetsMicro(v, a.X, a.Y, b.X, b.Y)")]),
+  m("X15", "audit M-10 M20: the reveal margin box is open at the high edges", [P("navigation.ts", "if (X >= lo && X <= hiX && Y >= lo && Y <= hiY) return undefined;", "if (X >= lo && X < hiX && Y >= lo && Y < hiY) return undefined;")]),
+  m("X16", "audit M-10 M21: the reveal pan truncates on the left and top", [P("navigation.ts", "p < lo ? ceilDiv(lo - p, MICRO)", "p < lo ? (lo - p) / MICRO")]),
+  m("X17", "audit M-10 M23: the reveal omission is inclusive at 2^31", [P("navigation.ts", "if (dx > PIX_LIMIT || dx < -PIX_LIMIT || dy > PIX_LIMIT || dy < -PIX_LIMIT) return undefined;", "if (dx >= PIX_LIMIT || dx <= -PIX_LIMIT || dy >= PIX_LIMIT || dy <= -PIX_LIMIT) return undefined;")]),
+  m("X18", "audit M-10 M27: with no focus an endpoint move focuses the last element", [P("navigation.ts", "case \"nav-endpoint\": return \"first\";", "case \"nav-endpoint\": return \"last\";")]),
+  m("X19", "audit M-10 M28: Home and End reveal even the already focused element", [P("navigation.ts", "if (o.reveal && target !== undefined && !(v.focus !== undefined && sameElement(v.focus, target))) {", "if (o.reveal && target !== undefined) {")]),
+  m("X20", "audit M-10 M29: an Escape row with any modifiers satisfies NO_ESCAPE_EXIT", [P("bindings.ts", "if (key === \"Escape\" && mods === 0) escapes.add(mode);", "if (key === \"Escape\") escapes.add(mode);")]),
+  m("X21", "audit M-10 M39: the lasso selects a hidden edge between two inside nodes", [P("lasso.ts", "if (v.edges[e.index] && inside[e.src] && inside[e.tgt])", "if (inside[e.src] && inside[e.tgt])")]),
+  m("X22", "audit M-10 M42: the pinch factor upper clamp is 2,000,000", [P("machine.ts", "f > 1_000_000n ? 1_000_000n : f", "f > 2_000_000n ? 2_000_000n : f")]),
+  m("X23", "audit M-10 M43: the pinch factor lower clamp is 0", [P("machine.ts", "f < 1n ? 1n : f", "f < 0n ? 0n : f")]),
+  m("X24", "audit M-10 M44: the remainders are not range-checked in readMachine", [P("machine.ts", "if (!isInt(rem_x) || rem_x < -500 || rem_x > 499 || !isInt(rem_y) || rem_y < -500 || rem_y > 499) throw badMachine(\"rem_x or rem_y\");", "if (!isInt(rem_x) || !isInt(rem_y)) throw badMachine(\"rem_x or rem_y\");")]),
+  m("X25", "audit M-10 M47: mods0 is not range-checked in readMachine", [P("machine.ts", "  if (mods0 < 0 || mods0 > 15) throw badMachine(\"mods0\");\n", "")]),
+];

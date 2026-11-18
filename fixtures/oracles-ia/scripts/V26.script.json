@@ -1,0 +1,17 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/s3_a.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "ArrowRight",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

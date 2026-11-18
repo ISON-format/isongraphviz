@@ -1,0 +1,49 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 1,
+    "mods": 0,
+    "ptype": "touch",
+    "t": 0,
+    "target": {
+     "node": {
+      "id": "s:a",
+      "type": "p"
+     }
+    },
+    "type": "pointerdown",
+    "x": 182000,
+    "y": 32000
+   }
+  },
+  {
+   "event": {
+    "t": 499,
+    "type": "tick"
+   }
+  },
+  {
+   "event": {
+    "t": 500,
+    "type": "tick"
+   }
+  },
+  {
+   "event": {
+    "id": 1,
+    "mods": 0,
+    "t": 600,
+    "type": "pointerup",
+    "x": 182000,
+    "y": 32000
+   }
+  }
+ ]
+}

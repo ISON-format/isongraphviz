@@ -1,0 +1,33 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "key": "+",
+    "mods": 1,
+    "t": 0,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "=",
+    "mods": 0,
+    "t": 1,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "-",
+    "mods": 1,
+    "t": 2,
+    "type": "key"
+   }
+  }
+ ]
+}

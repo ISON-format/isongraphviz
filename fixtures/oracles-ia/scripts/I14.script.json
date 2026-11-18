@@ -1,0 +1,53 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "initial",
+ "steps": [
+  {
+   "event": {
+    "button": 0,
+    "id": 1,
+    "mods": 0,
+    "ptype": "touch",
+    "t": 0,
+    "type": "pointerdown",
+    "x": 300000,
+    "y": 300000
+   }
+  },
+  {
+   "event": {
+    "button": 0,
+    "id": 2,
+    "mods": 0,
+    "ptype": "touch",
+    "t": 10,
+    "type": "pointerdown",
+    "x": 500000,
+    "y": 300000
+   }
+  },
+  {
+   "event": {
+    "id": 2,
+    "mods": 0,
+    "t": 20,
+    "type": "pointermove",
+    "x": 600000,
+    "y": 300000
+   }
+  },
+  {
+   "event": {
+    "id": 2,
+    "mods": 0,
+    "t": 30,
+    "type": "pointermove",
+    "x": 600150,
+    "y": 300000
+   }
+  }
+ ]
+}

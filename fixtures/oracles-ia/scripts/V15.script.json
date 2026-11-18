@@ -1,0 +1,25 @@
+{
+ "size": {
+  "height": 600,
+  "width": 900
+ },
+ "state": "states/g_edge3.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "s",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  },
+  {
+   "event": {
+    "key": "t",
+    "mods": 0,
+    "t": 1,
+    "type": "key"
+   }
+  }
+ ]
+}

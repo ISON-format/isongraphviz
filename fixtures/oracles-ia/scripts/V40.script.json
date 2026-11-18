@@ -1,0 +1,17 @@
+{
+ "size": {
+  "height": 40,
+  "width": 40
+ },
+ "state": "states/g_b40.state.json",
+ "steps": [
+  {
+   "event": {
+    "key": "ArrowRight",
+    "mods": 0,
+    "t": 0,
+    "type": "key"
+   }
+  }
+ ]
+}

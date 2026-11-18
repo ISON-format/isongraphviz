@@ -1,0 +1,1 @@
+{"final_state":{"gesture":"idle","last_t":20,"mode":"normal","pointers":[],"rem_x":0,"rem_y":0,"wheel_acc":0},"steps":[{"handled":true,"outputs":[]},{"handled":true,"outputs":[{"intent":{"dx":3,"dy":3,"type":"pan"},"kind":"intent"}]},{"handled":true,"outputs":[]}]}

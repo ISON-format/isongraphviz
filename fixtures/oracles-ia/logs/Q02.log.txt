@@ -1,0 +1,2 @@
+["textContent","igc-status","1 selected, 0 hidden. Focus: person 1."]
+["setAttribute","igc-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d","aria-selected","true"]

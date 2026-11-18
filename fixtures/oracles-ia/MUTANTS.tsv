@@ -1,0 +1,129 @@
+id	verdict	named_killers	killed_by	mutation
+K01	KILLED	I07	I07	drag threshold >= instead of >
+K02	KILLED	I07b	I07b	threshold by Chebyshev distance
+K03	KILLED	I06b	I06b	pan remainder dropped each event
+K04	KILLED	I06	I06	pan accumulation floorDiv instead of divRound
+K05	KILLED	I06	I06	pan accumulation truncates toward zero
+K06	KILLED	I06	I06	first pan excludes the press-to-threshold segment
+K07	KILLED	I28	I28	click modifiers read at pointerup
+K08	KILLED	I03b	I03b	shift before ctrl: ctrl+shift click adds
+K09	KILLED	I04b	I04b	meta is not a toggle modifier
+K10	KILLED	I05	I05	modified click on empty space clears
+K11	KILLED	I10	I10	wheel accumulator kept across reversal
+K12	KILLED	I12	I12	wheel notch cap 16 instead of 8
+K13	KILLED	I08	I08	wheel sign flipped
+K14	KILLED	I11	I11	line unit 10 px
+K15	KILLED	I13	I13	page unit uses viewport width
+K16	KILLED	I08	I08	zoom anchor floor instead of divRound
+K17	KILLED	I14	I14	pinch factor truncated
+K18	KILLED	I14	I14	pinch emits zoom before pan
+K19	KILLED	I14b	I14b	pinch reference refreshed on every move
+K20	KILLED	I16	I16	third pointer replaces the first
+K21	KILLED	I18	I18	long press needs more than 500 ms
+K22	KILLED	I20	I20	movement does not cancel a long press
+K23	KILLED	I18	I18	a click follows a fired long press
+K24	KILLED	I27	I27	click on a target that is no longer drawn selects it
+K25	KILLED	I25	I25	pointercancel clicks
+K26	KILLED	I21	I21	context action drops the target
+K27	KILLED	I23b	I23b	lasso ctrl adds, shift toggles
+K28	KILLED	I24	I24	lasso rectangle not normalised
+K29	KILLED	I24b	I24b	lasso rectangle open at its border
+K30	KILLED	I23	I23	lasso edge needs one endpoint inside
+K31	KILLED	I29	I29	lasso includes hidden nodes
+K32	KILLED	V07	V07	spatial navigation without the half-plane tier
+K33	KILLED	V07	V07	spatial tie to the highest index
+K34	KILLED	V08	V08	spatial cone open at 45 degrees
+K35	KILLED	V03	V03	up and down swapped
+K36	KILLED	V09	V09	spatial from an edge uses its source
+K37	KILLED	V11	V11	incident +1 picks the last edge
+K38	KILLED	V12	V12	incident navigation includes hidden edges
+K39	KILLED	V13	V13	a self-loop counted twice
+K40	KILLED	V14	V14	incident wraps without the option
+K41	KILLED	V14w	V14w	wrap without nav-wrapped event
+K42	KILLED	V10	V10	no focus: left/up focus the first element
+K43	KILLED	V06	V06	extend emits select before focus
+K44	KILLED	V20	V20	select-all includes hidden elements
+K45	KILLED	C02	C02	tab stop on the first item
+K46	KILLED	C02	C02	selected flag taken from focus
+K47	KILLED	C07	C07	window start off by one
+K48	KILLED	C08	C08	focused and tab-stop items missing outside the window
+K49	KILLED	C10	C10	live text not capped
+K50	KILLED	C11	C11	live cap 399 instead of 400
+K51	KILLED	C09	C09	duplicate announcements not collapsed
+K52	KILLED	C01	C01	edge description omitted
+K53	KILLED	C01	C01	node name is the label only
+K54	KILLED	C01	C01	position 0-based
+K55	KILLED	P03	P03	plan re-emits unchanged attributes
+K56	KILLED	P04,P08	P04,P08	plan appends new items instead of inserting by position
+K57	KILLED	G13	G13	gate does not see a bound Tab
+K58	KILLED	G12	G12	gate does not count tab stops
+K59	KILLED	G14	G14	gate does not require a forward step binding
+K60	KILLED	G17	G17	gate ignores the backend focus marker
+K61	KILLED	G29	G29	gate does not require edge descriptions
+K62	KILLED	G27	G27	an informational finding fails the gate
+K63	KILLED	X04	X04	PNG chunk CRC over the data only
+K64	KILLED	X04	X04	tEXt keyword without its NUL separator
+K65	KILLED	X04	X04	binding chunk placed before IEND instead of after IHDR
+K66	KILLED	X07	X07	a second binding chunk is added
+K67	KILLED	X06	X06	PNG signature not checked
+K68	KILLED	X02	X02	manifest artifacts in insertion order
+K69	KILLED	X01	X01	manifest carries an extra key
+K70	KILLED	X09	X09	bundle verification skips the layout binding
+K71	KILLED	X02	X02	SVG export without the XML declaration
+K72	KILLED	I40	I40	punctuation tokens compared with the shift bit
+K73	KILLED	L06	L06	marquee mode does not fall back to the normal table
+K74	KILLED	V16	V16	step ignores the wrap option
+K75	KILLED	B01	B01	uppercase letters not lowercased
+K76	KILLED	E07	E07	event field with a fraction accepted by rounding
+K77	KILLED	E21	E21	time going backwards accepted
+K78	KILLED	E16	E16	key not checked against the token grammar
+K79	KILLED	E05	E05	extra event key accepted
+K80	KILLED	B05	B05	punctuation tokens compared with the shift bit in the duplicate check
+K81	KILLED	B13	B13	`Tab` forbidden only in the normal mode
+K82	KILLED	M01	M01	composed manifest does not flip `a11y.companion-dom`
+K83	KILLED	M01	M01	composed manifest also flips `a11y.native-dom`
+K84	not-applicable	C16,I51		TypeScript-only: element lookup through a plain object keyed by graph strings (`__proto__`, `constructor`); not verifiable in the Python reference
+K85	KILLED	I42	I42	a double click on an element does nothing
+K86	KILLED	V25	V25	spatial key without the secondary term `(p^2 + s^2, index)`
+K87	KILLED	V24	V24	spatial key lexicographic `(p, s, index)`
+K88	KILLED	V26	V26	spatial key Manhattan `(p + s, s, index)`
+K89	KILLED	V25	V25	spatial tie to the larger secondary
+K90	KILLED	V30	V30	reveal margin 0 instead of 24
+K91	KILLED	V30	V30	reveal pan sign flipped
+K92	KILLED	V33	V33	reveal not applied to `focus-step`
+K93	KILLED	V32	V32	reveal applied although `reveal` is false
+K94	KILLED	I43	I43	a wheel event with `dy = 0` resets the accumulator
+K95	KILLED	I56	I56	a move after a fired long press pans
+K96	KILLED	I54	I54	no `lasso-end` on `pointercancel`
+K97	KILLED	I57	I57	`wake_at` kept after the pointer moved
+K98	KILLED	I22	I22	a non-primary `pointerdown` is `handled`
+K99	KILLED	C19	C19	focus announcements kept when DOM focus is inside
+K100	KILLED	P09	P09	equal non-empty live text not rewritten
+K101	KILLED	P01,P08	P01,P08	description elements appended to the listbox
+K102	KILLED	G35	G35	gate does not compare the window
+K103	KILLED	G33	G33	gate does not compare `selected`
+K104	KILLED	G31	G31	gate accepts a single tab stop on the wrong item
+K105	KILLED	G30	G30	gate ignores an off-screen focus
+K106	KILLED	G40	G40	gate ignores the page tab-stop count
+K107	KILLED	G41	G41	gate accepts a step binding with any modifier
+K108	KILLED	G38	G38	gate ignores the SVG tab stop
+K109	KILLED	X02	X02	manifest without `svg_format`
+K110	KILLED	X17	X17	PNG size not checked
+K111	KILLED	X24	X24	manifest size not bounded
+K112	KILLED	X25	X25	manifest depth not bounded
+K113	KILLED	X22	X22	non-canonical manifest bytes accepted
+K114	KILLED	X20	X20	a listed artifact missing from the files is accepted
+K115	KILLED	X21	X21	an unlisted extra file is accepted
+K116	KILLED	X18	X18	artifact SHA-256 not compared
+K117	KILLED	X19	X19	artifact length not compared
+K118	KILLED	X14	X14	state hash not compared
+K119	KILLED	X23	X23	PNG container check does not require `IHDR` first
+K120	KILLED	X16	X16	PNG binding chunk not compared
+K121	KILLED	C17	C17	adjacent duplicates judged before omitting events without text
+K122	KILLED	V37,V38	V37,V38	reveal ignores the left and top branches
+K123	KILLED	V39	V39	an edge target reveals toward its source centre
+K124	KILLED	V40	V40	reveal margin not clamped for a tiny viewport
+K125	KILLED	G42,G43	G42,G43	gate flags only right and bottom off-screen focus
+K126	KILLED	I52,V36	I52,V36	lasso and select-all count boundary exclusive
+K127	KILLED	X26	X26	`svg_format` not checked
+K128	KILLED	G44	G44	gate does not compare the tree mode with the machine mode

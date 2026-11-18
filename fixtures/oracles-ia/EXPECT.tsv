@@ -1,0 +1,411 @@
+id	group	tier	scene	layout	input	expected	error
+E01	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000}}		
+E02	E	core			{"event":{}}		INVALID_EVENT/SCHEMA
+E03	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":5,"x":100000,"y":200000}}		INVALID_EVENT/UNKNOWN_TYPE
+E04	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerzoom","x":100000,"y":200000}}		INVALID_EVENT/UNKNOWN_TYPE
+E05	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000,"z":1}}		INVALID_EVENT/SCHEMA
+E06	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","y":200000}}		INVALID_EVENT/SCHEMA
+E07	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":1.5,"y":200000}}		INVALID_EVENT/NOT_INTEGER
+E08	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":"5","y":200000}}		INVALID_EVENT/SCHEMA
+E09	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":true,"y":200000}}		INVALID_EVENT/SCHEMA
+E10	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":549755813889,"y":200000}}		INVALID_EVENT/OUT_OF_RANGE
+E11	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":-1,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/OUT_OF_RANGE
+E12	E	core			{"event":{"button":0,"id":1,"mods":16,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/OUT_OF_RANGE
+E13	E	core			{"event":{"button":3,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/INVALID_VALUE
+E14	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"stylus","t":5,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/INVALID_VALUE
+E15	E	core			{"event":{"button":0,"id":-1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/OUT_OF_RANGE
+E16	E	core			{"event":{"key":"Tab2","mods":0,"t":5,"type":"key"}}		INVALID_EVENT/UNKNOWN_KEY
+E17	E	core			{"event":{"key":5,"mods":0,"t":5,"type":"key"}}		INVALID_EVENT/SCHEMA
+E18	E	core			{"event":{"dy":1000,"mods":0,"t":5,"type":"wheel","unit":3,"x":0,"y":0}}		INVALID_EVENT/INVALID_VALUE
+E19	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"target":{},"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/SCHEMA
+E20	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"target":{"node":5},"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/SCHEMA
+E21	E	core			{"event":{"t":9,"type":"tick"},"last_t":10}		INVALID_EVENT/NON_MONOTONIC_TIME
+E22	E	core			{"event":[]}		INVALID_EVENT/SCHEMA
+E23	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":"NaN","y":200000}}		INVALID_EVENT/NOT_FINITE
+E24	E	core			{"event":{"t":10,"type":"tick"},"last_t":10}		
+E25	E	core			{"event":{"id":1,"mods":0,"t":5,"type":"pointermove","x":1000,"y":2000}}		
+E26	E	core			{"event":{"id":1,"mods":0,"t":5,"type":"pointerup","x":1000,"y":2000}}		
+E27	E	core			{"event":{"id":1,"t":5,"type":"pointercancel"}}		
+E28	E	core			{"event":{"dy":-100000,"mods":0,"t":5,"type":"wheel","unit":0,"x":450000,"y":300000}}		
+E29	E	core			{"event":{"key":"ArrowRight","mods":0,"t":5,"type":"key"}}		
+E30	E	core			{"event":{"t":5,"type":"tick"}}		
+E31	E	core			{"event":{"mods":0,"t":5,"target":{"node":{"id":"s:a","type":"p"}},"type":"contextmenu","x":182000,"y":32000}}		
+E32	E	core			{"event":{"mods":0,"t":5,"type":"dblclick","x":182000,"y":32000}}		
+E33	E	core			{"event":{"id":1,"t":5,"type":"pointercancel","x":0}}		INVALID_EVENT/SCHEMA
+E34	E	core			{"event":{"t":5,"type":"dblclick","x":1,"y":2}}		INVALID_EVENT/SCHEMA
+E35	E	core			{"event":{"button":1.5,"id":1,"mods":0,"ptype":"mouse","t":5,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/NOT_INTEGER
+E36	E	core			{"event":{"dy":1000,"mods":0,"t":5,"type":"wheel","unit":"NaN","x":0,"y":0}}		INVALID_EVENT/NOT_FINITE
+E37	E	core			{"event":{"button":0,"id":1,"mods":0,"ptype":"mouse","t":4503599627370497,"type":"pointerdown","x":100000,"y":200000}}		INVALID_EVENT/OUT_OF_RANGE
+E38	E	core			{"event":{"mods":0,"t":5,"type":"pointermove","x":1,"y":2}}		INVALID_EVENT/SCHEMA
+E39	E	core			{"event":{"mods":0,"t":5,"target":{"edge":{},"node":{}},"type":"contextmenu","x":1,"y":2}}		INVALID_EVENT/SCHEMA
+E40	E	core			{"config":{"zz":1}}		INVALID_CONFIG/SCHEMA
+E41	E	core			{"config":{"wrap":"yes"}}		INVALID_CONFIG/SCHEMA
+E42	E	core			{"config":{"maxTargets":1.5}}		INVALID_CONFIG/NOT_INTEGER
+E43	E	core			{"config":{"maxTargets":-1}}		INVALID_CONFIG/OUT_OF_RANGE
+E44	E	core			{"config":{"maxTargets":3,"reveal":false,"wrap":true}}		
+E50	E	core			{"command":{}}		INVALID_COMMAND/SCHEMA
+E51	E	core			{"command":{"type":"nav-jump"}}		INVALID_COMMAND/UNKNOWN_TYPE
+E52	E	core			{"command":{"dir":"north","type":"nav-spatial"}}		INVALID_COMMAND/INVALID_VALUE
+E53	E	core			{"command":{"delta":1,"type":"nav-step","z":1}}		INVALID_COMMAND/SCHEMA
+E54	E	core			{"command":{"delta":2,"type":"nav-step"}}		INVALID_COMMAND/INVALID_VALUE
+E55	E	core			{"command":{"dir":"left","extend":1,"type":"nav-spatial"}}		INVALID_COMMAND/SCHEMA
+E56	E	core			{"command":{"delta":1,"type":"nav-step"}}		
+E60	E	core			{"machine":"inputs/E60.machine.json"}		
+E61	E	core			{"machine":"inputs/E61.machine.json"}		INVALID_MACHINE/SCHEMA
+E62	E	core			{"machine":"inputs/E62.machine.json"}		INVALID_MACHINE/SCHEMA
+E63	E	core			{"machine":"inputs/E63.machine.json"}		INVALID_MACHINE/SCHEMA
+E70	E	core	scenes/G9.scene.json	layouts/G9.layout.json	{"rect":{"x0":1.5,"x1":10,"y0":0,"y1":10}}		INVALID_INPUT/NOT_INTEGER
+E71	E	core	scenes/G9.scene.json	layouts/G9.layout.json	{"rect":{"x0":0,"x1":10,"y0":0}}		INVALID_INPUT/SCHEMA
+E72	E	core	scenes/G9.scene.json	layouts/G9.layout.json	{"rect":{"x0":549755813889,"x1":10,"y0":0,"y1":10}}		INVALID_INPUT/OUT_OF_RANGE
+E73	E	core	scenes/G9.scene.json	layouts/G9.layout.json	{"rect":{"x0":0,"x1":549755813888,"y0":0,"y1":10}}		
+I01	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I01.script.json	transcripts/I01.result.json	
+I02	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I02.script.json	transcripts/I02.result.json	
+I03	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I03.script.json	transcripts/I03.result.json	
+I03b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I03b.script.json	transcripts/I03b.result.json	
+I04	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I04.script.json	transcripts/I04.result.json	
+I04b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I04b.script.json	transcripts/I04b.result.json	
+I05	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I05.script.json	transcripts/I05.result.json	
+I06	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I06.script.json	transcripts/I06.result.json	
+I06b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I06b.script.json	transcripts/I06b.result.json	
+I07	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I07.script.json	transcripts/I07.result.json	
+I07b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I07b.script.json	transcripts/I07b.result.json	
+I08	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I08.script.json	transcripts/I08.result.json	
+I09	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I09.script.json	transcripts/I09.result.json	
+I10	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I10.script.json	transcripts/I10.result.json	
+I11	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I11.script.json	transcripts/I11.result.json	
+I12	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I12.script.json	transcripts/I12.result.json	
+I13	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I13.script.json	transcripts/I13.result.json	
+I14	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I14.script.json	transcripts/I14.result.json	
+I14b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I14b.script.json	transcripts/I14b.result.json	
+I15	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I15.script.json	transcripts/I15.result.json	
+I16	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I16.script.json	transcripts/I16.result.json	
+I17	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I17.script.json	transcripts/I17.result.json	
+I18	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I18.script.json	transcripts/I18.result.json	
+I20	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I20.script.json	transcripts/I20.result.json	
+I21	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I21.script.json	transcripts/I21.result.json	
+I22	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I22.script.json	transcripts/I22.result.json	
+I23	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I23.script.json	transcripts/I23.result.json	
+I23b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I23b.script.json	transcripts/I23b.result.json	
+I24	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I24.script.json	transcripts/I24.result.json	
+I24b	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I24b.script.json	transcripts/I24b.result.json	
+I25	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I25.script.json	transcripts/I25.result.json	
+I26	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I26.script.json	transcripts/I26.result.json	
+I27	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I27.script.json	transcripts/I27.result.json	
+I28	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I28.script.json	transcripts/I28.result.json	
+I29	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I29.script.json	transcripts/I29.result.json	
+I30	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I30.script.json	transcripts/I30.result.json	
+I40	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I40.script.json	transcripts/I40.result.json	
+I41	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I41.script.json	transcripts/I41.result.json	
+I42	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I42.script.json	transcripts/I42.result.json	
+I43	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I43.script.json	transcripts/I43.result.json	
+I50	I	core	scenes/O1.scene.json	layouts/O1.layout.json	scripts/I50.script.json	transcripts/I50.result.json	
+I51	I	core	scenes/PROTO.scene.json	layouts/PROTO.layout.json	scripts/I51.script.json	transcripts/I51.result.json	
+I52	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I52.script.json	transcripts/I52.result.json	
+I53	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I53.script.json	transcripts/I53.result.json	
+I54	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I54.script.json	transcripts/I54.result.json	
+I55	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I55.script.json	transcripts/I55.result.json	
+I56	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I56.script.json	transcripts/I56.result.json	
+I57	I	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/I57.script.json	transcripts/I57.result.json	
+V01	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V01.script.json	transcripts/V01.result.json	
+V02	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V02.script.json	transcripts/V02.result.json	
+V03	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V03.script.json	transcripts/V03.result.json	
+V04	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V04.script.json	transcripts/V04.result.json	
+V05	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V05.script.json	transcripts/V05.result.json	
+V06	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V06.script.json	transcripts/V06.result.json	
+V07	V	core	scenes/T4.scene.json	layouts/T4.layout.json	scripts/V07.script.json	transcripts/V07.result.json	
+V08	V	core	scenes/T5.scene.json	layouts/T5.layout.json	scripts/V08.script.json	transcripts/V08.result.json	
+V09	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V09.script.json	transcripts/V09.result.json	
+V10	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V10.script.json	transcripts/V10.result.json	
+V11	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V11.script.json	transcripts/V11.result.json	
+V12	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V12.script.json	transcripts/V12.result.json	
+V13	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V13.script.json	transcripts/V13.result.json	
+V14	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V14.script.json	transcripts/V14.result.json	
+V14w	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V14w.script.json	transcripts/V14w.result.json	
+V15	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V15.script.json	transcripts/V15.result.json	
+V15b	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V15b.script.json	transcripts/V15b.result.json	
+V16	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V16.script.json	transcripts/V16.result.json	
+V16n	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V16n.script.json	transcripts/V16n.result.json	
+V17	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V17.script.json	transcripts/V17.result.json	
+V18	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V18.script.json	transcripts/V18.result.json	
+V18b	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V18b.script.json	transcripts/V18b.result.json	
+V19	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V19.script.json	transcripts/V19.result.json	
+V20	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V20.script.json	transcripts/V20.result.json	
+V21	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V21.script.json	transcripts/V21.result.json	
+V22	V	core	scenes/O1.scene.json	layouts/O1.layout.json	scripts/V22.script.json	transcripts/V22.result.json	
+V23	V	core	scenes/PROTO.scene.json	layouts/PROTO.layout.json	scripts/V23.script.json	transcripts/V23.result.json	
+V24	V	core	scenes/S1.scene.json	layouts/S1.layout.json	scripts/V24.script.json	transcripts/V24.result.json	
+V25	V	core	scenes/S2.scene.json	layouts/S2.layout.json	scripts/V25.script.json	transcripts/V25.result.json	
+V26	V	core	scenes/S3.scene.json	layouts/S3.layout.json	scripts/V26.script.json	transcripts/V26.result.json	
+V30	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V30.script.json	transcripts/V30.result.json	
+V31	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V31.script.json	transcripts/V31.result.json	
+V32	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V32.script.json	transcripts/V32.result.json	
+V33	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V33.script.json	transcripts/V33.result.json	
+V35	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V35.script.json	transcripts/V35.result.json	
+V36	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V36.script.json	transcripts/V36.result.json	
+V37	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V37.script.json	transcripts/V37.result.json	
+V38	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V38.script.json	transcripts/V38.result.json	
+V39	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V39.script.json	transcripts/V39.result.json	
+V40	V	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/V40.script.json	transcripts/V40.result.json	
+L01	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L01.script.json	transcripts/L01.result.json	
+L02	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L02.script.json	transcripts/L02.result.json	
+L03	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L03.script.json	transcripts/L03.result.json	
+L04	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L04.script.json	transcripts/L04.result.json	
+L04b	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L04b.script.json	transcripts/L04b.result.json	
+L05	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L05.script.json	transcripts/L05.result.json	
+L06	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L06.script.json	transcripts/L06.result.json	
+L07	L	core	scenes/G9.scene.json	layouts/G9.layout.json	scripts/L07.script.json	transcripts/L07.result.json	
+B01	B	core			inputs/B01.keys.json	json/B01.tokens.json	
+B02	B	core			inputs/B02.bindings.json		
+B03	B	core			inputs/B03.bindings.json		INVALID_BINDINGS/TAB_BOUND
+B04	B	core			inputs/B04.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B05	B	core			inputs/B05.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B06	B	core			inputs/B06.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B07	B	core			inputs/B07.bindings.json		INVALID_BINDINGS/NO_ESCAPE_EXIT
+B08	B	core			inputs/B08.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B09	B	core			inputs/B09.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B10	B	core			inputs/B10.bindings.json		INVALID_BINDINGS/SCHEMA
+B11	B	core			inputs/B11.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B12	B	core				json/B12.bindings.json	
+B13	B	core			inputs/B13.bindings.json		INVALID_BINDINGS/TAB_BOUND
+C01	C	core	scenes/O1.scene.json	layouts/O1.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	trees/C01.tree.json	
+C02	C	core	scenes/O1.scene.json	layouts/O1.layout.json	{"size":{"height":600,"width":900},"state":"states/c02.state.json"}	trees/C02.tree.json	
+C03	C	core	scenes/G9.scene.json	layouts/G9.layout.json	{"events":[{"selection":[{"address":{"id":"s:a","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"}],"type":"selection-changed"},{"focus":{"address":{"id":"s:e","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"},"type":"focus-changed"}],"size":{"height":600,"width":900},"state":"states/c03.state.json"}	trees/C03.tree.json	
+C04	C	core	scenes/G9.scene.json	layouts/G9.layout.json	{"size":{"height":600,"width":900},"state":"states/c04.state.json"}	trees/C04.tree.json	
+C05	C	core	scenes/W520.scene.json	layouts/W520.layout.json	{"size":{"height":600,"width":900},"state":"states/w300.state.json"}	trees/C05.tree.json	
+C06	C	core	scenes/W520.scene.json	layouts/W520.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	trees/C06.tree.json	
+C07	C	core	scenes/W520.scene.json	layouts/W520.layout.json	{"size":{"height":600,"width":900},"state":"states/w510.state.json"}	trees/C07.tree.json	
+C08	C	core	scenes/W520.scene.json	layouts/W520.layout.json	{"options":{"window":{"count":5,"first":10}},"size":{"height":600,"width":900},"state":"states/w300.state.json"}	trees/C08.tree.json	
+C09	C	core	scenes/G9.scene.json	layouts/G9.layout.json	{"events":[{"selection":[{"address":{"id":"s:a","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"}],"type":"selection-changed"},{"selection":[{"address":{"id":"s:a","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"}],"type":"selection-changed"}],"size":{"height":600,"width":900},"state":"states/c03.state.json"}	trees/C09.tree.json	
+C10	C	core	scenes/H1.scene.json	layouts/H1.layout.json	{"events":[{"focus":{"address":{"id":"s:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"},"type":"focus-changed"}],"size":{"height":600,"width":900},"state":"states/h1f.state.json"}	trees/C10.tree.json	
+C11	C	core	scenes/H2.scene.json	layouts/H2.layout.json	{"events":[{"focus":{"address":{"id":"s:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"},"type":"focus-changed"}],"size":{"height":600,"width":900},"state":"states/h2f.state.json"}	trees/C11.tree.json	
+C12	C	core	scenes/EMPTY.scene.json	layouts/EMPTY.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	trees/C12.tree.json	
+C13	C	core	scenes/HOST.scene.json	layouts/HOST.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	trees/C13.tree.json	
+C14	C	core	scenes/O1.scene.json	layouts/O1.layout.json	{"options":{"idPrefix":"my-c"},"size":{"height":600,"width":900},"state":"initial"}	trees/C14.tree.json	
+C15	C	core	scenes/W520.scene.json	layouts/W520.layout.json	{"options":{"window":"all"},"size":{"height":600,"width":900},"state":"initial"}	trees/C15.tree.json	
+C16	C	core	scenes/PROTO.scene.json	layouts/PROTO.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	trees/C16.tree.json	
+C17	C	core	scenes/O1.scene.json	layouts/O1.layout.json	{"events":[{"selection":[{"address":{"id":"i:1","type":"person"},"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"}],"type":"selection-changed"},{"type":"viewport-changed","viewport":{"center_x":383554,"center_y":134563,"height":600,"width":900,"zoom":1994}},{"selection":[{"address":{"id":"i:1","type":"person"},"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"}],"type":"selection-changed"}],"size":{"height":600,"width":900},"state":"states/o1_sel_i1.state.json"}	trees/C17.tree.json	
+C18	C	core	scenes/O1.scene.json	layouts/O1.layout.json	{"options":{"mode":"marquee"},"size":{"height":600,"width":900},"state":"initial"}	trees/C18.tree.json	
+C19	C	core	scenes/G9.scene.json	layouts/G9.layout.json	{"events":[{"focus":{"address":{"id":"s:e","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"},"type":"focus-changed"},{"selection":[{"address":{"id":"s:a","type":"p"},"artifact_sha256":"0000000000000000000000000000000000000000000000000000000000000000"}],"type":"selection-changed"}],"options":{"omitFocusAnnouncement":true},"size":{"height":600,"width":900},"state":"states/c03.state.json"}	trees/C19.tree.json	
+C20	C	core	scenes/G9.scene.json	layouts/G9.layout.json	{"events":[{"type":"marquee-started"},{"reason":"NOT_A_NODE","type":"nav-none"},{"count":8,"type":"lasso-too-large"},{"dir":"right","nav":"spatial","type":"nav-boundary"}],"size":{"height":600,"width":900},"state":"states/c03.state.json"}	trees/C20.tree.json	
+P01	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/C01.tree.json","prev":null}	plans/P01.plan.txt	
+P02	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/P02.next.tree.json","prev":"trees/C01.tree.json"}	plans/P02.plan.txt	
+P03	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/C01.tree.json","prev":"trees/C01.tree.json"}	plans/P03.plan.txt	
+P04	P	core	scenes/W520.scene.json	layouts/W520.layout.json	{"next":"trees/P04.next.tree.json","prev":"trees/C05.tree.json"}	plans/P04.plan.txt	
+P05	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/P05.next.tree.json","prev":"trees/C01.tree.json"}	plans/P05.plan.txt	
+P06	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/P06.next.tree.json","prev":"trees/C01.tree.json"}	plans/P06.plan.txt	
+P07	P	core	scenes/G9.scene.json	layouts/G9.layout.json	{"next":"trees/C04.tree.json","prev":"trees/P07.prev.tree.json"}	plans/P07.plan.txt	
+P08	P	core	scenes/G9.scene.json	layouts/G9.layout.json	{"next":"trees/P07.prev.tree.json","prev":"trees/C04.tree.json"}	plans/P08.plan.txt	
+P09	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"next":"trees/P09.tree.json","prev":"trees/P09.tree.json"}	plans/P09.plan.txt	
+P10	P	core	scenes/O1.scene.json	layouts/O1.layout.json	{"maxPlanBytes":1000,"next":"trees/C01.tree.json","prev":null}		RESOURCE_LIMIT/BYTES_LIMIT
+P11	P	core	scenes/G9.scene.json	layouts/G9.layout.json	{"pairs":[{"next":"trees/P02.next.tree.json","pair":"P02","prev":"trees/C01.tree.json"},{"next":"trees/P04.next.tree.json","pair":"P04","prev":"trees/C05.tree.json"},{"next":"trees/C04.tree.json","pair":"P07","prev":"trees/P07.prev.tree.json"},{"next":"trees/P07.prev.tree.json","pair":"P08","prev":"trees/C04.tree.json"}]}	json/P11.invariant.json	
+Q01	Q	core	scenes/O1.scene.json	layouts/O1.layout.json	{"plans":["plans/P01.plan.txt"]}	logs/Q01.log.txt	
+Q02	Q	core	scenes/O1.scene.json	layouts/O1.layout.json	{"plans":["plans/P01.plan.txt","plans/P02.plan.txt"]}	logs/Q02.log.txt	
+Q03	Q	core	scenes/O1.scene.json	layouts/O1.layout.json	{"plans":["plans/P01.plan.txt","plans/P05.plan.txt"]}	logs/Q03.log.txt	
+Q04	Q	core	scenes/G9.scene.json	layouts/G9.layout.json	{"plans":["plans/Q04.pre.plan.txt","plans/P07.plan.txt"]}	logs/Q04.log.txt	
+G01	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G01.gate.json	
+G02	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","tabStops":1,"tree":"trees/G02.tree.json"}	gates/G02.gate.json	
+G10	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G10.tree.json"}	gates/G10.gate.json	
+G11	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","tabStops":1,"tree":"trees/G11.tree.json"}	gates/G11.gate.json	
+G12	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G12.tree.json"}	gates/G12.gate.json	
+G13	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"bindings":"inputs/G13.bindings.json","fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G13.gate.json	
+G14	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"bindings":"inputs/G14.bindings.json","fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G14.gate.json	
+G15	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"bindings":"inputs/G15.bindings.json","fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G15.gate.json	
+G16	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","tabStops":1,"tree":"trees/G16.tree.json"}	gates/G16.gate.json	
+G17	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:f","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","tabStops":1,"tree":"trees/G02.tree.json"}	gates/G17.gate.json	
+G18	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"full","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G18.gate.json	
+G19	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G19.tree.json"}	gates/G19.gate.json	
+G20	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G20.tree.json"}	gates/G20.gate.json	
+G21	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G21.tree.json"}	gates/G21.gate.json	
+G22	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G22.tree.json"}	gates/G22.gate.json	
+G23	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G23.tree.json"}	gates/G23.gate.json	
+G24	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G24.tree.json"}	gates/G24.gate.json	
+G26	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"composition":"svg-native","fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","svg":{"items":[{"name":"p a","tabindex":-1},{"name":"p b!","tabindex":-1},{"name":"p c","tabindex":-1},{"name":"p d","tabindex":-1},{"name":"p e","tabindex":0},{"name":"p f","tabindex":-1},{"name":"p g","tabindex":-1},{"name":"p h","tabindex":-1},{"name":"p i","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1}],"root":{"desc":"0 selected, 0 hidden. Focus: p e.","title":"Directed graph with 9 nodes and 9 edges. Node categories: p (9)."}},"tabStops":1}	gates/G26.gate.json	
+G27	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"state":"initial","tree":"trees/C01.tree.json"}	gates/G27.gate.json	
+G28	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G28.tree.json"}	gates/G28.gate.json	
+G29	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G29.tree.json"}	gates/G29.gate.json	
+G30	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g30_s.state.json","tabStops":1,"tree":"trees/G02.tree.json"}	gates/G30.gate.json	
+G31	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G31.tree.json"}	gates/G31.gate.json	
+G32	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"composition":"svg-native","fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","svg":{"items":[{"name":"p a","tabindex":-1},{"name":"p b","tabindex":-1},{"name":"p c","tabindex":-1},{"name":"p d","tabindex":-1},{"name":"p e","tabindex":0},{"name":"p f","tabindex":-1},{"name":"p g","tabindex":-1},{"name":"p h","tabindex":-1},{"name":"p i","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1}],"root":{"desc":"0 selected, 0 hidden. Focus: p e.","title":"Directed graph with 9 nodes and 9 edges. Node categories: p (9)."}},"tabStops":1}	gates/G32.gate.json	
+G33	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G33.tree.json"}	gates/G33.gate.json	
+G34	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G34.tree.json"}	gates/G34.gate.json	
+G35	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G35.tree.json"}	gates/G35.gate.json	
+G36	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G36.tree.json"}	gates/G36.gate.json	
+G37	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/G37.tree.json"}	gates/G37.gate.json	
+G38	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"composition":"svg-native","fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","svg":{"items":[{"name":"p a","tabindex":-1},{"name":"p b","tabindex":-1},{"name":"p c","tabindex":-1},{"name":"p d","tabindex":0},{"name":"p e","tabindex":-1},{"name":"p f","tabindex":-1},{"name":"p g","tabindex":-1},{"name":"p h","tabindex":-1},{"name":"p i","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1}],"root":{"desc":"0 selected, 0 hidden. Focus: p e.","title":"Directed graph with 9 nodes and 9 edges. Node categories: p (9)."}},"tabStops":1}	gates/G38.gate.json	
+G39	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"composition":"svg-native","fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","svg":{"items":[{"name":"p a","tabindex":-1},{"name":"p b","tabindex":-1},{"name":"p c","tabindex":-1},{"name":"p d","tabindex":-1},{"name":"p e","tabindex":0},{"name":"p f","tabindex":-1},{"name":"p g","tabindex":-1},{"name":"p h","tabindex":-1},{"name":"p i","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1},{"name":"R","tabindex":-1}],"root":{"desc":"0 selected, 0 hidden. Focus: p e.","title":"Directed graph"}},"tabStops":1}	gates/G39.gate.json	
+G40	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g_e.state.json","tabStops":2,"tree":"trees/G02.tree.json"}	gates/G40.gate.json	
+G41	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"bindings":"inputs/G41.bindings.json","fidelity":"none","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G41.gate.json	
+G42	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g42_s.state.json","tabStops":1,"tree":"trees/G02.tree.json"}	gates/G42.gate.json	
+G43	G	core	scenes/G9.scene.json	layouts/G9.layout.json	{"fidelity":"none","readout":{"focus":{"node":{"id":"s:e","type":"p"}}},"reducedMotion":true,"state":"states/g43_s.state.json","tabStops":1,"tree":"trees/G02.tree.json"}	gates/G43.gate.json	
+G44	G	core	scenes/O1.scene.json	layouts/O1.layout.json	{"fidelity":"none","mode":"marquee","reducedMotion":true,"state":"initial","tree":"trees/C01.tree.json"}	gates/G44.gate.json	
+X01	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":[],"op":"export"}	json/X01.manifest.json	
+X02	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg"],"op":"export"}	json/X02.manifest.json	
+X03	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg","png"],"op":"export"}	json/X03.manifest.json	
+X04	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/fixture.png"}	png/X04.png	
+X05	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X04.png"}	json/X05.binding.json	
+X06	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X06.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X07	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X04.png"}		INVALID_EXPORT/PNG_ALREADY_BOUND
+X09	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.alt.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X09.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X10	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X10.manifest.json","op":"verify"}		
+X11	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X11.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X12	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X12.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X13	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X13.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X14	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/X14.state.json"},"manifest":"manifests/X14.manifest.json","op":"verify"}		INVALID_EXPORT/STATE_MISMATCH
+X15	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/X15.svg"},"manifest":"manifests/X15.manifest.json","op":"verify"}		INVALID_EXPORT/SVG_NOT_REPRODUCIBLE
+X16	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/fixture.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X16.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X17	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":2,"width":2},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X18	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/X18.state.json"},"manifest":"manifests/X18.manifest.json","op":"verify"}		INVALID_EXPORT/ARTIFACT_MISMATCH
+X19	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json"},"manifest":"manifests/X19.manifest.json","op":"verify"}		INVALID_EXPORT/ARTIFACT_MISMATCH
+X20	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X20.manifest.json","op":"verify"}		INVALID_EXPORT/ARTIFACT_MISMATCH
+X21	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X21.manifest.json","op":"verify"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X22	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X22.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X23	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X23.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X23.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X24	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{},"manifest":"generated/X24.manifest.bin","op":"verify"}		RESOURCE_LIMIT/BYTES_LIMIT
+X25	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{},"manifest":"manifests/X25.manifest.json","op":"verify"}		INVALID_EXPORT/SCHEMA
+X26	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X26.manifest.json","op":"verify"}		INVALID_EXPORT/UNKNOWN_FORMAT
+M01	M	core			{"base":"manifests/base-dom.manifest.json","flags":{"companion":true,"input":true,"keyboard-nav":true,"lasso":true}}	manifests/M01.manifest.json	
+M02	M	core			{"base":"manifests/base-dom.manifest.json","flags":{}}	manifests/M02.manifest.json	
+M03	M	core			{"base":"manifests/base-dom.manifest.json","flags":{"export-png":true,"export-svg":true,"headless":true}}	manifests/M03.manifest.json	
+M04	M	core			{"base":"manifests/base-dom.manifest.json","flags":{"input":"yes"}}		INVALID_CONFIG/SCHEMA
+M05	M	core			{"base":"manifests/base-headless.manifest.json","flags":{"companion":true}}		INVALID_CONFIG/INVALID_VALUE
+H01	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["state"]}	headless/H01.bin	
+H02	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["svg"]}	headless/H02.bin	
+H03	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["display-list"]}	headless/H03.bin	
+H04	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["tree"]}	headless/H04.bin	
+H05	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"intents":[{"mode":"replace","targets":[{"node":{"id":"i:1"}}],"type":"select"}],"outputs":["state"]}		INVALID_INTENT/UNRESOLVED_ELEMENT
+H06	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["state","state"]}		INVALID_INPUT/SCHEMA
+H07	H	core	scenes/O1.scene.json	layouts/O1.layout.json	{"outputs":["state"],"size":{"height":600,"width":800},"state":"states/O1.initial.state.json"}		INVALID_INPUT/INVALID_VALUE
+D01	D	diff					
+D02	D	diff					
+D03	D	diff					
+D04	D	diff					
+D05	D	diff					
+D06	D	diff					
+K01	K						
+K02	K						
+K03	K						
+K04	K						
+K05	K						
+K06	K						
+K07	K						
+K08	K						
+K09	K						
+K10	K						
+K11	K						
+K12	K						
+K13	K						
+K14	K						
+K15	K						
+K16	K						
+K17	K						
+K18	K						
+K19	K						
+K20	K						
+K21	K						
+K22	K						
+K23	K						
+K24	K						
+K25	K						
+K26	K						
+K27	K						
+K28	K						
+K29	K						
+K30	K						
+K31	K						
+K32	K						
+K33	K						
+K34	K						
+K35	K						
+K36	K						
+K37	K						
+K38	K						
+K39	K						
+K40	K						
+K41	K						
+K42	K						
+K43	K						
+K44	K						
+K45	K						
+K46	K						
+K47	K						
+K48	K						
+K49	K						
+K50	K						
+K51	K						
+K52	K						
+K53	K						
+K54	K						
+K55	K						
+K56	K						
+K57	K						
+K58	K						
+K59	K						
+K60	K						
+K61	K						
+K62	K						
+K63	K						
+K64	K						
+K65	K						
+K66	K						
+K67	K						
+K68	K						
+K69	K						
+K70	K						
+K71	K						
+K72	K						
+K73	K						
+K74	K						
+K75	K						
+K76	K						
+K77	K						
+K78	K						
+K79	K						
+K80	K						
+K81	K						
+K82	K						
+K83	K						
+K84	K						
+K85	K						
+K86	K						
+K87	K						
+K88	K						
+K89	K						
+K90	K						
+K91	K						
+K92	K						
+K93	K						
+K94	K						
+K95	K						
+K96	K						
+K97	K						
+K98	K						
+K99	K						
+K100	K						
+K101	K						
+K102	K						
+K103	K						
+K104	K						
+K105	K						
+K106	K						
+K107	K						
+K108	K						
+K109	K						
+K110	K						
+K111	K						
+K112	K						
+K113	K						
+K114	K						
+K115	K						
+K116	K						
+K117	K						
+K118	K						
+K119	K						
+K120	K						
+K121	K						
+K122	K						
+K123	K						
+K124	K						
+K125	K						
+K126	K						
+K127	K						
+K128	K						
