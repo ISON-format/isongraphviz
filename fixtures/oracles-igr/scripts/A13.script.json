@@ -1,0 +1,89 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:13",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:9",
+       "type": "person"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:17",
+        "type": "project"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/A13.s1.state.json",
+   "expected_events": "events/A13.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/A13.s2.state.json",
+   "expected_events": "events/A13.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/A13.s3.state.json",
+   "expected_events": "events/A13.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/A13.s4.state.json",
+   "expected_events": "events/A13.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus",
+    "target": {
+     "edge": {
+      "ord": "0",
+      "rel": "R2",
+      "src": {
+       "id": "i:17",
+       "type": "project"
+      },
+      "tgt": {
+       "id": "i:19",
+       "type": "company"
+      }
+     }
+    }
+   },
+   "expected_state": "states/A13.s5.state.json",
+   "expected_events": "events/A13.s5.events.json"
+  }
+ ]
+}

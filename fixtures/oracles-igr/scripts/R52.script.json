@@ -1,0 +1,310 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "limits": {
+  "maxSceneBytes": 504
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "error": "RESOURCE_LIMIT/TARGET_LIMIT"
+  }
+ ]
+}

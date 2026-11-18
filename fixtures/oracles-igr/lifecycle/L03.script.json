@@ -1,0 +1,73 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "render",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "hitTest",
+   "arg": {
+    "x": 1,
+    "y": 1
+   },
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "probe",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "export",
+   "arg": "scene",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L03.c8.state.json"
+  }
+ ],
+ "expect_recorded_events": "events/L03.recorded.events.json"
+}

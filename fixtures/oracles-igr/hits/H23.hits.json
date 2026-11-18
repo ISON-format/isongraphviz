@@ -1,0 +1,75 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/H23.state.json",
+ "points": [
+  {
+   "x": 400.5,
+   "y": 300,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 412.5,
+   "y": 300,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 412.501,
+   "y": 300
+  },
+  {
+   "x": 388.5,
+   "y": 300,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 388.499,
+   "y": 300,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 400.5,
+   "y": 312,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 400.5,
+   "y": 312.001
+  }
+ ]
+}

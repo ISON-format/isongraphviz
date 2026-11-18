@@ -1,0 +1,99 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "teleport"
+   },
+   "error": "INVALID_INTENT/UNKNOWN_TYPE"
+  },
+  {
+   "intent": {
+    "type": "clear-selection",
+    "x": 1
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": "NaN",
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/NOT_FINITE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 1.5,
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/INVALID_VALUE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": "10",
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 1
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": "Infinity",
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/NOT_FINITE"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 0
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000001
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ],
+    "extra": 1
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 2,
+    "dy": 2
+   },
+   "expected_state": "states/R34.s11.state.json",
+   "expected_events": "events/R34.s11.events.json"
+  }
+ ]
+}

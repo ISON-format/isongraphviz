@@ -1,0 +1,45 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "arg": {
+    "initial": "states/S11.state.json"
+   },
+   "await": true,
+   "expect": "INVALID_STATE/SCENE_MISMATCH"
+  },
+  {
+   "op": "loadScene",
+   "arg": {
+    "initial": "states/S02.state.json"
+   },
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L10.c3.state.json"
+  }
+ ],
+ "expect_recorded_events": "events/L10.recorded.events.json"
+}

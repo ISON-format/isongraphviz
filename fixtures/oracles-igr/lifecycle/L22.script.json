@@ -1,0 +1,60 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "arg": {
+    "over_capacity": "nodes"
+   },
+   "await": true,
+   "expect": "RESOURCE_LIMIT/NODE_LIMIT"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "loadScene",
+   "arg": {
+    "over_capacity": "edges"
+   },
+   "await": true,
+   "expect": "RESOURCE_LIMIT/EDGE_LIMIT"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L22.c6.state.json"
+  }
+ ],
+ "expect_recorded_events": "events/L22.recorded.events.json"
+}

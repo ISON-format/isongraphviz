@@ -1,0 +1,32 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "dispose",
+   "await": false,
+   "expect": "ok"
+  },
+  {
+   "op": "applySceneDelta",
+   "arg": {},
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  }
+ ],
+ "expect_recorded_events": "events/L25.recorded.events.json",
+ "expect_settle_order": [
+  0
+ ]
+}

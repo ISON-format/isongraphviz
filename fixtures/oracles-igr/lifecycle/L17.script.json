@@ -1,0 +1,97 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L17.c2.state.json"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "resize",
+    "width": 0,
+    "height": 600
+   },
+   "await": true,
+   "expect": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "resize",
+    "width": 900,
+    "height": 16385
+   },
+   "await": true,
+   "expect": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "resize",
+    "width": 100.5,
+    "height": 600
+   },
+   "await": true,
+   "expect": "INVALID_INTENT/INVALID_VALUE"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "resize",
+    "width": 640
+   },
+   "await": true,
+   "expect": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L17.c7.state.json"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "resize",
+    "width": 640,
+    "height": 480
+   },
+   "await": true,
+   "expect": "ok",
+   "expect_events": "events/L17.c8.events.json",
+   "expect_state": "states/L17.c8.state.json"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L17.c9.state.json"
+  }
+ ],
+ "expect_recorded_events": "events/L17.recorded.events.json"
+}

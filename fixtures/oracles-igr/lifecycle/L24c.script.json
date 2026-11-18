@@ -1,0 +1,34 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 16384
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "ok",
+   "expect_state": "states/L24c.c2.state.json"
+  }
+ ],
+ "expect_recorded_events": "events/L24c.recorded.events.json"
+}

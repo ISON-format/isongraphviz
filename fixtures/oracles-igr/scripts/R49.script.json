@@ -1,0 +1,36 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-hidden",
+    "hidden": true,
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R49.s1.state.json",
+   "expected_events": "events/R49.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus",
+    "target": {
+     "node": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   },
+   "error": "INVALID_INTENT/ELEMENT_HIDDEN"
+  }
+ ]
+}

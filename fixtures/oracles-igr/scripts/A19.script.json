@@ -1,0 +1,24 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/A19.s1.state.json",
+   "expected_events": "events/A19.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/A19.s2.state.json",
+   "expected_events": "events/A19.s2.events.json"
+  }
+ ]
+}

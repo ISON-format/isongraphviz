@@ -1,0 +1,23 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": 5
+      }
+     }
+    ]
+   },
+   "error": "INVALID_INTENT/UNRESOLVED_ELEMENT"
+  }
+ ]
+}

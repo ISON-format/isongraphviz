@@ -1,0 +1,73 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 9
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 100001
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 9007199254740992,
+    "center_y": 0,
+    "zoom": 1000
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": -9007199254740992,
+    "zoom": 1000
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 1000.5
+   },
+   "error": "INVALID_INTENT/INVALID_VALUE"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 9007199254740991,
+    "center_y": -9007199254740991,
+    "zoom": 10
+   },
+   "expected_state": "states/R30.s6.state.json",
+   "expected_events": "events/R30.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 100000
+   },
+   "expected_state": "states/R30.s7.state.json",
+   "expected_events": "events/R30.s7.events.json"
+  }
+ ]
+}

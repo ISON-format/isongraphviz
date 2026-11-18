@@ -1,0 +1,139 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "state": "initial",
+ "points": [
+  {
+   "x": 500,
+   "y": 308,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 500,
+   "y": 300
+  },
+  {
+   "x": 32.0,
+   "y": 193.5,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 250,
+   "y": 260
+  },
+  {
+   "x": 450,
+   "y": 303,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 500,
+   "y": 304
+  },
+  {
+   "x": 500,
+   "y": 313,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 500,
+   "y": 318.5,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 500,
+   "y": 319.5
+  },
+  {
+   "x": 868,
+   "y": 406,
+   "hit": {
+    "node": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 600,
+   "y": 337,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   }
+  },
+  {
+   "x": 600,
+   "y": 349
+  }
+ ]
+}

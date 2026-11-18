@@ -1,0 +1,78 @@
+{
+ "capabilities": {
+  "scene.load": {
+   "status": "supported"
+  },
+  "viewport": {
+   "status": "supported"
+  },
+  "hit-test": {
+   "status": "supported"
+  },
+  "selection": {
+   "status": "unsupported",
+   "reason": "NOT_IMPLEMENTED"
+  },
+  "focus": {
+   "status": "supported"
+  },
+  "visibility": {
+   "status": "supported"
+  },
+  "labels": {
+   "status": "supported"
+  },
+  "direction-cue": {
+   "status": "supported"
+  },
+  "indicators.non-color": {
+   "status": "supported"
+  },
+  "a11y.model": {
+   "status": "supported"
+  },
+  "state.report": {
+   "status": "supported"
+  },
+  "lifecycle": {
+   "status": "supported"
+  },
+  "labels.edge": {
+   "status": "supported"
+  },
+  "motion.animated": {
+   "status": "supported"
+  },
+  "export.scene": {
+   "status": "supported"
+  },
+  "export.svg": {
+   "status": "supported"
+  },
+  "export.png": {
+   "status": "supported"
+  },
+  "a11y.native-dom": {
+   "status": "unsupported",
+   "reason": "NOT_IMPLEMENTED"
+  },
+  "a11y.companion-dom": {
+   "status": "supported"
+  },
+  "scene.apply-delta": {
+   "status": "unsupported",
+   "reason": "RESERVED"
+  }
+ },
+ "capacity": {
+  "maxDrawnLabelUnits": 4096,
+  "maxEdges": 40000,
+  "maxNodes": 20000
+ },
+ "igr": "IGR/1",
+ "renderer": {
+  "host": "dom",
+  "name": "oracle-test",
+  "version": "0.0.0"
+ }
+}

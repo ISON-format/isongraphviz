@@ -1,0 +1,1 @@
+[{"selection":[{"address":{"id":"i:42","type":"t"},"artifact_sha256":"8f383ccddc6f17eb57a96c711523e4a8072d8e791b4a773ea0153e0d993d03e1"},{"address":{"ord":"0","rel":"‮x","src":{"id":"i:42","type":"t"},"tgt":{"id":"s:markup type","type":"<b>"}},"artifact_sha256":"8f383ccddc6f17eb57a96c711523e4a8072d8e791b4a773ea0153e0d993d03e1"}],"type":"selection-changed"}]

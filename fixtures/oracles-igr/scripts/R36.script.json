@@ -1,0 +1,54 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 10
+   },
+   "expected_state": "states/R36.s1.state.json",
+   "expected_events": "events/R36.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1049
+   },
+   "expected_state": "states/R36.s2.state.json",
+   "expected_events": "events/R36.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1050
+   },
+   "expected_state": "states/R36.s3.state.json",
+   "expected_events": "events/R36.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1049,
+    "anchor": {
+     "x": 5,
+     "y": 5
+    }
+   },
+   "expected_state": "states/R36.s4.state.json",
+   "expected_events": "events/R36.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1
+   },
+   "expected_state": "states/R36.s5.state.json",
+   "expected_events": "events/R36.s5.events.json"
+  }
+ ]
+}

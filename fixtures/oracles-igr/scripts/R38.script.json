@@ -1,0 +1,79 @@
+{
+ "size": {
+  "width": 1,
+  "height": 1
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R38.s1.state.json",
+   "expected_events": "events/R38.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 64,
+    "height": 64
+   },
+   "expected_state": "states/R38.s2.state.json",
+   "expected_events": "events/R38.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R38.s3.state.json",
+   "expected_events": "events/R38.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 65,
+    "height": 65
+   },
+   "expected_state": "states/R38.s4.state.json",
+   "expected_events": "events/R38.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R38.s5.state.json",
+   "expected_events": "events/R38.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 1,
+    "height": 1
+   },
+   "expected_state": "states/R38.s6.state.json",
+   "expected_events": "events/R38.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R38.s7.state.json",
+   "expected_events": "events/R38.s7.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 2,
+    "height": 3
+   },
+   "expected_state": "states/R38.s8.state.json",
+   "expected_events": "events/R38.s8.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R38.s9.state.json",
+   "expected_events": "events/R38.s9.events.json"
+  }
+ ]
+}

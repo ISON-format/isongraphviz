@@ -1,0 +1,88 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": 5.5
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/INVALID_VALUE"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": "5"
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/SCHEMA"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": -1
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/OUT_OF_RANGE"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodez": 5
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/SCHEMA"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": "NaN"
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/NOT_FINITE"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": 9007199254740992
+    }
+   },
+   "await": true,
+   "expect": "INVALID_INPUT/OUT_OF_RANGE"
+  },
+  {
+   "op": "initialize",
+   "arg": {
+    "limits": {
+     "maxNodes": 0
+    }
+   },
+   "await": true,
+   "expect": "ok"
+  }
+ ],
+ "expect_recorded_events": "events/L27.recorded.events.json"
+}

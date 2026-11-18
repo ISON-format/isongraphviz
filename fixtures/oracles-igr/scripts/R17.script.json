@@ -1,0 +1,38 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R17.s1.state.json",
+   "expected_events": "events/R17.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/R17.s2.state.json",
+   "expected_events": "events/R17.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-first"
+   },
+   "expected_state": "states/R17.s3.state.json",
+   "expected_events": "events/R17.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-last"
+   },
+   "expected_state": "states/R17.s4.state.json",
+   "expected_events": "events/R17.s4.events.json"
+  }
+ ]
+}

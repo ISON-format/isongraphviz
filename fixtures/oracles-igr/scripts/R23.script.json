@@ -1,0 +1,100 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 5,
+    "center_y": 6,
+    "zoom": 10
+   },
+   "expected_state": "states/R23.s1.state.json",
+   "expected_events": "events/R23.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 500
+   },
+   "expected_state": "states/R23.s2.state.json",
+   "expected_events": "events/R23.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 500,
+    "anchor": {
+     "x": 10,
+     "y": 10
+    }
+   },
+   "expected_state": "states/R23.s3.state.json",
+   "expected_events": "events/R23.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 5,
+    "center_y": 6,
+    "zoom": 100000
+   },
+   "expected_state": "states/R23.s4.state.json",
+   "expected_events": "events/R23.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 2000
+   },
+   "expected_state": "states/R23.s5.state.json",
+   "expected_events": "events/R23.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 2000,
+    "anchor": {
+     "x": 10,
+     "y": 10
+    }
+   },
+   "expected_state": "states/R23.s6.state.json",
+   "expected_events": "events/R23.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 32
+   },
+   "expected_state": "states/R23.s7.state.json",
+   "expected_events": "events/R23.s7.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000000,
+    "anchor": {
+     "x": 100,
+     "y": 50
+    }
+   },
+   "expected_state": "states/R23.s8.state.json",
+   "expected_events": "events/R23.s8.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1,
+    "anchor": {
+     "x": 100,
+     "y": 50
+    }
+   },
+   "expected_state": "states/R23.s9.state.json",
+   "expected_events": "events/R23.s9.events.json"
+  }
+ ]
+}

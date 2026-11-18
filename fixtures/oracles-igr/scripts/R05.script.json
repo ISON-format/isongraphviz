@@ -1,0 +1,80 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R05.s1.state.json",
+   "expected_events": "events/R05.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "toggle",
+    "targets": [
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R05.s2.state.json",
+   "expected_events": "events/R05.s2.events.json"
+  }
+ ]
+}

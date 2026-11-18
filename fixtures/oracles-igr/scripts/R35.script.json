@@ -1,0 +1,105 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R35.s1.state.json",
+   "expected_events": "events/R35.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R35.s2.state.json",
+   "expected_events": "events/R35.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R35.s3.state.json",
+   "expected_events": "events/R35.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R35.s4.state.json",
+   "expected_events": "events/R35.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R35.s5.state.json",
+   "expected_events": "events/R35.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "add",
+    "targets": [
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R35.s6.state.json",
+   "expected_events": "events/R35.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "set-hidden",
+    "hidden": true,
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R35.s7.state.json",
+   "expected_events": "events/R35.s7.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 5,
+    "dy": 5
+   },
+   "expected_state": "states/R35.s8.state.json",
+   "expected_events": "events/R35.s8.events.json"
+  }
+ ]
+}

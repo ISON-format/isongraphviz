@@ -1,0 +1,31 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "fit",
+    "padding": -1
+   },
+   "error": "INVALID_INTENT/INVALID_VALUE"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": -100000
+   },
+   "error": "INVALID_INTENT/INVALID_VALUE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 1,
+    "dy": 1
+   },
+   "expected_state": "states/R28.s3.state.json",
+   "expected_events": "events/R28.s3.events.json"
+  }
+ ]
+}

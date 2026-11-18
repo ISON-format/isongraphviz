@@ -1,0 +1,65 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 40,
+    "dy": -25
+   },
+   "expected_state": "states/R24.s1.state.json",
+   "expected_events": "events/R24.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 32
+   },
+   "expected_state": "states/R24.s2.state.json",
+   "expected_events": "events/R24.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 40,
+    "dy": -25
+   },
+   "expected_state": "states/R24.s3.state.json",
+   "expected_events": "events/R24.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R24.s4.state.json",
+   "expected_events": "events/R24.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 0
+   },
+   "expected_state": "states/R24.s5.state.json",
+   "expected_events": "events/R24.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 100
+   },
+   "expected_state": "states/R24.s6.state.json",
+   "expected_events": "events/R24.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 299
+   },
+   "expected_state": "states/R24.s7.state.json",
+   "expected_events": "events/R24.s7.events.json"
+  }
+ ]
+}

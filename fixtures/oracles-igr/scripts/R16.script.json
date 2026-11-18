@@ -1,0 +1,72 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-hidden",
+    "hidden": true,
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "p"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R16.s1.state.json",
+   "expected_events": "events/R16.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R16.s2.state.json",
+   "expected_events": "events/R16.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R16.s3.state.json",
+   "expected_events": "events/R16.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R16.s4.state.json",
+   "expected_events": "events/R16.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/R16.s5.state.json",
+   "expected_events": "events/R16.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/R16.s6.state.json",
+   "expected_events": "events/R16.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/R16.s7.state.json",
+   "expected_events": "events/R16.s7.events.json"
+  }
+ ]
+}

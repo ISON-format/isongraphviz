@@ -1,0 +1,33 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 7,
+    "center_y": 8,
+    "zoom": 3000
+   },
+   "expected_state": "states/R25.s1.state.json",
+   "expected_events": "events/R25.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R25.s2.state.json",
+   "expected_events": "events/R25.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 0
+   },
+   "expected_state": "states/R25.s3.state.json",
+   "expected_events": "events/R25.s3.events.json"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "set-hidden",
+    "targets": [],
+    "hidden": "true"
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "focus-endpoint",
+    "target": {
+     "edge": {
+      "ord": "0",
+      "rel": "KNOWS",
+      "src": {
+       "id": "i:1",
+       "type": "person"
+      },
+      "tgt": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    }
+   },
+   "error": "INVALID_INTENT/UNKNOWN_TYPE"
+  },
+  {
+   "intent": {
+    "type": "focus-incident",
+    "target": {
+     "node": {
+      "id": "i:1",
+      "type": "person"
+     }
+    }
+   },
+   "error": "INVALID_INTENT/UNKNOWN_TYPE"
+  },
+  {
+   "intent": {
+    "type": "focus-endpoint"
+   },
+   "error": "INVALID_INTENT/UNKNOWN_TYPE"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R37.s4.state.json",
+   "expected_events": "events/R37.s4.events.json"
+  }
+ ]
+}

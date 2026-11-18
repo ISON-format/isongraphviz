@@ -1,0 +1,1 @@
+[{"selection":[{"address":{"id":"s:ann","type":"person"},"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"},{"address":{"ord":"0","rel":"KNOWS","src":{"id":"i:1","type":"person"},"tgt":{"id":"s:ann","type":"person"}},"artifact_sha256":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"}],"type":"selection-changed"}]

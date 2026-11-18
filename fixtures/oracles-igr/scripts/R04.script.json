@@ -1,0 +1,94 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "add",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R04.s1.state.json",
+   "expected_events": "events/R04.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "remove",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R04.s2.state.json",
+   "expected_events": "events/R04.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "remove",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R04.s3.state.json",
+   "expected_events": "events/R04.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "set-hidden",
+    "hidden": true,
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R04.s4.state.json",
+   "expected_events": "events/R04.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "remove",
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R04.s5.state.json",
+   "expected_events": "events/R04.s5.events.json"
+  }
+ ]
+}

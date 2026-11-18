@@ -1,0 +1,38 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/H13.state.json",
+ "points": [
+  {
+   "x": 200,
+   "y": 100
+  },
+  {
+   "x": 205,
+   "y": 105
+  },
+  {
+   "x": 100,
+   "y": 100,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 200,
+   "y": 100,
+   "state": "states/hitgeo.state.json",
+   "hit": {
+    "node": {
+     "id": "i:3",
+     "type": "n"
+    }
+   }
+  }
+ ]
+}

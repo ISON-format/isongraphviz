@@ -1,0 +1,1304 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:4",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:7",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:13",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:16",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:19",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n10",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:3",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:6",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:9",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:12",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:18",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n0",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n15",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:2",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:8",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:11",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:14",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:17",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n5",
+       "type": "project"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:1",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:4",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n5",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:17",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:13",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:13",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n0",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:16",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:19",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "s:n10",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:2",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "s:n10",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:14",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:7",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:12",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:6",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:6",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:17",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:12",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:7",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:18",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "s:n0",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n15",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n10",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:4",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:16",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:11",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:4",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:19",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:6",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:12",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:13",
+        "type": "company"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R41.s1.state.json",
+   "expected_events": "events/R41.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "toggle",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:4",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:7",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:13",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:16",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:19",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n10",
+       "type": "company"
+      }
+     },
+     {
+      "node": {
+       "id": "i:3",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:6",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:9",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:12",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:18",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n0",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n15",
+       "type": "person"
+      }
+     },
+     {
+      "node": {
+       "id": "i:2",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:8",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:11",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:14",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "i:17",
+       "type": "project"
+      }
+     },
+     {
+      "node": {
+       "id": "s:n5",
+       "type": "project"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:1",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:4",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n5",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:7",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:17",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:13",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:13",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "s:n0",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:16",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:19",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "s:n10",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:2",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "s:n10",
+        "type": "company"
+       },
+       "tgt": {
+        "id": "i:14",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:7",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:11",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:3",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:12",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:6",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:6",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:17",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:12",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:7",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:18",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:8",
+        "type": "project"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "s:n0",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n15",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n10",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:2",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:18",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:4",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:16",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "i:8",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:11",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:4",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "s:n15",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:19",
+        "type": "company"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R2",
+       "src": {
+        "id": "i:17",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R0",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:3",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:6",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:9",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R1",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:12",
+        "type": "person"
+       }
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R3",
+       "src": {
+        "id": "s:n5",
+        "type": "project"
+       },
+       "tgt": {
+        "id": "i:13",
+        "type": "company"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R41.s2.state.json",
+   "expected_events": "events/R41.s2.events.json"
+  }
+ ]
+}

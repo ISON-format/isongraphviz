@@ -1,0 +1,44 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 500
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 300
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 16385
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 16384
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 299
+   },
+   "expected_state": "states/R27.s5.state.json",
+   "expected_events": "events/R27.s5.events.json"
+  }
+ ]
+}

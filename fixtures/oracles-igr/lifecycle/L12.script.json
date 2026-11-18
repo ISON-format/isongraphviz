@@ -1,0 +1,40 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "applySceneDelta",
+   "arg": {},
+   "await": true,
+   "expect": "UNSUPPORTED_CAPABILITY/RESERVED"
+  },
+  {
+   "op": "applySceneDelta",
+   "await": true,
+   "expect": "UNSUPPORTED_CAPABILITY/RESERVED"
+  },
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "applySceneDelta",
+   "arg": {},
+   "await": true,
+   "expect": "UNSUPPORTED_CAPABILITY/RESERVED"
+  }
+ ],
+ "expect_recorded_events": "events/L12.recorded.events.json"
+}

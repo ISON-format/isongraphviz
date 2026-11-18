@@ -1,0 +1,54 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "initial": "states/R32.init.state.json",
+ "steps": [
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000000,
+    "anchor": {
+     "x": 2147483648,
+     "y": 0
+    }
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000,
+    "anchor": {
+     "x": 2147483649,
+     "y": 0
+    }
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000000,
+    "anchor": {
+     "x": 900,
+     "y": 600
+    }
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000000,
+    "anchor": {
+     "x": 450,
+     "y": 300
+    }
+   },
+   "expected_state": "states/R33.s4.state.json",
+   "expected_events": "events/R33.s4.events.json"
+  }
+ ]
+}

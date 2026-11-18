@@ -1,0 +1,117 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/hitgeo.state.json",
+ "points": [
+  {
+   "x": 150,
+   "y": 405,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:7",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:8",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 150.001,
+   "y": 405,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:9",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:10",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 149.999,
+   "y": 405,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:7",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:8",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 150,
+   "y": 404,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:7",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:8",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 151,
+   "y": 406,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:9",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:10",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 151,
+   "y": 404,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:7",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:8",
+      "type": "n"
+     }
+    }
+   }
+  }
+ ]
+}

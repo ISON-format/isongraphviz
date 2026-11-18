@@ -1,0 +1,53 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {}
+    ]
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {},
+      "edge": {}
+     }
+    ]
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": 5
+     }
+    ]
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     5
+    ]
+   },
+   "error": "INVALID_INTENT/SCHEMA"
+  }
+ ]
+}

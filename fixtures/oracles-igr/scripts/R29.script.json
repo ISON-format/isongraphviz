@@ -1,0 +1,53 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "resize",
+    "width": 1000,
+    "height": 700
+   },
+   "expected_state": "states/R29.s1.state.json",
+   "expected_events": "events/R29.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 1000,
+    "height": 700
+   },
+   "expected_state": "states/R29.s2.state.json",
+   "expected_events": "events/R29.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 1,
+    "height": 16384
+   },
+   "expected_state": "states/R29.s3.state.json",
+   "expected_events": "events/R29.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 16384,
+    "height": 1
+   },
+   "expected_state": "states/R29.s4.state.json",
+   "expected_events": "events/R29.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "resize",
+    "width": 900,
+    "height": 600
+   },
+   "expected_state": "states/R29.s5.state.json",
+   "expected_events": "events/R29.s5.events.json"
+  }
+ ]
+}

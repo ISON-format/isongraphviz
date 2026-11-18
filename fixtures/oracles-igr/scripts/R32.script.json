@@ -1,0 +1,42 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "initial": "states/R32.init.state.json",
+ "steps": [
+  {
+   "intent": {
+    "type": "pan",
+    "dx": -2147483648,
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 0,
+    "dy": 2147483648
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 2147483649,
+    "dy": 0
+   },
+   "error": "INVALID_INTENT/OUT_OF_RANGE"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 1,
+    "dy": -1
+   },
+   "expected_state": "states/R32.s4.state.json",
+   "expected_events": "events/R32.s4.events.json"
+  }
+ ]
+}

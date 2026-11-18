@@ -1,0 +1,98 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 10,
+    "dy": 0
+   },
+   "expected_state": "states/R20.s1.state.json",
+   "expected_events": "events/R20.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 32
+   },
+   "expected_state": "states/R20.s2.state.json",
+   "expected_events": "events/R20.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": -7,
+    "dy": 0
+   },
+   "expected_state": "states/R20.s3.state.json",
+   "expected_events": "events/R20.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 0,
+    "dy": -13
+   },
+   "expected_state": "states/R20.s4.state.json",
+   "expected_events": "events/R20.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 3,
+    "dy": 5
+   },
+   "expected_state": "states/R20.s5.state.json",
+   "expected_events": "events/R20.s5.events.json"
+  },
+  {
+   "intent": {
+    "type": "set-viewport",
+    "center_x": 0,
+    "center_y": 0,
+    "zoom": 128
+   },
+   "expected_state": "states/R20.s6.state.json",
+   "expected_events": "events/R20.s6.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 1,
+    "dy": 0
+   },
+   "expected_state": "states/R20.s7.state.json",
+   "expected_events": "events/R20.s7.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": -1,
+    "dy": 0
+   },
+   "expected_state": "states/R20.s8.state.json",
+   "expected_events": "events/R20.s8.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 0,
+    "dy": -1
+   },
+   "expected_state": "states/R20.s9.state.json",
+   "expected_events": "events/R20.s9.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 0,
+    "dy": 1
+   },
+   "expected_state": "states/R20.s10.state.json",
+   "expected_events": "events/R20.s10.events.json"
+  }
+ ]
+}

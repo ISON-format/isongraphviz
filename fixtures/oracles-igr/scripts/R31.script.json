@@ -1,0 +1,40 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "fit"
+   },
+   "expected_state": "states/R31.s1.state.json",
+   "expected_events": "events/R31.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "pan",
+    "dx": 100,
+    "dy": 0
+   },
+   "expected_state": "states/R31.s2.state.json",
+   "expected_events": "events/R31.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "fit",
+    "padding": 0
+   },
+   "expected_state": "states/R31.s3.state.json",
+   "expected_events": "events/R31.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000000
+   },
+   "expected_state": "states/R31.s4.state.json",
+   "expected_events": "events/R31.s4.events.json"
+  }
+ ]
+}

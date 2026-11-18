@@ -1,0 +1,285 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/H19.min.state.json",
+ "points": [
+  {
+   "x": 412,
+   "y": 300,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 388,
+   "y": 300,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 312,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 288,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.00048828125,
+   "y": 300,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.0009765625,
+   "y": 300,
+   "state": "states/H19.min.state.json"
+  },
+  {
+   "x": 400,
+   "y": 300,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.001,
+   "y": 300,
+   "state": "states/H19.min.state.json"
+  },
+  {
+   "x": 408,
+   "y": 308,
+   "state": "states/H19.min.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 409,
+   "y": 309,
+   "state": "states/H19.min.state.json"
+  },
+  {
+   "x": 412,
+   "y": 300,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 388,
+   "y": 300,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 312,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 288,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.00048828125,
+   "y": 300,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.0009765625,
+   "y": 300,
+   "state": "states/H19.def.state.json"
+  },
+  {
+   "x": 400,
+   "y": 300,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.001,
+   "y": 300,
+   "state": "states/H19.def.state.json"
+  },
+  {
+   "x": 408,
+   "y": 308,
+   "state": "states/H19.def.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 409,
+   "y": 309,
+   "state": "states/H19.def.state.json"
+  },
+  {
+   "x": 412,
+   "y": 300,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 388,
+   "y": 300,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 312,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 288,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.00048828125,
+   "y": 300,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.0009765625,
+   "y": 300,
+   "state": "states/H19.max.state.json"
+  },
+  {
+   "x": 400,
+   "y": 300,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 412.001,
+   "y": 300,
+   "state": "states/H19.max.state.json"
+  },
+  {
+   "x": 408,
+   "y": 308,
+   "state": "states/H19.max.state.json",
+   "hit": {
+    "node": {
+     "id": "i:14",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 409,
+   "y": 309,
+   "state": "states/H19.max.state.json"
+  }
+ ]
+}

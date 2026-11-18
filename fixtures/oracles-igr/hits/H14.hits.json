@@ -1,0 +1,76 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/H14a.state.json",
+ "points": [
+  {
+   "x": 330,
+   "y": 200
+  },
+  {
+   "x": 300,
+   "y": 200
+  },
+  {
+   "x": 500,
+   "y": 200,
+   "hit": {
+    "node": {
+     "id": "i:5",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 400,
+   "y": 200,
+   "hit": {
+    "node": {
+     "id": "i:6",
+     "type": "n"
+    }
+   }
+  },
+  {
+   "x": 430,
+   "y": 200
+  },
+  {
+   "x": 330,
+   "y": 200,
+   "state": "states/hitgeo.state.json",
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "E",
+     "src": {
+      "id": "i:4",
+      "type": "n"
+     },
+     "tgt": {
+      "id": "i:5",
+      "type": "n"
+     }
+    }
+   }
+  },
+  {
+   "x": 330,
+   "y": 200,
+   "state": "states/H14b.state.json"
+  },
+  {
+   "x": 300,
+   "y": 200,
+   "state": "states/H14b.state.json",
+   "hit": {
+    "node": {
+     "id": "i:4",
+     "type": "n"
+    }
+   }
+  }
+ ]
+}

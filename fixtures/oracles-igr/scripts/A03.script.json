@@ -1,0 +1,53 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "R",
+       "src": {
+        "id": "i:2",
+        "type": "p"
+       },
+       "tgt": {
+        "id": "i:2",
+        "type": "p"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/A03.s1.state.json",
+   "expected_events": "events/A03.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus",
+    "target": {
+     "edge": {
+      "ord": "0",
+      "rel": "R",
+      "src": {
+       "id": "i:2",
+       "type": "p"
+      },
+      "tgt": {
+       "id": "i:2",
+       "type": "p"
+      }
+     }
+    }
+   },
+   "expected_state": "states/A03.s2.state.json",
+   "expected_events": "events/A03.s2.events.json"
+  }
+ ]
+}

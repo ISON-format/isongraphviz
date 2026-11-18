@@ -1,0 +1,24 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "s:1",
+       "type": "p"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/A14.s1.state.json",
+   "expected_events": "events/A14.s1.events.json"
+  }
+ ]
+}

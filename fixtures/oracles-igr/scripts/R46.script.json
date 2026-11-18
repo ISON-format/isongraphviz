@@ -1,0 +1,12 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {},
+   "error": "INVALID_INTENT/SCHEMA"
+  }
+ ]
+}

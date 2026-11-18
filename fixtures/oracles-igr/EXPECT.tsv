@@ -1,0 +1,355 @@
+id	group	tier	scene	layout	input	expected	error
+M01	M	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json		models/M01.model.json	
+M02	M	core	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json		models/M02.model.json	
+M03	M	core	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json		models/M03.model.json	
+M04	M	core	../oracles-igl/scenes/single.scene.json	../oracles-igl/layouts/F08.layout.json		models/M04.model.json	
+M05	M	core	../oracles-igl/scenes/unicode.scene.json	../oracles-igl/layouts/F09.layout.json		models/M05.model.json	
+M06	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json		models/M06.model.json	
+M07	M	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/X01.layout.json		models/M07.model.json	
+M08	M	core	../oracles-igl/scenes/keybound.scene.json	../oracles-igl/layouts/F13.layout.json		models/M08.model.json	
+M09	M	core	../oracles-igl/scenes/S18.scene.json	../oracles-igl/layouts/X05.layout.json		models/M09.model.json	
+M10	M	core	scenes/hostile.scene.json	layouts/hostile.layout.json		models/M10.model.json	
+M11	M	core	../oracles-igl/scenes/bind-a.scene.json	../oracles-igl/bind/B01.layout.json			LAYOUT:SCENE_MISMATCH/
+M12	M	core	../oracles-igl/scenes/bind-a.scene.json	../oracles-igl/bind/B03.layout.json			LAYOUT:INCOMPLETE_LAYOUT/MISSING_NODE
+M13	M	core	../oracles-igl/scenes/B07.scene.json	../oracles-igl/layouts/F11.layout.json			IGS:INVALID_SCENE/NON_CANONICAL
+M14	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxNodes":20}}	models/M14.model.json	
+M15	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxNodes":19}}		RESOURCE_LIMIT/NODE_LIMIT
+M16	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxEdges":37}}	models/M16.model.json	
+M17	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxEdges":36}}		RESOURCE_LIMIT/EDGE_LIMIT
+M18	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxTotalLabelUnits":241}}	models/M18.model.json	
+M19	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxTotalLabelUnits":240}}		RESOURCE_LIMIT/LABEL_LIMIT
+M20	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxSceneBytes":5988}}	models/M20.model.json	
+M21	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxSceneBytes":5987}}		RESOURCE_LIMIT/BYTES_LIMIT
+M22	M	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"limits":{"maxLayoutBytes":1478}}		RESOURCE_LIMIT/BYTES_LIMIT
+M23	M	core	../oracles/o1-basic.scene.json	../oracles-igl/verify/V21.layout.json		models/M23.model.json	
+M23b	M	core	../oracles/o1-basic.scene.json	../oracles-igl/verify/V24.layout.json		models/M23b.model.json	
+M24	M	core	../oracles/o1-basic.scene.json	../oracles-igl/verify/V45.layout.json		models/M24.model.json	
+M24b	M	core	../oracles/o1-basic.scene.json	../oracles-igl/verify/V46.layout.json		models/M24b.model.json	
+M25	M	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"plain_object_model":true}		INVALID_INPUT/NOT_A_RENDER_MODEL
+M26	M	core	../oracles/o1-basic.scene.json	layouts/M26.layout.json		models/M26.model.json	
+M27	M	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"limits":{"maxEdges":80000,"maxIntentTargets":120000,"maxLayoutBytes":8388608,"maxNodes":40000,"maxSceneBytes":16777216,"maxStateBytes":16777216,"maxTotalLabelUnits":8388608}}	models/M01.model.json	
+M28	M	core	scenes/M28.scene.json	layouts/M28.layout.json		models/M28.model.json	
+M29	M	core	../oracles-igl/scenes/S09.scene.json	layouts/M29.layout.json		models/M29.model.json	
+M30	M	core	scenes/M30.scene.json	layouts/M30.layout.json		models/M30.model.json	
+S01	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"initial":{"height":600,"width":900}}	states/S01.state.json	
+S02	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S02.state.json		
+S03	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S03.state.json		
+S04	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S04.state.json		
+S05	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S05.state.json		
+S06	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S06.state.json		
+S07	S	both	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	{"initial":{"height":600,"width":900}}	states/S07.state.json	
+S08	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"initial":{"height":1,"width":1}}	states/S08.state.json	
+S09	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"initial":{"height":64,"width":64}}	states/S09.state.json	
+S10	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"initial":{"height":65,"width":65}}	states/S10.state.json	
+S11	S	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	states/S11.state.json		
+S12	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S12.state.json		INVALID_STATE/NON_CANONICAL
+S13	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S13.state.json		INVALID_STATE/NON_CANONICAL
+S14	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S14.state.json		INVALID_STATE/NON_CANONICAL
+S15	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S15.state.json		INVALID_STATE/NON_CANONICAL
+S16	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S16.state.json		INVALID_STATE/DUPLICATE_ELEMENT
+S17	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S17.state.json		INVALID_STATE/DUPLICATE_ELEMENT
+S18	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S18.state.json		INVALID_STATE/UNRESOLVED_ELEMENT
+S19	S	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	states/S19.state.json		INVALID_STATE/UNRESOLVED_ELEMENT
+S20	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S20.state.json		INVALID_STATE/SCENE_MISMATCH
+S21	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S21.state.json		INVALID_STATE/LAYOUT_MISMATCH
+S22	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S22.state.json		INVALID_STATE/SCENE_MISMATCH
+S23	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S23.state.json		INVALID_STATE/SELECTED_HIDDEN
+S24	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S24.state.json		INVALID_STATE/FOCUS_HIDDEN
+S25	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S25.state.json		INVALID_STATE/INVALID_VIEWPORT
+S26	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S26.state.json		INVALID_STATE/INVALID_VIEWPORT
+S27	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S27.state.json		INVALID_STATE/INVALID_NUMBER
+S28	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S28.state.json		INVALID_STATE/NON_CANONICAL
+S29	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S29.state.json		INVALID_STATE/INVALID_VIEWPORT
+S30	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S30.state.json		INVALID_STATE/INVALID_VIEWPORT
+S31	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S31.state.json		INVALID_STATE/INVALID_NUMBER
+S32	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S32.state.json		
+S33	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S33.state.json		INVALID_STATE/UNKNOWN_FIELD
+S34	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S34.state.json		INVALID_STATE/UNKNOWN_FIELD
+S35	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S35.state.json		INVALID_STATE/MISSING_FIELD
+S36	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S36.state.json		INVALID_STATE/UNSUPPORTED_VERSION
+S37	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S37.state.json		INVALID_STATE/INVALID_ENCODING
+S38	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S38.state.json		INVALID_STATE/INVALID_ENCODING
+S39	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S39.state.json		INVALID_STATE/SCHEMA
+S40	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S40.state.json		INVALID_STATE/INVALID_HASH
+S41	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"file":"states/S03.state.json","limits":{"maxStateBytes":538}}		RESOURCE_LIMIT/BYTES_LIMIT
+S42	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S42.state.json		INVALID_STATE/UNKNOWN_FIELD
+S43	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S43.state.json		INVALID_STATE/MISSING_FIELD
+S44	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S44.state.json		INVALID_STATE/MISSING_FIELD
+S45	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S45.state.json		INVALID_STATE/SCHEMA
+S46	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S46.state.json		INVALID_STATE/UNKNOWN_FIELD
+S47	S	both	../oracles/o1-basic.scene.json	layouts/S47.layout.json	{"initial":{"height":600,"width":900}}	states/S47.state.json	
+S48	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S48.state.json		INVALID_STATE/SELECTED_HIDDEN
+S49	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S49.state.json		INVALID_STATE/INVALID_STRING
+S50	S	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"file":"states/S03.state.json","limits":{"maxStateBytes":539}}		
+S51	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S51.state.json		INVALID_STATE/UNRESOLVED_ELEMENT
+S52	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S52.state.json		INVALID_STATE/NON_CANONICAL
+S53	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S53.state.json		INVALID_STATE/INVALID_NUMBER
+S54	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S54.state.json		INVALID_STATE/LAYOUT_MISMATCH
+S55	S	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	states/S55.state.json		INVALID_STATE/INVALID_VALUE
+R01	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R01.script.json	states/R01.s3.state.json	
+R02	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R02.script.json	states/R02.s3.state.json	
+R03	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R03.script.json	states/R03.s3.state.json	
+R04	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R04.script.json	states/R04.s5.state.json	
+R05	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R05.script.json	states/R05.s2.state.json	
+R06	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R06.script.json	states/R06.s3.state.json	
+R07	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R07.script.json	states/R07.s4.state.json	
+R08	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R08.script.json	states/R08.s7.state.json	
+R09	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R09.script.json	states/R09.s12.state.json	
+R10	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R10.script.json	states/R10.s3.state.json	
+R11	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R11.script.json	states/R11.s4.state.json	
+R12	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R12.script.json	states/R12.s3.state.json	
+R13	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R13.script.json	states/R13.s3.state.json	
+R14	R	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	scripts/R14.script.json	states/R14.s5.state.json	
+R15	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R15.script.json	states/R15.s7.state.json	
+R16	R	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	scripts/R16.script.json	states/R16.s7.state.json	
+R17	R	both	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	scripts/R17.script.json	states/R17.s4.state.json	
+R18	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R18.script.json	states/R18.s3.state.json	
+R19	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R19.script.json	states/R19.s7.state.json	
+R20	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R20.script.json	states/R20.s10.state.json	
+R21	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R21.script.json	states/R21.s5.state.json	
+R22	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R22.script.json	states/R22.s7.state.json	
+R23	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R23.script.json	states/R23.s9.state.json	
+R24	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R24.script.json	states/R24.s7.state.json	
+R25	R	both	../oracles-igl/scenes/single.scene.json	../oracles-igl/layouts/F08.layout.json	scripts/R25.script.json	states/R25.s3.state.json	
+R26	R	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	scripts/R26.script.json	states/R26.s9.state.json	
+R27	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R27.script.json	states/R27.s5.state.json	
+R28	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R28.script.json	states/R28.s3.state.json	
+R29	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R29.script.json	states/R29.s5.state.json	
+R30	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R30.script.json	states/R30.s7.state.json	
+R31	R	both	../oracles/o1-basic.scene.json	../oracles-igl/verify/V46.layout.json	scripts/R31.script.json	states/R31.s4.state.json	
+R31b	R	both	../oracles/o1-basic.scene.json	../oracles-igl/verify/V45.layout.json	scripts/R31b.script.json	states/R31b.s4.state.json	
+R32	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R32.script.json	states/R32.s4.state.json	
+R33	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R33.script.json	states/R33.s4.state.json	
+R34	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R34.script.json	states/R34.s11.state.json	
+R35	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R35.script.json	states/R35.s8.state.json	
+R36	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R36.script.json	states/R36.s5.state.json	
+R37	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R37.script.json	states/R37.s4.state.json	
+R38	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R38.script.json	states/R38.s9.state.json	
+R39	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R39.script.json	states/R39.s1.state.json	
+R40	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R40.script.json	states/R40.s5.state.json	
+R41	R	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	scripts/R41.script.json	states/R41.s2.state.json	
+R42	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R42.script.json	states/S01.state.json	
+R43	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R43.script.json	states/S01.state.json	
+R44	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R44.script.json	states/S01.state.json	
+R45	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R45.script.json	states/S01.state.json	
+R46	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R46.script.json	states/S01.state.json	
+R47	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R47.script.json	states/S01.state.json	
+R48	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R48.script.json	states/S01.state.json	
+R49	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R49.script.json	states/R49.s1.state.json	
+R50	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R50.script.json	states/S01.state.json	
+R51	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R51.script.json	states/R51.s1.state.json	
+R52	R	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/R52.script.json	states/S01.state.json	
+H01	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H01.hits.json		
+H02	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H02.hits.json		
+H03	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H03.hits.json		
+H04	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H04.hits.json		
+H05	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H05.hits.json		
+H06	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H06.hits.json		
+H07	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H07.hits.json		
+H08	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H08.hits.json		
+H09	H	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	hits/H09.hits.json		
+H10	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H10.hits.json		
+H11	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H11.hits.json		
+H12	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H12.hits.json		
+H13	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H13.hits.json		
+H14	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H14.hits.json		
+H15	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H15.hits.json		
+H16	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H16.hits.json		
+H17	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H17.hits.json		
+H18	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H18.hits.json		
+H19	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H19.hits.json		
+H20	H	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	hits/H20.hits.json		
+H21	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H21.hits.json		
+H22	H	both	../oracles-igl/scenes/unicode.scene.json	../oracles-igl/layouts/F09.layout.json	hits/H22.hits.json		
+H23	H	both	../oracles/o1-basic.scene.json	../oracles-igl/verify/V45.layout.json	hits/H23.hits.json		
+H24	H	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	hits/H24.hits.json		
+H25	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H25.hits.json		
+H26	H	both	scenes/hitgeo.scene.json	layouts/hitgeo.layout.json	hits/H26.hits.json		
+H27	H	both	../oracles/o1-basic.scene.json	layouts/H27.layout.json	hits/H27.hits.json		
+A01	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A01.script.json	a11y/A01.a11y.json	
+A02	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A02.script.json	a11y/A02.a11y.json	
+A03	A	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	scripts/A03.script.json	a11y/A03.a11y.json	
+A04	A	both	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	scripts/A04.script.json	a11y/A04.a11y.json	
+A05	A	both	scenes/A05.scene.json	layouts/A05.layout.json	scripts/A05.script.json	a11y/A05.a11y.json	
+A06	A	both	scenes/ten.scene.json	layouts/ten.layout.json	scripts/A06.script.json	a11y/A06.a11y.json	
+A07	A	both	scenes/nfc.scene.json	layouts/nfc.layout.json	scripts/A07.script.json	a11y/A07.a11y.json	
+A08	A	both	scenes/hostile.scene.json	layouts/hostile.layout.json	scripts/A08.script.json	a11y/A08.a11y.json	
+A09	A	both	../oracles-igl/scenes/keybound.scene.json	../oracles-igl/layouts/F13.layout.json	scripts/A09.script.json	a11y/A09.a11y.json	
+A10	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A10.script.json	a11y/A10.a11y.json	
+A11	A	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	scripts/A11.script.json	a11y/A11.a11y.json	
+A12	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A12.script.json	a11y/A12.a11y.json	
+A13	A	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	scripts/A13.script.json	a11y/A13.a11y.json	
+A14	A	both	scenes/twins.scene.json	layouts/twins.layout.json	scripts/A14.script.json	a11y/A14.a11y.json	
+A15	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A15.script.json	a11y/A15.a11y.json	
+A16	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A16.script.json	a11y/A16.a11y.json	
+A17	A	both	../oracles-igl/scenes/S09.scene.json	layouts/M29.layout.json	scripts/A17.script.json	a11y/A17.a11y.json	
+A18	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A18.script.json	events/A18.events.json	
+A19	A	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/A19.script.json	a11y/A19.a11y.json	
+A20	A	both	scenes/A20.scene.json	layouts/A20.layout.json	scripts/A20.script.json	a11y/A20.a11y.json	
+A21	A	both	scenes/M30.scene.json	layouts/M30.layout.json	scripts/A21.script.json	a11y/A21.a11y.json	
+P01	P	core			manifests/P01.manifest.json		
+P02	P	core			manifests/P02.manifest.json		
+P03	P	core			manifests/P03.manifest.json		
+P04	P	core			manifests/P04.manifest.json		
+P05	P	core			manifests/P05.manifest.json		INVALID_MANIFEST/MISSING_CAPABILITY
+P06	P	core			manifests/P06.manifest.json		INVALID_MANIFEST/UNKNOWN_CAPABILITY
+P07	P	core			manifests/P07.manifest.json		INVALID_MANIFEST/MANDATORY_UNSUPPORTED
+P08	P	core			manifests/P08.manifest.json		INVALID_MANIFEST/MANDATORY_DEGRADED
+P09	P	core			manifests/P09.manifest.json		INVALID_MANIFEST/RESERVED_CAPABILITY
+P10	P	core			manifests/P10.manifest.json		INVALID_MANIFEST/RESERVED_CAPABILITY
+P11	P	core			manifests/P11.manifest.json		INVALID_MANIFEST/RESERVED_CAPABILITY
+P12	P	core			manifests/P12.manifest.json		INVALID_MANIFEST/UNKNOWN_DEGRADATION
+P13	P	core			manifests/P13.manifest.json		INVALID_MANIFEST/DEGRADATION_NOT_ALLOWED
+P14	P	core			manifests/P14.manifest.json		INVALID_MANIFEST/DEGRADATION_NOT_ALLOWED
+P15	P	core			manifests/P15.manifest.json		INVALID_MANIFEST/HOST_LACKS_NOT_ALLOWED
+P16	P	core			manifests/P16.manifest.json		INVALID_MANIFEST/UNSUPPORTED_VERSION
+P17	P	core			manifests/P17.manifest.json		INVALID_MANIFEST/INVALID_LIMITS
+P18	P	core			manifests/P18.manifest.json		INVALID_MANIFEST/UNKNOWN_CAPABILITY
+P19	P	core			manifests/P19.manifest.json		INVALID_MANIFEST/INVALID_NAME
+P20	P	core			manifests/P20.manifest.json		INVALID_MANIFEST/RESERVED_CAPABILITY
+P21	P	core			manifests/P21.manifest.json		INVALID_MANIFEST/INVALID_LIMITS
+P22	P	core			manifests/P22.manifest.json		INVALID_MANIFEST/MANDATORY_DEGRADED
+P23	P	core			manifests/P23.manifest.json		INVALID_MANIFEST/HOST_LACKS_NOT_ALLOWED
+P24	P	core			manifests/P24.manifest.json		INVALID_MANIFEST/SCHEMA
+P25	P	core			manifests/P25.manifest.json		INVALID_MANIFEST/RESERVED_CAPABILITY
+P26	P	core			manifests/P26.manifest.json		
+P27	P	core			manifests/P27.manifest.json		INVALID_MANIFEST/SCHEMA
+L01	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L01.script.json		
+L02	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L02.script.json		
+L03	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L03.script.json		
+L04	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L04.script.json		
+L05	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L05.script.json		
+L06	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L06.script.json		
+L07	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L07.script.json		
+L08	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L08.script.json		
+L09	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L09.script.json		
+L10	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L10.script.json		
+L11	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L11.script.json		
+L12	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L12.script.json		
+L13	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L13.script.json		
+L14	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L14.script.json		
+L15	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L15.script.json		
+L16	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L16.script.json		
+L17	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L17.script.json		
+L18	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L18.script.json		
+L19	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L19.script.json		
+L20	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L20.script.json		
+L21	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L21.script.json		
+L21b	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L21b.script.json		
+L22	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L22.script.json		
+L23	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L23.script.json		
+L24	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L24.script.json		
+L24b	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L24b.script.json		
+L24c	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L24c.script.json		
+L24d	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L24d.script.json		
+L25	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L25.script.json		
+L26	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L26.script.json		
+L27	L	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	lifecycle/L27.script.json		
+D01	D	subject					
+D02	D	subject					
+D03	D	subject					
+D04	D	subject					
+D05	D	subject					
+K01	K						
+K02	K						
+K03	K						
+K04	K						
+K05	K						
+K06	K						
+K07	K						
+K08	K						
+K09	K						
+K10	K						
+K11	K						
+K12	K						
+K13	K						
+K14	K						
+K15	K						
+K16	K						
+K17	K						
+K18	K						
+K19	K						
+K20	K						
+K21	K						
+K22	K						
+K23	K						
+K24	K						
+K25	K						
+K26	K						
+K27	K						
+K28	K						
+K29	K						
+K30	K						
+K31	K						
+K32	K						
+K33	K						
+K34	K						
+K35	K						
+K36	K						
+K37	K						
+K38	K						
+K39	K						
+K40	K						
+K41	K						
+K42	K						
+K43	K						
+K44	K						
+K45	K						
+K46	K						
+K47	K						
+K48	K						
+K49	K						
+K50	K						
+K51	K						
+K52	K						
+K53	K						
+K54	K						
+K55	K						
+K56	K						
+K57	K						
+K58	K						
+K59	K						
+K60	K						
+K61	K						
+K62	K						
+K63	K						
+K64	K						
+K65	K						
+K66	K						
+K67	K						
+K68	K						
+K69	K						
+K70	K						
+K71	K						
+K72	K						
+K73	K						
+K74	K						
+K75	K						
+K76	K						
+K77	K						
+K78	K						
+K79	K						
+K80	K						
+K81	K						
+K82	K						
+C01	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C01.reports.json	compare/C01.compare.json	
+C02	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C02.reports.json	compare/C02.compare.json	
+C03	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C03.reports.json	compare/C03.compare.json	
+C04	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C04.reports.json	compare/C04.compare.json	
+C05	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C05.reports.json	compare/C05.compare.json	
+C06	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C06.reports.json	compare/C06.compare.json	
+C07	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C07.reports.json	compare/C07.compare.json	
+C08	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C08.reports.json	compare/C08.compare.json	
+C09	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C09.reports.json		INVALID_REPORT/INCONSISTENT
+C10	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C10.reports.json		INVALID_REPORT/UNRESOLVED_ELEMENT
+C11	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C11.reports.json		INVALID_REPORT/SCHEMA
+C12	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C12.reports.json		INVALID_REPORT/UNSUPPORTED_VERSION
+C13	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C13.reports.json		INVALID_REPORT/NON_CANONICAL
+C14	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C14.reports.json		INVALID_REPORT/INCONSISTENT
+C15	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C15.reports.json		INVALID_REPORT/UNRESOLVED_ELEMENT
+C16	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C16.reports.json	compare/C16.compare.json	
+C17	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C17.reports.json	compare/C17.compare.json	
+C18	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C18.reports.json		INVALID_REPORT/INCONSISTENT
+C19	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C19.reports.json		INVALID_REPORT/NON_CANONICAL
+C20	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C20.reports.json	compare/C20.compare.json	
+C21	C	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	compare/C21.reports.json		INVALID_REPORT/SCHEMA

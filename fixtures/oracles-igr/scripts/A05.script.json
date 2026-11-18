@@ -1,0 +1,38 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "p"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "loop",
+       "src": {
+        "id": "i:1",
+        "type": "p"
+       },
+       "tgt": {
+        "id": "i:1",
+        "type": "p"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/A05.s1.state.json",
+   "expected_events": "events/A05.s1.events.json"
+  }
+ ]
+}

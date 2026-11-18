@@ -1,0 +1,99 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "dispose",
+   "await": true,
+   "expect": "ok"
+  },
+  {
+   "op": "dispatch",
+   "arg": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "getState",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "hitTest",
+   "arg": {
+    "x": 1,
+    "y": 1
+   },
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "probe",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "render",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "export",
+   "arg": "scene",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "loadScene",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "initialize",
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "setReducedMotion",
+   "arg": true,
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "applySceneDelta",
+   "arg": {},
+   "await": true,
+   "expect": "INVALID_LIFECYCLE/DISPOSED"
+  },
+  {
+   "op": "dispose",
+   "await": true,
+   "expect": "ok"
+  }
+ ],
+ "expect_recorded_events": "events/L06.recorded.events.json"
+}

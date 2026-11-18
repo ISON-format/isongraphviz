@@ -1,0 +1,51 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:42",
+       "type": "t"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "\u202ex",
+       "src": {
+        "id": "i:42",
+        "type": "t"
+       },
+       "tgt": {
+        "id": "s:markup type",
+        "type": "<b>"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/A08.s1.state.json",
+   "expected_events": "events/A08.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus",
+    "target": {
+     "node": {
+      "id": "s:<script>alert(\"x\")</script>",
+      "type": "t"
+     }
+    }
+   },
+   "expected_state": "states/A08.s2.state.json",
+   "expected_events": "events/A08.s2.events.json"
+  }
+ ]
+}

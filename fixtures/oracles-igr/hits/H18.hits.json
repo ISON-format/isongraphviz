@@ -1,0 +1,58 @@
+{
+ "size": {
+  "width": 800,
+  "height": 600
+ },
+ "state": "states/hitgeo.state.json",
+ "points": [
+  {
+   "x": "NaN",
+   "y": 100,
+   "error": "INVALID_INPUT/NOT_FINITE"
+  },
+  {
+   "x": 100,
+   "y": "NaN",
+   "error": "INVALID_INPUT/NOT_FINITE"
+  },
+  {
+   "x": "Infinity",
+   "y": 100,
+   "error": "INVALID_INPUT/NOT_FINITE"
+  },
+  {
+   "x": 100,
+   "y": "-Infinity",
+   "error": "INVALID_INPUT/NOT_FINITE"
+  },
+  {
+   "x": 1099511627776,
+   "y": 100,
+   "error": "INVALID_INPUT/OUT_OF_RANGE"
+  },
+  {
+   "x": 100,
+   "y": -1099511627776,
+   "error": "INVALID_INPUT/OUT_OF_RANGE"
+  },
+  {
+   "x": 2147483649,
+   "y": 100,
+   "error": "INVALID_INPUT/OUT_OF_RANGE"
+  },
+  {
+   "x": 2147483648,
+   "y": 100
+  },
+  {
+   "x": 200,
+   "y": 100,
+   "hit": {
+    "node": {
+     "id": "i:3",
+     "type": "n"
+    }
+   }
+  }
+ ]
+}

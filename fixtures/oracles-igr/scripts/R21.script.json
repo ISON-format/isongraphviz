@@ -1,0 +1,48 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 2000
+   },
+   "expected_state": "states/R21.s1.state.json",
+   "expected_events": "events/R21.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 500
+   },
+   "expected_state": "states/R21.s2.state.json",
+   "expected_events": "events/R21.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1000
+   },
+   "expected_state": "states/R21.s3.state.json",
+   "expected_events": "events/R21.s3.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1333
+   },
+   "expected_state": "states/R21.s4.state.json",
+   "expected_events": "events/R21.s4.events.json"
+  },
+  {
+   "intent": {
+    "type": "zoom",
+    "factor_milli": 1
+   },
+   "expected_state": "states/R21.s5.state.json",
+   "expected_events": "events/R21.s5.events.json"
+  }
+ ]
+}

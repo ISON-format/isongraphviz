@@ -1,0 +1,59 @@
+{
+ "model": {
+  "scene": "../oracles/o1-basic.scene.json",
+  "layout": "../oracles-igl/layouts/F01.layout.json"
+ },
+ "env": {
+  "host": "headless",
+  "size": {
+   "height": 600,
+   "width": 900
+  },
+  "reducedMotion": false
+ },
+ "listener": "record",
+ "calls": [
+  {
+   "op": "initialize",
+   "await": false,
+   "expect": "ok"
+  },
+  {
+   "op": "loadScene",
+   "await": false,
+   "expect": "ok"
+  },
+  {
+   "op": "initialize",
+   "await": false,
+   "expect": "INVALID_LIFECYCLE/ALREADY_INITIALIZED"
+  },
+  {
+   "op": "render",
+   "await": false,
+   "expect": "ok"
+  },
+  {
+   "op": "export",
+   "arg": "scene",
+   "await": false,
+   "expect": "ok",
+   "expect_bytes": "../oracles/o1-basic.scene.json",
+   "expect_media_type": "application/octet-stream"
+  },
+  {
+   "op": "dispose",
+   "await": true,
+   "expect": "ok"
+  }
+ ],
+ "expect_recorded_events": "events/L18.recorded.events.json",
+ "expect_settle_order": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ]
+}

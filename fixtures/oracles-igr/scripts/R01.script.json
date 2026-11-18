@@ -1,0 +1,63 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R01.s1.state.json",
+   "expected_events": "events/R01.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "s:ann",
+       "type": "person"
+      }
+     },
+     {
+      "edge": {
+       "ord": "0",
+       "rel": "KNOWS",
+       "src": {
+        "id": "i:1",
+        "type": "person"
+       },
+       "tgt": {
+        "id": "s:ann",
+        "type": "person"
+       }
+      }
+     }
+    ]
+   },
+   "expected_state": "states/R01.s2.state.json",
+   "expected_events": "events/R01.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "select",
+    "mode": "replace",
+    "targets": []
+   },
+   "expected_state": "states/R01.s3.state.json",
+   "expected_events": "events/R01.s3.events.json"
+  }
+ ]
+}

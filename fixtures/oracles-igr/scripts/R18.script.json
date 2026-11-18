@@ -1,0 +1,31 @@
+{
+ "size": {
+  "width": 900,
+  "height": 600
+ },
+ "steps": [
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": -1
+   },
+   "expected_state": "states/R18.s1.state.json",
+   "expected_events": "events/R18.s1.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus"
+   },
+   "expected_state": "states/R18.s2.state.json",
+   "expected_events": "events/R18.s2.events.json"
+  },
+  {
+   "intent": {
+    "type": "focus-step",
+    "delta": 1
+   },
+   "expected_state": "states/R18.s3.state.json",
+   "expected_events": "events/R18.s3.events.json"
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "size": {
+  "width": 14,
+  "height": 14
+ },
+ "state": "states/H27.state.json",
+ "points": [
+  {
+   "x": 12.0,
+   "y": 7.0,
+   "hit": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   }
+  },
+  {
+   "x": 12.0625,
+   "y": 7.0
+  }
+ ]
+}
