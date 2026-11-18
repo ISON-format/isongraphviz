@@ -291,4 +291,5 @@ export const EXTRA_MUTANTS = [
   m("X12", "audit M-3: renderer.pick uses a picker built with the default list options", [C("renderer.ts", "elementBounds as boundsOf, pickerFromList,", "elementBounds as boundsOf, pickerFromList, createPicker,"), C("renderer.ts", "return pickerFromList(model, state, buildDisplayList(model, state, r.dl)).pick(point);", "void pickerFromList; return createPicker(model, state).pick(point);")]),
   m("X13", "audit B10: a rejected load becomes the current registry entry", [C("renderer.ts", "if (ok) current = key;", "current = key;")]),
   m("X14", "audit M-4: renderer options accept an accessor", [C("options.ts", 'if (d.get !== undefined || d.set !== undefined) throw bad("SCHEMA", `${path}.${k}`, "an accessor");', "void 0;")]),
+  m("X15", "rev 5: the stream reader does not limit layers 2 and 6 to one focus marker", [D("canvas2d/stream.ts", "if ((layer === 2 || layer === 6) && ++focusMarkers > 1) throw", "if ((layer === 2 || layer === 6) && ++focusMarkers > 99) throw")]),
 ];

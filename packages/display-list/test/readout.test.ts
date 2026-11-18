@@ -125,3 +125,15 @@ describe("compareReadouts (9.4)", () => {
     expect(errOf(() => compareReadouts(JSON.parse('[{"renderer":"a","__proto__":{}}]') as never))).toBe("INVALID_REPORT/SCHEMA");
   });
 });
+
+describe("a guard-omitted node (centre Infinity, as a WebGL plan reports it)", () => {
+  it("is outside the guard box and lands in nodes_far without coordinates", () => {
+    expect(inGuardBox(Infinity, Infinity, 900, 600)).toBe(false);
+    expect(inGuardBox(-Infinity, 0, 900, 600)).toBe(false);
+    const a = { id: "i:1", type: "t" };
+    const r = assembleReadout({ scene_sha256: "0".repeat(64), layout_sha256: "1".repeat(64), width: 900, height: 600, nodes: [{ address: a, x: Infinity, y: Infinity }], edges: [], selectedNodes: [], selectedEdges: [], arrows: [], labelNodes: [], labelEdges: [] });
+    expect(r.nodes_at).toEqual([]);
+    expect(r.nodes_far).toEqual([a]);
+    expect(() => serializeReadout(r)).not.toThrow();
+  });
+});

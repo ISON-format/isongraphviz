@@ -305,6 +305,16 @@ NEW = [
   "`maxBytes` and `maxLineUnits` are checked first; the lexer also drops tolerated bytes.",
   "`maxLineUnits` is measured on the raw line (before the tolerated bytes are dropped), `maxBytes` on the whole input.",
   "Reading; no row separates the two."),
+ ("6.6 and 9.3 (rev 5): at most one focused element in a stream",
+  "6.6: a stream is rejected unless \"layers 2 and 6 together hold at most one pid\"; 9.3: readoutFromCanvasStream reports \"the one focus or none (no precedence rule is needed)\".",
+  "The strict stream reader (`parse_stream`, used by `canvasStreamWitness` and `readoutFromCanvasStream`) counts the marker sections of layers 2 and 6 together, painted or not, and rejects the stream with INVALID_INPUT/SCHEMA when there is more than one. "
+  "A node and an edge cannot share a pid, so one pid in layer 2 and one in layer 6 is also two focused elements and is rejected.",
+  "Reading. The count is over markers (the reader's structural stage), not over painted sections; the text says 'hold ... pid'."),
+ ("13.3 and 13.5 (rev 5): the new rule has no row and no mutant",
+  "Rev 5 adds the single-focus rule to the stream reader; the change log says \"no corpus row has two focused elements\" and no row or mutant id changes.",
+  "No expected byte exercises the rule (checked by a direct test: a G01 stream with two focus markers is rejected, a stream with one is accepted), and no mutant names it. "
+  "13.5 closes with \"a normative rule without a mutant here is a review finding\".",
+  "Finding (clerical): the rule has neither a killer row nor a mutant; a stream row with two focus markers (error `INVALID_INPUT/SCHEMA`) and a mutant that drops the rule would close it. Not added: the ids are frozen by rev 5."),
 ]
 
 
@@ -313,8 +323,8 @@ def render_ambiguities(res):
     assert len(STATUS) == len(A) == 35
     A = A + [(sec, text, reading, why, "") for sec, text, reading, why in NEW]
     out = ["# Ambiguities, contradictions and unimplementable rules found while writing the oracle", "",
-           "Source: design 31 rev 3 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were written against rev 2 and carry the rev 3 disposition from its change log, with whether my reading matched), "
-           "30 rev 4, 27 rev 5, IGS-1, IGL-1. A-36 onwards are new findings from re-implementing the rev 3 text. Entries marked DESIGN DEFECT are places where the text "
+           "Source: design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were written against rev 2 and carry the rev 3 disposition from its change log, with whether my reading matched), "
+           "30 rev 4, 27 rev 5, IGS-1, IGL-1. A-36 to A-44 are new findings from re-implementing the rev 3 text, A-45 and A-46 from the rev 5 text. Entries marked DESIGN DEFECT are places where the text "
            "cannot be implemented as written or a named killer row does not kill; they are reported, not repaired. Entry numbers are stable.", ""]
     for i, (sec, text, reading, why, kind) in enumerate(A, 1):
         out.append("## A-%02d  %s" % (i, sec))
@@ -336,7 +346,7 @@ def make(outs, notes, app_rows, res, info):
     w = L.append
     w("# IGR-DL/1 and IGR-CV/1 oracle corpus (`oracles-dl`)")
     w("")
-    w("Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 rev 3 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3) by an oracle author who was given "
+    w("Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given "
       "only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures "
       "(`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` "
       "(the digest of its `SHA256SUMS`, `%s`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (%d entries) before judging any mismatch."

@@ -532,6 +532,9 @@ def parse_stream(stream):
         if layer != last_layer:
             last_pid = -1
         last_layer, last_pid = layer, pid
+    # 6.6 (rev 5): layers 2 and 6 together hold at most one pid (at most one focused element)
+    if sum(1 for pid, layer, _ in secs if layer in (2, 6)) > 1:
+        raise IgrError("INVALID_INPUT", "SCHEMA")
     return pro, secs
 
 

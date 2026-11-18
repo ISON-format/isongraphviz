@@ -131,6 +131,22 @@ export const AUDIT_ROWS: AuditRow[] = [
       must("accessor in an edge address", code(() => fn.readoutFromSvgReadout(edgeSvg as never)), "INVALID_INPUT/SCHEMA");
     },
   },
+  { // rev 5, 6.6 and 9.3: a stream whose layer 2 and layer 6 marker sections together number more than one is rejected by the reader (painted or not)
+    id: "ext:F1",
+    run(fn, io) {
+      const list = fn.parseDisplayList(bytesOf(io.text("dl/G01.dl")));
+      const c02 = io.text("calls/C02.calls"); // one focused node: the marker of pid 2 in layer 6
+      const run = (s: string): string[] => [code(() => fn.readoutFromCanvasStream(bytesOf(s), list)), code(() => fn.canvasStreamWitness(bytesOf(s), list))];
+      must("one focus", run(c02), ["none", "none"]);
+      must("no focus", run(io.text("calls/C01.calls")), ["none", "none"]);
+      const NL = String.fromCharCode(10);
+      const ins = (before: string, add: string): string => c02.replace(before + NL, add + NL + before + NL);
+      const paint = ["[\"m\",\"beginPath\"]", "[\"m\",\"stroke\"]"].join(NL);
+      must("layer 2 and layer 6", run(ins("[\"#\",3,3]", "[\"#\",3,2]" + NL + paint)), ["INVALID_INPUT/SCHEMA", "INVALID_INPUT/SCHEMA"]);
+      must("an unpainted layer-2 marker counts", run(ins("[\"#\",3,3]", "[\"#\",3,2]")), ["INVALID_INPUT/SCHEMA", "INVALID_INPUT/SCHEMA"]);
+      must("two layer-6 markers", run(ins("[\"#\",2,6]", "[\"#\",1,6]" + NL + paint)), ["INVALID_INPUT/SCHEMA", "INVALID_INPUT/SCHEMA"]);
+    },
+  },
   { // N-4: an executor or a readout handed a hand-built bad source throws IgrError, never a TypeError
     id: "ext:H1",
     run(fn, io) {

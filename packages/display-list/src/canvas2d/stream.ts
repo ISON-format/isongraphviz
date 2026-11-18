@@ -17,7 +17,7 @@ export function readStream(stream: Uint8Array, list: DisplayList, limits?: { max
   const lines = readLines(stream, resolveReadLimits(limits, DEFAULT_CV_READ_LIMITS), "cv.read");
   const nd = list.nodes.length, total = nd + list.edges.length;
   const sections: StreamSection[] = [];
-  let lastLayer = 0, lastPid = 0;
+  let lastLayer = 0, lastPid = 0, focusMarkers = 0;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]!, no = i + 1;
     let rec: unknown;
@@ -34,6 +34,8 @@ export function readStream(stream: Uint8Array, list: DisplayList, limits?: { max
       if ((layer <= 4 && pid <= nd) || (layer >= 5 && layer <= 7 && pid > nd)) throw schemaError(no, "the marker pid is of the wrong kind for its layer");
       if (layer < lastLayer) throw schemaError(no, "marker layers are non-decreasing");
       if (layer === lastLayer && pid <= lastPid) throw schemaError(no, "marker pids ascend strictly within a layer");
+      // at most one focused element: the marker sections of layers 2 and 6 together number at most one, painted or not (6.6, 9.3, rev 5)
+      if ((layer === 2 || layer === 6) && ++focusMarkers > 1) throw schemaError(no, "at most one marker in layers 2 and 6 together (one focused element)");
       lastLayer = layer; lastPid = pid;
       sections.push({ pid, layer, calls: [], line: no });
     } else if (rec[0] === "m") {

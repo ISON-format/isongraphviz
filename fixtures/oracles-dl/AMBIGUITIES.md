@@ -1,6 +1,6 @@
 # Ambiguities, contradictions and unimplementable rules found while writing the oracle
 
-Source: design 31 rev 3 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were written against rev 2 and carry the rev 3 disposition from its change log, with whether my reading matched), 30 rev 4, 27 rev 5, IGS-1, IGL-1. A-36 onwards are new findings from re-implementing the rev 3 text. Entries marked DESIGN DEFECT are places where the text cannot be implemented as written or a named killer row does not kill; they are reported, not repaired. Entry numbers are stable.
+Source: design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were written against rev 2 and carry the rev 3 disposition from its change log, with whether my reading matched), 30 rev 4, 27 rev 5, IGS-1, IGL-1. A-36 to A-44 are new findings from re-implementing the rev 3 text, A-45 and A-46 from the rev 5 text. Entries marked DESIGN DEFECT are places where the text cannot be implemented as written or a named killer row does not kill; they are reported, not repaired. Entry numbers are stable.
 
 ## A-01  4.7 D1 and D12; 13.3 S28-S31; K72-K74
 
@@ -300,3 +300,15 @@ Source: design 31 rev 3 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were wr
 * **Design text.** `maxBytes` and `maxLineUnits` are checked first; the lexer also drops tolerated bytes.
 * **Literal reading used.** `maxLineUnits` is measured on the raw line (before the tolerated bytes are dropped), `maxBytes` on the whole input.
 * **Why / status.** Reading; no row separates the two.
+
+## A-45  6.6 and 9.3 (rev 5): at most one focused element in a stream
+
+* **Design text.** 6.6: a stream is rejected unless "layers 2 and 6 together hold at most one pid"; 9.3: readoutFromCanvasStream reports "the one focus or none (no precedence rule is needed)".
+* **Literal reading used.** The strict stream reader (`parse_stream`, used by `canvasStreamWitness` and `readoutFromCanvasStream`) counts the marker sections of layers 2 and 6 together, painted or not, and rejects the stream with INVALID_INPUT/SCHEMA when there is more than one. A node and an edge cannot share a pid, so one pid in layer 2 and one in layer 6 is also two focused elements and is rejected.
+* **Why / status.** Reading. The count is over markers (the reader's structural stage), not over painted sections; the text says 'hold ... pid'.
+
+## A-46  13.3 and 13.5 (rev 5): the new rule has no row and no mutant
+
+* **Design text.** Rev 5 adds the single-focus rule to the stream reader; the change log says "no corpus row has two focused elements" and no row or mutant id changes.
+* **Literal reading used.** No expected byte exercises the rule (checked by a direct test: a G01 stream with two focus markers is rejected, a stream with one is accepted), and no mutant names it. 13.5 closes with "a normative rule without a mutant here is a review finding".
+* **Why / status.** Finding (clerical): the rule has neither a killer row nor a mutant; a stream row with two focus markers (error `INVALID_INPUT/SCHEMA`) and a mutant that drops the rule would close it. Not added: the ids are frozen by rev 5.

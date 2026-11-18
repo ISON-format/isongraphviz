@@ -17,7 +17,7 @@ describe("mutation matrix", () => {
     console.log(`[mutants] killed ${by("KILLED").length}, survived ${by("SURVIVED").join(",") || "none"}, inconclusive ${by("INCONCLUSIVE").join(",") || "none"}, harness errors ${by("HARNESS-ERROR").join(",") || "none"}`);
     const k = report.mutants.filter((m) => m.id.startsWith("K")), x = report.mutants.filter((m) => m.id.startsWith("X"));
     expect(k).toHaveLength(193);
-    expect(x.length).toBeGreaterThanOrEqual(14);
+    expect(x.length).toBeGreaterThanOrEqual(15);
     expect(x.filter((m) => m.status !== "KILLED").map((m) => m.id)).toEqual([]); // the extra mutants of the audit findings are killed too
     expect(by("SURVIVED")).toEqual([]);
     expect(by("INCONCLUSIVE")).toEqual([]);

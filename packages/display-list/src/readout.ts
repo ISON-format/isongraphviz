@@ -26,7 +26,10 @@ export interface ReadoutParts {
   /** The viewport of the artifact, in CSS pixels: the guard box of 9.1 is [-256000, 1000 W + 256000] x [-256000, 1000 H + 256000] in milli-pixels. */
   width: number;
   height: number;
-  /** Drawn nodes in scene order; the centre is `undefined` when the backend does not state one. */
+  /**
+   * Drawn nodes in scene order, centres in milli-pixels. A backend that omitted a node by its own guard rule and so knows no centre (the WebGL plan) passes
+   * `x` and `y` as `Infinity`: such a node is outside the guard box by definition and goes to `nodes_far`, with no coordinates in the readout.
+   */
   nodes: { address: WireNode; x: number; y: number }[];
   edges: WireEdge[];
   selectedNodes: WireNode[];
@@ -40,7 +43,7 @@ export interface ReadoutParts {
 const cp = (n: WireNode): WireNode => ({ id: n.id, type: n.type });
 const cpe = (e: WireEdge): WireEdge => ({ ord: e.ord, rel: e.rel, src: cp(e.src), tgt: cp(e.tgt) });
 
-/** The guard box membership of a node centre (closed). */
+/** The guard box membership of a node centre (closed). An infinite coordinate (a guard-omitted node) is outside. */
 export function inGuardBox(x: number, y: number, width: number, height: number): boolean {
   return x >= -GUARD_MARGIN && x <= 1000 * width + GUARD_MARGIN && y >= -GUARD_MARGIN && y <= 1000 * height + GUARD_MARGIN;
 }
