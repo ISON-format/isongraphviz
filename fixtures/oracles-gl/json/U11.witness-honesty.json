@@ -1,0 +1,6 @@
+{
+ "honest_plan_W01": "pass",
+ "plan_lacking_a_disc_W01": "fail",
+ "probe_drawn_nodes": 2,
+ "witness_nodes_of_the_double": 1
+}

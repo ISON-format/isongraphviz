@@ -1,0 +1,1 @@
+{"backend":"igr-gl/1","elements":{"edges":[{"ord":"0","rel":"KNOWS","src":{"id":"i:1","type":"person"},"tgt":{"id":"s:ann","type":"person"}}],"nodes":[{"id":"i:1","type":"person"},{"id":"s:ann","type":"person"}]},"texts":[]}

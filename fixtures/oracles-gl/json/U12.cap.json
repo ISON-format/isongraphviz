@@ -1,0 +1,16 @@
+{
+ "CHK-CAP": "pass",
+ "capacity": {
+  "maxDrawnLabelUnits": 1048576,
+  "maxEdges": 200000,
+  "maxNodes": 5
+ },
+ "labels.edge": {
+  "degradations": [
+   "EDGE_LABELS_OMITTED"
+  ],
+  "status": "degraded"
+ },
+ "name": "x-gl",
+ "verifyManifest": "ok"
+}

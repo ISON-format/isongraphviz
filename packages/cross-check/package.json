@@ -1,0 +1,32 @@
+{
+  "name": "isongraph-visualize-cross-check",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "XR-1 three-way cross-renderer semantic readout check (SVG, Canvas, WebGL); tests and scripts only, no exports",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node scripts/vitest.mjs run",
+    "test:slow": "node scripts/vitest.mjs run --config vitest.slow.config.ts",
+    "check": "npm run typecheck && npm test && npm run test:slow && npm run smoke",
+    "smoke": "node scripts/smoke.mjs",
+    "xr": "node scripts/xr-ison.mjs"
+  },
+  "dependencies": {
+    "isongraph-visualize-display-list": "file:../display-list",
+    "isongraph-visualize-renderer-canvas": "file:../renderer-canvas",
+    "isongraph-visualize-renderer-core": "file:../renderer-core",
+    "isongraph-visualize-renderer-svg": "file:../renderer-svg",
+    "isongraph-visualize-renderer-webgl": "file:../renderer-webgl"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "isongraph-visualize-layout-core": "file:../layout-core",
+    "isongraph-visualize-scene-core": "file:../scene-core",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

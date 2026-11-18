@@ -1,0 +1,85 @@
+{
+ "arrow": {
+  "actual": {
+   "attributes": [
+    "a_b2",
+    "a_tb1"
+   ],
+   "constants": [],
+   "uniforms": {
+    "fs": [
+     "u_ink"
+    ],
+    "vs": [
+     "u_view"
+    ]
+   },
+   "varyings": []
+  },
+  "equals_table_7_4": true,
+  "fs_inputs": []
+ },
+ "disc": {
+  "actual": {
+   "attributes": [
+    "a_center",
+    "a_meta"
+   ],
+   "constants": [
+    "PAL"
+   ],
+   "uniforms": {
+    "fs": [
+     "u_ink"
+    ],
+    "vs": [
+     "u_view"
+    ]
+   },
+   "varyings": [
+    "v_cat",
+    "v_local",
+    "v_style"
+   ]
+  },
+  "equals_table_7_4": true,
+  "fs_inputs": [
+   "v_cat",
+   "v_local",
+   "v_style"
+  ]
+ },
+ "edge": {
+  "actual": {
+   "attributes": [
+    "a_ab",
+    "a_cb",
+    "a_meta"
+   ],
+   "constants": [
+    "ALPHA",
+    "SEG",
+    "WIDTH"
+   ],
+   "uniforms": {
+    "fs": [
+     "u_ink"
+    ],
+    "vs": [
+     "u_view"
+    ]
+   },
+   "varyings": [
+    "v_across",
+    "v_along",
+    "v_style"
+   ]
+  },
+  "equals_table_7_4": true,
+  "fs_inputs": [
+   "v_across",
+   "v_along",
+   "v_style"
+  ]
+ }
+}

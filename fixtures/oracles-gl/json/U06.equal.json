@@ -1,0 +1,10 @@
+{
+ "dom": {
+  "equal_to_glManifest": true,
+  "verifyManifest": "ok"
+ },
+ "headless": {
+  "equal_to_glManifest": true,
+  "verifyManifest": "ok"
+ }
+}

@@ -1,0 +1,20 @@
+// src/index.ts - IGR-GL/1 core entry (design 2). DOM-free; the browser adapter is the separate subpath "./dom".
+export { GL_FORMAT, GL_SEG, DEFAULT_GL_LIMITS } from "./constants.js";
+export { SHADER_SOURCES, SHADER_SET_SHA256, shaderSetBytes } from "./shaders.js";
+export type { GlDraw, GlHeader, GlPlan, OmittedEntry, TextRecord } from "./plan.js";
+export { planGl, serializePlan } from "./plan.js";
+export { parseGlPlan, readGlPlan } from "./read.js";
+export type { ReadOptions } from "./read.js";
+export { readoutFromGl, glWitness } from "./readout.js";
+export type { Gl2Like, GlCanvasLike, GlEventLike, GlHandle } from "./gl.js";
+export { createGlResources, deleteGlResources, executePlan, releaseGlContext } from "./execute.js";
+export type { GlFrame, GlResources } from "./execute.js";
+export { probeWebgl, contextAttributes } from "./probe.js";
+export type { ProbeReason, WebglProbe } from "./probe.js";
+export { createGlController } from "./control.js";
+export type { GlController, GlControllerOptions, GlLabelLayer, GlStatus } from "./control.js";
+export { glManifest } from "./manifest.js";
+export type { WebglRendererOptions } from "./options.js";
+export { createWebglRenderer } from "./renderer.js";
+export type { WebglRenderer } from "./renderer.js";
+export { createWebglSubject } from "./subject.js";

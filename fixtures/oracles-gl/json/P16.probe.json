@@ -1,0 +1,9 @@
+{
+ "available": true,
+ "limits": {
+  "maxViewportDims": [
+   16384,
+   16384
+  ]
+ }
+}

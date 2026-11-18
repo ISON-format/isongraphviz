@@ -1,0 +1,56 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "arg": {
+    "height": 300,
+    "type": "resize",
+    "width": 400
+   },
+   "expect": "ok",
+   "expect_state": "states/U02.c3.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_plan": "plan/U02.c4.glplan",
+   "op": "planBytes"
+  },
+  {
+   "arg": {
+    "center_x": 400000,
+    "center_y": 150000,
+    "type": "set-viewport",
+    "zoom": 2500
+   },
+   "expect": "ok",
+   "expect_state": "states/U02.c5.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "expect_plan": "plan/U02.c6.glplan",
+   "op": "planBytes"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

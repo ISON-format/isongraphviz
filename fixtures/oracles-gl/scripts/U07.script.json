@@ -1,0 +1,201 @@
+{
+ "calls": [
+  {
+   "arg": {
+    "dl": {
+     "x": 1
+    }
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "x": 1
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dl": {
+     "labels": "yes"
+    }
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dl": {
+     "maxDrawnLabelUnits": 1.5
+    }
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dl": {
+     "maxDrawnLabelUnits": "NaN"
+    }
+   },
+   "expect": "INVALID_INPUT/NOT_FINITE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dl": {
+     "maxDrawnLabelUnits": -1
+    }
+   },
+   "expect": "INVALID_INPUT/OUT_OF_RANGE",
+   "op": "create"
+  },
+  {
+   "arg": [],
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dprMilli": 249
+   },
+   "expect": "INVALID_INPUT/OUT_OF_RANGE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dprMilli": 1000.5
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dprMilli": "NaN"
+   },
+   "expect": "INVALID_INPUT/NOT_FINITE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dprMilli": "1000"
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "dprMilli": 8001
+   },
+   "expect": "INVALID_INPUT/OUT_OF_RANGE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "ink": [
+     256,
+     0,
+     0
+    ]
+   },
+   "expect": "INVALID_INPUT/OUT_OF_RANGE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "ink": "red"
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "ink": [
+     1,
+     2
+    ]
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "ink": [
+     1.5,
+     0,
+     0
+    ]
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "ink": [
+     "a",
+     0,
+     0
+    ]
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "contextAttributes": {
+     "failIfMajorPerformanceCaveat": "no"
+    }
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "capacity": {
+     "maxDrawnLabelUnits": 5
+    },
+    "dl": {
+     "maxDrawnLabelUnits": 6
+    }
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "capacity": {
+     "maxDrawnLabelUnits": 6
+    },
+    "dl": {
+     "maxDrawnLabelUnits": 6
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "contextAttributes": {
+     "failIfMajorPerformanceCaveat": false
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

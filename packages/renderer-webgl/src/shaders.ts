@@ -1,0 +1,170 @@
+// src/shaders.ts - the shader sources of igr-gl/1 (design 7.4, Appendix B): GLSL ES 3.00 constants of the package, each pinned by SHADER_SET_SHA256.
+// A source is text, never composed from a scene, a state, an option or the environment (H-4, 11.3). One changed byte is igr-gl/2.
+import { canonicalString, utf8Encode } from "./bytes.js";
+
+/** The SHA-256 of `shaderSetBytes()` (Appendix A.8, row gl:H02). */
+export const SHADER_SET_SHA256 = "eaf76017c4e62f6a445e9b550ace6301d75ea22143f27e9c66d9e97a631e6968";
+
+const src = (lines: readonly string[]): string => lines.join("\n") + "\n";
+
+export interface ShaderPair { readonly vs: string; readonly fs: string }
+
+export const SHADER_SOURCES: Readonly<Record<"arrow" | "disc" | "edge", Readonly<ShaderPair>>> = Object.freeze({
+  arrow: Object.freeze({
+    vs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "precision highp int;",
+      "uniform vec2 u_view;",
+      "in vec4 a_tb1;",
+      "in vec2 a_b2;",
+      "void main() {",
+      "  vec2 p = gl_VertexID == 0 ? a_tb1.xy : (gl_VertexID == 1 ? a_tb1.zw : a_b2);",
+      "  p = p * 0.001;",
+      "  gl_Position = vec4(p.x / u_view.x * 2.0 - 1.0, 1.0 - p.y / u_view.y * 2.0, 0.0, 1.0);",
+      "}",
+    ]),
+    fs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "uniform vec3 u_ink;",
+      "out vec4 o_color;",
+      "void main() {",
+      "  o_color = vec4(u_ink * 0.6, 0.6);",
+      "}",
+    ]),
+  }),
+  disc: Object.freeze({
+    vs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "precision highp int;",
+      "uniform vec2 u_view;",
+      "in vec2 a_center;",
+      "in uvec4 a_meta;",
+      "out vec2 v_local;",
+      "flat out uint v_style;",
+      "flat out uint v_cat;",
+      "void main() {",
+      "  vec2 corner = vec2(float(gl_VertexID & 1), float(gl_VertexID >> 1)) * 2.0 - 1.0;",
+      "  v_local = corner * 22.0;",
+      "  v_style = a_meta.x;",
+      "  v_cat = a_meta.y;",
+      "  vec2 px = a_center * 0.001 + v_local;",
+      "  gl_Position = vec4(px.x / u_view.x * 2.0 - 1.0, 1.0 - px.y / u_view.y * 2.0, 0.0, 1.0);",
+      "}",
+    ]),
+    fs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "precision highp int;",
+      "in vec2 v_local;",
+      "flat in uint v_style;",
+      "flat in uint v_cat;",
+      "uniform vec3 u_ink;",
+      "out vec4 o_color;",
+      "const vec3 PAL[9] = vec3[9](",
+      "  vec3(42.0, 120.0, 214.0) / 255.0, vec3(235.0, 104.0, 52.0) / 255.0, vec3(27.0, 175.0, 122.0) / 255.0,",
+      "  vec3(237.0, 161.0, 0.0) / 255.0, vec3(232.0, 123.0, 164.0) / 255.0, vec3(0.0, 131.0, 0.0) / 255.0,",
+      "  vec3(74.0, 58.0, 167.0) / 255.0, vec3(227.0, 73.0, 72.0) / 255.0, vec3(122.0, 121.0, 117.0) / 255.0);",
+      "void main() {",
+      "  float r = length(v_local);",
+      "  float aa = max(fwidth(r), 0.0001);",
+      "  if (v_style == 2u) {",
+      "    float outer = clamp(0.5 - (r - 11.0) / aa, 0.0, 1.0);",
+      "    float inner = clamp(0.5 - (r - 9.0) / aa, 0.0, 1.0);",
+      "    vec3 c = mix(vec3(1.0), PAL[min(int(v_cat), 8)], inner);",
+      "    o_color = vec4(c * outer, outer);",
+      "  } else if (v_style == 0u) {",
+      "    float cov = clamp(0.5 - (abs(r - 14.0) - 1.5) / aa, 0.0, 1.0);",
+      "    o_color = vec4(u_ink * cov, cov);",
+      "  } else {",
+      "    float cov = clamp(0.5 - (abs(r - 18.0) - 1.0) / aa, 0.0, 1.0);",
+      "    float ang = atan(v_local.y, v_local.x) + 3.14159265;",
+      "    if (mod(ang * 18.0, 7.0) >= 4.0) discard;",
+      "    o_color = vec4(u_ink * cov, cov);",
+      "  }",
+      "}",
+    ]),
+  }),
+  edge: Object.freeze({
+    vs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "precision highp int;",
+      "uniform vec2 u_view;",
+      "in vec4 a_ab;",
+      "in vec4 a_cb;",
+      "in uvec4 a_meta;",
+      "out float v_across;",
+      "out float v_along;",
+      "flat out uint v_style;",
+      "const int SEG = 16;",
+      "const float WIDTH[3] = float[3](6.0, 10.0, 2.0);",
+      "vec2 curve(float t, vec2 a, vec2 c1, vec2 c2, vec2 b, uint kind) {",
+      "  float s = 1.0 - t;",
+      "  if (kind == 0u) return a * s + b * t;",
+      "  if (kind == 1u) return a * (s * s) + c1 * (2.0 * s * t) + b * (t * t);",
+      "  return a * (s * s * s) + c1 * (3.0 * s * s * t) + c2 * (3.0 * s * t * t) + b * (t * t * t);",
+      "}",
+      "vec2 slope(float t, vec2 a, vec2 c1, vec2 c2, vec2 b, uint kind) {",
+      "  float s = 1.0 - t;",
+      "  if (kind == 0u) return b - a;",
+      "  if (kind == 1u) return 2.0 * (s * (c1 - a) + t * (b - c1));",
+      "  return 3.0 * (s * s * (c1 - a) + 2.0 * s * t * (c2 - c1) + t * t * (b - c2));",
+      "}",
+      "void main() {",
+      "  int i = gl_VertexID >> 1;",
+      "  float side = (gl_VertexID & 1) == 0 ? -1.0 : 1.0;",
+      "  float t = float(i) / float(SEG);",
+      "  uint kind = a_meta.x;",
+      "  vec2 a = a_ab.xy * 0.001;",
+      "  vec2 c1 = a_ab.zw * 0.001;",
+      "  vec2 c2 = a_cb.xy * 0.001;",
+      "  vec2 b = a_cb.zw * 0.001;",
+      "  vec2 p = curve(t, a, c1, c2, b, kind);",
+      "  vec2 d = slope(t, a, c1, c2, b, kind);",
+      "  float dn = length(d);",
+      "  vec2 dir = dn > 0.000001 ? d / dn : vec2(1.0, 0.0);",
+      "  float half_w = 0.5 * WIDTH[min(int(a_meta.y), 2)] + 1.0;",
+      "  vec2 q = p + vec2(-dir.y, dir.x) * side * half_w;",
+      "  float poly = kind == 0u ? length(b - a) : (kind == 1u ? length(c1 - a) + length(b - c1) : length(c1 - a) + length(c2 - c1) + length(b - c2));",
+      "  v_across = side * half_w;",
+      "  v_along = t * poly;",
+      "  v_style = a_meta.y;",
+      "  gl_Position = vec4(q.x / u_view.x * 2.0 - 1.0, 1.0 - q.y / u_view.y * 2.0, 0.0, 1.0);",
+      "}",
+    ]),
+    fs: src([
+      "#version 300 es",
+      "precision highp float;",
+      "precision highp int;",
+      "in float v_across;",
+      "in float v_along;",
+      "flat in uint v_style;",
+      "uniform vec3 u_ink;",
+      "out vec4 o_color;",
+      "const float WIDTH[3] = float[3](6.0, 10.0, 2.0);",
+      "const float ALPHA[3] = float[3](0.35, 0.25, 0.6);",
+      "void main() {",
+      "  int s = min(int(v_style), 2);",
+      "  float aa = max(fwidth(v_across), 0.0001);",
+      "  float cov = clamp(0.5 - (abs(v_across) - 0.5 * WIDTH[s]) / aa, 0.0, 1.0);",
+      "  if (s == 1 && mod(v_along, 10.0) >= 6.0) discard;",
+      "  float a = cov * ALPHA[s];",
+      "  o_color = vec4(u_ink * a, a);",
+      "}",
+    ]),
+  }),
+});
+
+/** The canonical JSON of the six sources, `{"arrow":{"fs":..,"vs":..},"disc":{..},"edge":{..}}`, UTF-8, no final LF (7.4, row gl:H01). */
+export function shaderSetBytes(): Uint8Array {
+  let text = "{";
+  const programs = ["arrow", "disc", "edge"] as const;
+  for (let i = 0; i < programs.length; i++) {
+    const p = SHADER_SOURCES[programs[i]!];
+    text += (i === 0 ? "" : ",") + canonicalString(programs[i]!) + ':{"fs":' + canonicalString(p.fs) + ',"vs":' + canonicalString(p.vs) + "}";
+  }
+  return utf8Encode(text + "}");
+}

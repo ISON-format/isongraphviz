@@ -1,0 +1,130 @@
+mutant	description	named_killers	killing_rows	named_not_killing	other_changed_rows	verdict
+K01	unclipped threshold `<=` 2^24 instead of `<`	B01	B01			KILLED
+K02	coordinates as 8-byte floats	G01	G01		G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U08,U09,U11,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K03	big-endian	G01	G01		G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U04,U05,U06,U07,U08,U09,U10,U11,U12,U13,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U32,U33,U34,U35,U36,U37,U38,U39	KILLED
+K04	`-0` written for zero	B02	B02		G01,G02,G05,G06,G08,G10,G11,B01,B04,B05,B06,B07,B08,B09,B11,B12,B14,B15,B17,B19,B20,X01,X02,X03,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U09,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K05	unused control points copy the end points	B04	B04		G01,G02,G05,G06,G08,G10,G11,B01,B02,B05,B06,B07,B08,B09,B17,B19,B20,X01,X02,X03,X05,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U09,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K06	pid written as the instance index	G09	G09		G01,G02,G04,G05,G06,G07,G08,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U08,U09,U11,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K07	draws in the wrong layer order (rings before arrows)	G06	G06		G08,G10,B03,B05,B06,B07,X03,E03,U01	KILLED
+K08	selected edges not duplicated in layer 1	G06	G06		G08,G10,B03,B05,X03,E03	KILLED
+K09	`halo-foc` style byte 0	G08	G08		B03,B05	KILLED
+K10	`kind` and `style` swapped	G05	G05		G01,G02,G06,G08,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B14,B15,B17,B19,B20,X01,X02,X03,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U09,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K11	`first` not cumulative	G06	G06		G08,G10,B03,B05,B06,B07,X03,X04,E03,U01	KILLED
+K12	draws with `count` 0 emitted	G01	G01		G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E04,E05,E06,E07,E08,U01,U02,U03,U08,U09,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K13	arrow buffer emitted for an undirected graph	G02	G02		B02,B16,X04,E08	KILLED
+K14	ring `cat` non-zero	G10	G10		G08	KILLED
+K15	header with spaces or unsorted keys	G01	G01		G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,U01,U02,U03,U08,U09	KILLED
+K16	`sizes.arrow` and `sizes.disc` swapped	G01	G01		G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B12,B13,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X09,U01,U02,U03,U08,U09,U11,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K17	buffers depend on the label options (renderer level)	B08	B08			KILLED
+K18	`maxBytes` boundary exclusive	B09	B09			KILLED
+K19	`maxBytes` boundary accepts one byte more	B10	B10			KILLED
+K20	edge stride 36 or 44	G01	G01		G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U08,U09,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K21	y written before x	G01	G01		G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,E02,E03,E05,E06,E07,E08,U01,U02,U03,U08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K22	reader skips G1 (header keys, format, `seg`, `g`, `stride`)	W02,W03,W04,W26,W33	W02,W03,W04,W26,W33			KILLED
+K23	reader skips G2 (sizes, trailing bytes)	W05,W06	W05,W06			KILLED
+K24	reader skips G3 (multiple of the constant stride)	W07	W07			KILLED
+K25	reader skips G4 (layer order, program)	W08,W09	W08,W09			KILLED
+K26	reader skips G5 (bounds, contiguity)	W10,W11	W10,W11			KILLED
+K27	reader skips G6 (finite, `-0`, integer, bound)	W12,W13,W14,W15	W12,W13,W14,W15			KILLED
+K28	reader skips G7 (enum ranges, style equals layer)	W16,W17,W18,W19	W16,W17,W18,W19			KILLED
+K29	reader skips G8 (padding)	W20	W20			KILLED
+K30	reader skips G9 (pid >= 1)	W21	W21			KILLED
+K31	reader skips G10 (unused control points)	W22	W22			KILLED
+K32	reader skips G11 (pid order and repetition)	W23,W27,W37	W23,W27,W37			KILLED
+K33	reader skips G12 (subsets)	W24,W25,W28	W24,W25,W28			KILLED
+K34	one byte of a shader source changed	H01,H02,H03	H01,H02,H03		H05,E01,E11,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38	KILLED
+K35	a TAB in a source	H04	H04		H01,H02,H03,H05,E01,E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K36	`#extension` added	H04	H04		H01,H02,H03,H05,E01,E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K37	scene text concatenated into a source	H05,E01	H05,E01		H01,H02,H03,H04,E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K38	an attribute renamed	H06	H06		H01,H02,H03,H05,E01,E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K39	digest over the concatenation instead of the canonical JSON	H02	H02		H01	KILLED
+K40	programs created in the order `disc`, `edge`, `arrow`	E01	E01		E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K41	`deleteShader` missing	E01	E01		E10,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K42	blend function wrong	E02	E02		E03,E04,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K43	`clearColor` not transparent	E02	E02		E03,E04,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K44	attribute offset ignores `first`	E03	E03			KILLED
+K45	attribute divisor 0	E02	E02		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K46	`vertexAttribPointer` used for `a_meta`	E02	E02		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K47	`u_ink` not divided by 255	E07	E07		E02,E03,E05,E06,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K48	`viewport` uses the plan's `w`, `h` instead of the frame's `widthPx`, `heightPx`	E06	E06			KILLED
+K49	buffers re-uploaded for every draw	E02	E02		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K50	`bindVertexArray(null)` missing	E02,E04	E02,E04		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K51	an empty plan issues draws	E04	E04			KILLED
+K52	edge vertex count 32 or 36	E02	E02		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K53	wrong primitive mode	E02	E02		E03,E05,E06,E07,E08,U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U33,U34,U35,U36,U38	KILLED
+K54	no `preventDefault` on loss	U20	U20		U21,U22,U23,U24,U25,U28,U29,U31,U33,U34,U35,U36	KILLED
+K55	GL calls while lost	U21	U21			KILLED
+K56	resources deleted on loss	U20	U20		U21,U22,U23,U24,U25,U28,U29,U31,U33,U34,U35,U36	KILLED
+K57	restore does not re-upload the plan	U22	U22		U23,U24,U28,U31,U35,U36	KILLED
+K58	restore creates resources but draws no frame	U22	U22		U23,U24,U28,U31,U35,U36	KILLED
+K59	listeners not removed on dispose	U26,U33	U26,U33		U34,U36,U39	KILLED
+K60	a commit while lost is dropped	U23	U23			KILLED
+K61	loss emits a semantic event	U24	U24		U20,U21,U22,U23,U25,U28,U29,U31,U33,U34,U35,U36	KILLED
+K62	a failed restore throws	U25	U25		U31,U34,U36	KILLED
+K63	a compile failure ignored	U27	U27		U39	KILLED
+K64	probe reasons confused	P01,P02,P03,P04	P01,P02,P03,P04		U37	KILLED
+K65	probe reads the unmasked renderer or any extension but `WEBGL_lose_context`	P13	P13		U37,P05,P06,P07,P08,P09,P10,P11,P12,P14,P15,P16	KILLED
+K66	probe skips the 2D layer check	P10	P10		U37,P09,P11,P13,P14,P16	KILLED
+K67	`failIfMajorPerformanceCaveat` false in the constants	P14	P14		U37,P03,P04,P05,P06,P07,P08,P09,P10,P11,P12,P13,P15	KILLED
+K68	witness reads `probe()` instead of the plan	U11	U11			KILLED
+K69	manifest differs from the renderer's	U06,U12	U06,U12			KILLED
+K70	`x-gl.context-recovery` supported on the headless host	U06	U06			KILLED
+K71	`readoutFromGl` takes label addresses from the table at pid - 2	X09	X09		X01,X02,X03,X04,X05,X06,X08	KILLED
+K72	`nodes_far` domain `<=` instead of `<`	X04	X04			KILLED
+K73	`readoutFromGl` reads node marks from the wrong layers	X03	X03		X04,X06	KILLED
+K74	`readoutFromGl` ignores the `flags` of `cn`/`ce` entries (a culled selected node loses its mark)	X06	X06			KILLED
+K75	`u_view` taken from the frame instead of the plan header	E06	E06			KILLED
+K76	`uniform3f` ink channels in the wrong order	E07	E07			KILLED
+K77	probe leaves its GL context unreleased	P09	P09		U37,P04,P05,P06,P07,P08,P10,P11,P12,P13,P14,P15,P16	KILLED
+K78	probe precedence changed (`TOO_SMALL` before `NO_HIGHP`)	P15	P15		U37,P05,P06,P07,P08,P09,P10,P11,P12,P13,P14,P16	KILLED
+K79	probe asks one canvas for both context types	P11	P11		U37,P09,P10,P13,P14,P16	KILLED
+K80	a throwing factory or `getParameter` escapes the probe	P12	P12			KILLED
+K81	vertex-stage precision not checked	P05	P05		U37,P06,P07,P08,P09,P10,P11,P12,P13,P14,P15,P16	KILLED
+K82	`MAX_VIEWPORT_DIMS` not checked	P08	P08			KILLED
+K83	no relaxed retry: `PERFORMANCE_CAVEAT` reported as `NO_CONTEXT`	P04	P04		U37,P03	KILLED
+K84	guard margin 128000 instead of 256000	B16,W33	B16,W33		G01,G02,G03,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B13,B14,B15,B17,B18,B19,B20,B21,X04,X06,X08,X09,U01,U02,U03,U08	KILLED
+K85	clip intersection with `floorDiv` instead of `divRound`	B11,B12	B11,B12		B01,B14,X06,X08	KILLED
+K86	clip does not reject a parallel segment outside (`p = 0`, `q < 0`)	B18	B18			KILLED
+K87	edge inclusion expansion 6000 instead of 12000	B19,B20	B19,B20			KILLED
+K88	node inclusion without the 22000 expansion	B16	B16		B18,B19,B20,B21,X04	KILLED
+K89	omitted edges and nodes not listed in `ce`/`cn`	B13,B14	B13,B14		B01,B11,B12,B15,B16,B18,B19,B21,X06,X08,U02	KILLED
+K90	`flags` lost in `cn`/`ce`	B14	B14		B13,X06	KILLED
+K91	a far arrow is kept (coordinates beyond `2^24`)	B15	B15		B01,B11,B12,B14,B19,X06,X08,U02	KILLED
+K92	a clipped curve kept as a kind-1 or kind-2 instance with far control points	B12	B12		B01	KILLED
+K93	clip to the viewport instead of the guard box	B11	B11		B01,B12,B14,B15,X06,X08	KILLED
+K94	the arrow of an edge omitted by the box test is emitted without the guard test	B13	B13		B19	KILLED
+K95	text section missing or reordered in the plan	B17,X09	B17,X09		G01,G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,U01,U02,U03,U08,U09,U13	KILLED
+K96	element table order wrong in the plan	B17	B17		G01,G02,G04,G05,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B13,B14,B15,B16,B18,B19,B20,B21,X01,X02,X03,X04,X05,X06,X08,X09,U01,U02,U03,U08,U09,U11	KILLED
+K97	loss during the restore rebuild ends in `failed`	U28	U28			KILLED
+K98	a double loss changes the status	U29	U29			KILLED
+K99	a restore while `ready` rebuilds the resources	U30	U30			KILLED
+K100	`failed` never retries on a restore	U31	U31			KILLED
+K101	`dispose` in `lost` issues delete calls	U33	U33			KILLED
+K102	`dispose` in `ready` omits `loseContext`	U26	U26		U36	KILLED
+K103	cleanup after a failed creation not in reverse order	E10,E11	E10,E11		U25,U27,U31,U34,U36,U39	KILLED
+K104	failure `detail` carries more than 120 characters of the info log	E10	E10		E11	KILLED
+K105	the label canvas is not cleared on loss	U35	U35		U20,U21,U22,U23,U24,U25,U28,U29,U31,U33,U34,U36	KILLED
+K106	labels are drawn while lost	U35	U35		U23	KILLED
+K107	loss and restore not reported through `onStatus`	U36	U36		U20,U21,U22,U23,U24,U25,U26,U28,U29,U30,U31,U32,U33,U34,U35,U37,U38,U39	KILLED
+K108	`contextAttributes` ignored	U37	U37			KILLED
+K109	probe contexts not released at `initialize`	U37	U37			KILLED
+K110	the info log is read before the status check	E10	E10		E01,E11,U20,U21,U22,U23,U24,U25,U26,U27,U28,U29,U30,U31,U33,U34,U35,U36,U37,U38,U39	KILLED
+K111	`textCalls()` differs from the Canvas layer-8 stream	U13	U13			KILLED
+K112	an arrow is emitted for an edge whose polyline was clipped away	B21	B21		B18	KILLED
+K113	reader skips G13 (table counts and pid ranges)	W29,W30,W36	W29,W30,W36			KILLED
+K114	reader skips G14 (text lines)	W34,W35	W34,W35			KILLED
+K115	reader skips G15 (`cn`, `ce` rules)	W31,W32	W31,W32			KILLED
+K116	reader skips G16 (pid accounting)	W38	W38			KILLED
+K117	fragment-stage precision not checked	P06	P06		U37,P07,P08,P09,P10,P11,P12,P13,P14,P16	KILLED
+K118	`MAX_VERTEX_ATTRIBS` not checked	P07	P07		U37,P08,P09,P10,P11,P12,P13,P14,P16	KILLED
+K119	`readoutFromGl` accepts a pid outside the table	X07	X07			KILLED
+K120	`readoutFromGl` takes `arrows` from layer 4 instead of the header's `d`	X08	X08		X06	KILLED
+K121	a zero-length buffer is uploaded	E08	E08		E04	KILLED
+K122	the probe ignores `options.failIfMajorPerformanceCaveat`	P16	P16		U37	KILLED
+K123	the probe leaves a context unreleased on the `NO_HIGHP` return	P05	P05		P15	KILLED
+K124	the adapter rejects `PERFORMANCE_CAVEAT` although the option is false	U37	U37			KILLED
+K125	`init` while `ready` re-creates the resources	U38	U38			KILLED
+K126	`dispose` in `failed` omits `loseContext`	U34	U34			KILLED
+K127	`dispose` after a failed `initialize` omits `loseContext`	U39	U39			KILLED
+K128	`onStatus` emitted before `onError`	U25,U36	U25,U36		U31,U34	KILLED
+K129	`x-gl.executes` supported on the headless host	U06	U06			KILLED

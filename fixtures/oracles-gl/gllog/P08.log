@@ -1,0 +1,8 @@
+["factory"]
+["getContext","webgl2",{"alpha":true,"antialias":true,"depth":false,"failIfMajorPerformanceCaveat":true,"powerPreference":"default","premultipliedAlpha":true,"preserveDrawingBuffer":false,"stencil":false}]
+["getShaderPrecisionFormat","VERTEX_SHADER","HIGH_FLOAT"]
+["getShaderPrecisionFormat","FRAGMENT_SHADER","HIGH_FLOAT"]
+["getParameter","MAX_VERTEX_ATTRIBS"]
+["getParameter","MAX_VIEWPORT_DIMS"]
+["getExtension","WEBGL_lose_context"]
+["loseContext"]

@@ -1,0 +1,280 @@
+id	group	tier	scene	layout	input	expected	error
+G01	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G01.glplan	
+G02	G	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G02.glplan	
+G03	G	both	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G03.glplan	
+G04	G	both	../oracles-igl/scenes/single.scene.json	../oracles-igl/layouts/F08.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G04.glplan	
+G05	G	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G05.glplan	
+G06	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"../oracles-svg/states/Y03.state.json"}	plan/G06.glplan	
+G07	G	both	../oracles-svg/scenes/loops2.scene.json	../oracles-svg/layouts/loops2.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G07.glplan	
+G08	G	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"size":{"height":600,"width":900},"state":"states/G08.state.json"}	plan/G08.glplan	
+G09	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"../oracles-svg/states/Y07.state.json"}	plan/G09.glplan	
+G10	G	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"size":{"height":600,"width":900},"state":"states/G10.state.json"}	plan/G10.glplan	
+G11	G	both	../oracles-svg/scenes/ten.scene.json	../oracles-svg/layouts/ten.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/G11.glplan	
+B01	B	both	scenes/far-thr.scene.json	layouts/far-thr.layout.json	{"search":"inputs/B01.search.json","size":{"height":600,"width":900},"state":"states/far-thr.state.json"}	plan/B01.glplan	
+B02	B	both	../oracles-svg/scenes/zero.scene.json	../oracles-svg/layouts/zero.layout.json	{"size":{"height":600,"width":900},"state":"../oracles-svg/states/N02.state.json"}	plan/B02.glplan	
+B03	B	both	../oracles-svg/scenes/loops2.scene.json	../oracles-svg/layouts/loops2.layout.json	{"size":{"height":600,"width":900},"state":"states/B03.state.json"}	plan/B03.glplan	
+B04	B	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"size":{"height":300,"width":400},"state":"initial"}	plan/B04.glplan	
+B05	B	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"also":[{"expected":"plan/B05b.glplan","state":"states/B05b.state.json"}],"size":{"height":600,"width":900},"state":"states/B05.state.json"}	plan/B05.glplan	
+B06	B	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"size":{"height":600,"width":900},"state":"../oracles-svg/states/Y12.state.json"}	plan/B06.glplan	
+B07	B	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"../oracles-svg/states/Y01.state.json"}	plan/B07.glplan	
+B08	B	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"also":[{"expected":"plan/B08.b.glplan","options":{"dl":{"edgeLabels":false}},"outcome":"json/B08.b.json"},{"expected":"plan/B08.c.glplan","list":{"maxDrawnLabelUnits":0},"outcome":"json/B08.c.json"}],"options":{"dl":{"labels":false}},"size":{"height":600,"width":900},"state":"initial"}	plan/B08.a.glplan	
+B09	B	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"limits":{"maxBytes":936},"size":{"height":600,"width":900},"state":"initial"}	plan/B09.glplan	
+B10	B	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"limits":{"maxBytes":935},"size":{"height":600,"width":900},"state":"initial"}		RESOURCE_LIMIT/BYTES_LIMIT
+B11	B	both	scenes/far-a.scene.json	layouts/far-a.layout.json	{"size":{"height":600,"width":900},"state":"states/far-a.state.json"}	plan/B11.glplan	
+B12	B	both	scenes/far-pair.scene.json	layouts/far-pair.layout.json	{"size":{"height":600,"width":900},"state":"states/far-pair.state.json"}	plan/B12.glplan	
+B13	B	both	scenes/far-out.scene.json	layouts/far-out.layout.json	{"size":{"height":600,"width":900},"state":"states/far-out.state.json"}	plan/B13.glplan	
+B14	B	both	scenes/far-a.scene.json	layouts/far-a.layout.json	{"size":{"height":600,"width":900},"state":"states/far-a.sel.state.json"}	plan/B14.glplan	
+B15	B	both	scenes/far-b.scene.json	layouts/far-b.layout.json	{"size":{"height":600,"width":900},"state":"states/far-b.state.json"}	plan/B15.glplan	
+B16	B	both	scenes/far-node.scene.json	layouts/far-node.layout.json	{"size":{"height":600,"width":900},"state":"states/far-node.state.json"}	plan/B16.glplan	
+B17	B	both	../oracles-svg/scenes/ids12.scene.json	../oracles-svg/layouts/ids12.layout.json	{"size":{"height":600,"width":900},"state":"initial"}	plan/B17.glplan	
+B18	B	both	scenes/far-par.scene.json	layouts/far-par.layout.json	{"size":{"height":600,"width":900},"state":"states/far-par.state.json"}	plan/B18.glplan	
+B19	B	both	scenes/far-incl.scene.json	layouts/far-incl.layout.json	{"size":{"height":600,"width":900},"state":"states/far-incl.state.json"}	plan/B19.glplan	
+B20	B	both	scenes/far-coinc.scene.json	layouts/far-coinc.layout.json	{"size":{"height":600,"width":900},"state":"states/far-coinc.state.json"}	plan/B20.glplan	
+B21	B	both	scenes/far-away.scene.json	layouts/far-away.layout.json	{"search":"inputs/B21.search.json","size":{"height":600,"width":900},"state":"states/far-away.state.json"}	plan/B21.glplan	
+H01	H	core				json/H01.set.json	
+H02	H	core				json/H02.sha256.json	
+H03	H	core				json/H03.sources.json	
+H04	H	core				json/H04.lint.json	
+H05	H	core			{"scenes":["../oracles-svg/scenes/markup.scene.json","../oracles-svg/scenes/hostile-svg.scene.json","../oracles-svg/scenes/illegal.scene.json"]}	json/H05.const.json	
+H06	H	core				json/H06.names.json	
+W01	W	core			{"files":["plan/G01.glplan","plan/G02.glplan","plan/G03.glplan","plan/G04.glplan","plan/G05.glplan","plan/G06.glplan","plan/G07.glplan","plan/G08.glplan","plan/G09.glplan","plan/G10.glplan","plan/G11.glplan"]}		
+W02	W	core			bad/W02.glplan		INVALID_INPUT/SCHEMA
+W03	W	core			bad/W03.glplan		INVALID_INPUT/SCHEMA
+W04	W	core			bad/W04.glplan		INVALID_INPUT/SCHEMA
+W05	W	core			bad/W05.glplan		INVALID_INPUT/SCHEMA
+W06	W	core			bad/W06.glplan		INVALID_INPUT/SCHEMA
+W07	W	core			bad/W07.glplan		INVALID_INPUT/SCHEMA
+W08	W	core			bad/W08.glplan		INVALID_INPUT/SCHEMA
+W09	W	core			bad/W09.glplan		INVALID_INPUT/SCHEMA
+W10	W	core			bad/W10.glplan		INVALID_INPUT/SCHEMA
+W11	W	core			bad/W11.glplan		INVALID_INPUT/SCHEMA
+W12	W	core			bad/W12.glplan		INVALID_INPUT/SCHEMA
+W13	W	core			bad/W13.glplan		INVALID_INPUT/SCHEMA
+W14	W	core			bad/W14.glplan		INVALID_INPUT/SCHEMA
+W15	W	core			bad/W15.glplan		INVALID_INPUT/SCHEMA
+W16	W	core			bad/W16.glplan		INVALID_INPUT/SCHEMA
+W17	W	core			bad/W17.glplan		INVALID_INPUT/SCHEMA
+W18	W	core			bad/W18.glplan		INVALID_INPUT/SCHEMA
+W19	W	core			bad/W19.glplan		INVALID_INPUT/SCHEMA
+W20	W	core			bad/W20.glplan		INVALID_INPUT/SCHEMA
+W21	W	core			bad/W21.glplan		INVALID_INPUT/SCHEMA
+W22	W	core			bad/W22.glplan		INVALID_INPUT/SCHEMA
+W23	W	core			bad/W23.glplan		INVALID_INPUT/SCHEMA
+W24	W	core			bad/W24.glplan		INVALID_INPUT/SCHEMA
+W25	W	core			bad/W25.glplan		INVALID_INPUT/SCHEMA
+W26	W	core			bad/W26.glplan		INVALID_INPUT/SCHEMA
+W27	W	core			bad/W27.glplan		INVALID_INPUT/SCHEMA
+W28	W	core			bad/W28.glplan		INVALID_INPUT/SCHEMA
+W29	W	core			bad/W29.glplan		INVALID_INPUT/SCHEMA
+W30	W	core			bad/W30.glplan		INVALID_INPUT/SCHEMA
+W31	W	core			bad/W31.glplan		INVALID_INPUT/SCHEMA
+W32	W	core			bad/W32.glplan		INVALID_INPUT/SCHEMA
+W33	W	core			bad/W33.glplan		INVALID_INPUT/SCHEMA
+W34	W	core			bad/W34.glplan		INVALID_INPUT/SCHEMA
+W35	W	core			bad/W35.glplan		INVALID_INPUT/SCHEMA
+W36	W	core			bad/W36.glplan		INVALID_INPUT/SCHEMA
+W37	W	core			bad/W37.glplan		INVALID_INPUT/SCHEMA
+W38	W	core			bad/W38.glplan		INVALID_INPUT/SCHEMA
+X01	X	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"from":"gl","plan":"plan/G01.glplan"}	xr/X01.xr.json	
+X02	X	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"from":"gl","plan":"plan/G05.glplan"}	xr/X02.xr.json	
+X03	X	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"from":"gl","plan":"plan/G06.glplan"}	xr/X03.xr.json	
+X04	X	core	scenes/far-edge.scene.json	layouts/far-edge.layout.json	{"from":"gl","plan":"plan/X04.glplan"}	xr/X04.xr.json	
+X05	X	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"all_equal":true,"calls":"calls/X05.calls","from":"three-way","plan":"plan/G01.glplan","svg":"../oracles-svg/svg/G01.svg"}	xr/X05.xr.json	
+X06	X	core	scenes/far-a.scene.json	layouts/far-a.layout.json	{"from":"gl","plan":"plan/X06.glplan"}	xr/X06.xr.json	
+X07	X	core			{"from":"gl","lenient":true,"plan":"bad/X07.glplan"}		INVALID_INPUT/SCHEMA
+X08	X	core	scenes/far-a.scene.json	layouts/far-a.layout.json	{"from":"gl","plan":"plan/X08.glplan"}	xr/X08.xr.json	
+X09	X	core	../oracles-svg/scenes/hostile-svg.scene.json	../oracles-svg/layouts/hostile-svg.layout.json	{"equals_list_readout":true,"from":"gl","plan":"plan/X09.glplan"}	xr/X09.xr.json	
+E01	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"scenario":"create","size":{"height":600,"width":900},"state":"initial"}	gllog/E01.log	
+E02	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"frame":{"heightPx":600,"ink":[34,34,34],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E02.log	
+E03	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"frame":{"heightPx":600,"ink":[34,34,34],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"../oracles-svg/states/Y03.state.json"}	gllog/E03.log	
+E04	E	core	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	{"frame":{"heightPx":600,"ink":[34,34,34],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E04.log	
+E05	E	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"frame":{"heightPx":600,"ink":[34,34,34],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E05.log	
+E06	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"frame":{"heightPx":800,"ink":[34,34,34],"widthPx":1200},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E06.log	
+E07	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"frame":{"heightPx":600,"ink":[255,0,128],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E07.log	
+E08	E	core	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	{"frame":{"heightPx":600,"ink":[34,34,34],"widthPx":900},"scenario":"frame","size":{"height":600,"width":900},"state":"initial"}	gllog/E08.log	
+E09	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"scenario":"dispose","size":{"height":600,"width":900},"state":"initial"}	gllog/E09.log	
+E10	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_detail":"COMPILE_FAILED:ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error","info_log":"ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ","scenario":"fail-compile:disc.fs","size":{"height":600,"width":900},"state":"initial"}	gllog/E10.log	INVALID_INPUT/INVALID_VALUE
+E11	E	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_detail":"LINK_FAILED:ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error","info_log":"ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ERROR: 0:7: 'fake_symbol' : syntax error (fake driver text, not from any scene) ","scenario":"fail-link:edge","size":{"height":600,"width":900},"state":"initial"}	gllog/E11.log	INVALID_INPUT/INVALID_VALUE
+U01	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U01.script.json		
+U02	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U02.script.json		
+U03	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U03.script.json		
+U04	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U04.script.json		
+U05	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U05.script.json		
+U06	U	subject			{"also":[{"expected":"json/U06.dom.manifest.json","host":"dom"}],"equal":"json/U06.equal.json","host":"headless"}	json/U06.headless.manifest.json	
+U07	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U07.script.json		
+U08	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U08.script.json		
+U09	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"also":[{"expected":"json/U09.G05.witness.json","layout":"../oracles-igl/layouts/F04.layout.json","plan":"plan/G05.glplan","scene":"../oracles-igl/scenes/mixed20.scene.json"}],"plan":"plan/G01.glplan"}	json/U09.G01.witness.json	
+U10	U	subject					
+U11	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"outcome":"json/U11.witness-honesty.json"}	json/U11.witness-honesty.json	
+U12	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"only":["L01"],"options":{"capacity":{"maxNodes":5},"dl":{"edgeLabels":false},"ink":[1,2,3],"name":"x-gl"}}	json/U12.cap.json	
+U13	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"equal_to_canvas_layer_8_stream":true,"layers":[8],"plan":"plan/G01.glplan"}	calls/U13.calls	
+U20	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"}],"expect_log":"gllog/U20.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"}]}	gllog/U20.log	
+U21	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"F"}],"expect_log":"gllog/U21.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"}]}	gllog/U21.log	
+U22	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"R"}],"expect_log":"gllog/U22.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U22.log	
+U23	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"C","plan":"plan/G05.glplan"},{"op":"R"}],"expect_log":"gllog/U23.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U23.log	
+U24	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"R"},{"op":"L"},{"op":"R"},{"op":"L"},{"op":"R"}],"expect_log":"gllog/U24.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U24.log	
+U25	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"}],"expect_log":"gllog/U25.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"}]}	gllog/U25.log	
+U26	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"D"}],"expect_log":"gllog/U26.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U26.log	
+U27	U	subject			{"events":[{"fail":"compile","op":"init"}],"expect_log":"gllog/U27.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"created"}]}	gllog/U27.log	
+U28	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"lost","op":"R"},{"op":"R"}],"expect_log":"gllog/U28.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U28.log	
+U29	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"L"}],"expect_log":"gllog/U29.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"}]}	gllog/U29.log	
+U30	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"R"}],"expect_log":"gllog/U30.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U30.log	
+U31	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"},{"op":"R"}],"expect_log":"gllog/U31.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U31.log	
+U32	U	subject			{"events":[{"op":"C","plan":"plan/G01.glplan"},{"op":"D"}],"expect_log":"gllog/U32.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U32.log	
+U33	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"D"}],"expect_log":"gllog/U33.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"disposed"}]}	gllog/U33.log	
+U34	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"link","op":"R"},{"op":"D"}],"expect_log":"gllog/U34.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"LINK_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U34.log	
+U35	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"C","plan":"plan/G05.glplan"},{"op":"C","plan":"plan/G01.glplan"},{"op":"R"}],"expect_log":"gllog/U35.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U35.log	
+U36	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"},{"op":"L"},{"op":"R"},{"op":"D"}],"expect_log":"gllog/U36.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U36.log	
+U37	U	subject			{"cases":[{"fake":{"adapter":{"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true}]},"name":"default"},{"fake":{"adapter":{"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true}]},"name":"option-false","options":{"failIfMajorPerformanceCaveat":false}},{"fake":{"adapter":{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},"canvases":[{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true}]},"name":"software-only-option-false","options":{"failIfMajorPerformanceCaveat":false}},{"fake":{"adapter":{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},"canvases":[{"webgl2":null},{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]},"name":"software-only-default"}],"expect_log":"gllog/U37.log","expect_status":{"default":{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},"option-false":{"attributes":{"failIfMajorPerformanceCaveat":false},"contextLost":false,"phase":"ready"},"software-only-default":{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"PERFORMANCE_CAVEAT","phase":"created"},"software-only-option-false":{"attributes":{"failIfMajorPerformanceCaveat":false},"contextLost":false,"phase":"ready"}}}	gllog/U37.log	
+U38	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"init"}],"expect_log":"gllog/U38.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U38.log	
+U39	U	subject			{"events":[{"fail":"compile","op":"init"},{"op":"D"}],"expect_log":"gllog/U39.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U39.log	
+P01	P	core			{"expect_log":"gllog/P01.log","fake":{"canvases":[],"factory":"not-a-function"}}	json/P01.probe.json	
+P02	P	core			{"expect_log":"gllog/P02.log","fake":{"canvases":[]}}	json/P02.probe.json	
+P03	P	core			{"expect_log":"gllog/P03.log","fake":{"canvases":[{"webgl2":null},{"webgl2":null}]}}	json/P03.probe.json	
+P04	P	core			{"expect_log":"gllog/P04.log","fake":{"canvases":[{"webgl2":null},{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P04.probe.json	
+P05	P	core			{"expect_log":"gllog/P05.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":15}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P05.probe.json	
+P06	P	core			{"expect_log":"gllog/P06.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":15,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P06.probe.json	
+P07	P	core			{"expect_log":"gllog/P07.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":3,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P07.probe.json	
+P08	P	core			{"expect_log":"gllog/P08.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[4096,4096],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]},"need":{"heightPx":8192,"widthPx":8192}}	json/P08.probe.json	
+P09	P	core			{"expect_log":"gllog/P09.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P09.probe.json	
+P10	P	core			{"expect_log":"gllog/P10.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":null}]}}	json/P10.probe.json	
+P11	P	core			{"expect_log":"gllog/P11.log","fake":{"canvases":[{"2d":true,"one_context_type":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true}]}}	json/P11.probe.json	
+P12	P	core			{"expect_log":"gllog/P12.log","fake":{"canvases":[{"2d":true,"throws":"getParameter","webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P12.probe.json	
+P13	P	core			{"expect_log":"gllog/P13.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P13.probe.json	
+P14	P	core			{"expect_log":"gllog/P14.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]}}	json/P14.probe.json	
+P15	P	core			{"expect_log":"gllog/P15.log","fake":{"canvases":[{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[4096,4096],"vertexPrecision":15}},{"2d":true,"webgl2":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}}]},"need":{"heightPx":8192,"widthPx":8192}}	json/P15.probe.json	
+P16	P	core			{"expect_log":"gllog/P16.log","fake":{"canvases":[{"webgl2":null,"webgl2_relaxed":{"extensions":["WEBGL_lose_context"],"fragmentPrecision":23,"maxVertexAttribs":16,"maxViewportDims":[16384,16384],"vertexPrecision":23}},{"2d":true}]},"options":{"failIfMajorPerformanceCaveat":false}}	json/P16.probe.json	
+D01	D	subject					
+D02	D	subject					
+D03	D	subject					
+D04	D	subject					
+D05	D	subject					
+K01	K						
+K02	K						
+K03	K						
+K04	K						
+K05	K						
+K06	K						
+K07	K						
+K08	K						
+K09	K						
+K10	K						
+K11	K						
+K12	K						
+K13	K						
+K14	K						
+K15	K						
+K16	K						
+K17	K						
+K18	K						
+K19	K						
+K20	K						
+K21	K						
+K22	K						
+K23	K						
+K24	K						
+K25	K						
+K26	K						
+K27	K						
+K28	K						
+K29	K						
+K30	K						
+K31	K						
+K32	K						
+K33	K						
+K34	K						
+K35	K						
+K36	K						
+K37	K						
+K38	K						
+K39	K						
+K40	K						
+K41	K						
+K42	K						
+K43	K						
+K44	K						
+K45	K						
+K46	K						
+K47	K						
+K48	K						
+K49	K						
+K50	K						
+K51	K						
+K52	K						
+K53	K						
+K54	K						
+K55	K						
+K56	K						
+K57	K						
+K58	K						
+K59	K						
+K60	K						
+K61	K						
+K62	K						
+K63	K						
+K64	K						
+K65	K						
+K66	K						
+K67	K						
+K68	K						
+K69	K						
+K70	K						
+K71	K						
+K72	K						
+K73	K						
+K74	K						
+K75	K						
+K76	K						
+K77	K						
+K78	K						
+K79	K						
+K80	K						
+K81	K						
+K82	K						
+K83	K						
+K84	K						
+K85	K						
+K86	K						
+K87	K						
+K88	K						
+K89	K						
+K90	K						
+K91	K						
+K92	K						
+K93	K						
+K94	K						
+K95	K						
+K96	K						
+K97	K						
+K98	K						
+K99	K						
+K100	K						
+K101	K						
+K102	K						
+K103	K						
+K104	K						
+K105	K						
+K106	K						
+K107	K						
+K108	K						
+K109	K						
+K110	K						
+K111	K						
+K112	K						
+K113	K						
+K114	K						
+K115	K						
+K116	K						
+K117	K						
+K118	K						
+K119	K						
+K120	K						
+K121	K						
+K122	K						
+K123	K						
+K124	K						
+K125	K						
+K126	K						
+K127	K						
+K128	K						
+K129	K						

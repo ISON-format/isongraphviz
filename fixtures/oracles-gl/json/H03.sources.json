@@ -1,0 +1,32 @@
+[
+ {
+  "bytes": 129,
+  "name": "arrow.fs",
+  "sha256": "894c4e9db734c2fcc5f42940184807d119f028d2d24bc53d979c038f0450e914"
+ },
+ {
+  "bytes": 310,
+  "name": "arrow.vs",
+  "sha256": "975cffe180978aaacd4b7e716fd067877e6c9bfd9de03530037fae630f459006"
+ },
+ {
+  "bytes": 1172,
+  "name": "disc.fs",
+  "sha256": "5a783e38303592b018513b272fdcda6ecd4feda10a7a65fa594d65f3be603bf6"
+ },
+ {
+  "bytes": 476,
+  "name": "disc.vs",
+  "sha256": "d9a3be158baca0282919240a9d729989ad671c8828a531a95fe04f8bf5909d30"
+ },
+ {
+  "bytes": 536,
+  "name": "edge.fs",
+  "sha256": "b537d827b12c32a8c98e0f3b7412bbd71cbe77b1efa0bd7efa0127fb7b69c245"
+ },
+ {
+  "bytes": 1662,
+  "name": "edge.vs",
+  "sha256": "9dc240db5ea5b60fc26fadc1425da04b4a84b123812fd7a00786beec25f1c62f"
+ }
+]

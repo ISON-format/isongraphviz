@@ -1,0 +1,6 @@
+["viewport",0,0,900,600]
+["clearColor",0,0,0,0]
+["clear","COLOR_BUFFER_BIT"]
+["enable","BLEND"]
+["blendFunc","ONE","ONE_MINUS_SRC_ALPHA"]
+["bindVertexArray",null]

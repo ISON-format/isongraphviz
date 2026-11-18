@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebGL renderer demo: click to source address</title>
+<style>
+  :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+  body { margin: 1rem auto; max-width: 960px; padding: 0 1rem; background: #fff; color: #222; }
+  #graph { border: 1px solid currentColor; width: 900px; max-width: 100%; height: 600px; overflow: hidden; position: relative; }
+  #graph canvas { display: block; }
+  #graph [role="status"] { position: absolute; left: -10000px; }
+  pre#result { white-space: pre-wrap; word-break: break-all; border: 1px solid currentColor; padding: .5rem; min-height: 3rem; }
+  button { margin-right: .5rem; }
+</style>
+</head>
+<body>
+<h1>Click to source address</h1>
+<p>Non-normative demo of the IGR-GL/1 WebGL2 renderer. Source text, scene and layout are embedded by <code>scripts/plan-ison.mjs --demo</code>; the plan is
+drawn by the six shaders through a real WebGL2 context and the labels by the companion 2D layer. The page probes for WebGL2 first and, when the probe refuses,
+mounts the Canvas renderer and then V5's SVG renderer by the host's own try-chain (fallback is never the renderer's). A click goes through
+<code>pickDrawn</code> and shows the typed address and the identity that <code>resolveSelection</code> finds in the embedded source. Build once with
+<code>npm run demo -- ../../fixtures/oracles/o1-basic.source.ison --demo --layout force</code> and <code>npm run demo:build</code>, then serve this folder from
+<code>localhost</code> (hashing needs a secure context); add <code>?software=1</code> to accept software GL. The canvas is not keyboard-operable and is not
+claimed accessible (design 8.3).</p>
+<div><button id="fit">fit</button><button id="zin">zoom in</button><button id="zout">zoom out</button></div>
+<div id="graph"></div>
+<pre id="result">loading ...</pre>
+<script src="out/data.js"></script>
+<script src="out/demo.js"></script>
+</body>
+</html>
