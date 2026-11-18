@@ -1,0 +1,41 @@
+{
+  "name": "isongraph-visualize-bench",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "V12 performance evidence harness: seeded workloads, per-stage Node measurements, an optional Chromium mode, and the report generator; not a pass/fail suite",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "node scripts/vitest.mjs run",
+    "check": "npm run typecheck && npm test && npm run bench:smoke",
+    "bench": "npm run build && node scripts/bench.mjs",
+    "bench:smoke": "npm run build && node scripts/bench.mjs --smoke",
+    "bench:browser": "npm run build && node scripts/bench.mjs --browser",
+    "report": "npm run build && node scripts/results.mjs"
+  },
+  "dependencies": {
+    "isongraph-visualize-a11y-companion": "file:../a11y-companion",
+    "isongraph-visualize-display-list": "file:../display-list",
+    "isongraph-visualize-export-core": "file:../export-core",
+    "isongraph-visualize-interaction-core": "file:../interaction-core",
+    "isongraph-visualize-layout-core": "file:../layout-core",
+    "isongraph-visualize-lod-core": "file:../lod-core",
+    "isongraph-visualize-renderer-canvas": "file:../renderer-canvas",
+    "isongraph-visualize-renderer-core": "file:../renderer-core",
+    "isongraph-visualize-renderer-svg": "file:../renderer-svg",
+    "isongraph-visualize-renderer-webgl": "file:../renderer-webgl",
+    "isongraph-visualize-scene-core": "file:../scene-core",
+    "isongraph-visualize-stable-layout-core": "file:../stable-layout-core"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.65.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}
