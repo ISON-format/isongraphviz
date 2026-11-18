@@ -1,0 +1,48 @@
+{
+  "name": "isongraph-visualize-export-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "IGR-IA/1 export: integrity manifest, bundle verification, PNG binding chunk, headless rendering",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.core.json",
+    "build": "tsc -p tsconfig.build.json",
+    "test": "node scripts/vitest.mjs run",
+    "test:slow": "node scripts/vitest.mjs run --config vitest.slow.config.ts",
+    "mutants": "node scripts/mutate.mjs",
+    "check": "npm run typecheck && npm test && npm run test:slow && npm run build && npm run smoke && npm run demo:check",
+    "smoke": "node scripts/smoke.mjs",
+    "demo": "node scripts/ia-demo.mjs",
+    "demo:build": "node scripts/build-demo.mjs",
+    "demo:check": "node scripts/demo-check.mjs",
+    "smoke:browser": "node scripts/browser-smoke.mjs"
+  },
+  "dependencies": {
+    "isongraph-visualize-a11y-companion": "file:../a11y-companion",
+    "isongraph-visualize-display-list": "file:../display-list",
+    "isongraph-visualize-interaction-core": "file:../interaction-core",
+    "isongraph-visualize-renderer-core": "file:../renderer-core",
+    "isongraph-visualize-renderer-svg": "file:../renderer-svg",
+    "isongraph-visualize-scene-core": "file:../scene-core"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "isongraph-visualize-layout-core": "file:../layout-core",
+    "isongraph-visualize-renderer-canvas": "file:../renderer-canvas",
+    "playwright-core": "1.65.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

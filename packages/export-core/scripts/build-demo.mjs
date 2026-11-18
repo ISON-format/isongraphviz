@@ -1,0 +1,15 @@
+// scripts/build-demo.mjs - bundles demo/page.mjs (renderer-canvas ./dom, interaction-core ./dom, a11y-companion ./dom and this package) with esbuild into
+// demo/out/demo.js and writes demo/out/data.js (the example scene and layout of the oracle corpus). NON-NORMATIVE. Needs `npm run build` first.
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
+
+const PKG = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const ORACLES = join(PKG, "..", "..", "fixtures", "oracles-ia");
+const out = join(PKG, "demo", "out");
+mkdirSync(out, { recursive: true });
+const b64 = (rel) => readFileSync(join(ORACLES, rel)).toString("base64");
+writeFileSync(join(out, "data.js"), `window.__IA_DEMO__ = ${JSON.stringify({ name: "G9", size: { width: 900, height: 600 }, sceneB64: b64("scenes/G9.scene.json"), layoutB64: b64("layouts/G9.layout.json") })};\n`);
+const r = await build({ entryPoints: [join(PKG, "demo", "page.mjs")], bundle: true, format: "iife", platform: "browser", outfile: join(out, "demo.js"), logLevel: "error", target: "es2022", metafile: true });
+console.log(`wrote demo/out/demo.js (${Object.values(r.metafile.outputs)[0].bytes} bytes) and demo/out/data.js`);
