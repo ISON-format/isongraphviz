@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="igr-svg" width="900" height="600" viewBox="0 0 900 600" role="graphics-document" aria-roledescription="graph" aria-labelledby="igr-title" aria-describedby="igr-desc" data-igr-svg="igr-svg/1" data-igr-artifact="401d1e3c150b6dbeefda9c8ab4cae751a71b8da9483ac7cfca5098ccb4a7913a" data-igr-scene="8286b0ad3ad730e2c21f0651ae9095b67c69d61e9a8690195bb58c0c6972a5ff" data-igr-layout="74949783a66d863d01f059c0872542d009001f4f6da076768b2fd6633b68fbc2">
+<title id="igr-title">Directed graph with 2 nodes and 1 edge. Node categories: p (2).</title>
+<desc id="igr-desc">0 selected, 0 hidden.</desc>
+<style>
+.igr-svg{font:12px sans-serif}
+.igr-shape{stroke:#fff;stroke-width:2}
+.igr-k0 .igr-shape{fill:#2a78d6}
+.igr-k1 .igr-shape{fill:#eb6834}
+.igr-k2 .igr-shape{fill:#1baf7a}
+.igr-k3 .igr-shape{fill:#eda100}
+.igr-k4 .igr-shape{fill:#e87ba4}
+.igr-k5 .igr-shape{fill:#008300}
+.igr-k6 .igr-shape{fill:#4a3aa7}
+.igr-k7 .igr-shape{fill:#e34948}
+.igr-kx .igr-shape{fill:#7a7975}
+.igr-line{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:2}
+.igr-pick{fill:none;stroke:transparent;stroke-width:10;pointer-events:stroke}
+.igr-arrow{fill:currentColor;fill-opacity:.6}
+.igr-ring-sel{fill:none;stroke:currentColor;stroke-width:3}
+.igr-ring-foc{fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:4 3}
+.igr-halo-sel{fill:none;stroke:currentColor;stroke-width:6;stroke-opacity:.35}
+.igr-halo-foc{fill:none;stroke:currentColor;stroke-width:10;stroke-opacity:.25;stroke-dasharray:6 4}
+.igr-label,.igr-elabel{fill:currentColor;unicode-bidi:isolate;pointer-events:none}
+</style>
+<defs><marker id="igr-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path class="igr-arrow" d="M 0 0 L 10 5 L 0 10 z"/></marker></defs>
+<g class="igr-nodes">
+<g id="igr-n-7b226964223a22693a31222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p 1" tabindex="0">
+<title>p 1</title>
+<circle class="igr-shape" cx="32.025" cy="300" r="10"/>
+<text class="igr-label" x="32.025" y="324" text-anchor="middle">1</text>
+</g>
+<g id="igr-n-7b226964223a22733a6967616767313a30313233343536373839616263646566303132333435363738396162636465663031323334353637383961626364656630313233343536373839616263646566222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p igagg1:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" tabindex="-1">
+<title>p igagg1:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</title>
+<circle class="igr-shape" cx="867.975" cy="300" r="10"/>
+<text class="igr-label" x="867.975" y="324" text-anchor="middle">igagg1:0123456789abcdef…</text>
+</g>
+</g>
+<g class="igr-edges">
+<g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22693a31222c2274797065223a2270227d2c22746774223a7b226964223a22733a6967616767313a30313233343536373839616263646566303132333435363738396162636465663031323334353637383961626364656630313233343536373839616263646566222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
+<title>R</title>
+<desc>1 R igagg1:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef</desc>
+<path class="igr-line" d="M 44.025 300 L 855.975 300" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 44.025 300 L 855.975 300"/>
+<text class="igr-elabel" x="450" y="296" text-anchor="middle">R</text>
+</g>
+</g>
+</svg>

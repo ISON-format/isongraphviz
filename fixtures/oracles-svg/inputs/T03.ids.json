@@ -1,0 +1,82 @@
+[
+ {
+  "case": "valid node",
+  "id": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "valid edge",
+  "id": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "wrong prefix",
+  "id": "xyz-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "kind a (reserved)",
+  "id": "igr-a-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "uppercase hex",
+  "id": "igr-n-7B226964223A22693A31222C2274797065223A22706572736F6E227D",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "odd hex",
+  "id": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d0",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "invalid utf-8",
+  "id": "igr-n-ff7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "json with a space",
+  "id": "igr-n-7b226964223a2022693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "keys reordered",
+  "id": "igr-n-7b2274797065223a22706572736f6e222c226964223a22693a31227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "extra key",
+  "id": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e222c2278223a2279227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "missing key",
+  "id": "igr-n-7b226964223a22693a31227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "number as id",
+  "id": "igr-n-7b226964223a312c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "empty rest",
+  "id": "igr-n-",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "other kind letter",
+  "id": "igr-x-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "igr"
+ },
+ {
+  "case": "id of the other prefix",
+  "id": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+  "idPrefix": "g-1"
+ },
+ {
+  "case": "valid json naming no scene element",
+  "id": "igr-n-7b226964223a22733a6e6f626f6479222c2274797065223a2267686f7374227d",
+  "idPrefix": "igr"
+ }
+]

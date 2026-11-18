@@ -1,0 +1,242 @@
+{
+ "conflict_case_format": "[x, y, kind, expected] with kind n=node centre, m=edge chord midpoint, expected = index into drawn_order (-1 none, -2 error)",
+ "drawn_order": [
+  {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  },
+  {
+   "node": {
+    "id": "s:ann",
+    "type": "person"
+   }
+  },
+  {
+   "edge": {
+    "ord": "0",
+    "rel": "KNOWS",
+    "src": {
+     "id": "i:1",
+     "type": "person"
+    },
+    "tgt": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   }
+  }
+ ],
+ "elements": [
+  {
+   "by_id": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   },
+   "conflicts": [
+    [
+     867.928442,
+     406.39984,
+     "n",
+     0
+    ],
+    [
+     450.0,
+     300.0,
+     "m",
+     0
+    ]
+   ],
+   "element": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   },
+   "id": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d",
+   "identity": {
+    "address": {
+     "id": "i:1",
+     "type": "person"
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a",
+    "kind": "node"
+   },
+   "objectRef": {
+    "address": {
+     "id": "i:1",
+     "type": "person"
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"
+   }
+  },
+  {
+   "by_id": {
+    "node": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   },
+   "conflicts": [
+    [
+     32.071558,
+     193.60016,
+     "n",
+     1
+    ],
+    [
+     450.0,
+     300.0,
+     "m",
+     1
+    ]
+   ],
+   "element": {
+    "node": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   },
+   "id": "igr-n-7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d",
+   "identity": {
+    "address": {
+     "id": "s:ann",
+     "type": "person"
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a",
+    "kind": "node"
+   },
+   "objectRef": {
+    "address": {
+     "id": "s:ann",
+     "type": "person"
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"
+   }
+  },
+  {
+   "by_id": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   },
+   "conflicts": [
+    [
+     32.071558,
+     193.60016,
+     "n",
+     0
+    ],
+    [
+     867.928442,
+     406.39984,
+     "n",
+     1
+    ]
+   ],
+   "element": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   },
+   "id": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d",
+   "identity": {
+    "address": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a",
+    "kind": "edge"
+   },
+   "objectRef": {
+    "address": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    },
+    "artifact_sha256": "1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a"
+   }
+  }
+ ],
+ "pointer": [
+  {
+   "pick": {
+    "node": {
+     "id": "i:1",
+     "type": "person"
+    }
+   },
+   "x": 32.0,
+   "y": 193.5
+  },
+  {
+   "pick": {
+    "edge": {
+     "ord": "0",
+     "rel": "KNOWS",
+     "src": {
+      "id": "i:1",
+      "type": "person"
+     },
+     "tgt": {
+      "id": "s:ann",
+      "type": "person"
+     }
+    }
+   },
+   "x": 500.0,
+   "y": 308.0
+  },
+  {
+   "pick": null,
+   "x": 500.0,
+   "y": 300.0
+  },
+  {
+   "pick": {
+    "node": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   },
+   "x": 867.9,
+   "y": 406.4
+  }
+ ]
+}

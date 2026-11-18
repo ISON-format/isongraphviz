@@ -1,0 +1,156 @@
+{
+ "calls": [
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [],
+    "edge_labels": true,
+    "labels": "full",
+    "motion": "none"
+   },
+   "op": "probe"
+  },
+  {
+   "arg": {
+    "model": {
+     "layout": "../oracles-igl/layouts/F13.layout.json",
+     "scene": "../oracles-igl/scenes/keybound.scene.json"
+    }
+   },
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [
+     "LABELS_ELIDED"
+    ],
+    "edge_labels": true,
+    "labels": "elided",
+    "motion": "none"
+   },
+   "op": "probe"
+  },
+  {
+   "arg": {
+    "svg": {
+     "labels": false
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [
+     "EDGE_LABELS_OMITTED"
+    ],
+    "edge_labels": false,
+    "labels": "none",
+    "motion": "none"
+   },
+   "op": "probe"
+  },
+  {
+   "arg": {
+    "svg": {
+     "edgeLabels": false
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [
+     "EDGE_LABELS_OMITTED"
+    ],
+    "edge_labels": false,
+    "labels": "full",
+    "motion": "none"
+   },
+   "op": "probe"
+  },
+  {
+   "arg": {},
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "reducedMotion": true
+   },
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [],
+    "edge_labels": true,
+    "labels": "full",
+    "motion": "none"
+   },
+   "op": "probe"
+  },
+  {
+   "arg": false,
+   "expect": "ok",
+   "op": "setReducedMotion"
+  },
+  {
+   "expect": "ok",
+   "expect_fidelity": {
+    "degradations": [],
+    "edge_labels": true,
+    "labels": "full",
+    "motion": "none"
+   },
+   "op": "probe"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

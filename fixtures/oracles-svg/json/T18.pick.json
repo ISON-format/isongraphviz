@@ -1,0 +1,111 @@
+[
+ {
+  "input": {
+   "targetId": "igr-n-7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d"
+  },
+  "label": "hidden node id",
+  "pick": null
+ },
+ {
+  "input": {
+   "point": {
+    "x": 867.9,
+    "y": 406.4
+   },
+   "targetId": "igr-n-7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d"
+  },
+  "label": "hidden node id with a point on its old position",
+  "pick": null
+ },
+ {
+  "input": {
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d"
+  },
+  "label": "hidden edge id",
+  "pick": null
+ },
+ {
+  "input": {
+   "point": {
+    "x": 450.0,
+    "y": 300.0
+   },
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d"
+  },
+  "label": "hidden edge id with a point on the chord",
+  "pick": null
+ },
+ {
+  "input": {
+   "targetId": "igr-n-7b226964223a22693a3939222c2274797065223a22706572736f6e227d"
+  },
+  "label": "decodes but names no element",
+  "pick": null
+ },
+ {
+  "input": {
+   "point": {
+    "x": 32.0,
+    "y": 193.5
+   },
+   "targetId": "igr-n-7b226964223a22693a3939222c2274797065223a22706572736f6e227d"
+  },
+  "label": "decodes but names no element, point on i:1",
+  "pick": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  }
+ },
+ {
+  "input": {
+   "targetId": "garbage"
+  },
+  "label": "undecodable id",
+  "pick": null
+ },
+ {
+  "input": {
+   "point": {
+    "x": 32.0,
+    "y": 193.5
+   },
+   "targetId": "garbage"
+  },
+  "label": "undecodable id, point on i:1",
+  "pick": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  }
+ },
+ {
+  "input": {
+   "targetId": "igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d"
+  },
+  "label": "visible node id",
+  "pick": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  }
+ },
+ {
+  "input": {
+   "point": {
+    "x": 32.0,
+    "y": 193.5
+   }
+  },
+  "label": "no id, point on i:1",
+  "pick": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  }
+ }
+]

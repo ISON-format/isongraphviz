@@ -1,0 +1,294 @@
+{
+ "conflict_case_format": "[x, y, kind, expected] with kind n=node centre, m=edge chord midpoint, expected = index into drawn_order (-1 none, -2 error)",
+ "drawn_order": [
+  {
+   "node": {
+    "id": "i:1",
+    "type": "p"
+   }
+  },
+  {
+   "node": {
+    "id": "i:2",
+    "type": "p"
+   }
+  },
+  {
+   "edge": {
+    "ord": "0",
+    "rel": "R",
+    "src": {
+     "id": "i:1",
+     "type": "p"
+    },
+    "tgt": {
+     "id": "i:2",
+     "type": "p"
+    }
+   }
+  },
+  {
+   "edge": {
+    "ord": "0",
+    "rel": "R",
+    "src": {
+     "id": "i:2",
+     "type": "p"
+    },
+    "tgt": {
+     "id": "i:2",
+     "type": "p"
+    }
+   }
+  }
+ ],
+ "elements": [
+  {
+   "by_id": {
+    "node": {
+     "id": "i:1",
+     "type": "p"
+    }
+   },
+   "conflicts": [
+    [
+     867.928442,
+     406.39984,
+     "n",
+     0
+    ],
+    [
+     450.0,
+     300.0,
+     "m",
+     0
+    ]
+   ],
+   "element": {
+    "node": {
+     "id": "i:1",
+     "type": "p"
+    }
+   },
+   "id": "igr-n-7b226964223a22693a31222c2274797065223a2270227d",
+   "identity": {
+    "address": {
+     "id": "i:1",
+     "type": "p"
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3",
+    "kind": "node"
+   },
+   "objectRef": {
+    "address": {
+     "id": "i:1",
+     "type": "p"
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3"
+   }
+  },
+  {
+   "by_id": {
+    "node": {
+     "id": "i:2",
+     "type": "p"
+    }
+   },
+   "conflicts": [
+    [
+     32.071558,
+     193.60016,
+     "n",
+     1
+    ],
+    [
+     450.0,
+     300.0,
+     "m",
+     1
+    ]
+   ],
+   "element": {
+    "node": {
+     "id": "i:2",
+     "type": "p"
+    }
+   },
+   "id": "igr-n-7b226964223a22693a32222c2274797065223a2270227d",
+   "identity": {
+    "address": {
+     "id": "i:2",
+     "type": "p"
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3",
+    "kind": "node"
+   },
+   "objectRef": {
+    "address": {
+     "id": "i:2",
+     "type": "p"
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3"
+   }
+  },
+  {
+   "by_id": {
+    "edge": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:1",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    }
+   },
+   "conflicts": [
+    [
+     32.071558,
+     193.60016,
+     "n",
+     0
+    ],
+    [
+     867.928442,
+     406.39984,
+     "n",
+     1
+    ]
+   ],
+   "element": {
+    "edge": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:1",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    }
+   },
+   "id": "igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22693a31222c2274797065223a2270227d2c22746774223a7b226964223a22693a32222c2274797065223a2270227d7d",
+   "identity": {
+    "address": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:1",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3",
+    "kind": "edge"
+   },
+   "objectRef": {
+    "address": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:1",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3"
+   }
+  },
+  {
+   "by_id": {
+    "edge": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:2",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    }
+   },
+   "conflicts": [
+    [
+     32.071558,
+     193.60016,
+     "n",
+     0
+    ],
+    [
+     867.928442,
+     406.39984,
+     "n",
+     1
+    ],
+    [
+     450.0,
+     300.0,
+     "m",
+     3
+    ]
+   ],
+   "element": {
+    "edge": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:2",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    }
+   },
+   "id": "igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22693a32222c2274797065223a2270227d2c22746774223a7b226964223a22693a32222c2274797065223a2270227d7d",
+   "identity": {
+    "address": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:2",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3",
+    "kind": "edge"
+   },
+   "objectRef": {
+    "address": {
+     "ord": "0",
+     "rel": "R",
+     "src": {
+      "id": "i:2",
+      "type": "p"
+     },
+     "tgt": {
+      "id": "i:2",
+      "type": "p"
+     }
+    },
+    "artifact_sha256": "cb7ed11865d3106714b303b973086178a1562ed9deed3fae2b75ab583bb575d3"
+   }
+  }
+ ],
+ "pointer": []
+}

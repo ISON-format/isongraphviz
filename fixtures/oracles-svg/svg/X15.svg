@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="igr-svg" width="900" height="600" viewBox="0 0 900 600" role="graphics-document" aria-roledescription="graph" aria-labelledby="igr-title" aria-describedby="igr-desc" data-igr-svg="igr-svg/1" data-igr-artifact="15695c398f65c00a21c588a2dd4eeb10ecc0a32e38d9528efc567a4d7cb0cd1b" data-igr-scene="65aed23fee717f78584357ad82534d7a2ae26e050c3c41ba868d36ba63c04801" data-igr-layout="67b15bd10d3ccad62b8a436306c3a7a22a97cc266c03c6d7a2e3dcce4f8c7e74">
+<title id="igr-title">Directed graph with 2 nodes and 1 edge. Node categories: 𝒜 (1), 😀 (1).</title>
+<desc id="igr-desc">0 selected, 0 hidden.</desc>
+<style>
+.igr-svg{font:12px sans-serif}
+.igr-shape{stroke:#fff;stroke-width:2}
+.igr-k0 .igr-shape{fill:#2a78d6}
+.igr-k1 .igr-shape{fill:#eb6834}
+.igr-k2 .igr-shape{fill:#1baf7a}
+.igr-k3 .igr-shape{fill:#eda100}
+.igr-k4 .igr-shape{fill:#e87ba4}
+.igr-k5 .igr-shape{fill:#008300}
+.igr-k6 .igr-shape{fill:#4a3aa7}
+.igr-k7 .igr-shape{fill:#e34948}
+.igr-kx .igr-shape{fill:#7a7975}
+.igr-line{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:2}
+.igr-pick{fill:none;stroke:transparent;stroke-width:10;pointer-events:stroke}
+.igr-arrow{fill:currentColor;fill-opacity:.6}
+.igr-ring-sel{fill:none;stroke:currentColor;stroke-width:3}
+.igr-ring-foc{fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:4 3}
+.igr-halo-sel{fill:none;stroke:currentColor;stroke-width:6;stroke-opacity:.35}
+.igr-halo-foc{fill:none;stroke:currentColor;stroke-width:10;stroke-opacity:.25;stroke-dasharray:6 4}
+.igr-label,.igr-elabel{fill:currentColor;unicode-bidi:isolate;pointer-events:none}
+</style>
+<defs><marker id="igr-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path class="igr-arrow" d="M 0 0 L 10 5 L 0 10 z"/></marker></defs>
+<g class="igr-nodes">
+<g id="igr-n-7b226964223a22733af09d929c79222c2274797065223a22f09d929c227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="𝒜 𝒜y" tabindex="0">
+<title>𝒜 𝒜y</title>
+<circle class="igr-shape" cx="32.025" cy="300" r="10"/>
+<text class="igr-label" x="32.025" y="324" text-anchor="middle">𝒜y</text>
+</g>
+<g id="igr-n-7b226964223a22733af09f988078222c2274797065223a22f09f9880227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="😀 😀x" tabindex="-1">
+<title>😀 😀x</title>
+<circle class="igr-shape" cx="867.975" cy="300" r="10"/>
+<text class="igr-label" x="867.975" y="324" text-anchor="middle">😀x</text>
+</g>
+</g>
+<g class="igr-edges">
+<g id="igr-e-7b226f7264223a2230222c2272656c223a22f09f9880222c22737263223a7b226964223a22733af09f988078222c2274797065223a22f09f9880227d2c22746774223a7b226964223a22733af09d929c79222c2274797065223a22f09d929c227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="😀" tabindex="-1">
+<title>😀</title>
+<desc>😀x 😀 𝒜y</desc>
+<path class="igr-line" d="M 855.975 300 L 44.025 300" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 855.975 300 L 44.025 300"/>
+<text class="igr-elabel" x="450" y="296" text-anchor="middle">😀</text>
+</g>
+</g>
+</svg>

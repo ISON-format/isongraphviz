@@ -1,0 +1,105 @@
+{
+ "calls": [
+  {
+   "arg": {
+    "svg": {
+     "idPrefix": "g-1"
+    }
+   },
+   "expect": "ok",
+   "op": "create"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "ok",
+   "expect_svg": "svg/U07.c3.svg",
+   "op": "svg"
+  },
+  {
+   "arg": {
+    "svg": {
+     "bogus": 1
+    }
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "svg": {
+     "idPrefix": "1a"
+    }
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "svg": {
+     "style": "yes"
+    }
+   },
+   "expect": "INVALID_INPUT/SCHEMA",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "svg": {
+     "maxSvgBytes": "NaN"
+    }
+   },
+   "expect": "INVALID_INPUT/NOT_FINITE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "svg": {
+     "maxDrawnLabelUnits": 1.5
+    }
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "svg": {
+     "maxSvgBytes": -1
+    }
+   },
+   "expect": "INVALID_INPUT/OUT_OF_RANGE",
+   "op": "create"
+  },
+  {
+   "arg": {
+    "capacity": {
+     "maxDrawnLabelUnits": 5
+    },
+    "svg": {
+     "maxDrawnLabelUnits": 6
+    }
+   },
+   "expect": "INVALID_INPUT/INVALID_VALUE",
+   "op": "create"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "listener": "record",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

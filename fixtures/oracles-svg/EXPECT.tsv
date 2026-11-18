@@ -1,0 +1,250 @@
+id	group	tier	scene	layout	input	expected	error
+G01	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G01.svg	
+G02	G	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":4,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G02.svg	
+G03	G	both	../oracles-igl/scenes/empty.scene.json	../oracles-igl/layouts/F07.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":0,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G03.svg	
+G04	G	both	../oracles-igl/scenes/single.scene.json	../oracles-igl/layouts/F08.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":1,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G04.svg	
+G05	G	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":108,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G05.svg	
+G06	G	both	../oracles-igl/scenes/unicode.scene.json	../oracles-igl/layouts/F09.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":6,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/G06.svg	
+G07	G	both	../oracles-igl/scenes/keybound.scene.json	../oracles-igl/layouts/F13.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":115,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/G07.svg	
+G08	G	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":108,"labels":"full"},"size":{"height":300,"width":400},"state":"initial"}	svg/G08.svg	
+G09	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":1,"width":1},"state":"initial"}	svg/G09.svg	
+G10	G	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":601,"width":901},"state":"initial"}	svg/G10.svg	
+N01	N	both	scenes/ties.scene.json	layouts/ties.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":36,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N01.state.json"}	svg/N01.svg	
+N02	N	both	scenes/zero.scene.json	layouts/zero.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":11,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N02.state.json"}	svg/N02.svg	
+N03	N	both	scenes/trim.scene.json	layouts/trim.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":144,"labels":"full"},"search":"inputs/N03.search.json","size":{"height":600,"width":900},"state":"states/N03.state.json"}	svg/N03.svg	
+N04	N	both	scenes/deg.scene.json	layouts/deg.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":15,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N04.state.json"}	svg/N04.svg	
+N05	N	both	scenes/deg.scene.json	layouts/deg.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":15,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N05.state.json"}	svg/N05.svg	
+N06	N	both	scenes/deg.scene.json	layouts/deg.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":15,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N06.state.json"}	svg/N06.svg	
+N07	N	both	scenes/coincident.scene.json	layouts/coincident.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":7,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N07.svg	
+N07b	N	both	scenes/coincident-u.scene.json	layouts/coincident-u.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":7,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N07b.svg	
+N08	N	both	scenes/loops2.scene.json	layouts/loops2.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":12,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N08.svg	
+N09	N	both	scenes/multi4.scene.json	layouts/multi4.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":22,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N09.svg	
+N10	N	both	scenes/multi4.scene.json	layouts/multi4.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":18,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N10.state.json"}	svg/N10.svg	
+N11	N	both	../oracles/o1-basic.scene.json	../oracles-igl/verify/V45.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N11.svg	
+N12	N	both	../oracles/o1-basic.scene.json	../oracles-igl/verify/V46.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/N12.svg	
+N13	N	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N13.state.json"}	svg/N13.svg	
+N14	N	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/N14.state.json"}	svg/N14.svg	
+N15	N	both	scenes/anchors.scene.json	layouts/anchors.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":162,"labels":"full"},"search":"inputs/N15.search.json","size":{"height":600,"width":900},"state":"states/N15.state.json"}	svg/N15.svg	
+X01	X	both	scenes/ids4.scene.json	layouts/ids4.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":12,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X01.svg	
+X02	X	both	scenes/hostile-svg.scene.json	layouts/hostile-svg.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":78,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/X02.svg	
+X03	X	both	scenes/trunc.scene.json	layouts/trunc.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":213,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/X03.svg	
+X04	X	both	scenes/longid1024.scene.json	layouts/longid1024.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":26,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/X04.svg	
+X05	X	both	../oracles-igl/scenes/S18.scene.json	../oracles-igl/layouts/X05.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":25,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/X05.svg	
+X06	X	both	scenes/ids12.scene.json	layouts/ids12.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":43,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X06.svg	
+X07	X	both	scenes/nfc.scene.json	layouts/nfc.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":8,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X07.svg	
+X08	X	both	scenes/emptylabels.scene.json	layouts/emptylabels.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":8,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X08.svg	
+X09	X	both	scenes/agg-id.scene.json	layouts/agg-id.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":26,"labels":"elided"},"size":{"height":600,"width":900},"state":"initial"}	svg/X09.svg	
+X10	X	both	scenes/ctl.scene.json	layouts/ctl.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":14,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X10.svg	
+X11	X	both	scenes/illegal.scene.json	layouts/illegal.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":16,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X11.svg	
+X12	X	both	scenes/markup.scene.json	layouts/markup.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":20,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X12.svg	
+X13	X	both	scenes/ten.scene.json	layouts/ten.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":22,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X13.svg	
+X14	X	both	scenes/bidi.scene.json	layouts/bidi.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":6,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X14.svg	
+X15	X	both	scenes/astral.scene.json	layouts/astral.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":8,"labels":"full"},"size":{"height":600,"width":900},"state":"initial"}	svg/X15.svg	
+Y01	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y01.state.json"}	svg/Y01.svg	
+Y02	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y02.state.json"}	svg/Y02.svg	
+Y03	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y03.state.json"}	svg/Y03.svg	
+Y04	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y04.state.json"}	svg/Y04.svg	
+Y05	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y05.state.json"}	svg/Y05.svg	
+Y06	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y06.state.json"}	svg/Y06.svg	
+Y07	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":1,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y07.state.json"}	svg/Y07.svg	
+Y08	Y	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":106,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y08.state.json"}	svg/Y08.svg	
+Y09	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":0,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y09.state.json"}	svg/Y09.svg	
+Y10	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":3,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y10.state.json"}	svg/Y10.svg	
+Y11	Y	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":108,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y11.state.json"}	svg/Y11.svg	
+Y12	Y	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":93,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y12.state.json"}	svg/Y12.svg	
+Y13	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y13.state.json"}	svg/Y13.svg	
+Y14	Y	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"states/Y14.state.json"}		INVALID_STATE/SCENE_MISMATCH
+Y15	Y	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"states/Y15.state.json"}		INVALID_STATE/NON_CANONICAL
+Y16	Y	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y16.state.json"}	svg/Y16.svg	
+Y17	Y	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":58,"labels":"full"},"size":{"height":600,"width":900},"state":"states/Y17.state.json"}	svg/Y17.svg	
+O01	O	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"style":false},"size":{"height":600,"width":900},"state":"initial"}	svg/O01.svg	
+O02	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":false,"label_units":0,"labels":"none"},"options":{"labels":false},"size":{"height":600,"width":900},"state":"initial"}	svg/O02.svg	
+O03	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":false,"label_units":4,"labels":"full"},"options":{"edgeLabels":false},"size":{"height":600,"width":900},"state":"initial"}	svg/O03.svg	
+O04	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"idPrefix":"g-1"},"size":{"height":600,"width":900},"state":"initial"}	svg/O04.svg	
+O05	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"xmlDeclaration":true},"size":{"height":600,"width":900},"state":"initial"}	svg/O05.svg	
+O06	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"maxDrawnLabelUnits":9},"size":{"height":600,"width":900},"state":"initial"}	svg/O06.svg	
+O07	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":4,"labels":"elided"},"options":{"maxDrawnLabelUnits":8},"size":{"height":600,"width":900},"state":"initial"}	svg/O07.svg	
+O08	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":0,"labels":"elided"},"options":{"maxDrawnLabelUnits":0},"size":{"height":600,"width":900},"state":"initial"}	svg/O08.svg	
+O09	O	core	scenes/trunc3.scene.json	layouts/trunc3.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":3,"labels":"elided"},"options":{"maxDrawnLabelUnits":5},"size":{"height":600,"width":900},"state":"initial"}	svg/O09.svg	
+O10	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"bogus":1},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/SCHEMA
+O11	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"idPrefix":"1a"},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/INVALID_VALUE
+O12	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"idPrefix":""},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/INVALID_VALUE
+O13	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"idPrefix":"abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"},"size":{"height":600,"width":900},"state":"initial"}	svg/O13.svg	
+O14	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"idPrefix":"abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbc"},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/INVALID_VALUE
+O15	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"style":"yes"},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/SCHEMA
+O16	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"maxSvgBytes":"NaN"},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/NOT_FINITE
+O17	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"maxDrawnLabelUnits":1.5},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/INVALID_VALUE
+O18	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"maxSvgBytes":-1},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/OUT_OF_RANGE
+O19	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":[],"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/SCHEMA
+O20	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"style":null},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/SCHEMA
+O21	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"idPrefix":"A"},"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/INVALID_VALUE
+O22	O	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"plain_object_model":true,"size":{"height":600,"width":900},"state":"initial"}		INVALID_INPUT/NOT_A_RENDER_MODEL
+F01	F	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":9,"labels":"full"},"options":{"maxSvgBytes":3193},"size":{"height":600,"width":900},"state":"initial"}	svg/F01.svg	
+F02	F	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"maxSvgBytes":3192},"size":{"height":600,"width":900},"state":"initial"}		RESOURCE_LIMIT/BYTES_LIMIT
+F03	F	core	scenes/hub.scene.json	layouts/hub.layout.json	{"options":{"maxSvgBytes":262144},"size":{"height":600,"width":900},"state":"initial"}		RESOURCE_LIMIT/BYTES_LIMIT
+F04	F	core	scenes/hub.scene.json	layouts/hub.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":716,"labels":"elided"},"options":{"maxSvgBytes":797809},"size":{"height":600,"width":900},"state":"initial"}	svg/F04.svg	
+F05	F	core	scenes/hub.scene.json	layouts/hub.layout.json	{"expect_sink_bytes_at_most":4096,"options":{"maxSvgBytes":4096},"size":{"height":600,"width":900},"state":"initial"}	json/F05.sink.json	
+F06	F	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"maxSvgBytes":0},"size":{"height":600,"width":900},"state":"initial"}		RESOURCE_LIMIT/BYTES_LIMIT
+T01	T	core	scenes/ids4.scene.json	layouts/ids4.layout.json	{"idPrefix":"igr","svg":"svg/X01.svg"}	json/T01.ids.json	
+T02	T	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"idPrefix":"igr","points":[{"x":32.0,"y":193.5},{"x":500.0,"y":308.0},{"x":500.0,"y":300.0},{"x":867.9,"y":406.4}],"size":{"height":600,"width":900},"source":"../oracles/o1-basic.source.ison","state":"initial"}	json/T02.chain.json	
+T03	T	core			inputs/T03.ids.json	json/T03.decode.json	
+T04	T	core			bad/T04.svg		INVALID_INPUT/SCHEMA
+T05	T	core			bad/T05.svg		INVALID_INPUT/SCHEMA
+T06	T	core			bad/T06.svg		INVALID_INPUT/SCHEMA
+T07	T	core			bad/T07.svg		INVALID_INPUT/SCHEMA
+T08	T	core			bad/T08.svg		INVALID_INPUT/SCHEMA
+T09	T	core			bad/T09.svg		INVALID_INPUT/SCHEMA
+T10	T	core			bad/T10.svg		INVALID_INPUT/SCHEMA
+T11	T	core			bad/T11.svg		INVALID_INPUT/SCHEMA
+T12	T	core			bad/T12.svg		INVALID_INPUT/SCHEMA
+T13	T	core			bad/T13.svg		INVALID_INPUT/SCHEMA
+T14	T	both			{"rows":["G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","N01","N02","N03","N04","N05","N06","N07","N07b","N08","N09","N10","N11","N12","N13","N14","N15","X01","X02","X03","X04","X05","X06","X07","X08","X09","X10","X11","X12","X13","X14","X15","Y01","Y02","Y03","Y04","Y05","Y06","Y07","Y08","Y09","Y10","Y11","Y12","Y13","Y14","Y16","Y15","Y17","O01","O02","O03","O04","O05","O06","O07","O08","O09","O10","O11","O12","O13","O14","O15","O16","O17","O18","O19","O20","O21","O22"]}	json/T14.readouts.json	
+T15	T	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"idPrefix":"igr","size":{"height":600,"width":900},"source":"../oracles-igl/sources/mixed20.source.ison","state":"initial"}	json/T15.chain.json	
+T16	T	both	../oracles/o4-undirected.scene.json	../oracles-igl/layouts/F02.layout.json	{"idPrefix":"igr","size":{"height":600,"width":900},"source":"../oracles/o4-undirected.source.ison","state":"initial"}	json/T16.chain.json	
+T17	T	core	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"also":{"layout":"../oracles-igl/layouts/F02.layout.json","scene":"../oracles/o4-undirected.scene.json"},"size":{"height":600,"width":900},"state":"initial"}	json/T17.hits.json	
+T18	T	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"cases":10,"size":{"height":600,"width":900},"state":"states/T18.state.json"}	json/T18.pick.json	
+T19	T	core			bad/T19.svg		INVALID_INPUT/SCHEMA
+T20	T	core			bad/T20.svg		INVALID_INPUT/SCHEMA
+T21	T	core			bad/T21.svg		INVALID_INPUT/SCHEMA
+T22	T	core			bad/T22.svg		INVALID_INPUT/SCHEMA
+T23	T	core			bad/T23.svg		INVALID_INPUT/SCHEMA
+T24	T	core			bad/T24.svg		INVALID_INPUT/SCHEMA
+T25	T	core			bad/T25.svg		INVALID_INPUT/SCHEMA
+T26	T	core			bad/T26.svg		INVALID_INPUT/SCHEMA
+T27	T	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"limits":["maxBytes=len","maxBytes=len-1","maxLineUnits=100"],"readSvg_of":"G01"}	json/T27.limits.json	
+T28	T	core			{"cases":["hex digits maxIdHexDigits + 2","json nested 4 levels"],"maxIdHexDigits":4194304}	json/T28.decode.json	
+T29	T	core			bad/T29.svg		INVALID_INPUT/SCHEMA
+T30	T	core			bad/T30.svg		INVALID_INPUT/SCHEMA
+T31	T	both	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"also":{"layout":"../oracles-igl/layouts/F02.layout.json","scene":"../oracles/o4-undirected.scene.json","state":"initial"},"size":{"height":600,"width":900},"state":"states/N14.state.json"}	json/T31.pick.json	
+T32	T	core			bad/T32.svg		INVALID_INPUT/SCHEMA
+U01	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U01.script.json		
+U02	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U02.script.json		
+U03	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U03.script.json		
+U04	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U04.script.json		
+U05	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U05.script.json		
+U06	U	subject			{"also":[{"expected":"json/U06.dom.manifest.json","host":"dom"}],"expected":"json/U06.headless.manifest.json","host":"headless"}	json/U06.headless.manifest.json	
+U07	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U07.script.json		
+U08	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	scripts/U08.script.json		
+U09	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"also":[{"expected":"json/U09.G05.witness.json","layout":"../oracles-igl/layouts/F04.layout.json","scene":"../oracles-igl/scenes/mixed20.scene.json","svg":"svg/G05.svg"}],"expected":"json/U09.G01.witness.json","svg":"svg/G01.svg"}	json/U09.G01.witness.json	
+U10	U	subject			{"expect":{"claimable":false,"level":2,"verdict":"not-fail"},"kit":"igr-corpus","subject":"createSvgSubject()"}		
+U11	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"double":"svg() omits the second node and renames the first; probe() stays correct","expect":{"W01":"fail","level":1}}	json/U11.witness-honesty.json	
+U12	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"kit":{"only":["L01"]},"options":{"capacity":{"maxDrawnLabelUnits":77,"maxNodes":5},"name":"x-svg","svg":{"edgeLabels":false}}}	json/U12.cap.json	
+U13	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"options":{"svg":{"maxSvgBytes":100}}}	json/U13.render.json	
+D01	D	subject					
+D02	D	subject					
+D03	D	subject					
+D04	D	subject					
+K01	K						
+K02	K						
+K03	K						
+K04	K						
+K05	K						
+K06	K						
+K07	K						
+K08	K						
+K09	K						
+K10	K						
+K11	K						
+K12	K						
+K13	K						
+K14	K						
+K15	K						
+K16	K						
+K17	K						
+K18	K						
+K19	K						
+K20	K						
+K21	K						
+K22	K						
+K23	K						
+K24	K						
+K25	K						
+K26	K						
+K27	K						
+K28	K						
+K29	K						
+K30	K						
+K31	K						
+K32	K						
+K33	K						
+K34	K						
+K35	K						
+K36	K						
+K37	K						
+K38	K						
+K39	K						
+K40	K						
+K41	K						
+K42	K						
+K43	K						
+K44	K						
+K45	K						
+K46	K						
+K47	K						
+K48	K						
+K49	K						
+K50	K						
+K51	K						
+K52	K						
+K53	K						
+K54	K						
+K55	K						
+K56	K						
+K57	K						
+K58	K						
+K59	K						
+K60	K						
+K61	K						
+K62	K						
+K63	K						
+K64	K						
+K65	K						
+K66	K						
+K67	K						
+K68	K						
+K69	K						
+K70	K						
+K71	K						
+K72	K						
+K73	K						
+K74	K						
+K75	K						
+K76	K						
+K77	K						
+K78	K						
+K79	K						
+K80	K						
+K81	K						
+K82	K						
+K83	K						
+K84	K						
+K85	K						
+K86	K						
+K87	K						
+K88	K						
+K89	K						
+K90	K						
+K91	K						
+K92	K						
+K93	K						
+K94	K						
+K95	K						
+K96	K						
+K97	K						
+K98	K						
+K99	K						
+K100	K						
+K101	K						
+K102	K						
+K103	K						
+K104	K						
+K105	K						
+K106	K						
+K107	K						
+K108	K						
+K109	K						
+K110	K						
+K111	K						
+K112	K						
+K113	K						
+K114	K						

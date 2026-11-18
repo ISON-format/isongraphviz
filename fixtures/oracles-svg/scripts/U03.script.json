@@ -1,0 +1,75 @@
+{
+ "calls": [
+  {
+   "expect": "INVALID_LIFECYCLE/NOT_INITIALIZED",
+   "op": "svg"
+  },
+  {
+   "expect": "ok",
+   "op": "initialize"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/NOT_LOADED",
+   "op": "svg"
+  },
+  {
+   "await": false,
+   "expect": "ok",
+   "op": "loadScene"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/BUSY",
+   "op": "svg"
+  },
+  {
+   "expect": "ok",
+   "op": "render"
+  },
+  {
+   "expect": "ok",
+   "expect_svg": "svg/U03.c6.svg",
+   "op": "svg"
+  },
+  {
+   "arg": {
+    "mode": "replace",
+    "targets": [
+     {
+      "node": {
+       "id": "i:1",
+       "type": "person"
+      }
+     }
+    ],
+    "type": "select"
+   },
+   "expect": "ok",
+   "expect_state": "states/U03.c7.state.json",
+   "op": "dispatch"
+  },
+  {
+   "expect": "ok",
+   "op": "dispose"
+  },
+  {
+   "expect": "INVALID_LIFECYCLE/DISPOSED",
+   "op": "svg"
+  }
+ ],
+ "env": {
+  "host": "headless",
+  "reducedMotion": false,
+  "size": {
+   "height": 600,
+   "width": 900
+  }
+ },
+ "expect_listener_svgs": [
+  "svg/U03.l0.svg"
+ ],
+ "listener": "svg-inside",
+ "model": {
+  "layout": "../oracles-igl/layouts/F01.layout.json",
+  "scene": "../oracles/o1-basic.scene.json"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "CHK-CAP": "pass",
+ "fidelity": {
+  "degradations": [
+   "EDGE_LABELS_OMITTED"
+  ],
+  "edge_labels": false,
+  "labels": "full",
+  "motion": "none"
+ },
+ "fidelity_consistent": true,
+ "labels_edge": {
+  "degradations": [
+   "EDGE_LABELS_OMITTED"
+  ],
+  "status": "degraded"
+ },
+ "manifest_bytes_equal": true
+}

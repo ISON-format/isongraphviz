@@ -1,0 +1,78 @@
+[
+ {
+  "input": {
+   "point": {
+    "x": 447.904,
+    "y": 299.466
+   },
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d"
+  },
+  "label": "KNOWS edge id, point on the centre of i:1",
+  "pick": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  },
+  "scene": "o1"
+ },
+ {
+  "input": {
+   "point": {
+    "x": 452.096,
+    "y": 300.534
+   },
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a224b4e4f5753222c22737263223a7b226964223a22693a31222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d7d"
+  },
+  "label": "KNOWS edge id, point on the centre of s:ann",
+  "pick": {
+   "node": {
+    "id": "s:ann",
+    "type": "person"
+   }
+  },
+  "scene": "o1"
+ },
+ {
+  "input": {
+   "point": {
+    "x": 874.928,
+    "y": 399.4
+   },
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22693a32222c2274797065223a2270227d2c22746774223a7b226964223a22693a32222c2274797065223a2270227d7d"
+  },
+  "label": "self-loop id, point on the loop end inside the disc of i:2",
+  "pick": {
+   "node": {
+    "id": "i:2",
+    "type": "p"
+   }
+  },
+  "scene": "o4"
+ },
+ {
+  "input": {
+   "point": {
+    "x": 450.0,
+    "y": 100.0
+   },
+   "targetId": "igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22693a32222c2274797065223a2270227d2c22746774223a7b226964223a22693a32222c2274797065223a2270227d7d"
+  },
+  "label": "self-loop id, point 40+ px from every centre",
+  "pick": {
+   "edge": {
+    "ord": "0",
+    "rel": "R",
+    "src": {
+     "id": "i:2",
+     "type": "p"
+    },
+    "tgt": {
+     "id": "i:2",
+     "type": "p"
+    }
+   }
+  },
+  "scene": "o4"
+ }
+]

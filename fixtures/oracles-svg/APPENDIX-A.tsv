@@ -1,0 +1,14 @@
+item	status	detail
+A.1 G01 bytes equal the A.1 block (extracted from the design)	REPRODUCED	3193 bytes
+A.1 size 3193 and SHA-256 265736b6b752... of the block	REPRODUCED	3193 / 265736b6b7523681b589fcda23a20a10b574601c603e473bd78c7df7d1977653
+A.2 (row Y03) size 3441 and SHA-256 d2db035d1125...	REPRODUCED	3441 / d2db035d11252ee3be86cd4259ca11cdd0cd55178abd5bf8df15deedf5739261
+A.3 (row Y07) size 2242 and SHA-256 6694f5e23e26...	REPRODUCED	2242 / 6694f5e23e261cf442409f627115d94650a70e7a16f11528209e03c88c0254fd
+A.2 block from <g class="igr-nodes"> on	REPRODUCED	
+A.3 block from <g class="igr-nodes"> on	REPRODUCED	
+A.4 degenerate edge (row N14) three lines	REPRODUCED	
+A.5 four distinct ids (i:7, s:7, s:007, s:-0) also present in row X01	REPRODUCED	
+A.6 labels (dl cases, escapes, D-XML, budget 9/8/0)	REPRODUCED	
+A.7 click chain numbers (points -> i:1, edge, none, s:ann; id path; source hash)	REPRODUCED	
+A.8 other forms (self-loop, mixed20 edges 7/26/1/28, extreme coordinates)	REPRODUCED	
+A.9 option sizes (xmlDeclaration 3232, style:false 2207, labels:false 2965, edgeLabels:false 3118, idPrefix 3193)	REPRODUCED	O05=3232, O01=2207, O02=2965, O03=3118, O04=3193
+A.10 hit numbers (midpoint 184.517/216.904 -> edge 7; apexes; loop apex; edge 26 by id at the midpoint; T31 node wins)	REPRODUCED	mid=(184.517307,216.9037875) apex7=(187.122,208.693) apex26=(181.912,225.115) loop=(867.928,381.4)

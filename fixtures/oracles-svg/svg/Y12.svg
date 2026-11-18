@@ -1,0 +1,336 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="igr-svg" width="900" height="600" viewBox="0 0 900 600" role="graphics-document" aria-roledescription="graph" aria-labelledby="igr-title" aria-describedby="igr-desc" data-igr-svg="igr-svg/1" data-igr-artifact="13c7a5321b776520bb716735da598a200f98e3383667939590ecb1475f7b6f77" data-igr-scene="b512e859cc4cd339d72509c5e87ec8edb6c4bccb5deed51c7576e5f2c4214059" data-igr-layout="059c9f3ea1769fb7ea6e8723afffb125ae4793cf05ae8cf14245851cb0dbf81f">
+<title id="igr-title">Directed graph with 20 nodes and 37 edges. Node categories: company (7), person (7), project (6).</title>
+<desc id="igr-desc">0 selected, 8 hidden. Focus: company 4.</desc>
+<style>
+.igr-svg{font:12px sans-serif}
+.igr-shape{stroke:#fff;stroke-width:2}
+.igr-k0 .igr-shape{fill:#2a78d6}
+.igr-k1 .igr-shape{fill:#eb6834}
+.igr-k2 .igr-shape{fill:#1baf7a}
+.igr-k3 .igr-shape{fill:#eda100}
+.igr-k4 .igr-shape{fill:#e87ba4}
+.igr-k5 .igr-shape{fill:#008300}
+.igr-k6 .igr-shape{fill:#4a3aa7}
+.igr-k7 .igr-shape{fill:#e34948}
+.igr-kx .igr-shape{fill:#7a7975}
+.igr-line{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:2}
+.igr-pick{fill:none;stroke:transparent;stroke-width:10;pointer-events:stroke}
+.igr-arrow{fill:currentColor;fill-opacity:.6}
+.igr-ring-sel{fill:none;stroke:currentColor;stroke-width:3}
+.igr-ring-foc{fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:4 3}
+.igr-halo-sel{fill:none;stroke:currentColor;stroke-width:6;stroke-opacity:.35}
+.igr-halo-foc{fill:none;stroke:currentColor;stroke-width:10;stroke-opacity:.25;stroke-dasharray:6 4}
+.igr-label,.igr-elabel{fill:currentColor;unicode-bidi:isolate;pointer-events:none}
+</style>
+<defs><marker id="igr-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path class="igr-arrow" d="M 0 0 L 10 5 L 0 10 z"/></marker></defs>
+<g class="igr-nodes">
+<g id="igr-n-7b226964223a22693a31222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company 1" tabindex="-1">
+<title>company 1</title>
+<circle class="igr-shape" cx="241.265" cy="42.96" r="10"/>
+<text class="igr-label" x="241.265" y="66.96" text-anchor="middle">1</text>
+</g>
+<g id="igr-n-7b226964223a22693a34222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0 igr-focused" role="graphics-symbol" aria-roledescription="node" aria-label="company 4" tabindex="0">
+<title>company 4</title>
+<circle class="igr-ring-foc" cx="622.495" cy="346.878" r="18"/>
+<circle class="igr-shape" cx="622.495" cy="346.878" r="10"/>
+<text class="igr-label" x="622.495" y="370.878" text-anchor="middle">4</text>
+</g>
+<g id="igr-n-7b226964223a22693a37222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company 7" tabindex="-1">
+<title>company 7</title>
+<circle class="igr-shape" cx="867.69" cy="147.085" r="10"/>
+<text class="igr-label" x="867.69" y="171.085" text-anchor="middle">7</text>
+</g>
+<g id="igr-n-7b226964223a22693a3133222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company 13" tabindex="-1">
+<title>company 13</title>
+<circle class="igr-shape" cx="687.678" cy="547.142" r="10"/>
+<text class="igr-label" x="687.678" y="571.142" text-anchor="middle">13</text>
+</g>
+<g id="igr-n-7b226964223a22693a3136222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company 16" tabindex="-1">
+<title>company 16</title>
+<circle class="igr-shape" cx="36.32" cy="169.887" r="10"/>
+<text class="igr-label" x="36.32" y="193.887" text-anchor="middle">16</text>
+</g>
+<g id="igr-n-7b226964223a22693a3139222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company 19" tabindex="-1">
+<title>company 19</title>
+<circle class="igr-shape" cx="404.442" cy="42.96" r="10"/>
+<text class="igr-label" x="404.442" y="66.96" text-anchor="middle">19</text>
+</g>
+<g id="igr-n-7b226964223a22733a6e3130222c2274797065223a22636f6d70616e79227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="company n10" tabindex="-1">
+<title>company n10</title>
+<circle class="igr-shape" cx="83.988" cy="557.04" r="10"/>
+<text class="igr-label" x="83.988" y="581.04" text-anchor="middle">n10</text>
+</g>
+<g id="igr-n-7b226964223a22693a33222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person 3" tabindex="-1">
+<title>person 3</title>
+<circle class="igr-shape" cx="743.786" cy="147.702" r="10"/>
+<text class="igr-label" x="743.786" y="171.702" text-anchor="middle">3</text>
+</g>
+<g id="igr-n-7b226964223a22693a36222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person 6" tabindex="-1">
+<title>person 6</title>
+<circle class="igr-shape" cx="779.85" cy="42.96" r="10"/>
+<text class="igr-label" x="779.85" y="66.96" text-anchor="middle">6</text>
+</g>
+<g id="igr-n-7b226964223a22693a39222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person 9" tabindex="-1">
+<title>person 9</title>
+<circle class="igr-shape" cx="453.468" cy="395.832" r="10"/>
+<text class="igr-label" x="453.468" y="419.832" text-anchor="middle">9</text>
+</g>
+<g id="igr-n-7b226964223a22693a3132222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person 12" tabindex="-1">
+<title>person 12</title>
+<circle class="igr-shape" cx="867.69" cy="42.96" r="10"/>
+<text class="igr-label" x="867.69" y="66.96" text-anchor="middle">12</text>
+</g>
+<g id="igr-n-7b226964223a22693a3138222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person 18" tabindex="-1">
+<title>person 18</title>
+<circle class="igr-shape" cx="419.154" cy="485.893" r="10"/>
+<text class="igr-label" x="419.154" y="509.893" text-anchor="middle">18</text>
+</g>
+<g id="igr-n-7b226964223a22733a6e30222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person n0" tabindex="-1">
+<title>person n0</title>
+<circle class="igr-shape" cx="564.942" cy="557.04" r="10"/>
+<text class="igr-label" x="564.942" y="581.04" text-anchor="middle">n0</text>
+</g>
+<g id="igr-n-7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d" class="igr-node igr-k1" role="graphics-symbol" aria-roledescription="node" aria-label="person n15" tabindex="-1">
+<title>person n15</title>
+<circle class="igr-shape" cx="483.098" cy="240.419" r="10"/>
+<text class="igr-label" x="483.098" y="264.419" text-anchor="middle">n15</text>
+</g>
+<g id="igr-n-7b226964223a22693a32222c2274797065223a2270726f6a656374227d" class="igr-node igr-k2" role="graphics-symbol" aria-roledescription="node" aria-label="project 2" tabindex="-1">
+<title>project 2</title>
+<circle class="igr-shape" cx="256.729" cy="557.04" r="10"/>
+<text class="igr-label" x="256.729" y="581.04" text-anchor="middle">2</text>
+</g>
+<g id="igr-n-7b226964223a22693a3131222c2274797065223a2270726f6a656374227d" class="igr-node igr-k2" role="graphics-symbol" aria-roledescription="node" aria-label="project 11" tabindex="-1">
+<title>project 11</title>
+<circle class="igr-shape" cx="867.69" cy="311.159" r="10"/>
+<text class="igr-label" x="867.69" y="335.159" text-anchor="middle">11</text>
+</g>
+<g id="igr-n-7b226964223a22693a3134222c2274797065223a2270726f6a656374227d" class="igr-node igr-k2" role="graphics-symbol" aria-roledescription="node" aria-label="project 14" tabindex="-1">
+<title>project 14</title>
+<circle class="igr-shape" cx="32.31" cy="557.04" r="10"/>
+<text class="igr-label" x="32.31" y="581.04" text-anchor="middle">14</text>
+</g>
+<g id="igr-n-7b226964223a22693a3137222c2274797065223a2270726f6a656374227d" class="igr-node igr-k2" role="graphics-symbol" aria-roledescription="node" aria-label="project 17" tabindex="-1">
+<title>project 17</title>
+<circle class="igr-shape" cx="629.933" cy="42.96" r="10"/>
+<text class="igr-label" x="629.933" y="66.96" text-anchor="middle">17</text>
+</g>
+<g id="igr-n-7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d" class="igr-node igr-k2" role="graphics-symbol" aria-roledescription="node" aria-label="project n5" tabindex="-1">
+<title>project n5</title>
+<circle class="igr-shape" cx="747.453" cy="271.587" r="10"/>
+<text class="igr-label" x="747.453" y="295.587" text-anchor="middle">n5</text>
+</g>
+</g>
+<g class="igr-edges">
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a31222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>1 R2 n15</desc>
+<path class="igr-line" d="M 250.56 50.55 L 473.803 232.83" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 250.56 50.55 L 473.803 232.83"/>
+<text class="igr-elabel" x="362.182" y="137.69" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a34222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a3131222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>4 R0 11</desc>
+<path class="igr-line" d="M 634.051 343.641 Q 742.786 313.185 855.692 311.353" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 634.051 343.641 Q 742.786 313.185 855.692 311.353"/>
+<text class="igr-elabel" x="743.829" y="316.341" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a37222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a3131222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>7 R0 11</desc>
+<path class="igr-line" d="M 867.69 159.085 L 867.69 299.159" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 867.69 159.085 L 867.69 299.159"/>
+<text class="igr-elabel" x="867.69" y="225.122" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a37222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>7 R0 n5</desc>
+<path class="igr-line" d="M 859.354 155.717 L 755.789 262.956" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 859.354 155.717 L 755.789 262.956"/>
+<text class="igr-elabel" x="807.572" y="205.336" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a37222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>7 R2 17</desc>
+<path class="igr-line" d="M 856.698 142.271 L 640.925 47.774" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 856.698 142.271 L 640.925 47.774"/>
+<text class="igr-elabel" x="748.812" y="91.022" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22693a3133222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a3138222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>13 R3 18</desc>
+<path class="igr-line" d="M 675.979 544.473 L 430.854 488.562" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 675.979 544.473 L 430.854 488.562"/>
+<text class="igr-elabel" x="553.416" y="512.518" text-anchor="middle">R3</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22693a3133222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22733a6e30222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>13 R3 n0</desc>
+<path class="igr-line" d="M 675.717 548.106 L 576.903 556.075" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 675.717 548.106 L 576.903 556.075"/>
+<text class="igr-elabel" x="626.31" y="548.091" text-anchor="middle">R3</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22733a6e3130222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a32222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>n10 R2 2</desc>
+<path class="igr-line" d="M 95.787 554.854 Q 170.359 541.04 244.93 554.854" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 95.787 554.854 Q 170.359 541.04 244.93 554.854"/>
+<text class="igr-elabel" x="170.359" y="543.947" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22733a6e3130222c2274797065223a22636f6d70616e79227d2c22746774223a7b226964223a22693a3134222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>n10 R2 14</desc>
+<path class="igr-line" d="M 71.988 557.04 L 44.31 557.04" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 71.988 557.04 L 44.31 557.04"/>
+<text class="igr-elabel" x="58.149" y="553.04" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a33222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a37222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>3 R0 7</desc>
+<path class="igr-line" d="M 755.786 147.642 L 855.69 147.145" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 755.786 147.642 L 855.69 147.145"/>
+<text class="igr-elabel" x="805.738" y="143.393" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a33222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a3131222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>3 R0 11</desc>
+<path class="igr-line" d="M 751.035 157.265 L 860.441 301.596" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 751.035 157.265 L 860.441 301.596"/>
+<text class="igr-elabel" x="805.738" y="225.43" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22693a33222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>3 R1 n15</desc>
+<path class="igr-line" d="M 732.48 151.723 L 494.404 236.398" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 732.48 151.723 L 494.404 236.398"/>
+<text class="igr-elabel" x="613.442" y="190.06" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a33222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a3132222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>3 R2 12</desc>
+<path class="igr-line" d="M 752.95 139.955 L 858.526 50.707" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 752.95 139.955 L 858.526 50.707"/>
+<text class="igr-elabel" x="805.738" y="91.331" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22693a36222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a33222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>6 R0 3</desc>
+<path class="igr-line" d="M 775.943 54.306 L 747.693 136.355" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 775.943 54.306 L 747.693 136.355"/>
+<text class="igr-elabel" x="761.818" y="91.331" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a36222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>6 R2 17</desc>
+<path class="igr-line" d="M 767.85 42.96 L 641.933 42.96" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 767.85 42.96 L 641.933 42.96"/>
+<text class="igr-elabel" x="704.892" y="38.96" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22693a3132222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a37222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>12 R3 7</desc>
+<path class="igr-line" d="M 867.69 54.96 L 867.69 135.085" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 867.69 54.96 L 867.69 135.085"/>
+<text class="igr-elabel" x="867.69" y="91.022" text-anchor="middle">R3</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22733a6e30222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>n0 R0 n15</desc>
+<path class="igr-line" d="M 561.939 545.422 L 486.101 252.037" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 561.939 545.422 L 486.101 252.037"/>
+<text class="igr-elabel" x="524.02" y="394.73" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a3138222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>n15 R1 18</desc>
+<path class="igr-line" d="M 480.073 252.032 L 422.179 474.281" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 480.073 252.032 L 422.179 474.281"/>
+<text class="igr-elabel" x="451.126" y="359.156" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a32222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22733a6e3130222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>2 R2 n10</desc>
+<path class="igr-line" d="M 244.93 559.226 Q 170.359 573.04 95.787 559.226" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 244.93 559.226 Q 170.359 573.04 95.787 559.226"/>
+<text class="igr-elabel" x="170.359" y="562.133" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22693a32222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a39222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>2 R3 9</desc>
+<path class="igr-line" d="M 266.011 549.434 L 444.186 403.438" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 266.011 549.434 L 444.186 403.438"/>
+<text class="igr-elabel" x="355.099" y="472.436" text-anchor="middle">R3</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22693a32222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a3138222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>2 R3 18</desc>
+<path class="igr-line" d="M 267.721 552.225 L 408.162 490.708" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 267.721 552.225 L 408.162 490.708"/>
+<text class="igr-elabel" x="337.942" y="517.467" text-anchor="middle">R3</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a3131222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a34222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>11 R2 4</desc>
+<path class="igr-line" d="M 856.135 314.395 Q 747.399 344.851 634.494 346.683" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 856.135 314.395 Q 747.399 344.851 634.494 346.683"/>
+<text class="igr-elabel" x="746.357" y="333.695" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22733a6e3135222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>17 R1 n15</desc>
+<path class="igr-line" d="M 622.773 52.589 L 490.259 230.79" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 622.773 52.589 L 490.259 230.79"/>
+<text class="igr-elabel" x="556.516" y="137.69" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a3139222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>17 R2 19</desc>
+<path class="igr-line" d="M 617.933 42.96 L 416.442 42.96" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 617.933 42.96 L 416.442 42.96"/>
+<text class="igr-elabel" x="517.188" y="38.96" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a33222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
+<title>R2</title>
+<desc>17 R2 3</desc>
+<path class="igr-line" d="M 638.765 51.085 L 734.955 139.577" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 638.765 51.085 L 734.955 139.577"/>
+<text class="igr-elabel" x="686.86" y="91.331" text-anchor="middle">R2</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225230222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a33222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R0" tabindex="-1">
+<title>R0</title>
+<desc>n5 R0 3</desc>
+<path class="igr-line" d="M 747.098 259.593 L 744.141 159.696" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 747.098 259.593 L 744.141 159.696"/>
+<text class="igr-elabel" x="745.62" y="205.645" text-anchor="middle">R0</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a36222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>n5 R1 6</desc>
+<path class="igr-line" d="M 749.137 259.706 L 778.166 54.841" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 749.137 259.706 L 778.166 54.841"/>
+<text class="igr-elabel" x="763.651" y="153.274" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a39222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>n5 R1 9</desc>
+<path class="igr-line" d="M 736.4 276.259 L 464.521 391.161" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 736.4 276.259 L 464.521 391.161"/>
+<text class="igr-elabel" x="600.461" y="329.71" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a3132222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
+<title>R1</title>
+<desc>n5 R1 12</desc>
+<path class="igr-line" d="M 753.039 260.967 L 862.104 53.581" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 753.039 260.967 L 862.104 53.581"/>
+<text class="igr-elabel" x="807.572" y="153.274" text-anchor="middle">R1</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a3133222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
+<title>R3</title>
+<desc>n5 R3 13</desc>
+<path class="igr-line" d="M 744.909 283.315 L 690.222 535.415" marker-end="url(#igr-arrow)"/>
+<path class="igr-pick" d="M 744.909 283.315 L 690.222 535.415"/>
+<text class="igr-elabel" x="717.566" y="405.365" text-anchor="middle">R3</text>
+</g>
+</g>
+</svg>

@@ -1,0 +1,11 @@
+[
+ {
+  "case": "hex of maxIdHexDigits + 2 digits",
+  "decoded": false,
+  "hex_digits": 4194306
+ },
+ {
+  "case": "JSON nested four levels",
+  "decoded": false
+ }
+]

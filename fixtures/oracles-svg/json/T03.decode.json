@@ -1,0 +1,89 @@
+[
+ {
+  "address": {
+   "node": {
+    "id": "i:1",
+    "type": "person"
+   }
+  },
+  "case": "valid node"
+ },
+ {
+  "address": {
+   "edge": {
+    "ord": "0",
+    "rel": "KNOWS",
+    "src": {
+     "id": "i:1",
+     "type": "person"
+    },
+    "tgt": {
+     "id": "s:ann",
+     "type": "person"
+    }
+   }
+  },
+  "case": "valid edge"
+ },
+ {
+  "address": null,
+  "case": "wrong prefix"
+ },
+ {
+  "address": null,
+  "case": "kind a (reserved)"
+ },
+ {
+  "address": null,
+  "case": "uppercase hex"
+ },
+ {
+  "address": null,
+  "case": "odd hex"
+ },
+ {
+  "address": null,
+  "case": "invalid utf-8"
+ },
+ {
+  "address": null,
+  "case": "json with a space"
+ },
+ {
+  "address": null,
+  "case": "keys reordered"
+ },
+ {
+  "address": null,
+  "case": "extra key"
+ },
+ {
+  "address": null,
+  "case": "missing key"
+ },
+ {
+  "address": null,
+  "case": "number as id"
+ },
+ {
+  "address": null,
+  "case": "empty rest"
+ },
+ {
+  "address": null,
+  "case": "other kind letter"
+ },
+ {
+  "address": null,
+  "case": "id of the other prefix"
+ },
+ {
+  "address": {
+   "node": {
+    "id": "s:nobody",
+    "type": "ghost"
+   }
+  },
+  "case": "valid json naming no scene element"
+ }
+]

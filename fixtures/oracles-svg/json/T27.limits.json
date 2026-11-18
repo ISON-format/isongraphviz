@@ -1,0 +1,23 @@
+[
+ {
+  "call": "maxBytes = length",
+  "limits": {
+   "maxBytes": 3193
+  },
+  "result": "ok"
+ },
+ {
+  "call": "maxBytes = length - 1",
+  "limits": {
+   "maxBytes": 3192
+  },
+  "result": "RESOURCE_LIMIT/BYTES_LIMIT"
+ },
+ {
+  "call": "maxLineUnits = 100",
+  "limits": {
+   "maxLineUnits": 100
+  },
+  "result": "RESOURCE_LIMIT/BYTES_LIMIT"
+ }
+]

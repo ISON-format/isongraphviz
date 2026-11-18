@@ -1,0 +1,49 @@
+{
+ "points": [
+  {
+   "LIMITATION": true,
+   "hit": {
+    "edge": {
+     "ord": "0",
+     "rel": "R3",
+     "src": {
+      "id": "i:16",
+      "type": "company"
+     },
+     "tgt": {
+      "id": "i:8",
+      "type": "project"
+     }
+    }
+   },
+   "label": "chord midpoint of the pair of edges 7 and 26",
+   "scene": "mixed20",
+   "x": 184.517307,
+   "y": 216.9037875
+  },
+  {
+   "LIMITATION": true,
+   "hit": null,
+   "label": "apex of edge 7",
+   "scene": "mixed20",
+   "x": 187.122,
+   "y": 208.693
+  },
+  {
+   "LIMITATION": true,
+   "hit": null,
+   "label": "apex of edge 26",
+   "scene": "mixed20",
+   "x": 181.912,
+   "y": 225.115
+  },
+  {
+   "LIMITATION": true,
+   "hit": null,
+   "label": "apex of the self-loop of i:2",
+   "scene": "o4",
+   "x": 867.928,
+   "y": 381.4
+  }
+ ]
+}

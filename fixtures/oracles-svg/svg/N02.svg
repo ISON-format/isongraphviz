@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="igr-svg" width="900" height="600" viewBox="0 0 900 600" role="graphics-document" aria-roledescription="graph" aria-labelledby="igr-title" aria-describedby="igr-desc" data-igr-svg="igr-svg/1" data-igr-artifact="010e5f89db36e2a296fb1d566afc7df02759d70ea95f73e233ce9a7d6b811b0b" data-igr-scene="d7ae8bef8c186d1eac01b16685761c849ff328ca5aeabbe230865cf77e17075c" data-igr-layout="b4639883d1bf0c873322a93b56669cee604775c4b61ce5d03762eac429aea5b4">
+<title id="igr-title">Undirected graph with 4 nodes and 3 edges. Node categories: p (4).</title>
+<desc id="igr-desc">0 selected, 0 hidden.</desc>
+<style>
+.igr-svg{font:12px sans-serif}
+.igr-shape{stroke:#fff;stroke-width:2}
+.igr-k0 .igr-shape{fill:#2a78d6}
+.igr-k1 .igr-shape{fill:#eb6834}
+.igr-k2 .igr-shape{fill:#1baf7a}
+.igr-k3 .igr-shape{fill:#eda100}
+.igr-k4 .igr-shape{fill:#e87ba4}
+.igr-k5 .igr-shape{fill:#008300}
+.igr-k6 .igr-shape{fill:#4a3aa7}
+.igr-k7 .igr-shape{fill:#e34948}
+.igr-kx .igr-shape{fill:#7a7975}
+.igr-line{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:2}
+.igr-pick{fill:none;stroke:transparent;stroke-width:10;pointer-events:stroke}
+.igr-arrow{fill:currentColor;fill-opacity:.6}
+.igr-ring-sel{fill:none;stroke:currentColor;stroke-width:3}
+.igr-ring-foc{fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:4 3}
+.igr-halo-sel{fill:none;stroke:currentColor;stroke-width:6;stroke-opacity:.35}
+.igr-halo-foc{fill:none;stroke:currentColor;stroke-width:10;stroke-opacity:.25;stroke-dasharray:6 4}
+.igr-label,.igr-elabel{fill:currentColor;unicode-bidi:isolate;pointer-events:none}
+</style>
+<g class="igr-nodes">
+<g id="igr-n-7b226964223a22733a7a30222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z0" tabindex="0">
+<title>p z0</title>
+<circle class="igr-shape" cx="0" cy="0" r="10"/>
+<text class="igr-label" x="0" y="24" text-anchor="middle">z0</text>
+</g>
+<g id="igr-n-7b226964223a22733a7a31222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z1" tabindex="-1">
+<title>p z1</title>
+<circle class="igr-shape" cx="0" cy="-0.001" r="10"/>
+<text class="igr-label" x="0" y="23.999" text-anchor="middle">z1</text>
+</g>
+<g id="igr-n-7b226964223a22733a7a32222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z2" tabindex="-1">
+<title>p z2</title>
+<circle class="igr-shape" cx="-0.001" cy="0.001" r="10"/>
+<text class="igr-label" x="-0.001" y="24.001" text-anchor="middle">z2</text>
+</g>
+<g id="igr-n-7b226964223a22733a7a33222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z3" tabindex="-1">
+<title>p z3</title>
+<circle class="igr-shape" cx="0.001" cy="0" r="10"/>
+<text class="igr-label" x="0.001" y="24" text-anchor="middle">z3</text>
+</g>
+</g>
+<g class="igr-edges">
+<g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a7a30222c2274797065223a2270227d2c22746774223a7b226964223a22733a7a31222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
+<title>R</title>
+<desc>z0 R z1</desc>
+<path class="igr-line" d="M 0 0 L 0 -0.001"/>
+<path class="igr-pick" d="M 0 0 L 0 -0.001"/>
+<text class="igr-elabel" x="0" y="-4.001" text-anchor="middle">R</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a7a31222c2274797065223a2270227d2c22746774223a7b226964223a22733a7a32222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
+<title>R</title>
+<desc>z1 R z2</desc>
+<path class="igr-line" d="M 0 -0.001 L -0.001 0.001"/>
+<path class="igr-pick" d="M 0 -0.001 L -0.001 0.001"/>
+<text class="igr-elabel" x="-0.001" y="-4" text-anchor="middle">R</text>
+</g>
+<g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a7a32222c2274797065223a2270227d2c22746774223a7b226964223a22733a7a33222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
+<title>R</title>
+<desc>z2 R z3</desc>
+<path class="igr-line" d="M -0.001 0.001 L 0.001 0"/>
+<path class="igr-pick" d="M -0.001 0.001 L 0.001 0"/>
+<text class="igr-elabel" x="0" y="-4" text-anchor="middle">R</text>
+</g>
+</g>
+</svg>

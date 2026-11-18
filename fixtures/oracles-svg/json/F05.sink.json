@@ -1,0 +1,7 @@
+{
+ "error": "RESOURCE_LIMIT/BYTES_LIMIT",
+ "ok": true,
+ "sink_at_most": 4096,
+ "sink_bytes": 4083,
+ "sink_lines": 59
+}
