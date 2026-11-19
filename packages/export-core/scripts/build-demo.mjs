@@ -1,4 +1,4 @@
-// scripts/build-demo.mjs - bundles demo/page.mjs (renderer-canvas ./dom, interaction-core ./dom, a11y-companion ./dom and this package) with esbuild into
+// scripts/build-demo.mjs - bundles demo/page.mjs (renderer-canvas ./dom, renderer-svg ./dom and its core entry, interaction-core ./dom, a11y-companion ./dom and this package) with esbuild into
 // demo/out/demo.js and writes demo/out/data.js (the example scene and layout of the oracle corpus). NON-NORMATIVE. Needs `npm run build` first.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";

@@ -8,7 +8,8 @@
   :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
   body { margin: 1rem auto; max-width: 960px; padding: 0 1rem; }
   #graph { border: 1px solid currentColor; width: 900px; max-width: 100%; height: 600px; overflow: hidden; position: relative; }
-  #graph canvas { display: block; }
+  #graph canvas, #graph svg { display: block; }
+  #graph .demo-status { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   pre#result { white-space: pre-wrap; word-break: break-all; border: 1px solid currentColor; padding: .5rem; min-height: 3rem; max-height: 14rem; overflow: auto; }
   button { margin-right: .5rem; }
 </style>
@@ -16,9 +17,10 @@
 <body>
 <h1>Keyboard, companion and export</h1>
 <p>Non-normative demo (design 17.2). A Canvas renderer built with <code>pointer: "none"</code>, <code>liveRegion: "none"</code> and <code>canvasLabel: "none"</code>; the
-input binder drives it; the accessible companion is mounted beside it. Serve from <code>localhost</code> (hashing needs a secure context). Smoke-tested in one
+input binder drives it; the accessible companion is mounted beside it. <em>toggle SVG</em> swaps the host for the V5 SVG adapter (built with <code>pointer: "none"</code>,
+<code>liveRegion: "none"</code> and <code>focusRestore: "none"</code>): no companion, the SVG's own ARIA elements, the same keys, the <code>svg-native</code> gate composition. Serve from <code>localhost</code> (hashing needs a secure context). Smoke-tested in one
 engine only; no accessibility or browser-qualification claim.</p>
-<div><button id="fit">fit</button><button id="export">export bundle</button><button id="gate">gate</button></div>
+<div><button id="fit">fit</button><button id="export">export bundle</button><button id="gate">gate</button><button id="toggle">toggle SVG</button></div>
 <div id="graph" tabindex="-1"></div>
 <pre id="result">loading ...</pre>
 <script src="out/data.js"></script>
