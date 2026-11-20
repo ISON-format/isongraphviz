@@ -11,7 +11,7 @@ export const REPO_DIR = resolve(PKG_DIR, "..", "..");
 export const ORACLE_DIR = join(REPO_DIR, "fixtures", "oracles-gl");
 export const DESIGN_PATH = join(REPO_DIR, "docs", "isongraph-visualize-blueprint", "31-CANVAS-WEBGL-DESIGN.md");
 /** The reference digest of fixtures/oracles-gl/SHA256SUMS (design 13.7: DRAFT, reference only, not frozen). */
-export const ORACLE_DIGEST = "00c304ceff6b20d5a4cf2a79d6ce7586cd2707754abd14f7a485d4aa69754f51";
+export const ORACLE_DIGEST = "b87ff2918a63f2acec56674b0b45b375f572ed8649340ca3bd7874d6a4084c5e";
 /** The pinned digest of the shader set (design A.8, 7.4). */
 export const SHADER_DIGEST = "eaf76017c4e62f6a445e9b550ace6301d75ea22143f27e9c66d9e97a631e6968";
 

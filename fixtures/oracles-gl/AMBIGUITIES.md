@@ -4,7 +4,7 @@ Every place where the design was ambiguous, contradictory, left a byte undetermi
 Section numbers without a prefix are sections of design 31 (`31-CANVAS-WEBGL-DESIGN.md`); `27 n` is the IGR/1 design (rev 5), `30 n` the SVG design (rev 4). Nothing was "fixed": where the design and the
 generator's output disagree, both values are given. Entries marked **DESIGN DEFECT** are things that cannot be right as written; the others are underspecifications or choices.
 
-**41 entries (A-01 to A-41), 8 of them design defects.** The Appendix A items and the shader digest all reproduce (README); the defects below concern corpus rows and mutants, not the Appendix.
+**46 entries (A-01 to A-46), 8 of them design defects.** A-42 to A-46 were added after the rev 5 gap review. The Appendix A items and the shader digest all reproduce (README); the defects below concern corpus rows and mutants, not the Appendix.
 
 ## A-01 [DESIGN DEFECT] W04 (`stride.edge 36`) cannot isolate G3
 
@@ -297,3 +297,38 @@ generator's output disagree, both values are given. Entries marked **DESIGN DEFE
 * **Reading used:** Case c is built as planGl(buildDisplayList(model, state, {maxDrawnLabelUnits: 0})) with no renderer; its input key is {'list':{'maxDrawnLabelUnits':0}} (under 'also'; cases a and b keep {'options':{'dl':...}}); the row's tier stays subject. A renderer built with dl.maxDrawnLabelUnits 0 (or capacity 0) is refused INVALID_INPUT/OUT_OF_RANGE by the reference (no row: 6.5 leaves it to unit tests). plan/B08.c.glplan is byte-identical to the rev 3 generation; json/B08.c.json records the list form of the option instead of the options form.
 * **Why:** The plan bytes do not depend on whether the zero budget reaches the builder through a renderer. 6.5 gives the code for a capacity of 0 (the same family as the one-value rule) but not for the dl option itself: OUT_OF_RANGE was used for both.
 
+## A-42 Rows B22, B23, X10-X13 (and X14-X18): expected plans derived from B14 and B13, not by re-running a planner
+
+* **Rev 5:** NEW (gap review after rev 5; closes the row part of A-39 for the omitted elements).
+* **Sections:** 7.2 (`cn`, `ce` entries `[pid, flags]` with the flags of the list's `N`/`E`), 4.4 (c), (d) (`flags = 1*selected + 2*focused`), 7.3 (the guard rule decides omission from geometry), 9.3 (marks "from the omitted entries' `flags`").
+* **Reading used:** whether an element is omitted depends only on geometry, never on selection or focus, so the plan of a state that only adds a focus to B14's scene (`far-a`, both nodes culled) or B13's scene (`far-out`, the edge entirely outside) is the plan of B14 or B13 with the flags of the one omitted entry changed (B22: `cn [[1,2],[2,0]]`; `also` B22b: selected and focused, `[1,3]`; B23: `ce [[4,2]]` with the selection emptied; `also` B23b: `[4,3]`, B13's selection kept). The expected files were derived that way and checked by the reference reader (G1-G16) and readout, not by running a planner again. X10-X13 are the readouts of those four plans: the focus comes from the entry's flags (`marked.focus`), the culled node stays in `drawn` and in `nodes_far`.
+* **Why:** a new planner run would add nothing: the guard rule is covered by B13-B21; what was uncovered is the flag of a *focused* omitted element and its readout.
+
+## A-43 Row W47 and the distinct-pid reading of G12
+
+* **Rev 5:** NEW (gap review). Closes the row part of A-39.
+* **Sections:** 7.2 G11, G12; 13.4 W.
+* **Reading used:** W39-W46 are single-fault plans for the single-focus clause (the reference reader reports exactly `G12` for each; asserted); W47 lists plans the reader must **accept**: the existing `bad/BASE.glplan` (a layer-2 edge focus with selected omitted entries), a focused edge whose chain has two kind-0 instances of one pid in layers 1, 2 and 3 (`plan/W47.b`), one omitted focused node (`.c`), one drawn node focus with selected omitted entries (`.d`), one omitted focused edge (`.e`). "The pids ... number at most one" is read as **distinct pids**, which the text forces: a clipped focused edge repeats its pid (G11) and a plan builder must still produce a valid plan. The plans of W47 are synthetic (edited from BASE), not planner outputs.
+* **Why:** A-39 said no row covers the clause and that "whether a repeated instance counts once or per instance is not said"; W47.b answers it with the only reading under which the builder's own output is valid. The same plans are read by the rows X14-X18 (a readout is taken through the strict reader), because the harness of V7 dispatches the inline `files` form of a W row for W01 only (by id): W47 itself is not run there (a runner finding, not a design one; design 13.2 gives the `files` form for acceptance).
+
+## A-44 Rows U42, U43: the release rule in `created` with a lost context
+
+* **Rev 5:** NEW (gap review). Closes the row part of A-40 (the controller outcomes).
+* **Sections:** 7.6 table rows `created` L/R and D, "Release rule", status convention, 13.2 controller fake.
+* **Reading used:** after a failed initialize the phase is `created`, a context object exists and the listeners are in place. The table row `created | L, R` says "X (no context to lose; ignored)" and, unlike every other loss row, does not list `preventDefault`: a loss in `created` is ignored without any effect line, status unchanged, `status().contextLost` is the fake's flag (true from the loss). The release rule says `loseContext()` only for a context that "was obtained and is **not lost**": since `created` ignores the loss event, "lost" can only mean the context's own state (`isContextLost()`), so U42 (`init` fails, L, D) logs no `getExtension`/`loseContext`, and U43 (`init` fails, L, R, D) does, because R makes the context usable again. Mutants K147-K149 differ on exactly this.
+* **Not used:** a loss *during* the failed creation (the fake's `fail: "lost"` at `init`): 7.5 says the detail token is `CONTEXT_LOST` "followed by a colon and at most 120 characters of the driver's info log (called once, after the status check and before the cleanup)", but a lost context returns no log and the design does not say whether `getShaderInfoLog` is still called; no row writes that byte.
+* **Why:** U42 is the "dispose in `created` with a lost context" case the ledger names (M-4); without the reading above no event sequence reaches it.
+
+## A-45 The U-row convention differs from the sentence of 13.2 about rows with a log and an error
+
+* **Rev 5:** NEW (gap review); a finding about the existing corpus.
+* **Sections:** 13.2 "A failure that has both a log and an error" (lists U25, U27, U31, U34, U36, U39), README of this corpus, A-06.
+* **Reading used:** the existing rows U25, U27, U31, U34, U36, U39 have an **empty** `error` cell and no `info_log`/`expect_detail` in their input (only E10 and E11 have them), contrary to 13.2 and to A-06. The new controller rows follow the existing U rows (expected = the log, `error` empty, no info log), so one runner reads all U rows alike; U42 and U43 contain a failed initialize in that form.
+* **Why:** consistency with the committed rows; whether the design sentence or the rows should change is the owner's call.
+
+## A-46 Controller cells deliberately not written as rows
+
+* **Rev 5:** NEW (gap review).
+* **Sections:** 7.6.
+* **Reading used:** (a) a second `init` after a failed `init` (created, creation fails, then `init` again): "listeners added once at the start of every initialize that reaches creation" and "a failed initialize leaves them in place" leave open whether the listeners are added twice; (b) `L` or `R` after `dispose`: with the listeners removed the fake's flag, and so `status().contextLost`, is not determined; U49 uses only `C`, `F`, `init`, `D` after the dispose; (c) a plan with two foci read with every reader rule disabled (X07's mode): 9.3 says `readoutFromGl` "reports the one focus or none" for valid plans; the result for two foci is not stated. No row encodes a guess for (a)-(c).
+* **Why:** underspecified; recorded for the owner.

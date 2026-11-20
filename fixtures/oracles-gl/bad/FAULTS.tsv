@@ -36,3 +36,11 @@ W35	G14
 W36	G13	
 W37	G11	
 W38	G16	
+W39	G12	a layer-2 edge focus (pid 9) and a layer-6 node focus (pid 2)
+W40	G12	two layer-2 pids (9 and 10)
+W41	G12	two layer-6 pids (1 and 2), no layer 2
+W42	G12	the layer-2 focus and a cn entry with flags 2
+W43	G12	the layer-2 focus and a ce entry with flags 3
+W44	G12	two cn entries with the focus bit, no drawn focus
+W45	G12	a layer-6 node focus and a cn entry with flags 2
+W46	G12	a cn entry and a ce entry with the focus bit

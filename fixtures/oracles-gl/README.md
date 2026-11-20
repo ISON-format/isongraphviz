@@ -22,28 +22,28 @@ ambiguous, contradictory or could not be built, the literal reading used, and wh
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **279 rows**, one per id of design 13.6.
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **336 rows** (the 279 rows, one per id of design 13.6, and the 57 gap rows of the last section).
 
 | Family | Rows | Content | Expected files |
 |---|---|---|---|
 | G | 11 | golden plans | plan/Gnn.glplan (binary, 7.2) |
-| B | 21 | buffer encoding, guard rule, plan sections | plan/Bnn.glplan; B08 renderer-level (also list); B10 error |
+| B | 23 | buffer encoding, guard rule, plan sections | plan/Bnn.glplan; B08 renderer-level (also list); B10 error |
 | H | 6 | the shader set | json/H0n.*.json, shaders/*.glsl |
-| W | 38 | the plan reader (bad plans) | bad/Wnn.glplan (error INVALID_INPUT/SCHEMA), bad/FAULTS.tsv |
-| X | 9 | readouts | xr/Xnn.xr.json (X07 error) |
+| W | 47 | the plan reader (bad plans; W47 accepts) | bad/Wnn.glplan (error INVALID_INPUT/SCHEMA), bad/FAULTS.tsv |
+| X | 18 | readouts | xr/Xnn.xr.json (X07 error) |
 | E | 11 | executor call logs against a fake context | gllog/Enn.log (E10, E11: log and error) |
-| U | 33 | the WebGL renderer (headless), the context controller | scripts/, plan/, states/, json/, calls/, gllog/ |
+| U | 43 | the WebGL renderer (headless), the context controller | scripts/, plan/, states/, json/, calls/, gllog/ |
 | P | 16 | the capability probe | json/Pnn.probe.json + gllog/Pnn.log |
 | D | 5 | differential (runtime) | no files (self-checks of the generator, README) |
-| K | 129 | mutants | no files (MUTANTS.tsv) |
-| **total** | **279** | | |
+| K | 156 | mutants | no files (MUTANTS.tsv) |
+| **total** | **336** | | |
 
-Rows with empty cells by design: D (5) and K (129); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W38, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
+Rows with empty cells by design: D (5) and K (156); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W46, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
 
 | Directory | Content |
 |---|---|
 | `plan/` | expected plans (binary `igr-gl/1`: header line, element table, label runs, three instance buffers) of rows G, B, X and the plans after each step of U scripts |
-| `bad/` | the 37 bad plans W02-W38, `X07.glplan`, `FAULTS.tsv` (the rule each bad plan breaks), `BASE.glplan` (the plan they are made from) |
+| `bad/` | the 45 bad plans W02-W46, `X07.glplan`, `FAULTS.tsv` (the rule each bad plan breaks), `BASE.glplan` (the plan they are made from) |
 | `gllog/` | executor call logs (E), controller logs (U20-U39), probe call logs (P): one canonical JSON line per effect, LF-terminated |
 | `calls/` | recorded Canvas streams: `X05.calls` (the Canvas stream of O1, all layers), `U13.calls` (the WebGL text layer, layer 8) |
 | `xr/` | readouts `igr-xr/1`: canonical JSON plus one LF |
@@ -3893,3 +3893,25 @@ The full matrix is `MUTANTS.tsv` (columns mutant, description, named killers, ki
 
 The shader sources were compiled once, by the author, in headless Chromium (see the hand-over) and not elsewhere; nothing here claims pixels, GPU behaviour, real context loss, other drivers or browsers. The runtime D rows have no frozen bytes. The controller, probe and lifecycle rows run on fakes and on a simulation whose every choice is recorded in `AMBIGUITIES.md`.
 
+## Additions after the rev 5 gap review (single-focus clause of G12; the controller outcomes; rows B22-B23, W39-W47, X10-X18, U40-U49, K130-K156)
+
+The ledger notes `gl A-39` (single focus) and `gl A-40` (controller outcomes) recorded that rev 5 added rules for which no row exists (AMBIGUITIES A-39, A-40: "asserted by the generator, not by rows"). These 57 rows were **appended** (new ids; no existing expected byte or row changed; the only existing files that differ are `EXPECT.tsv`, `MUTANTS.tsv` and `bad/FAULTS.tsv` (appended lines), `AMBIGUITIES.md` (appended A-42 to A-46 and the entry count), this README (counts and this section) and `SHA256SUMS`).
+
+| Rows | What | Files |
+|---|---|---|
+| W39-W46 | plans with more than one focused element, each rejected by **G12 only** (the reference reader reports exactly `G12`): layer-2 edge plus layer-6 node (W39), two layer-2 pids (W40), two layer-6 pids (W41), the layer-2 focus plus a `cn` entry with flags 2 (W42), plus a `ce` entry with flags 3 (W43), two `cn` entries with the focus bit and no drawn focus (W44), a layer-6 node plus a `cn` entry (W45), a `cn` and a `ce` entry (W46) | `bad/W39.glplan` ... `bad/W46.glplan`, `bad/FAULTS.tsv` |
+| W47 | the reader accepts: `bad/BASE.glplan`, a focused clipped edge (two instances of one pid), one omitted focused node, a drawn node focus with selected omitted entries, one omitted focused edge | `plan/W47.b.glplan` ... `plan/W47.e.glplan` |
+| B22, B23 | a focused node / edge that the guard rule omits: the flags in `cn`/`ce` carry the focus bit (`also` cases: selected and focused) | `states/B22*.state.json`, `states/B23*.state.json`, `plan/B22*.glplan`, `plan/B23*.glplan` |
+| X10-X13 | the readout of those four plans: the focus from the omitted entry's flags | `xr/X10.xr.json` ... `xr/X13.xr.json` |
+| X14-X18 | the readout of the accepted plans of W47 (the harness runs the `files` form of a W row for W01 only, so the acceptance is also pinned through the strict reader of an X row): focus edge of a clipped chain (X14), omitted node (X15), drawn node with selected omitted entries (X16), omitted edge (X17), `bad/BASE.glplan` (X18) | `xr/X14.xr.json` ... `xr/X18.xr.json` |
+| U40 | `(failed, R)` with the context **lost again**: phase `lost`, `failure` cleared, `onStatus`, no cleanup calls, a later R succeeds | `gllog/U40.log` |
+| U41 | `(failed, R)` with a **second usable failure** (new token): phase stays `failed`, `onError` once, new `failure`, no `onStatus`; dispose releases | `gllog/U41.log` |
+| U42, U43 | the **release rule** in `created` after a failed initialize: a lost context is not released (U42), a restored one is (U43) | `gllog/U42.log`, `gllog/U43.log` |
+| U44-U49 | table cells without a row: `created` with R, C, F and no context (U44); a plan retained before `initialize` is drawn by it, `ready` F (U45); a restore with no retained plan draws nothing (U46); `failed` with C and F, then lost, then the latest plan on restore (U47); `init` in `lost` and `failed` is ignored (U48); `disposed` absorbs every event (U49) | `gllog/U44.log` ... `gllog/U49.log` |
+| K130-K156 | 27 mutants (reader clause variants, readout, guard flags, controller outcomes); all killed by the named rows (MUTANTS.tsv) | |
+
+**Independence of these rows.** Written from design 31 rev 5 (7.2 with G1-G16, 7.4, 7.5, 7.6, 9.1, 9.3, Appendix A.5.1) by a separate oracle author who did not read, import or run any TypeScript or `packages/*/src` and did not read the generator of this corpus; the reference logic is `tools/gap_glref.py` (plan structure and strict reader G1-G16, readout from the plan, executor log, controller reducer with its fake) and `tools/gap_gl.py`, `tools/gap_finish_gl.py` (standard library only). Before writing anything the reference is checked against the existing corpus: it accepts every `plan/*.glplan`, reproduces the violated rule of each of W02-W38, the readouts X01-X04, X06, X08, X09 and the logs and `status()` sequences of the 19 existing controller rows U20-U36, U38, U39 byte for byte. `tools/gen.py` does not know these rows: running it removes them. To rebuild only the additions, restore the corpus from version control and run `python -B -I tools/gap_gl.py && python -B -I tools/gap_finish_gl.py`.
+
+**Mutant matrix of K130-K156.** The mutants touch the G12 clause, the readout, the guard flags and the controller only, so each was run over the new rows and over every existing row that calls those functions (W01-W38, X01-X09, U20-U39 except U37, B14 and B13 by derivation); the other existing rows cannot change. Result: 27 of 27 killed with every named row changing. Rows that change although not named: K134 also changes X13-X15 and X17 (selected omitted entries); K138 the existing X06 and the new X14-X18; K142 the existing U28; K148 the new U41 and the existing U34; K153 the existing U36 (these existing rows already pinned those behaviours; no existing row pinned the focus clause or the three controller outcomes).
+
+**Not covered (recorded in AMBIGUITIES).** A-44 (a loss during the failed creation), A-46 (a second initialize after a failure, events after dispose, two foci read leniently), A-45 (the existing U rows do not follow the 13.2 sentence about an error cell).

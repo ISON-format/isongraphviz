@@ -107,13 +107,18 @@ async function shaderRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
 
 // ---- W: the plan reader ------------------------------------------------------------------------------------------------------------------------
 async function readerRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
-  if (row.id === "W01") {
-    for (const f of parseInput(row)["files"] as string[]) {
+  // 13.2: an input that starts with `{` is the inline `files` form (W01, W47): the strict reader accepts each file and re-serializes it to itself. Any
+  // other input is a path under bad/ and the row's error cell names the rejection. The form decides, never the id.
+  const files = parseInput(row)["files"];
+  if (Array.isArray(files)) {
+    if (row.error !== "") fail(`${row.id}: the files form is an acceptance row but its error cell is ${row.error}`);
+    for (const f of files as string[]) {
       const bytes = c.bytes(f);
-      eqBytes(`W01 serializePlan(parseGlPlan(${f}))`, impl.serializePlan(impl.parseGlPlan(bytes)), bytes);
+      eqBytes(`${row.id} serializePlan(parseGlPlan(${f}))`, impl.serializePlan(impl.parseGlPlan(bytes)), bytes);
     }
     return;
   }
+  if (row.error === "") fail(`${row.id}: a path input needs an error cell (an acceptance row uses the inline files form)`);
   let got = "none";
   try { impl.parseGlPlan(c.bytes(row.input)); } catch (e) { got = code(e); }
   if (got !== row.error) fail(`${row.id} parseGlPlan(${row.input}): got ${got} want ${row.error}`);
@@ -204,7 +209,7 @@ async function probeRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
   eq(`${row.id} probe call log`, log.map((l) => l + "\n").join(""), c.text(input["expect_log"]));
 }
 
-// ---- U20-U39: the context controller against a fake canvas that fires context events ----------------------------------------------------------
+// ---- U20-U49 (but U37): the context controller against a fake canvas that fires context events ----------------------------------------------------------
 interface CtlStatus { phase: string; contextLost: boolean; failure?: string; attributes: unknown }
 const statusLine = (s: CtlStatus): string => canon(["onStatus", s.phase, s.contextLost ? 1 : 0, s.failure ?? null]);
 const errToken = (d: string | undefined): string => (d ?? "").split(":")[0]!;
@@ -280,8 +285,9 @@ async function adapterRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
 
 // ---- dispatch ------------------------------------------------------------------------------------------------------------------------------
 export const FUNCTION_GROUPS = new Set(["G", "B", "H", "W", "X", "E", "P", "U"]);
-/** The controller rows of tier subject: U20-U39 (no model, no renderer). */
-export const CONTROLLER_ROWS = (id: string): boolean => /^U(2\d|3\d)$/.test(id);
+/** The controller rows (U20-U36, U38-U49; no model, no renderer) are the U rows whose input is the inline `events` form (13.2): the form decides, never the id
+ * range (an id range silently turned U40-U49 into rows that ran nothing). */
+export const isControllerRow = (row: Row): boolean => Array.isArray(parseInput(row)["events"]);
 
 export async function runRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
   if (row.group === "U" && HEAVY.has(row.id)) return fail("heavy row: run through runHeavy");
@@ -292,7 +298,7 @@ export async function runRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
     case "X": return readoutRow(impl, c, row);
     case "E": return execRow(impl, c, row);
     case "P": return probeRow(impl, c, row);
-    case "U": if (row.id === "U37") return adapterRow(impl, c, row); if (CONTROLLER_ROWS(row.id)) return controllerRow(impl, c, row); return runRendererRow(impl, c, row);
+    case "U": if (row.id === "U37") return adapterRow(impl, c, row); if (isControllerRow(row)) return controllerRow(impl, c, row); return runRendererRow(impl, c, row);
     default: return fail(`row ${row.id}: no runner for group ${row.group}`);
   }
 }

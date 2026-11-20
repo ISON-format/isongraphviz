@@ -278,3 +278,60 @@ K126	K
 K127	K						
 K128	K						
 K129	K						
+B22	B	both	scenes/far-a.scene.json	layouts/far-a.layout.json	{"also":[{"expected":"plan/B22b.glplan","state":"states/B22b.state.json"}],"size":{"height":600,"width":900},"state":"states/B22.state.json"}	plan/B22.glplan	
+B23	B	both	scenes/far-out.scene.json	layouts/far-out.layout.json	{"also":[{"expected":"plan/B23b.glplan","state":"states/B23b.state.json"}],"size":{"height":600,"width":900},"state":"states/B23.state.json"}	plan/B23.glplan	
+W39	W	core			bad/W39.glplan		INVALID_INPUT/SCHEMA
+W40	W	core			bad/W40.glplan		INVALID_INPUT/SCHEMA
+W41	W	core			bad/W41.glplan		INVALID_INPUT/SCHEMA
+W42	W	core			bad/W42.glplan		INVALID_INPUT/SCHEMA
+W43	W	core			bad/W43.glplan		INVALID_INPUT/SCHEMA
+W44	W	core			bad/W44.glplan		INVALID_INPUT/SCHEMA
+W45	W	core			bad/W45.glplan		INVALID_INPUT/SCHEMA
+W46	W	core			bad/W46.glplan		INVALID_INPUT/SCHEMA
+W47	W	core			{"files":["bad/BASE.glplan","plan/W47.b.glplan","plan/W47.c.glplan","plan/W47.d.glplan","plan/W47.e.glplan"]}		
+X10	X	core	scenes/far-a.scene.json	layouts/far-a.layout.json	{"from":"gl","plan":"plan/B22.glplan"}	xr/X10.xr.json	
+X11	X	core	scenes/far-a.scene.json	layouts/far-a.layout.json	{"from":"gl","plan":"plan/B22b.glplan"}	xr/X11.xr.json	
+X12	X	core	scenes/far-out.scene.json	layouts/far-out.layout.json	{"from":"gl","plan":"plan/B23.glplan"}	xr/X12.xr.json	
+X13	X	core	scenes/far-out.scene.json	layouts/far-out.layout.json	{"from":"gl","plan":"plan/B23b.glplan"}	xr/X13.xr.json	
+X14	X	core			{"from":"gl","plan":"plan/W47.b.glplan"}	xr/X14.xr.json	
+X15	X	core			{"from":"gl","plan":"plan/W47.c.glplan"}	xr/X15.xr.json	
+X16	X	core			{"from":"gl","plan":"plan/W47.d.glplan"}	xr/X16.xr.json	
+X17	X	core			{"from":"gl","plan":"plan/W47.e.glplan"}	xr/X17.xr.json	
+X18	X	core			{"from":"gl","plan":"bad/BASE.glplan"}	xr/X18.xr.json	
+U40	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"},{"fail":"lost","op":"R"},{"op":"R"}],"expect_log":"gllog/U40.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U40.log	
+U41	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"},{"fail":"link","op":"R"},{"op":"D"}],"expect_log":"gllog/U41.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"LINK_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U41.log	
+U42	U	subject			{"events":[{"fail":"compile","op":"init"},{"op":"L"},{"op":"D"}],"expect_log":"gllog/U42.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"disposed"}]}	gllog/U42.log	
+U43	U	subject			{"events":[{"fail":"compile","op":"init"},{"op":"L"},{"op":"R"},{"op":"D"}],"expect_log":"gllog/U43.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U43.log	
+U44	U	subject			{"events":[{"op":"R"},{"op":"C","plan":"plan/G01.glplan"},{"op":"F"},{"op":"D"}],"expect_log":"gllog/U44.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U44.log	
+U45	U	subject			{"events":[{"op":"C","plan":"plan/G01.glplan"},{"op":"init"},{"op":"F"}],"expect_log":"gllog/U45.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"created"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U45.log	
+U46	U	subject			{"events":[{"op":"init"},{"op":"L"},{"op":"R"}],"expect_log":"gllog/U46.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U46.log	
+U47	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"fail":"compile","op":"R"},{"op":"C","plan":"plan/G05.glplan"},{"op":"F"},{"op":"L"},{"op":"R"}],"expect_log":"gllog/U47.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"}]}	gllog/U47.log	
+U48	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"L"},{"op":"init"},{"fail":"compile","op":"R"},{"op":"init"}],"expect_log":"gllog/U48.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":true,"phase":"lost"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"failure":"COMPILE_FAILED","phase":"failed"}]}	gllog/U48.log	
+U49	U	subject			{"events":[{"op":"init"},{"op":"C","plan":"plan/G01.glplan"},{"op":"D"},{"op":"C","plan":"plan/G05.glplan"},{"op":"F"},{"op":"init"},{"op":"D"}],"expect_log":"gllog/U49.log","expect_status":[{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"ready"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"},{"attributes":{"failIfMajorPerformanceCaveat":true},"contextLost":false,"phase":"disposed"}]}	gllog/U49.log	
+K130	K						
+K131	K						
+K132	K						
+K133	K						
+K134	K						
+K135	K						
+K136	K						
+K137	K						
+K138	K						
+K139	K						
+K140	K						
+K141	K						
+K142	K						
+K143	K						
+K144	K						
+K145	K						
+K146	K						
+K147	K						
+K148	K						
+K149	K						
+K150	K						
+K151	K						
+K152	K						
+K153	K						
+K154	K						
+K155	K						
+K156	K						

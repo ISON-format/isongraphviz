@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-gl (K01..K129: 129 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
+// The K table of design 13.5 for fixtures/oracles-gl (K01..K156: 156 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
 // SCRATCH COPY of packages/renderer-webgl/src ("gl"); production code has no switchable variants and the package's src/ is never modified (display-list is
 // not copied: no mutant of this table lives there). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of
 // src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -20,6 +20,13 @@ const DIMS = 'if (mx < (need?.widthPx ?? 1) || my < (need?.heightPx ?? 1)) retur
 const RESTORE_DRAW = "        try { draw(); }\n        catch (e) {";
 const ON_LOST_END = '    phase = "lost";\n    notify();\n  };';
 const ON_RESTORED_FAIL = '        failure = token(c.error);\n        options.onError?.(c.error);\n        phase = "failed";\n        if (was !== "failed") notify();';
+
+// the single-focus clause of G12 (design rev 5, 7.2) and the (failed, R) lost-again branch of the controller (7.6, A-40)
+const FOC_LAYERS = "...byLayer[2]!, ...byLayer[6]!, ";
+const FOC_CNCE = "...[...cn, ...ce].filter((e) => (e[1] & 2) !== 0).map((e) => e[0])";
+const FOC_DECL = "const focused = new Set<number>([" + FOC_LAYERS + FOC_CNCE + "]);\n    ";
+const FOC_THROW = 'if (focused.size > 1) throw fail("G12", "at most one element is focused");';
+const LOST_AGAIN = '      } else if (was === "failed") {\n';
 
 export const MUTANTS = [
   // ---- the plan encoding (G, B) --------------------------------------------------------------------------------------------------------------
@@ -181,4 +188,49 @@ export const MUTANTS = [
   m("K127", "`dispose` after a failed `initialize` omits `loseContext`", [G("control.ts", '(phase === "failed" || phase === "created") && gl !== undefined', '(phase === "failed") && gl !== undefined')]),
   m("K128", "`onStatus` emitted before `onError`", [G("control.ts", ON_RESTORED_FAIL, '        failure = token(c.error);\n        phase = "failed";\n        if (was !== "failed") notify();\n        options.onError?.(c.error);')]),
   m("K129", "`x-gl.executes` supported on the headless host", [G("manifest.ts", '"x-gl.executes": gpu,', '"x-gl.executes": SUPPORTED,')]),
+  // ---- K130-K156: the rev 5 gap rows (single-focus clause of G12, the readout of omitted flags, the guard flags, the controller outcomes of A-40) -----------------
+  m("K130", "G12 single-focus clause counts the layer-2 and layer-6 pids only (cn/ce flags ignored)", [G("read.ts", FOC_CNCE, "...[]")]),
+  m("K131", "G12 single-focus clause counts the cn/ce entries with the focus bit only (layers 2 and 6 ignored)", [G("read.ts", "new Set<number>([" + FOC_LAYERS, "new Set<number>([")]),
+  m("K132", "G12 allows one focused pid in layer 2 and one in layer 6 separately (cn/ce flags ignored)", [G("read.ts", FOC_DECL + FOC_THROW, 'const focused2 = new Set<number>(byLayer[2]!), focused6 = new Set<number>(byLayer[6]!);\n    if (focused2.size > 1 || focused6.size > 1) throw fail("G12", "at most one element is focused");')]),
+  m("K133", "G12 counts instances instead of distinct pids (a clipped focused edge counts per instance)", [G("read.ts", "const focused = new Set<number>([", "const focused: number[] = (["), G("read.ts", "if (focused.size > 1) throw fail(", "if (focused.length > 1) throw fail(")]),
+  m("K134", "G12 counts every cn/ce entry with a non-zero flags value (a selected omitted element is a focus)", [G("read.ts", "...[...cn, ...ce].filter((e) => (e[1] & 2) !== 0)", "...[...cn, ...ce].filter((e) => e[1] !== 0)")]),
+  m("K135", "G12 counts the cn entries with the focus bit but not the ce entries", [G("read.ts", "...[...cn, ...ce].filter((e) => (e[1] & 2) !== 0)", "...[...cn].filter((e) => (e[1] & 2) !== 0)")]),
+  m("K136", "reader has the subset clauses of G12 but not the single-focus clause", [G("read.ts", "if (focused.size > 1) throw fail(", "if (false) throw fail(")]),
+  m("K137", "readoutFromGl takes the focus from the layers 2 and 6 only (the flags of omitted entries ignored)", [
+    G("readout.ts", "    if (flags & 2) a.focusedNodes.add(pid);\n", ""),
+    G("readout.ts", "    if (flags & 2) a.focusedEdges.add(pid);\n", ""),
+  ]),
+  m("K138", "readoutFromGl swaps the selected and focused bits of the omitted entries", [
+    G("readout.ts", "    if (flags & 1) a.selectedNodes.add(pid);\n    if (flags & 2) a.focusedNodes.add(pid);\n", "    if (flags & 2) a.selectedNodes.add(pid);\n    if (flags & 1) a.focusedNodes.add(pid);\n"),
+    G("readout.ts", "    if (flags & 1) a.selectedEdges.add(pid);\n    if (flags & 2) a.focusedEdges.add(pid);\n", "    if (flags & 2) a.selectedEdges.add(pid);\n    if (flags & 1) a.focusedEdges.add(pid);\n"),
+  ]),
+  m("K139", "the guard rule writes the flags of an omitted element without the focus bit", [G("plan.ts", "ce.push([pid, flags]);", "ce.push([pid, flags & 1]);", 2), G("plan.ts", "cn.push([r[1], r[3] as number]);", "cn.push([r[1], (r[3] as number) & 1]);")]),
+  m("K140", "controller (failed, R) with the context lost again ends in phase failed instead of lost", [G("control.ts", LOST_AGAIN + '        failure = undefined;\n        phase = "lost";', LOST_AGAIN + '        failure = undefined;\n        phase = "failed";')]),
+  m("K141", "controller (failed, R) lost again keeps the failure token", [G("control.ts", LOST_AGAIN + "        failure = undefined;\n", LOST_AGAIN)]),
+  m("K142", "controller deletes the created objects when the restore is lost again", [
+    G("execute.ts", "    if (gl.isContextLost()) return;\n    for (let i = created.length - 1; i >= 0; i--) {", "    for (let i = created.length - 1; i >= 0; i--) {"),
+    G("execute.ts", 'e.detail?.startsWith("CONTEXT_LOST") === true) throw e;\n    cleanup();', 'e.detail?.startsWith("CONTEXT_LOST") === true) { cleanup(); throw e; }\n    cleanup();'),
+  ]),
+  m("K143", "controller (failed, R) lost again does not call onStatus", [G("control.ts", LOST_AGAIN + '        failure = undefined;\n        phase = "lost";\n        notify();', LOST_AGAIN + '        failure = undefined;\n        phase = "lost";')]),
+  m("K144", "controller (failed, R) second usable failure calls onStatus though the phase stays failed", [G("control.ts", '        options.onError?.(c.error);\n        phase = "failed";\n        if (was !== "failed") notify();', '        options.onError?.(c.error);\n        phase = "failed";\n        notify();')]),
+  m("K145", "controller (failed, R) second usable failure keeps the old failure token", [G("control.ts", "        failure = token(c.error);\n", '        if (was !== "failed") failure = token(c.error);\n')]),
+  m("K146", "controller (failed, R) second usable failure does not call onError", [G("control.ts", "        options.onError?.(c.error);\n", '        if (was !== "failed") options.onError?.(c.error);\n')]),
+  m("K147", "dispose in created releases the context although it is lost", [G("control.ts", "&& gl !== undefined && !lost()) releaseGlContext(gl);", "&& gl !== undefined) releaseGlContext(gl);")]),
+  m("K148", 'dispose in created decides the release from a cached "was ever lost" flag, not from the context', [
+    G("control.ts", "  let listening = false;\n", "  let listening = false;\n  let everLost = false;\n"),
+    G("control.ts", "  const onLost = (event: GlEventLike): void => {\n", "  const onLost = (event: GlEventLike): void => {\n    everLost = true;\n"),
+    G("control.ts", "&& gl !== undefined && !lost()) releaseGlContext(gl);", "&& gl !== undefined && !everLost) releaseGlContext(gl);"),
+  ]),
+  m("K149", "a loss event in created calls preventDefault", [G("control.ts", '    if (phase === "created" || phase === "disposed") return;\n    event.preventDefault();', '    if (phase === "disposed") return;\n    event.preventDefault();\n    if (phase === "created") return;')]),
+  m("K150", "initialize does not draw a plan retained before it", [G("control.ts", "      try { draw(); }\n      catch (e) {", "      try { void draw; }\n      catch (e) {")]),
+  m("K151", "a restore with no retained plan logs a label draw", [G("control.ts", "    if (plan === undefined || gl === undefined || resources === undefined) return;\n", "    if (gl === undefined || resources === undefined) return;\n    if (plan === undefined) { options.labels?.draw(plan as never); return; }\n")]),
+  m("K152", "a commit in failed does not store the plan (the restore draws an older one)", [G("control.ts", '      plan = next;\n      if (phase === "ready") draw();', '      if (phase !== "failed") plan = next;\n      if (phase === "ready") draw();')]),
+  m("K153", "a loss out of failed clears the label canvas again", [G("control.ts", 'if (was === "ready") options.labels?.clear();', 'if (was === "ready" || was === "failed") options.labels?.clear();')]),
+  m("K154", "initialize in lost or failed adds the listeners again", [G("control.ts", 'if (phase !== "created") return; // the renderer', 'if (phase !== "created") { if (phase === "lost" || phase === "failed") { canvas.addEventListener("webglcontextlost", onLost); canvas.addEventListener("webglcontextrestored", onRestored); } return; } // the renderer')]),
+  m("K155", "a second dispose removes the listeners again", [G("control.ts", 'if (phase === "disposed") return;\n      if (phase === "ready") {', 'if (phase === "disposed") { canvas.removeEventListener("webglcontextlost", onLost); canvas.removeEventListener("webglcontextrestored", onRestored); return; }\n      if (phase === "ready") {')]),
+  m("K156", "render() in ready draws the frame but not the labels", [
+    G("control.ts", "  let listening = false;\n", "  let listening = false;\n  let framesOnly = false;\n"),
+    G("control.ts", "      options.labels?.draw(plan);\n", "      if (!framesOnly) options.labels?.draw(plan);\n"),
+    G("control.ts", '    render(): void {\n      if (phase === "ready") draw();', '    render(): void {\n      if (phase === "ready") { framesOnly = true; try { draw(); } finally { framesOnly = false; } }'),
+  ]),
 ];

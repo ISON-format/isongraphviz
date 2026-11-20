@@ -128,3 +128,30 @@ K126	`dispose` in `failed` omits `loseContext`	U34	U34			KILLED
 K127	`dispose` after a failed `initialize` omits `loseContext`	U39	U39			KILLED
 K128	`onStatus` emitted before `onError`	U25,U36	U25,U36		U31,U34	KILLED
 K129	`x-gl.executes` supported on the headless host	U06	U06			KILLED
+K130	G12 single-focus clause counts the layer-2 and layer-6 pids only (cn/ce flags ignored)	W42,W43,W44,W45,W46	W42,W43,W44,W45,W46			KILLED
+K131	G12 single-focus clause counts the cn/ce entries with the focus bit only (layers 2 and 6 ignored)	W39,W40,W41,W42,W43,W45	W39,W40,W41,W42,W43,W45			KILLED
+K132	G12 allows one focused pid in layer 2 and one in layer 6 separately (cn/ce flags ignored)	W39,W42,W43,W44,W45,W46	W39,W42,W43,W44,W45,W46			KILLED
+K133	G12 counts instances instead of distinct pids (a clipped focused edge counts per instance)	W47,X14	W47,X14			KILLED
+K134	G12 counts every cn/ce entry with a non-zero flags value (a selected omitted element is a focus)	W47,X16,X18	W47,X16,X18		X13,X14,X15,X17	KILLED
+K135	G12 counts the cn entries with the focus bit but not the ce entries	W43,W46	W43,W46			KILLED
+K136	reader has the subset clauses of G12 but not the single-focus clause	W39,W40,W41,W42,W43,W44,W45,W46	W39,W40,W41,W42,W43,W44,W45,W46			KILLED
+K137	readoutFromGl takes the focus from the layers 2 and 6 only (the flags of omitted entries ignored)	X10,X11,X12,X13,X15,X17	X10,X11,X12,X13,X15,X17			KILLED
+K138	readoutFromGl swaps the selected and focused bits of the omitted entries	X10,X12,X13	X10,X12,X13		X06,X14,X15,X16,X17,X18	KILLED
+K139	the guard rule writes the flags of an omitted element without the focus bit	B22,B23	B22,B23			KILLED
+K140	controller (failed, R) with the context lost again ends in phase failed instead of lost	U40	U40			KILLED
+K141	controller (failed, R) lost again keeps the failure token	U40	U40			KILLED
+K142	controller deletes the created objects when the restore is lost again	U40	U40		U28	KILLED
+K143	controller (failed, R) lost again does not call onStatus	U40	U40			KILLED
+K144	controller (failed, R) second usable failure calls onStatus though the phase stays failed	U41	U41			KILLED
+K145	controller (failed, R) second usable failure keeps the old failure token	U41	U41			KILLED
+K146	controller (failed, R) second usable failure does not call onError	U41	U41			KILLED
+K147	dispose in created releases the context although it is lost	U42	U42			KILLED
+K148	dispose in created decides the release from a cached "was ever lost" flag, not from the context	U43	U43		U34,U41	KILLED
+K149	a loss event in created calls preventDefault	U42,U43	U42,U43			KILLED
+K150	initialize does not draw a plan retained before it	U45	U45			KILLED
+K151	a restore with no retained plan logs a label draw	U46	U46			KILLED
+K152	a commit in failed does not store the plan (the restore draws an older one)	U47	U47			KILLED
+K153	a loss out of failed clears the label canvas again	U47	U47		U36	KILLED
+K154	initialize in lost or failed adds the listeners again	U48	U48			KILLED
+K155	a second dispose removes the listeners again	U49	U49			KILLED
+K156	render() in ready draws the frame but not the labels	U45	U45			KILLED

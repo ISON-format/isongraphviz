@@ -98,7 +98,11 @@ describe("planGl", () => {
 
 describe("the reader: the single-fault property of the W rows (design 7.2: 'each single-fault in the W rows')", () => {
   const faults = readOracleText("bad/FAULTS.tsv").split("\n").slice(1).filter((l) => l !== "").map((l) => l.split("\t") as [string, string]);
-  it("there is one entry per W02-W38", () => { expect(faults.map((f) => f[0])).toEqual(Array.from({ length: 37 }, (_, i) => `W${String(i + 2).padStart(2, "0")}`)); });
+  it("there is one entry per reject row W02-W46 (W47 is the accept row and has none): the entries are exactly the W rows with an error cell", () => {
+    const rejects = readOracleText("EXPECT.tsv").split("\n").slice(1).map((l) => l.split("\t")).filter((c) => c[1] === "W" && c[7] !== undefined && c[7] !== "").map((c) => c[0]);
+    expect(faults.map((f) => f[0])).toEqual(rejects);
+    expect(faults.map((f) => f[0])).toEqual(Array.from({ length: 45 }, (_, i) => `W${String(i + 2).padStart(2, "0")}`));
+  });
   for (const [id, rule] of faults) {
     it(`${id}: rejected by ${rule}, and accepted when only ${rule} is skipped`, () => {
       const bytes = readOracle(`bad/${id}.glplan`);
