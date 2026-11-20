@@ -1,4 +1,4 @@
-// Guards the mutation harness without running it: the K table has the 193 ids of the corpus MUTANTS.tsv (K01..K187 with the b-variants), every patch
+// Guards the mutation harness without running it: the K table has the 206 ids of the corpus MUTANTS.tsv (K01..K200 with the b-variants), every patch
 // applies exactly the stated number of times to the CURRENT src of display-list and renderer-canvas (so a refactoring cannot silently turn a mutant into a
 // no-op), and production code carries no switchable variants.
 import { readFileSync, readdirSync } from "node:fs";
@@ -7,12 +7,12 @@ import { describe, expect, it } from "vitest";
 import { EXTRA_MUTANTS, MUTANTS } from "../scripts/mutants-table.mjs";
 import { ORACLE_DIR, PKG_DIR, REPO_DIR } from "./helpers.js";
 
-const SRC = { dl: join(REPO_DIR, "packages", "display-list", "src"), cv: join(PKG_DIR, "src") } as const;
+const SRC = { dl: join(REPO_DIR, "packages", "display-list", "src"), cv: join(PKG_DIR, "src"), core: join(REPO_DIR, "packages", "renderer-core", "src") } as const;
 
 describe("the K table (scripts/mutants-table.mjs)", () => {
   it("matches the ids of the corpus MUTANTS.tsv, each with a description and at least one patch", () => {
     const ids = readFileSync(join(ORACLE_DIR, "MUTANTS.tsv"), "utf8").split("\n").slice(1).filter((l) => l !== "").map((l) => l.split("\t")[0]);
-    expect(ids.length).toBe(193);
+    expect(ids.length).toBe(206);
     expect(MUTANTS.map((m) => m.id)).toEqual(ids);
     for (const m of MUTANTS) { expect(m.desc, m.id).toBeTruthy(); expect(m.patches.length, m.id).toBeGreaterThan(0); }
   });
@@ -30,7 +30,7 @@ describe("the K table (scripts/mutants-table.mjs)", () => {
     for (const m of MUTANTS) for (const h of m.heavy ?? []) expect(["U10", "U11", "U12"]).toContain(h);
   });
   it("production code has no switchable variants: no mutant, variant, MUT or K-number switch in either src", () => {
-    for (const dir of Object.values(SRC)) for (const f of readdirSync(dir, { recursive: true }) as string[]) {
+    for (const dir of [SRC.dl, SRC.cv]) for (const f of readdirSync(dir, { recursive: true }) as string[]) {
       if (!f.endsWith(".ts")) continue;
       const t = readFileSync(join(dir, f), "utf8");
       expect(t, f).not.toMatch(/\b(MUTANT|MUTATION|VARIANT|process\.env|globalThis\.__)\b|\bK\d{2,3}\b/);

@@ -1,6 +1,6 @@
 # IGR-DL/1 and IGR-CV/1 oracle corpus (`oracles-dl`)
 
-Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (46 entries) before judging any mismatch.
+Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (52 entries, A-47 to A-52 added after the gap review) before judging any mismatch.
 
 ## Independence statement
 
@@ -11,14 +11,14 @@ Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **432 rows**. `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **458 rows** (432 of the rev 5 generation and the 26 gap rows of the last section). `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
 
 | Family | Rows | with an error | what |
 |---|---|---|---|
 | G | 11 | 0 | golden display lists |
 | N | 17 | 3 | numbers and geometry |
 | X | 13 | 0 | text |
-| Y | 17 | 2 | state hooks |
+| Y | 20 | 4 | state hooks |
 | O | 17 | 10 | options and validation |
 | F | 5 | 3 | size limits |
 | S | 43 | 41 | the strict reader |
@@ -26,11 +26,11 @@ Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 
 | B | 4 | 0 | element bounds |
 | C | 25 | 9 | the Canvas call stream |
 | Z | 7 | 3 | device sizes |
-| R | 44 | 9 | readouts |
-| U | 14 | 0 | the Canvas renderer (lifecycle scripts, outcome files) |
+| R | 51 | 13 | readouts |
+| U | 17 | 2 | the Canvas renderer (lifecycle scripts, outcome files; U15-U17 witness rows) |
 | D | 6 | 0 | differential (runtime; no files) |
-| K | 193 | 0 | mutants (empty cells) |
-| **total** | **432** | **80** | D and K rows (199) have empty cells by design; U10 has neither a file nor an expected cell |
+| K | 206 | 0 | mutants (empty cells) |
+| **total** | **458** | **88** | D and K rows (212) have empty cells by design; U10 has neither a file nor an expected cell |
 
 | Directory | Content |
 |---|---|
@@ -313,3 +313,31 @@ Each mutant is a switch inside `tools/` (`--mutant Knnn`). For each mutant the g
 ## What the checks establish (and do not)
 
 Established: Appendix A (`dl:` items) is reproduced as tabled; every expected list is accepted by the strict reader and re-serializes to itself; every bad list is rejected and single-fault except S32 and S40 (see AMBIGUITIES); the readout of the list, of the SVG document and of the call stream agree byte for byte on the rows named above; two runs produce identical `SHA256SUMS` (the digest is in the hand-over report, not here, because this file is covered by it). **Not established:** that a browser draws anything, anything about the V7 plan, the frozen verifiers' verdict on the authored scenes and layouts (third party), or any behaviour of TypeScript (none existed).
+
+## Additions after the rev 5 gap review (single-focus clause; rows R45-R51, U15-U17, Y18-Y20, K188-K200)
+
+The ledger note `dl A-46` (AMBIGUITIES) recorded that rev 5 added "at most one element is focused" with no row and no mutant. These 26 rows were **appended** (ids are new; no existing expected byte or row changed; the only existing files that differ are `EXPECT.tsv` and `MUTANTS.tsv` (appended lines), `AMBIGUITIES.md` (appended entries A-47 to A-52), this README (counts and this section) and `SHA256SUMS`).
+
+| Rows | What | Files |
+|---|---|---|
+| R45 | stream with two layer-6 markers (nodes 1 and 2): `INVALID_INPUT/SCHEMA` | `calls/R45.calls` |
+| R46 | stream of `loops2` with two layer-2 markers (loops 3 and 4): rejected | `calls/R46.calls` |
+| R47 | one layer-2 marker (edge 3) and one layer-6 marker (node 1): rejected (the count is over both layers together) | `calls/R47.calls` |
+| R48 | an unpainted layer-2 marker plus a painted layer-6 marker: rejected (A-49) | `calls/R48.calls` |
+| R49 | a lone layer-6 marker without painting calls: accepted, no focus, readout equal to R01's | `calls/R49.calls`, `xr/R49.xr.json` |
+| R50 | nodes 1, 2 and edge 3 selected, node 2 also focused (selection is not focus): accepted | `calls/R50.calls`, `xr/R50.xr.json` |
+| R51 | `loops2`: node 1, edges 3, 5 selected, edge 4 selected and focused: accepted | `calls/R51.calls`, `xr/R51.xr.json` |
+| U15, U16 | `canvasStreamWitness` of the R45 and the R47 streams: rejected (the witness goes through the same reader) | (the R streams) |
+| U17 | `canvasStreamWitness` of the R50 stream: accepted, equals the C01 witness | `json/U17.witness.json` |
+| Y18 | state with `focus` naming both a node and an edge: `INVALID_STATE/SCHEMA` | `states/Y18.state.json` |
+| Y19 | state with `focus` an array of two nodes: `INVALID_STATE/SCHEMA` | `states/Y19.state.json` |
+| Y20 | `mixed20`, every element selected plus one focus (an edge; `also` case a node): the focus bit on exactly one record | `states/Y20.state.json`, `states/Y20b.state.json`, `dl/Y20.dl`, `dl/Y20b.dl` |
+| K188-K200 | 13 mutants of the single-focus rule, the stream readers and the builder (MUTANTS.tsv); all killed by the named rows | |
+
+Every rejected stream is **single-fault** (accepted by the reference with only the single-focus clause disabled; asserted by the generator). The reference reproduces the existing expected bytes of C01, C02, C04, C19 and R16, R39-R44, U09 before it writes anything.
+
+**Independence of these rows.** Written from design 31 rev 5 (4.1, 4.2, 4.8, 4.9, 6.1-6.3, 6.6, 9.1, 9.3) and 27 4.2 by a separate oracle author who did not read, import or run any TypeScript or `packages/*/src`, and did not read the generator of this corpus; the reference logic is `tools/gap_dlref.py` (replay, strict stream reader, readout, witness, flag derivation) and `tools/gap_dl.py`, `tools/gap_finish_dl.py` (standard library only). `tools/gen.py` does not know these rows: running it removes them. To rebuild only the additions, restore the corpus from version control and run `python -B -I tools/gap_dl.py && python -B -I tools/gap_finish_dl.py`.
+
+**Mutant matrix of K188-K200.** The mutants touch the stream reader, the readouts, the witness, the state check and the focus flags only, so each was run over the new rows and over the existing rows that call those functions (R16, R39-R44, U09's two cases); the other existing rows cannot change. Result: 13 of 13 killed with every named row changing. K192 (the selection layers counted with the focus layers) also changes the existing R39, R40 and U09.
+
+**Not covered (recorded in AMBIGUITIES).** A-50 (a pid in layers 2 and 6; a node pid in layer 2), A-51 (the list reader has no focus rule although the change log says "every artifact"), A-49 (markers versus painted sections is a reading).

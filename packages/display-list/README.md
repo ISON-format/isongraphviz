@@ -2,7 +2,7 @@
 
 `isongraph-visualize-display-list` is the shared library of ISONGraph Visualize milestones V6 and V7 (design `docs/isongraph-visualize-blueprint/31-CANVAS-WEBGL-DESIGN.md`, rev 4; implementation notes and findings: `docs/isongraph-visualize-blueprint/reviews/31-implementation-notes.md`). It turns an IGR/1 `RenderModel` and a `SemanticState` (both from `renderer-core`) into one renderer-neutral **display list** (integers and strings only, canonical bytes), and it holds everything that both renderers must agree on by construction: the strict reader, the pick buffer and `pickDrawn`, element bounds, the device size, the theme, the Canvas 2D replay with its recorded stream, and the cross-renderer readout.
 
-Status: **implemented, not frozen.** The independent oracle corpus `fixtures/oracles-dl/` is a DRAFT (its `SHA256SUMS` digest `22107e0d...353c` is the reference of design 13.7 and pinned nowhere; every run is `claimable: false`). The package depends on `renderer-core` only (`scene-core` and `layout-core` are dev dependencies of the tests) and changes none of the frozen contracts. It is a **shared library, not a renderer**; that `renderer-canvas` (and later `renderer-webgl`) depend on it as well as on `renderer-core` is the declared departure CCR-2 of design 10.1 (owner decision 1).
+Status: **implemented, not frozen.** The independent oracle corpus `fixtures/oracles-dl/` is a DRAFT (its `SHA256SUMS` digest `8c954cdb...5746` is the reference of design 13.7 and pinned nowhere; every run is `claimable: false`). The package depends on `renderer-core` only (`scene-core` and `layout-core` are dev dependencies of the tests) and changes none of the frozen contracts. It is a **shared library, not a renderer**; that `renderer-canvas` (and later `renderer-webgl`) depend on it as well as on `renderer-core` is the declared departure CCR-2 of design 10.1 (owner decision 1).
 
 ## What is here
 
@@ -29,7 +29,7 @@ Build order: `scene-core`, `layout-core` and `renderer-core` must have been buil
 - `npm run smoke`: Node smoke (needs the build): the lists of three oracle examples equal the oracle bytes, round-trip through the strict reader; the pick buffer and the readout of `G01`.
 - On Windows always go through these scripts: `scripts/vitest.mjs` restores an upper-case drive letter (see `packages/renderer-core/README.md`).
 
-The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U14`, the demo, the browser smoke and the **mutation matrix** for the whole K table (193 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
+The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U17`, the demo, the browser smoke and the **mutation matrix** for the whole K table (206 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
 
 ## Tests and oracle
 

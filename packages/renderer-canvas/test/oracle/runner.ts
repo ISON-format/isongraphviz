@@ -213,17 +213,36 @@ async function u07(impl: RendererImpl, c: Oracle, row: Row): Promise<void> {
   }
 }
 
-/** U09: the witness of the stream of C01 and of C03; the list is the one of the row of that name (the table is all the witness takes from it). */
-async function u09(impl: RendererImpl, c: Oracle, row: Row): Promise<void> {
+/**
+ * The witness rows: U09 and U15-U17 (an inline input with a `calls` path). U09 has empty scene and layout cells: the list is the one of the C row whose stream
+ * is named (the table is all the witness takes from it) and the expected file is json/U09.<C row>.witness.json. U15-U17 fill the scene and layout cells
+ * (AMBIGUITIES A-52): the list is built from them with the initial state and the row names its outcome (an error, or the expected witness file).
+ */
+async function witnessRow(impl: RendererImpl, c: Oracle, row: Row): Promise<void> {
   const input = parseInput(row);
   const cases = [{ calls: input["calls"] as string }, ...((input["also"] as { calls: string }[]) ?? [])];
   for (const k of cases) {
-    const id = /(C\d+)\.calls$/.exec(k.calls)![1]!;
-    const src = c.byId.get(id)!;
-    const { model, state } = await modelAndState(c, src, parseInput(src));
-    const list = impl.fn.buildDisplayList(model, state, tokens(parseInput(src)["options"]) as never);
-    const want = c.bytes(`json/U09.${id}.witness.json`);
-    if (!sameBytes(cj(impl.fn.canvasStreamWitness(c.bytes(k.calls), list)), want)) fail(`canvasStreamWitness(${k.calls}) bytes differ from json/U09.${id}.witness.json`);
+    let list: ReturnType<typeof impl.fn.buildDisplayList>, want: Uint8Array | undefined;
+    if (row.scene === "") {
+      const id = /(C\d+)\.calls$/.exec(k.calls)![1]!;
+      const src = c.byId.get(id)!;
+      const { model, state } = await modelAndState(c, src, parseInput(src));
+      list = impl.fn.buildDisplayList(model, state, tokens(parseInput(src)["options"]) as never);
+      want = c.bytes(`json/U09.${id}.witness.json`);
+    } else {
+      const { model, state } = await modelAndState(c, row, { state: "initial" });
+      list = impl.fn.buildDisplayList(model, state);
+      want = row.expected === "" ? undefined : c.bytes(row.expected);
+    }
+    let got = "none", bytes: Uint8Array | undefined;
+    try { bytes = cj(impl.fn.canvasStreamWitness(c.bytes(k.calls), list)); } catch (e) { got = code(e); }
+    if (row.error) {
+      if (got !== row.error) fail(`${row.id}: canvasStreamWitness(${k.calls}) got ${got} want ${row.error}`);
+      if (bytes !== undefined) fail(`${row.id}: a witness was returned for a refused stream`);
+      continue;
+    }
+    if (got !== "none" || bytes === undefined) fail(`${row.id}: canvasStreamWitness(${k.calls}) threw ${got}`);
+    if (!sameBytes(bytes!, want!)) fail(`canvasStreamWitness(${k.calls}) bytes differ from the expected witness`);
   }
 }
 
@@ -331,13 +350,14 @@ export async function runRow(impl: RendererImpl, c: Oracle, row: Row): Promise<v
   }
   if (row.group !== "U") return;
   if (HEAVY.has(row.id)) return fail("heavy row: run through runHeavy");
-  switch (row.id) {
-    case "U06": return u06(impl, c, row);
-    case "U07": return u07(impl, c, row);
-    case "U09": return u09(impl, c, row);
-    case "U13": return u13(impl, c, row);
-    default: return runScript(impl, c, row);
-  }
+  // by the form of the input (13.2): a path is a script; an inline object is told by its key
+  if (!/^[{[]/.test(row.input)) return runScript(impl, c, row);
+  const input = parseInput(row);
+  if (typeof input["calls"] === "string") return witnessRow(impl, c, row);
+  if (input["hosts"] !== undefined) return u06(impl, c, row);
+  if (input["cases"] !== undefined) return u07(impl, c, row);
+  if (input["subject_options"] !== undefined) return u13(impl, c, row);
+  return fail(`${row.id}: an inline U input of an unknown form`);
 }
 
 export const RENDERER_GROUPS = new Set(["G", "N", "X", "Y", "O", "P", "B", "C", "R", "U"]);

@@ -23,7 +23,7 @@ import { DL_DIGEST, DL_DIR, SVG_DIGEST, SVG_DIR, bytes, digestOf, loadRows, read
 const ENV = { host: "headless", size: { width: 900, height: 600 }, reducedMotion: false };
 
 describe("the corpora read as data are the ones this harness was written against (13.1)", () => {
-  it("oracles-svg SHA256SUMS is 63a19833... and oracles-dl SHA256SUMS is 22107e0d...", () => {
+  it("oracles-svg SHA256SUMS is 63a19833... and oracles-dl SHA256SUMS is 8c954cdb...", () => {
     expect(digestOf(SVG_DIR)).toBe(SVG_DIGEST);
     expect(digestOf(DL_DIR)).toBe(DL_DIGEST);
   });

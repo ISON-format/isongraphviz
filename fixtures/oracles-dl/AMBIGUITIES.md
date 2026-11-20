@@ -312,3 +312,39 @@ Source: design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were wr
 * **Design text.** Rev 5 adds the single-focus rule to the stream reader; the change log says "no corpus row has two focused elements" and no row or mutant id changes.
 * **Literal reading used.** No expected byte exercises the rule (checked by a direct test: a G01 stream with two focus markers is rejected, a stream with one is accepted), and no mutant names it. 13.5 closes with "a normative rule without a mutant here is a review finding".
 * **Why / status.** Finding (clerical): the rule has neither a killer row nor a mutant; a stream row with two focus markers (error `INVALID_INPUT/SCHEMA`) and a mutant that drops the rule would close it. Not added: the ids are frozen by rev 5.
+
+## A-47  27 4.2 (iii), 31 4.5 (4), 9.3: a state cannot name two focused elements (rows Y18, Y19)
+
+* **Design text.** 31 9.3: "a list has at most one [focused element] by construction"; 4.5 (4): the builder validates the state with `serializeState`; 27 4.2 (iii): `focus`, when present, is an object with **exactly one** key, `node` or `edge` ("both keys or none: `SCHEMA`"); a wrong JSON type (an array) is `SCHEMA`.
+* **Literal reading used.** Two states that name two foci, `{"focus":{"edge":..,"node":..}}` (Y18) and `{"focus":[{"node":..},{"node":..}]}` (Y19), are refused by the builder with `INVALID_STATE/SCHEMA`; a runner that loads the file with `parseState` or with plain JSON gets the same code, so (unlike Y14 and Y15) the loading mode does not matter. The code comes from 27, not from 31.
+* **Why / status.** Reading. The rows exist because 31 rev 5 says the guarantee is "by construction": the construction is the closed state shape. Row Y20 (everything selected, one focus; `also` case for the other kind) shows that the builder sets the focus bit on exactly one record whatever else is selected.
+
+## A-48  6.6, 9.3: the error code of a stream rejected for two foci (rows R45-R48, U15, U16)
+
+* **Design text.** 6.6 and 9.3 say the stream "is rejected" (and 9.3 that the reader is strict) but give no code; 4.6 lists `INVALID_INPUT` with `SCHEMA` among the classes of a malformed byte form and 4.7 gives `INVALID_INPUT/SCHEMA` to the list reader.
+* **Literal reading used.** `INVALID_INPUT/SCHEMA`, the same as A-45 and the same for `readoutFromCanvasStream` and `canvasStreamWitness` (both go through the one reader; K194 and K195 are the mutants that give the rule to one call site only).
+* **Why / status.** Reading by analogy with 4.7; no sentence of the design pins the code of the stream reader.
+
+## A-49  6.6 (rev 5): do markers count, or painted sections? (row R48, mutant K191; row R49)
+
+* **Design text.** "markers ... and layers 2 and 6 together holding at most one pid" (6.6, inside the list of conditions of the markers); 9.3: "a stream whose layers 2 and 6 hold more than one pid is rejected by the stream reader"; 9.3 also: "a marker without painting calls contributes nothing" (R44).
+* **Literal reading used.** The rule counts the **markers** of layers 2 and 6 (A-45), painted or not: R48 (an unpainted layer-2 marker plus a painted layer-6 marker) is rejected. A lone unpainted layer-2 or layer-6 marker is accepted and contributes no focus (R49: the readout equals R01). The two sentences are compatible with the other reading too ("hold" = painted); then R48 would be accepted with the layer-6 focus and K191 would be the correct behaviour.
+* **Why / status.** Reading, recorded so the owner can rule; the row is single-fault under the stated reading only.
+
+## A-50  6.6: a pid in both layers 2 and 6, a node pid in layer 2 (no row)
+
+* **Design text.** "layers 2 and 6 together holding at most one pid"; the reader checks that every marker pid is in the table and that layers are non-decreasing; it has no rule that ties layers 1-4 to edge pids and 5-8 to node pids (that check is stated for the plan, 9.3 last sentences).
+* **Literal reading used.** Not covered: a stream that puts one pid in layers 2 and 6 holds one pid (accepted by the count), and a node pid in layer 2 has no stated verdict. No row was written; a row would encode a guess.
+* **Why / status.** Underspecified; recorded for completeness.
+
+## A-51  4.7 D1-D12 versus "every artifact": the list reader has no focus rule (no row)
+
+* **Design text.** The change log (rev 5, M-9) says "At most one element is focused in every artifact: G12 gains ..., the stream reader likewise (6.6)"; 9.3 says "a list has at most one by construction". 4.7 D6 and D8 allow `flags` 0..3 on every `E` and `N` and no rule counts them.
+* **Literal reading used.** `parseDisplayList` accepts a list in which several records carry the focus bit (flags 2 or 3); `readoutFromList` of such a list is not specified. No S row was written (neither "accepted" nor "rejected" is derivable without choosing).
+* **Why / status.** FINDING (design): either D-rules gain a clause (a new rule D13 with a single-fault `S` row) or the exemption of the list reader is stated. Until then only the builder (Y18-Y20) and the stream reader (R45-R51, U15-U17) are covered.
+
+## A-52  13.2: where the list of a stream row comes from (rows R45-R51, U15-U17)
+
+* **Design text.** 13.2 gives the grammar `{"from":"calls","calls":path}` for R rows ("the stream with the row's list") and for U rows nothing but "scripts"; U09 has empty scene and layout cells.
+* **Literal reading used.** The new R and U rows carry the scene and layout of the list whose table the stream refers to (G01's for R45, R47-R50, U15-U17; the `loops2` one for R46 and R51), initial state; the reader needs only the table and the header hashes. The rows U15-U17 take `{"calls":"calls/Rnn.calls"}` like U09 but with the scene and layout cells filled so that the list is not implicit.
+* **Why / status.** Reading; if a runner cannot resolve the list of a U row from the cells it is a runner matter, not a design one.

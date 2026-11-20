@@ -431,3 +431,29 @@ K184	K
 K185	K						
 K186	K						
 K187	K						
+Y18	Y	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"states/Y18.state.json"}		INVALID_STATE/SCHEMA
+Y19	Y	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"size":{"height":600,"width":900},"state":"states/Y19.state.json"}		INVALID_STATE/SCHEMA
+Y20	Y	both	../oracles-igl/scenes/mixed20.scene.json	../oracles-igl/layouts/F04.layout.json	{"also":[{"expected":"dl/Y20b.dl","state":"states/Y20b.state.json"}],"size":{"height":600,"width":900},"state":"states/Y20.state.json"}	dl/Y20.dl	
+R45	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R45.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R46	R	core	../oracles-svg/scenes/loops2.scene.json	../oracles-svg/layouts/loops2.layout.json	{"calls":"calls/R46.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R47	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R47.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R48	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R48.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R49	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R49.calls","from":"calls"}	xr/R49.xr.json	
+R50	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R50.calls","from":"calls"}	xr/R50.xr.json	
+R51	R	core	../oracles-svg/scenes/loops2.scene.json	../oracles-svg/layouts/loops2.layout.json	{"calls":"calls/R51.calls","from":"calls"}	xr/R51.xr.json	
+U15	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R45.calls"}		INVALID_INPUT/SCHEMA
+U16	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R47.calls"}		INVALID_INPUT/SCHEMA
+U17	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R50.calls"}	json/U17.witness.json	
+K188	K						
+K189	K						
+K190	K						
+K191	K						
+K192	K						
+K193	K						
+K194	K						
+K195	K						
+K196	K						
+K197	K						
+K198	K						
+K199	K						
+K200	K						

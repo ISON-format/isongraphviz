@@ -1,13 +1,20 @@
-// The K table of design 13.5 for fixtures/oracles-dl (K01..K187 with the b-variants: 193 mutants) as source patches. Every mutant is a list of exact-text
+// The K table of design 13.5 for fixtures/oracles-dl (K01..K200 with the b-variants: 206 mutants) as source patches. Every mutant is a list of exact-text
 // patches applied to a SCRATCH COPY of packages/display-list/src ("dl") and packages/renderer-canvas/src ("cv"); production code has no switchable variants
-// and neither package's src/ is ever modified. A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of src/
+// and no src/ is ever modified (the K197 and K198 patches apply to a scratch copy of renderer-core/src, where the state check lives). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of src/
 // cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
 // "a mutant is one concrete change"); `heavy` names the heavy rows (kit runs) a mutant needs besides the ordinary rows.
 const P = (pkg, file, find, replace, count = 1) => ({ pkg, file, find, replace, count });
 const D = (file, find, replace, count = 1) => P("dl", file, find, replace, count);
 const C = (file, find, replace, count = 1) => P("cv", file, find, replace, count);
+const R = (file, find, replace, count = 1) => P("core", file, find, replace, count);
 const m = (id, desc, patches, heavy) => ({ id, desc, patches, ...(heavy ? { heavy } : {}) });
 
+const STREAM_RULE = "canvas2d/stream.ts";
+const FOCUS_COUNT = "(layer === 2 || layer === 6) && ++focusMarkers > 1";
+const FOCUS_LINE = `      if (${FOCUS_COUNT}) throw schemaError(no, "at most one marker in layers 2 and 6 together (one focused element)");\n`;
+const STREAM_END = "  return sections;\n}";
+const STREAM_SIG = "limits?: { maxBytes?: number; maxLineUnits?: number }): StreamSection[] {";
+const STREAM_SIG_SKIP = "limits?: { maxBytes?: number; maxLineUnits?: number }, skipFocusRule = false): StreamSection[] {";
 const FLOORDIV_GEOM = D("geometry.ts", 'import { divRound, isqrt } from "./num.js";', 'import { divRound, floorDiv, isqrt } from "./num.js";');
 const LET_RAW = D("lines.ts", "const raw = parts[i]!;", "let raw = parts[i]!;");
 
@@ -270,11 +277,43 @@ export const MUTANTS = [
   m("K185", "`edgeLabels: false` still emits edge `T` records", [D("labels.ts", "if (edgeLabels) for (const e of model.edges)", "if (true) for (const e of model.edges)")]),
   m("K186", "`backingSize` accepts a zero width", [D("device.ts", 'const w = integerIn(width, 1, VIEWPORT_MAX_PX, "width")', 'const w = integerIn(width, 0, VIEWPORT_MAX_PX, "width")')]),
   m("K187", "`readoutFromSvgReadout` accepts a printed value that is not a number", [D("readout.ts", 'if (!DECIMAL.test(s) || s === "-0") throw bad("SCHEMA", path, "not a number as 30 3.2 prints it");', 'if ((!DECIMAL.test(s) && /[0-9]/.test(s)) || s === "-0") throw bad("SCHEMA", path, "not a number as 30 3.2 prints it");')]),
+  // ---- the single-focus clause (rev 5; rows R45-R51, U15-U17, Y18-Y20) ------------------------------------------------------------------------------
+  m("K188", "single-focus count ignores the layer-2 markers (layer 6 only)", [D(STREAM_RULE, FOCUS_COUNT, "layer === 6 && ++focusMarkers > 1")]),
+  m("K189", "single-focus count ignores the layer-6 markers (layer 2 only)", [D(STREAM_RULE, FOCUS_COUNT, "layer === 2 && ++focusMarkers > 1")]),
+  m("K190", "at most one focused marker per layer instead of in layers 2 and 6 together", [
+    D(STREAM_RULE, "lastPid = 0, focusMarkers = 0;", "lastPid = 0, focusMarkers = 0;\n  const perLayer: Record<number, number> = {};"),
+    D(STREAM_RULE, FOCUS_COUNT, "(layer === 2 || layer === 6) && (perLayer[layer] = (perLayer[layer] ?? 0) + 1) > 1"),
+  ]),
+  m("K191", "single-focus count over painted sections only (an unpainted focus marker is not counted)", [
+    D(STREAM_RULE, FOCUS_LINE, ""),
+    D(STREAM_RULE, STREAM_END, "  if (sections.filter((s) => (s.layer === 2 || s.layer === 6) && painted(s)).length > 1) throw schemaError(lines.length, \"at most one painted focus section\");\n" + STREAM_END),
+  ]),
+  m("K192", "the single-focus count includes the selection layers 1 and 5", [D(STREAM_RULE, FOCUS_COUNT, "(layer === 1 || layer === 2 || layer === 5 || layer === 6) && ++focusMarkers > 1")]),
+  m("K193", "stream reader has no single-focus rule (readout and witness)", [D(STREAM_RULE, FOCUS_LINE, "")]),
+  m("K194", "canvasStreamWitness skips the single-focus rule, readoutFromCanvasStream keeps it", [
+    D(STREAM_RULE, STREAM_SIG, STREAM_SIG_SKIP),
+    D(STREAM_RULE, FOCUS_COUNT, "!skipFocusRule && " + FOCUS_COUNT),
+    D("canvas2d/witness.ts", "const sections = readStream(stream, list);\n  const nd = list.nodes.length;\n  const nodes = new Set<number>()", "const sections = readStream(stream, list, undefined, true);\n  const nd = list.nodes.length;\n  const nodes = new Set<number>()"),
+  ]),
+  m("K195", "readoutFromCanvasStream skips the single-focus rule, canvasStreamWitness keeps it", [
+    D(STREAM_RULE, STREAM_SIG, STREAM_SIG_SKIP),
+    D(STREAM_RULE, FOCUS_COUNT, "!skipFocusRule && " + FOCUS_COUNT),
+    D("canvas2d/witness.ts", "const sections = readStream(stream, list);\n  const nd = list.nodes.length;\n  const nodes: ReadoutParts", "const sections = readStream(stream, list, undefined, true);\n  const nd = list.nodes.length;\n  const nodes: ReadoutParts"),
+  ]),
+  m("K196", "stream reader refuses a lone focus marker that has no painting calls", [D(STREAM_RULE, STREAM_END, "  const fm = sections.filter((s) => s.layer === 2 || s.layer === 6);\n  if (fm.length === 1 && !painted(fm[0]!)) throw schemaError(fm[0]!.line, \"a focus marker without painting calls\");\n" + STREAM_END)]),
+  // the state check of 27 4.2 (iii) lives in renderer-core (src/state.ts): these two patch a scratch copy of that package
+  m("K197", "state check accepts a `focus` object with both keys `node` and `edge`", [R("state.ts", 'if (keys.length !== 1) throw bad("SCHEMA", "$.focus", "exactly one of node or edge");', 'if (keys.length < 1) throw bad("SCHEMA", "$.focus", "exactly one of node or edge");')]),
+  m("K198", "state check accepts a `focus` array", [R("state.ts", 'const f = closed(top["focus"], "$.focus", ["node", "edge"], []);', 'const f = closed(Array.isArray(top["focus"]) ? (top["focus"] as unknown[])[0] : top["focus"], "$.focus", ["node", "edge"], []);')]),
+  m("K199", "builder sets the focused bit on every element when a focus exists", [
+    D("build.ts", "(focusEdge === e.index ? 2 : 0)", "(focusEdge >= 0 || focusNode >= 0 ? 2 : 0)"),
+    D("build.ts", "(focusNode === n.index ? 2 : 0)", "(focusEdge >= 0 || focusNode >= 0 ? 2 : 0)"),
+  ]),
+  m("K200", "builder gives the incident edges of a focused node the focused bit", [D("build.ts", "(focusEdge === e.index ? 2 : 0)", "(focusEdge === e.index || (focusNode >= 0 && (e.src === focusNode || e.tgt === focusNode)) ? 2 : 0)")]),
 ];
 
 
 // ---- extra mutants of this implementation (not in the corpus table): one per behaviour pinned by the rows `ext:` (test/oracle/runner.ts, runExtra;
-// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 193 of the K table.
+// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 206 of the K table.
 const BS = String.fromCharCode(92);
 export const EXTRA_MUTANTS = [
   m("X01", "audit I-1: a record kind is looked up on a plain object (inherited names pass)", [D("read.ts", "const rank = RANK.get(kind);", "const rank = ({ H: 0, n: 1, e: 2, E: 3, A: 3, N: 4, T: 5 } as Record<string, number>)[kind];")]),

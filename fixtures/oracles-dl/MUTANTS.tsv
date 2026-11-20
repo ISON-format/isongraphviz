@@ -192,3 +192,16 @@ K184	`labels: false` still emits node `T` records	O01	O01		C09	killed
 K185	`edgeLabels: false` still emits edge `T` records	O02	O02			killed
 K186	`backingSize` accepts a zero width	Z07	Z07			killed
 K187	`readoutFromSvgReadout` accepts a printed value that is not a number	R24,R26	R24,R26			killed
+K188	single-focus count ignores the layer-2 markers (layer 6 only)	R46,R47,R48,U16	R46,R47,R48,U16			killed
+K189	single-focus count ignores the layer-6 markers (layer 2 only)	R45,R47,R48,U15,U16	R45,R47,R48,U15,U16			killed
+K190	at most one focused marker per layer instead of in layers 2 and 6 together	R47,R48,U16	R47,R48,U16			killed
+K191	single-focus count over painted sections only (an unpainted focus marker is not counted)	R48	R48			killed
+K192	the single-focus count includes the selection layers 1 and 5	R50,R51,U17	R50,R51,U17		R39,R40,U09	killed
+K193	stream reader has no single-focus rule (readout and witness)	R45,R46,R47,R48,U15,U16	R45,R46,R47,R48,U15,U16			killed
+K194	canvasStreamWitness skips the single-focus rule, readoutFromCanvasStream keeps it	U15,U16	U15,U16			killed
+K195	readoutFromCanvasStream skips the single-focus rule, canvasStreamWitness keeps it	R45,R46,R47,R48	R45,R46,R47,R48			killed
+K196	stream reader refuses a lone focus marker that has no painting calls	R49	R49			killed
+K197	state check accepts a `focus` object with both keys `node` and `edge`	Y18	Y18			killed
+K198	state check accepts a `focus` array	Y19	Y19			killed
+K199	builder sets the focused bit on every element when a focus exists	Y20	Y20			killed
+K200	builder gives the incident edges of a focused node the focused bit	Y20	Y20			killed

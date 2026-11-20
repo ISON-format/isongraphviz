@@ -7,7 +7,8 @@
 //   SURVIVED      when every row passes,
 //   INCONCLUSIVE  when the child timed out (a timeout is never counted as a kill),
 //   HARNESS-ERROR when a patch did not apply or the child produced no result (a defect of this harness, never a verdict).
-// The baseline (no patch) must be green first. Production code has no switchable variants; neither src/ is ever modified.
+// The baseline (no patch) must be green first. Production code has no switchable variants; no src/ is ever modified (a patch is applied to the scratch
+// copy of display-list ("dl"), renderer-canvas ("cv") or, for the state check of K197/K198, renderer-core ("core")).
 //
 //   node scripts/mutate.mjs [--only K01,K09,...] [--timeout MS] [--keep] [--no-heavy] [--jobs N]
 import { spawn } from "node:child_process";
@@ -21,8 +22,12 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const PKG = resolve(HERE, "..").replace(/^[a-z]:/, (d) => d.toUpperCase());
 const REPO = resolve(PKG, "..", "..");
 const DL = join(REPO, "packages", "display-list");
+const CORE = join(REPO, "packages", "renderer-core");
 const ORACLE = join(REPO, "fixtures", "oracles-dl");
 const IGR = join(REPO, "fixtures", "oracles-igr");
+// the exports map of renderer-core, from the subpath to its source file (every renderer-core specifier of the bundle is taken from the scratch copy, so that
+// there is one IgrError class)
+const CORE_ENTRY = { "": "index.ts", "/headless": "headless/index.ts", "/conformance": "conformance/index.ts", "/conformance/node": "conformance/node.ts" };
 const SCRATCH = join(PKG, ".mutants");
 const fwd = (p) => p.replace(/\\/g, "/");
 
@@ -46,6 +51,9 @@ async function prepare(id, patches) {
   mkdirSync(dir, { recursive: true });
   cpSync(join(DL, "src"), join(dir, "dl", "src"), { recursive: true });
   cpSync(join(PKG, "src"), join(dir, "cv", "src"), { recursive: true });
+  // renderer-core is copied (and its bare specifier bundled from the copy) only for a mutant with a "core" patch (K197, K198: the state check lives there)
+  const hasCore = patches.some((p) => p.pkg === "core");
+  if (hasCore) cpSync(join(CORE, "src"), join(dir, "core", "src"), { recursive: true });
   for (const p of patches) {
     const file = join(dir, p.pkg, "src", p.file);
     const text = readFileSync(file, "utf8");
@@ -82,6 +90,7 @@ async function prepare(id, patches) {
       "isongraph-visualize-display-list/canvas2d": fwd(join(dir, "dl", "src", "canvas2d", "index.ts")),
       "isongraph-visualize-display-list": fwd(join(dir, "dl", "src", "index.ts")),
     },
+    plugins: hasCore ? [{ name: "scratch-core", setup(b) { b.onResolve({ filter: /^isongraph-visualize-renderer-core(\/.*)?$/ }, (a) => ({ path: join(dir, "core", "src", CORE_ENTRY[a.path.slice("isongraph-visualize-renderer-core".length)] ?? "index.ts") })); } }] : [],
     external: ["isongraph-visualize-renderer-core", "isongraph-visualize-renderer-core/*", "isongraph-visualize-scene-core", "isongraph-visualize-scene-core/*", "isongraph-visualize-layout-core", "node:*"],
   });
   return join(dir, "bundle.mjs");
