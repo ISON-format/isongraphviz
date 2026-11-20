@@ -409,3 +409,323 @@ K125	K
 K126	K						
 K127	K						
 K128	K						
+B14	B	core			inputs/B14.bindings.json		
+B15	B	core			inputs/B15.bindings.json		
+B16	B	core			inputs/B16.bindings.json		
+B17	B	core			inputs/B17.bindings.json		
+B18	B	core			inputs/B18.bindings.json		
+B19	B	core			inputs/B19.bindings.json		
+B20	B	core			inputs/B20.bindings.json		
+B21	B	core			inputs/B21.bindings.json		
+B22	B	core			inputs/B22.bindings.json		
+B23	B	core			inputs/B23.bindings.json		
+B24	B	core			inputs/B24.bindings.json		
+B25	B	core			inputs/B25.bindings.json		
+B26	B	core			inputs/B26.bindings.json		
+B27	B	core			inputs/B27.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B28	B	core			inputs/B28.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B29	B	core			inputs/B29.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B30	B	core			inputs/B30.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B31	B	core			inputs/B31.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B32	B	core			inputs/B32.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B33	B	core			inputs/B33.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B34	B	core			inputs/B34.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B35	B	core			inputs/B35.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B36	B	core			inputs/B36.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B37	B	core			inputs/B37.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B38	B	core			inputs/B38.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B39	B	core			inputs/B39.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B40	B	core			inputs/B40.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B41	B	core			inputs/B41.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B42	B	core			inputs/B42.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B43	B	core			inputs/B43.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B44	B	core			inputs/B44.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B45	B	core			inputs/B45.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B46	B	core			inputs/B46.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B47	B	core			inputs/B47.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B48	B	core			inputs/B48.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B49	B	core			inputs/B49.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B50	B	core			inputs/B50.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B51	B	core			inputs/B51.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B52	B	core			inputs/B52.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B53	B	core			inputs/B53.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B54	B	core			inputs/B54.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B55	B	core			inputs/B55.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B56	B	core			inputs/B56.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B57	B	core			inputs/B57.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B58	B	core			inputs/B58.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B59	B	core			inputs/B59.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B60	B	core			inputs/B60.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B61	B	core			inputs/B61.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B62	B	core			inputs/B62.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B63	B	core			inputs/B63.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B64	B	core			inputs/B64.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B65	B	core			inputs/B65.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B66	B	core			inputs/B66.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B67	B	core			inputs/B67.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B68	B	core			inputs/B68.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B69	B	core			inputs/B69.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B70	B	core			inputs/B70.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B71	B	core			inputs/B71.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B72	B	core			inputs/B72.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B73	B	core			inputs/B73.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B74	B	core			inputs/B74.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B75	B	core			inputs/B75.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B76	B	core			inputs/B76.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B77	B	core			inputs/B77.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B78	B	core			inputs/B78.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B79	B	core			inputs/B79.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B80	B	core			inputs/B80.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B81	B	core			inputs/B81.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B82	B	core			inputs/B82.bindings.json		INVALID_BINDINGS/TAB_BOUND
+B83	B	core			inputs/B83.bindings.json		INVALID_BINDINGS/TAB_BOUND
+B84	B	core			inputs/B84.bindings.json		INVALID_BINDINGS/TAB_BOUND
+B85	B	core			inputs/B85.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B86	B	core			inputs/B86.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B87	B	core			inputs/B87.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B88	B	core			inputs/B88.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B89	B	core			inputs/B89.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B90	B	core			inputs/B90.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B91	B	core			inputs/B91.bindings.json		INVALID_BINDINGS/NO_ESCAPE_EXIT
+B92	B	core			inputs/B92.bindings.json		INVALID_BINDINGS/NO_ESCAPE_EXIT
+B93	B	core			inputs/B93.bindings.json		INVALID_BINDINGS/NO_ESCAPE_EXIT
+B94	B	core			inputs/B94.bindings.json		INVALID_BINDINGS/SCHEMA
+B95	B	core			inputs/B95.bindings.json		INVALID_BINDINGS/SCHEMA
+B96	B	core			inputs/B96.bindings.json		INVALID_BINDINGS/SCHEMA
+B97	B	core			inputs/B97.bindings.json		INVALID_BINDINGS/SCHEMA
+B98	B	core			inputs/B98.bindings.json		INVALID_BINDINGS/SCHEMA
+B99	B	core			inputs/B99.bindings.json		INVALID_BINDINGS/SCHEMA
+B100	B	core			inputs/B100.bindings.json		INVALID_BINDINGS/SCHEMA
+B101	B	core			inputs/B101.bindings.json		INVALID_BINDINGS/SCHEMA
+B102	B	core			inputs/B102.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B103	B	core			inputs/B103.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B104	B	core			inputs/B104.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B105	B	core			inputs/B105.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B106	B	core			inputs/B106.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+B107	B	core			inputs/B107.bindings.json		INVALID_BINDINGS/TAB_BOUND
+B108	B	core			inputs/B108.bindings.json		INVALID_BINDINGS/SCHEMA
+B109	B	core			inputs/B109.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B110	B	core			inputs/B110.bindings.json		INVALID_BINDINGS/DUPLICATE_BINDING
+X27	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X27.manifest.json","op":"parse"}		
+X28	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X28.manifest.json","op":"parse"}		
+X29	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X29.manifest.json","op":"parse"}		
+X30	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X30.manifest.json","op":"parse"}		
+X31	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X31.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X32	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X32.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X33	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X33.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X34	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X34.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X35	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X35.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X36	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X36.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X37	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X37.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X38	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X38.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X39	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X39.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X40	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X40.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X41	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X41.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X42	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X42.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X43	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X43.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X44	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X44.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X45	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X45.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X46	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X46.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X47	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X47.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X48	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X48.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X49	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X49.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X50	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X50.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X51	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X51.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X52	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X52.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X53	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X53.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X54	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X54.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X55	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X55.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X56	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X56.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X57	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X57.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X58	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X58.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X59	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X59.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X60	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X60.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X61	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X61.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X62	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X62.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X63	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X63.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X64	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X64.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X65	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X65.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X66	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X66.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X67	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X67.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X68	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X68.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X69	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X69.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X70	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X70.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X71	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X71.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X72	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X72.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X73	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X73.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X74	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X74.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X75	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X75.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X76	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X76.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X77	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X77.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X78	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X78.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X79	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X79.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X80	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X80.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X81	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X81.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X82	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X82.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X83	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X83.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X84	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X84.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X85	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X85.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X86	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json"},"manifest":"manifests/X86.manifest.json","op":"verify"}		INVALID_EXPORT/SCHEMA
+X87	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/X18.state.json"},"manifest":"manifests/X87.manifest.json","op":"verify"}		INVALID_EXPORT/NON_CANONICAL
+X88	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json"},"manifest":"manifests/X88.manifest.json","op":"verify"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X89	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X89.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X90	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X90.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X91	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X91.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X92	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X92.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X93	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X93.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X94	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X94.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X95	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X95.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X96	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X96.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X97	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X97.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X98	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X98.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X99	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X99.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X100	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X100.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X101	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X101.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X102	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X102.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X103	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X103.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X104	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"E8A4357A01A4F47F46A18B8F1C22C15A9F8C26CB06ED6B31588CD5C11407A1DA","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X104.in.png"}		INVALID_EXPORT/SCHEMA
+X105	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23d","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X105.in.png"}		INVALID_EXPORT/SCHEMA
+X106	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d0"},"op":"embed","png":"png/X106.in.png"}		INVALID_EXPORT/SCHEMA
+X107	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"g8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X107.in.png"}		INVALID_EXPORT/SCHEMA
+X108	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db\n","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X108.in.png"}		INVALID_EXPORT/SCHEMA
+X109	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":""},"op":"embed","png":"png/X109.in.png"}		INVALID_EXPORT/SCHEMA
+X110	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":5,"state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X110.in.png"}		INVALID_EXPORT/SCHEMA
+X111	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X111.in.png"}	png/X111.png	
+X112	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X112.in.png"}	png/X112.png	
+X113	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X113.in.png"}	png/X113.png	
+X114	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X114.in.png"}	png/X114.png	
+X115	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X115.in.png"}	png/X115.png	
+X116	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X116.in.png"}	png/X116.png	
+X117	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X117.in.png"}	png/X117.png	
+X118	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X118.in.png"}	png/X118.png	
+X119	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X119.in.png"}	png/X119.png	
+X120	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X120.in.png"}	png/X120.png	
+X121	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X121.in.png"}		INVALID_EXPORT/PNG_ALREADY_BOUND
+X122	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X122.in.png"}		INVALID_EXPORT/PNG_ALREADY_BOUND
+X123	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X123.in.png"}		INVALID_EXPORT/PNG_ALREADY_BOUND
+X124	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X124.in.png"}		INVALID_EXPORT/PNG_ALREADY_BOUND
+X125	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X125.in.png"}	json/X125.binding.json	
+X126	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X126.in.png"}	json/X126.binding.json	
+X127	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X127.in.png"}	json/X127.binding.json	
+X128	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X128.in.png"}	json/X128.binding.json	
+X129	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X129.in.png"}	json/X129.binding.json	
+X130	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X130.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X131	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X131.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X132	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X132.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X133	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X133.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X134	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X134.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X135	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X135.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X136	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X136.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X137	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X137.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X138	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X138.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X139	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X139.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X140	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X140.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X141	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X141.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X142	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X142.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X143	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X143.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X144	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X144.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X145	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X145.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X146	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X146.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X147	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X147.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X148	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X148.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X149	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X149.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X150	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X150.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X151	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X151.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X152	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X152.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X153	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X153.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X154	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X154.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X155	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X155.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X156	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X156.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X156.manifest.json","op":"verify"}		
+X157	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X157.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X157.manifest.json","op":"verify"}		
+X158	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X158.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X158.manifest.json","op":"verify"}		
+X159	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X159.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X159.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X160	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X160.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X160.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X161	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X161.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X161.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X162	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X162.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X162.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X163	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X163.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X163.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X164	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X164.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X164.manifest.json","op":"verify"}		INVALID_EXPORT/BINDING_MISMATCH
+X165	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X165.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X165.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X166	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X166.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X166.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X167	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X167.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X167.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X168	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X168.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X168.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X169	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X169.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X169.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X170	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X170.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X170.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X171	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X171.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X171.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X172	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X04.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X172.manifest.json","op":"verify"}		
+X173	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"op":"export"}	json/X173.manifest.json	
+X174	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":1},"op":"export"}	json/X174.manifest.json	
+X175	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":2},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X176	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":2,"width":1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X177	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg","png"],"expectedPngSize":{"height":1,"width":1},"op":"export"}	json/X177.manifest.json	
+K129	K						
+K130	K						
+K131	K						
+K132	K						
+K133	K						
+K134	K						
+K135	K						
+K136	K						
+K137	K						
+K138	K						
+K139	K						
+K140	K						
+K141	K						
+K142	K						
+K143	K						
+K144	K						
+K145	K						
+K146	K						
+K147	K						
+K148	K						
+K149	K						
+K150	K						
+K151	K						
+K152	K						
+K153	K						
+K154	K						
+K155	K						
+K156	K						
+K157	K						
+K158	K						
+K159	K						
+K160	K						
+K161	K						
+K162	K						
+K163	K						
+K164	K						
+K165	K						
+K166	K						
+K167	K						
+K168	K						
+K169	K						
+K170	K						
+K171	K						
+K172	K						
+K173	K						
+K174	K						
+K175	K						
+K176	K						
+K177	K						
+K178	K						
+K179	K						
+K180	K						
+K181	K						
+K182	K						
+K183	K						
+K184	K						
+K185	K						
+K186	K						
+K187	K						
+K188	K						
+K189	K						
+K190	K						
+K191	K						
+K192	K						
+K193	K						
+K194	K						
+K195	K						
+K196	K						
+K197	K						
+K198	K						
+K199	K						
+K200	K						

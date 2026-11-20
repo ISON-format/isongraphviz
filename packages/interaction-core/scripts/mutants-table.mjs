@@ -1,7 +1,7 @@
 // The K table of design 15.6 and 15.6a, restricted to the mutants whose named killer rows belong to interaction-core (rows E, I, V, L, B), as source patches:
-//   K01-K44, K72-K81, K84-K98, K122-K124, K126 (73 mutants).
-// The other 55 mutants of the corpus (K45-K71 companion, plan, gate, export; K82-K83 composed manifests; K99-K121, K125, K127, K128) are the business of
-// a11y-companion and export-core. Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/interaction-core/src; production code
+//   K01-K44, K72-K81, K84-K98, K122-K124, K126, K129-K153 (98 mutants; K129-K153 are the binding-table rows B14-B110 added with the gap rows, review 34).
+// The other 102 mutants of the corpus (K45-K71 companion, plan, gate, export; K82-K83 composed manifests; K99-K121, K125, K127, K128; K154-K200 PNG, binding chunk
+// and manifest) are the business of a11y-companion and export-core. Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/interaction-core/src; production code
 // has no switchable variants and src/ is never modified. A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring
 // of src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of 15.6a.
 const P = (file, find, replace, count = 1) => ({ file, find, replace, count });
@@ -12,6 +12,18 @@ const DRAG = "if (dx * dx + dy * dy > BigInt(DRAG_THRESHOLD_MILLI) ** 2n) {";
 const ACC = "const dx = noNegZero(divRoundN(bx, 1000)), dy = noNegZero(divRoundN(by, 1000));";
 const NODE_PICK = "const t = cmd.delta === 1 ? list[0]! : list[list.length - 1]!;";
 const KEYSPATIAL = "const key: [bigint, bigint, number] = [p * p + s * s, s, m.index];";
+
+const DUPID = "const id = JSON.stringify([mode, key, shiftIgnored(key) ? mods & 14 : mods]);";
+const TABROW = 'if (key === "Tab") throw bad("TAB_BOUND", p);';
+const ROWS = "  rows.forEach((e, i) => {\n";
+const MODS = '    if (!isInt(mods) || mods < 0 || mods > 15) throw bad("INVALID_VALUE", `${p}.mods`);\n';
+const KEY = '    if (typeof key !== "string" || !isKeyToken(key)) throw bad("UNKNOWN_KEY", `${p}.key`);\n';
+const MODSKEY = MODS + KEY, KEYMODS = KEY + MODS;
+const ACT = '    const action = readAction(e.get("action"), `${p}.action`);\n';
+const KEYACT = KEY + ACT;
+const ACTTYPE_FIRST = '    { const at = plainEntries(e.get("action"))?.get("type"); if (!(typeof at === "string" && ACTIONS.has(at))) throw bad("UNKNOWN_ACTION", `${p}.action`); }\n';
+const ACTTAB = ACT + "    " + TABROW;
+const CLOSED = '    if (e === undefined || e.size !== 4 || !["action", "key", "mode", "mods"].every((k) => e.has(k))) throw bad("SCHEMA", `[${i}]`, "exactly action, key, mode, mods");';
 
 export const MUTANTS = [
   // ---- pointer, wheel, pinch, long press, lasso (rows I) ------------------------------------------------------------------------------------------
@@ -107,6 +119,36 @@ export const MUTANTS = [
   m("K123", "an edge target reveals toward its source centre", [P("navigation.ts", "return { X: divRound(pa.X + pb.X, 2n), Y: divRound(pa.Y + pb.Y, 2n) };", "return { X: pa.X, Y: pa.Y };")]),
   m("K124", "reveal margin not clamped for a tiny viewport", [P("navigation.ts", "Math.min(REVEAL_MARGIN_PX, floorDivN(Math.min(w, h) - 1, 2))", "REVEAL_MARGIN_PX")]),
   m("K126", "lasso and select-all count boundary exclusive", [P("machine.ts", ".length > c.cfg.maxTargets", ".length >= c.cfg.maxTargets", 3)]),
+  // ---- binding-table domain rows B14-B110 (corpus K129-K153, added with the gap rows of review 34). Each mutant is this implementation's realization of the one-line
+  //      text of MUTANTS.tsv. K136, K139 and K141 have the same patch as K80, K81 and X20 and are kept under their own ids because the corpus names other killer rows. ---
+  m("K129", "host-mode grammar anchored with `$` (a trailing LF accepted)", [P("bindings.ts", "const MODE = /^x-[a-z0-9][a-z0-9._-]*$/;", "const MODE = /^x-[a-z0-9][a-z0-9._-]*\\n?$/;")]),
+  m("K130", "host-mode first character may be `.`, `_` or `-`", [P("bindings.ts", "const MODE = /^x-[a-z0-9][a-z0-9._-]*$/;", "const MODE = /^x-[a-z0-9._-][a-z0-9._-]*$/;")]),
+  m("K131", "mods -1 accepted", [P("bindings.ts", "if (!isInt(mods) || mods < 0 || mods > 15) throw", "if (!isInt(mods) || mods > 15) throw")]),
+  m("K132", "mods 15 refused", [P("bindings.ts", "if (!isInt(mods) || mods < 0 || mods > 15) throw", "if (!isInt(mods) || mods < 0 || mods >= 15) throw")]),
+  m("K133", "uppercase letters are key tokens", [P("bindings.ts", "return (s >= \"a\" && s <= \"z\") || (s >= \"0\" && s <= \"9\") || PUNCTUATION.includes(s);", "return (s >= \"a\" && s <= \"z\") || (s >= \"A\" && s <= \"Z\") || (s >= \"0\" && s <= \"9\") || PUNCTUATION.includes(s);")]),
+  m("K134", "legacy key names (Esc, Left, Spacebar) are key tokens", [P("bindings.ts", "if (NAME_TOKENS.has(s) || s === \"Space\") return true;\n  if (s.length !== 1) return false;", "if (NAME_TOKENS.has(s) || s === \"Space\" || LEGACY.has(s)) return true;\n  if (s.length !== 1) return false;")]),
+  m("K135", "shift bit ignored for every key in the duplicate check", [P("bindings.ts", DUPID, "const id = JSON.stringify([mode, key, mods & 14]);")]),
+  m("K136", "shift bit never ignored in the duplicate check", [P("bindings.ts", DUPID, "const id = JSON.stringify([mode, key, mods]);")]),
+  m("K137", "duplicate check compares only the shift bit", [P("bindings.ts", DUPID, "const id = JSON.stringify([mode, key, mods & 1]);")]),
+  m("K138", "duplicate check ignores the mode", [P("bindings.ts", DUPID, "const id = JSON.stringify([key, shiftIgnored(key) ? mods & 14 : mods]);")]),
+  m("K139", "Tab refused only in normal mode", [P("bindings.ts", TABROW, "if (key === \"Tab\" && mode === \"normal\") throw bad(\"TAB_BOUND\", p);")]),
+  m("K140", "Tab refused only with mods 0", [P("bindings.ts", TABROW, "if (key === \"Tab\" && mods === 0) throw bad(\"TAB_BOUND\", p);")]),
+  m("K141", "escape rule satisfied by an Escape row with any mods", [P("bindings.ts", "if (key === \"Escape\" && mods === 0) escapes.add(mode);", "if (key === \"Escape\") escapes.add(mode);")]),
+  m("K142", "escape rule not applied to marquee", [P("bindings.ts", "if (m !== \"normal\" && !escapes.has(m)) throw", "if (m !== \"normal\" && m !== \"marquee\" && !escapes.has(m)) throw")]),
+  m("K143", "escape rule checked before the rows", [P("bindings.ts", ROWS, "  { const ms = new Set<string>(), es = new Set<string>(); for (const e of rows) { const mm = e.get(\"mode\"); if (typeof mm === \"string\") { ms.add(mm); if (e.get(\"key\") === \"Escape\" && e.get(\"mods\") === 0) es.add(mm); } } for (const mm of ms) if (mm !== \"normal\" && !es.has(mm)) throw bad(\"NO_ESCAPE_EXIT\", undefined, mm); }\n" + ROWS)]),
+  m("K144", "key token checked before mods", [P("bindings.ts", MODSKEY, KEYMODS)]),
+  m("K145", "action type checked before the key token", [P("bindings.ts", KEYACT, ACTTYPE_FIRST + KEYACT)]),
+  m("K146", "Tab checked before the action fields (after the action type)", [P("bindings.ts", ACTTAB, "    { const at = plainEntries(e.get(\"action\"))?.get(\"type\"); if (key === \"Tab\" && typeof at === \"string\" && ACTIONS.has(at)) throw bad(\"TAB_BOUND\", p); }\n" + ACTTAB)]),
+  m("K147", "Tab rows found in a first pass over the whole table", [P("bindings.ts", ROWS, "  rows.forEach((e, i) => { if (e.get(\"key\") === \"Tab\") throw bad(\"TAB_BOUND\", `[${i}]`); });\n" + ROWS)]),
+  m("K148", "closed-row check interleaved with the per-row checks", [
+    P("bindings.ts", CLOSED + "\n    rows.push(e);", "    rows.push(e ?? new Map());"),
+    P("bindings.ts", "    const p = `[${i}]`;\n    const mode = e.get(\"mode\")", "    const p = `[${i}]`;\n    if (e.size !== 4 || ![\"action\", \"key\", \"mode\", \"mods\"].every((k) => e.has(k))) throw bad(\"SCHEMA\", p, \"exactly action, key, mode, mods\");\n    const mode = e.get(\"mode\")"),
+  ]),
+  m("K149", "extra action fields tolerated", [P("bindings.ts", "if (e.size !== spec.fields.length + 1 || !spec.fields.every", "if (!spec.fields.every")]),
+  m("K150", "empty table refused", [P("bindings.ts", "  if (!Array.isArray(table)) throw bad(\"SCHEMA\", undefined, \"an array expected\");\n", "  if (!Array.isArray(table) || table.length === 0) throw bad(\"SCHEMA\", undefined, \"an array expected\");\n")]),
+  m("K151", "zoom factor given as a string accepted", [P("bindings.ts", "return isInt(x) && x >= 1 && x <= 1_000_000;", "return (isInt(x) || typeof x === \"string\") && (x as never) >= 1 && (x as never) <= 1_000_000;")]),
+  m("K152", "spatial extend 1 or 0 accepted as a boolean", [P("bindings.ts", "typeof f.get(\"extend\") === \"boolean\" }],", "(typeof f.get(\"extend\") === \"boolean\" || f.get(\"extend\") === 1 || f.get(\"extend\") === 0) }],")]),
+  m("K153", "action type compared case-insensitively", [P("bindings.ts", "const spec = typeof type === \"string\" ? ACTIONS.get(type) : undefined;", "const spec = typeof type === \"string\" ? ACTIONS.get(type.toLowerCase()) : undefined;")]),
 ];
 
 /**

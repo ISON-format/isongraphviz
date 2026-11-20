@@ -1,7 +1,7 @@
 // Mutants beyond the corpus table (audit 32-code-audit-b.md): ids start with `ext:`; they are killed by the behaviour checks of test/oracle/extra.ts (ids U-*),
 // which the harness runs next to the oracle rows. `ext:K112-scan` is the documented EQUIVALENT mutant: on V8 JSON.parse is iterative, so the depth scan alone
 // changes no result (the closed-key reader refuses the parsed nest with the same SCHEMA); it must survive. The other half of K112 (the unguarded JSON.parse)
-// is killed by the unit check U-MANIFEST-json; no oracle row has a syntactically invalid manifest. `ext:E16` is the second documented equivalent mutant: the
+// is killed by the oracle rows X31-X44 and X86 (invalid JSON, ambiguity A-75, added with the gap rows) and by the unit check U-MANIFEST-json. `ext:E16` is the second documented equivalent mutant: the
 // size cap + 1 is refused one layer down by renderer-core `initialState` with the same INVALID_INPUT/OUT_OF_RANGE.
 const P = (file, find, replace, count = 1) => ({ file, find, replace, count });
 const m = (id, desc, patches) => ({ id, desc, patches });
