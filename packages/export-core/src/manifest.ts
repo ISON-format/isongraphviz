@@ -54,6 +54,7 @@ export function readManifest(bytes: Uint8Array, maxBytes: number): ExportManifes
     if (e === undefined || e.size !== 4 || !["bytes", "media_type", "name", "sha256"].every((k) => e.has(k))) throw exportError("SCHEMA", p, "closed object {bytes, media_type, name, sha256} expected");
     const n = e.get("name"), b = e.get("bytes"), s = e.get("sha256"), mt = e.get("media_type");
     if (typeof n !== "string" || typeof mt !== "string" || typeof s !== "string" || typeof b !== "number" || !Number.isSafeInteger(b) || b < 0 || !HEX64.test(s)) throw exportError("SCHEMA", p);
+    if (Object.is(b, -0)) throw exportError("SCHEMA", p, "-0 is not an integer of the canonical form"); // R32-07: not the foreign INVALID_NUMBER of the re-serialisation
     names.push(n);
     entries.push({ bytes: b, media_type: mt, name: n as ArtifactName, sha256: s });
   }
