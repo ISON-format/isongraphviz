@@ -107,7 +107,7 @@ async function shaderRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
 
 // ---- W: the plan reader ------------------------------------------------------------------------------------------------------------------------
 async function readerRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
-  // 13.2: an input that starts with `{` is the inline `files` form (W01, W47): the strict reader accepts each file and re-serializes it to itself. Any
+  // 13.2: an input that starts with `{` is the inline `files` form (W01, W47, W50): the strict reader accepts each file and re-serializes it to itself. Any
   // other input is a path under bad/ and the row's error cell names the rejection. The form decides, never the id.
   const files = parseInput(row)["files"];
   if (Array.isArray(files)) {
@@ -209,7 +209,7 @@ async function probeRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
   eq(`${row.id} probe call log`, log.map((l) => l + "\n").join(""), c.text(input["expect_log"]));
 }
 
-// ---- U20-U49 (but U37): the context controller against a fake canvas that fires context events ----------------------------------------------------------
+// ---- U20-U57 (but U37): the context controller against a fake canvas that fires context events ----------------------------------------------------------
 interface CtlStatus { phase: string; contextLost: boolean; failure?: string; attributes: unknown }
 const statusLine = (s: CtlStatus): string => canon(["onStatus", s.phase, s.contextLost ? 1 : 0, s.failure ?? null]);
 const errToken = (d: string | undefined): string => (d ?? "").split(":")[0]!;
@@ -285,7 +285,7 @@ async function adapterRow(impl: GlImpl, c: Oracle, row: Row): Promise<void> {
 
 // ---- dispatch ------------------------------------------------------------------------------------------------------------------------------
 export const FUNCTION_GROUPS = new Set(["G", "B", "H", "W", "X", "E", "P", "U"]);
-/** The controller rows (U20-U36, U38-U49; no model, no renderer) are the U rows whose input is the inline `events` form (13.2): the form decides, never the id
+/** The controller rows (U20-U36, U38-U57; no model, no renderer) are the U rows whose input is the inline `events` form (13.2): the form decides, never the id
  * range (an id range silently turned U40-U49 into rows that ran nothing). */
 export const isControllerRow = (row: Row): boolean => Array.isArray(parseInput(row)["events"]);
 

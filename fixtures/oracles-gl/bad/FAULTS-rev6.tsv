@@ -1,0 +1,3 @@
+id	rule	note
+W48	G12	a focused clipped edge (pid 3, two segments in layer 2) and a cn entry with the focus bit (distinct pid 2)
+W49	G12	two focused clipped edges (pids 3 and 4, two segments each in layer 2): two distinct pids

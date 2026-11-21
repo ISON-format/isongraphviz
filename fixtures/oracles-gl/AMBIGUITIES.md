@@ -332,3 +332,56 @@ generator's output disagree, both values are given. Entries marked **DESIGN DEFE
 * **Sections:** 7.6.
 * **Reading used:** (a) a second `init` after a failed `init` (created, creation fails, then `init` again): "listeners added once at the start of every initialize that reaches creation" and "a failed initialize leaves them in place" leave open whether the listeners are added twice; (b) `L` or `R` after `dispose`: with the listeners removed the fake's flag, and so `status().contextLost`, is not determined; U49 uses only `C`, `F`, `init`, `D` after the dispose; (c) a plan with two foci read with every reader rule disabled (X07's mode): 9.3 says `readoutFromGl` "reports the one focus or none" for valid plans; the result for two foci is not stated. No row encodes a guess for (a)-(c).
 * **Why:** underspecified; recorded for the owner.
+
+## A-47 After dispose, does the controller fake's flag still follow L and R?
+
+* **Rev 6:** NEW (rows U54-U57 for R31-11 (b)).
+* **Sections:** 7.6 "Listeners" (last sentences: "After `dispose`, `L` and `R` are ignored, and `status().contextLost` continues to report the context's own `isContextLost()`"), the controller conventions ("`status().contextLost` is the fake's flag (true from a loss to the next restore; `loseContext()` at dispose does not set it)"), 13.2 controller fake ("reports `isContextLost()` true from the event `"lost"` on and false after an `R`").
+* **Reading used:** the fake's flag is the context's own state and follows the `L` and `R` inputs in every phase, also after `dispose` and with the listeners removed (a removed listener means the controller is not told, not that the context stops being lost). `status().contextLost` after dispose reports that flag: in U54-U57 it is true after a loss, false after a restore, and no line is logged for the events (no `preventDefault`, no `labels.clear`, no `onStatus`, no GL call).
+* **Why:** the clause "(not a value kept from the dispose)" can be tested only if the value can change after dispose. If the owner's fake stops following events once the listeners are removed, the statuses after the first post-dispose `L` or `R` of U54-U57 are wrong (the log lines would still be right) and mutant K167 would be unkillable. The reading is the only one under which the rev 6 sentence has content.
+
+## A-48 `L` or `R` in `created` before any context object was obtained
+
+* **Rev 6:** NEW (no row written).
+* **Sections:** 7.6 table `created | L, R` ("X (no context to lose; ignored). A loss event in `created` is ignored: no effect line, status unchanged, `status().contextLost` true").
+* **Reading used:** none; no row sends `L` or `R` to a controller that has not reached `getContext` (before the first `initialize`). The sentence says there is no context to lose and also that `contextLost` is true afterwards. The rows use a loss in `created` only after a failed initialize (a context object exists: U42, U43) and after dispose following an initialize (U54-U57). U44 sends an `R` with no context and shows `contextLost` false (the flag cannot become true).
+* **Why:** the byte (`contextLost` of a controller with no context after an `L`) is not determined; recorded for the owner.
+
+## A-49 "so that a loss during creation is observable" versus "a loss event in `created` is ignored"
+
+* **Rev 6:** NEW (wording; the rows are unaffected).
+* **Sections:** 7.6 "Listeners" ("added once ... before the creation calls (so that a loss during creation is observable)"), table `created | L, R`, 7.5 failure paragraph.
+* **Reading used:** the listeners are in place during creation, a loss event arriving in `created` is ignored without an effect line, so the loss is observable only as the failed initialize (`onError`, `reject` with `CONTEXT_LOST`, `status().failure` `CONTEXT_LOST`) and through `status().contextLost`. U50 pins exactly those lines. Whether the fake also dispatches `webglcontextlost` during creation is not stated; the log is the same either way, because the event is ignored in `created`.
+* **Why:** the two sentences read as if the listeners made the loss visible as a line; no line shows it.
+
+## A-50 The `detail` string of a rejection caused by a loss during creation (executor level)
+
+* **Rev 6:** NEW (no row written).
+* **Sections:** 7.5 failure paragraph, 13.2 `E` grammar.
+* **Reading used:** 7.5 says the detail is `CONTEXT_LOST` "with no driver text"; for the other tokens it is the token, a colon and at most 120 characters of the info log. Whether a loss gives the bare `CONTEXT_LOST` or `CONTEXT_LOST:` is not said, and the `E` scenarios (`create`, `frame`, `dispose`, `fail-compile:<program>.<stage>`, `fail-link:<program>`) have no lost scenario. The controller log records the closed token only (`["onError","INVALID_INPUT/INVALID_VALUE","CONTEXT_LOST"]`), so U50-U53 do not depend on the string; no `E` row writes it.
+* **Why:** nothing in the grammar can carry it; an implementation may choose either spelling and pass the corpus.
+
+## A-51 13.2 "`onError` then `onStatus` (a failed restore)" is not exact
+
+* **Rev 6:** NEW (wording; the rows follow 7.6).
+* **Sections:** 13.2 "A failure that has both a log and an error"; 7.6 table `lost | R` and `failed | R` (M-15 of rev 5).
+* **Reading used:** from `lost` a failed restore logs `onError` then `onStatus` (phase becomes `failed`: U25, U57); from `failed` a second usable failure logs `onError` only (no phase change, no `onStatus`: U41). The 13.2 sentence is read as describing the `lost` to `failed` restore.
+* **Why:** read literally for every failed restore, the sentence contradicts the `failed | R` row.
+
+## A-52 An initialize on a context that is still lost
+
+* **Rev 6:** NEW (no row written).
+* **Sections:** 7.5 ("an `isContextLost()` that is true after a step stops creation"), 7.6 `created | init`.
+* **Reading used:** none. After a loss during creation (U50) the context stays lost until an `R`. A second `initialize` without a restore in between would start creation on a lost context; 7.5 says a lost context stops creation but not after which step the first check happens, and the fake's log stops "where the loss happened", which is not where it is already lost. U52 therefore sends an `R` between the two initializes.
+* **Why:** the log of that case is not determined; recorded for the owner.
+
+## Resolved in rev 6 (appended; no entry above is edited)
+
+**52 entries (A-01 to A-52), 8 of them design defects** (A-47 to A-52 were added after design 31 rev 6; the entry count in the header of this file is the rev 5 figure). Rev 6 (table `Rev 5 -> rev 6`, owner-adopted wording R31-01..R31-04, R31-07..R31-11 (a), (b)) resolves or confirms these entries; nothing above is rewritten, the notes here supersede the "Reading used" lines where they differ.
+
+* **A-06 (the `U` rows part) and A-45:** RESOLVED-IN-REV6 (R31-10), FIXED in 13.2: a controller row whose run contains a failed initialize has an empty `error` cell and the log as its expected file; `info_log` / `expect_detail` are for `E10` and `E11` only; the rows `U25`, `U27`, `U31`, `U34`, `U36`, `U39` follow it. **Reading matched:** yes (the corpus rows were already in that form; checked by script over `EXPECT.tsv` for all six rows and for `E10`, `E11`). No row changed.
+* **A-39 and A-43 (single focus, distinct pids):** RESOLVED-IN-REV6 (R31-07), CHANGED in 7.2 G12: "at most one **distinct** pid; a clipped focused edge repeats its pid (G11) and the repeat is not a second focus". **Reading matched:** yes (A-43 read the clause as distinct pids). Already carried by `W39`-`W46` (more than one focus is refused), `W47` and `X14` (a clipped focused edge is accepted) and the mutants `K130`-`K136`; rev 6 adds the planner row `B24` (a real planner output with a focused edge of several clipped segments), `W48`, `W49` (a repeated pid plus a second distinct pid, two distinct repeated pids), `W50`, `X19`, `X20` and `K157`-`K159`.
+* **A-44 (release rule in `created`; "Not used": a loss during creation):** RESOLVED-IN-REV6 (R31-08, R31-09). The loss in `created` is ignored with `status().contextLost` true and the release rule's "not lost" is the context's own `isContextLost()`: **reading matched:** yes (`U42`, `U43`, `K147`-`K149`, verified). The loss during creation is now stated: detail `CONTEXT_LOST` with no driver text and `getShaderInfoLog` not called: **reading matched:** the oracle's convention (the log stops after the `getShaderParameter` of `arrow.vs`, no cleanup) is consistent with it; new rows `U50`-`U52`, mutants `K160`-`K164`.
+* **A-46 (a) a second `initialize` after a failed one:** RESOLVED-IN-REV6 (R31-11 (a)): no listener is added again. New rows `U52`, `U53`, mutants `K165`, `K166`. **(b) `L` or `R` after `dispose`:** RESOLVED-IN-REV6 (R31-11 (b)): ignored, and `status().contextLost` reports the context's own `isContextLost()` (see A-47 for the one reading needed). New rows `U54`-`U57`, mutants `K167`-`K170`. **(c) a plan with two foci read with every reader rule disabled:** STILL OPEN (R31-11 (c) is not folded in rev 6): no row.
+* **A-09 (a loss during creation, the "log stops" convention):** CONFIRMED in part: 7.5 now says no driver text and no `getShaderInfoLog`; the point where the log stops (right after the `getShaderParameter` of `arrow.vs`) remains the oracle's convention of 7.6 ("Controller conventions") and is not changed.
+* **Not folded by rev 6 and not covered here:** R31-05, R31-06, R31-11 (c), R30-31-01 (open in the design); no row is written for them.

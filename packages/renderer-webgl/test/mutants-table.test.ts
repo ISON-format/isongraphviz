@@ -1,4 +1,4 @@
-// Guards the mutation harness without running it: the K table has the 156 ids of the corpus MUTANTS.tsv (K01..K156), every patch applies exactly the stated
+// Guards the mutation harness without running it: the K table has the 172 ids of the corpus MUTANTS.tsv (K01..K172), every patch applies exactly the stated
 // number of times to the CURRENT src of renderer-webgl (so a refactoring cannot silently turn a mutant into a no-op), and production code carries no
 // switchable variants.
 import { readFileSync, readdirSync } from "node:fs";
@@ -13,7 +13,7 @@ const SRC = { gl: join(PKG_DIR, "src") } as const;
 describe("the K table (scripts/mutants-table.mjs)", () => {
   it("matches the ids of the corpus MUTANTS.tsv, each with a description and at least one patch", () => {
     const ids = readFileSync(join(ORACLE_DIR, "MUTANTS.tsv"), "utf8").split("\n").slice(1).filter((l) => l !== "").map((l) => l.split("\t")[0]);
-    expect(ids.length).toBe(156);
+    expect(ids.length).toBe(172);
     expect(MUTANTS.map((m) => m.id)).toEqual(ids);
     for (const m of MUTANTS) { expect(m.desc, m.id).toBeTruthy(); expect(m.patches.length, m.id).toBeGreaterThan(0); }
   });

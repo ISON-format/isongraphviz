@@ -155,3 +155,19 @@ K153	a loss out of failed clears the label canvas again	U47	U47		U36	KILLED
 K154	initialize in lost or failed adds the listeners again	U48	U48			KILLED
 K155	a second dispose removes the listeners again	U49	U49			KILLED
 K156	render() in ready draws the frame but not the labels	U45	U45			KILLED
+K157	G12 ignores a pid that repeats (a focused edge of several clipped segments is not counted as a focus)	W48,W49	W48,W49			KILLED
+K158	the planner writes the focus halo (layer 2) of a clipped edge for its first segment only	B24	B24			KILLED
+K159	readoutFromGl counts the instances of layers 2 and 6 as foci and refuses a clipped focused edge	X19,X20	X19,X20		X14	KILLED
+K160	a loss during creation calls getShaderInfoLog before the failure is reported	U50,U51,U52	U50,U51,U52			KILLED
+K161	a loss during creation still deletes the objects created so far	U50,U51,U52	U50,U51,U52			KILLED
+K162	a loss during creation is reported with the token COMPILE_FAILED instead of CONTEXT_LOST	U50,U51,U52	U50,U51,U52			KILLED
+K163	a loss during creation puts the controller in phase lost (onStatus) instead of leaving it in created	U50,U51,U52	U50,U51,U52			KILLED
+K164	dispose after a loss during creation releases the lost context (getExtension, loseContext)	U51	U51			KILLED
+K165	a second initialize in created adds the two listeners again	U52,U53	U52,U53			KILLED
+K166	a second initialize in created after a failed one is ignored	U52,U53	U52,U53			KILLED
+K167	status().contextLost after dispose is the value kept from the dispose	U54,U55,U56,U57	U54,U55,U56,U57			KILLED
+K168	after dispose a loss event still runs the loss handler (preventDefault)	U54,U55,U56,U57	U54,U55,U56,U57			KILLED
+K169	after dispose a restore event rebuilds the resources	U54,U55,U56,U57	U54,U55,U56,U57			KILLED
+K170	status().contextLost is derived from the phase (true only in lost), not from the context	U42,U43,U54	U42,U43,U54		U33,U50,U51,U52,U55,U56,U57	KILLED
+K171	a loss event in created moves the controller to lost (preventDefault, labels.clear, onStatus)	U42,U43	U42,U43			KILLED
+K172	a loss event in created calls onStatus without a phase change	U42,U43	U42,U43			KILLED

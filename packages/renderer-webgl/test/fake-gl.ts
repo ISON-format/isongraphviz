@@ -52,10 +52,18 @@ export function createFakeGl(o: FakeGlOptions): FakeGl {
   const nameOf = (h: unknown): string => (h === null ? "null" : (h as Handle).name);
   const attribNames = new WeakMap<object, string>();
   const state = { lost: false, loseAfterArrowVs: false };
+  // Object names are the structural names of the corpus (arrow.vs, ... edge; 7.5), assigned in creation order within one creation GENERATION. A generation starts at
+  // the first creation call after (a) a restore (below) or (b) every object of the previous generation was deleted (a failed creation cleans up after itself, so a
+  // second initialize without a restore begins at arrow.vs again: gl:U53; a lost context cleans up nothing and only a restore starts the next generation).
+  const live = new Set<Handle>();
+  const born = <T extends Handle>(h: T): T => { live.add(h); return h; };
+  const gone = (h: Handle): void => { live.delete(h); };
+  const newGeneration = (): void => { counts.shader = 0; counts.program = 0; counts.vao = 0; counts.buffer = 0; };
+  const startIfDrained = (): void => { if (live.size === 0) newGeneration(); };
   const shaderName = (n: number): string => `${NAMES[n >> 1]}.${n & 1 ? "fs" : "vs"}`;
   const api = {
     ...CONST,
-    createShader: (t: number) => { const h: Handle = { kind: "shader", name: shaderName(counts.shader++) }; put("createShader", h.name, sym(t)); return h; },
+    createShader: (t: number) => { startIfDrained(); const h: Handle = born({ kind: "shader", name: shaderName(counts.shader++) }); put("createShader", h.name, sym(t)); return h; },
     shaderSource: (s: Handle, src: string) => put("shaderSource", s.name, sha16(src)),
     compileShader: (s: Handle) => put("compileShader", s.name),
     getShaderParameter: (s: Handle, p: number) => {
@@ -65,19 +73,19 @@ export function createFakeGl(o: FakeGlOptions): FakeGl {
       return ok;
     },
     getShaderInfoLog: (s: Handle) => { put("getShaderInfoLog", s.name); return o.infoLog ?? ""; },
-    createProgram: () => { const h: Handle = { kind: "program", name: NAMES[counts.program++]! }; put("createProgram", h.name); return h; },
+    createProgram: () => { const h: Handle = born({ kind: "program", name: NAMES[counts.program++]! }); put("createProgram", h.name); return h; },
     attachShader: (p: Handle, s: Handle) => put("attachShader", p.name, s.name),
     linkProgram: (p: Handle) => put("linkProgram", p.name),
     getProgramParameter: (p: Handle, n: number) => { put("getProgramParameter", p.name, sym(n)); return o.failLink !== p.name; },
     getProgramInfoLog: (p: Handle) => { put("getProgramInfoLog", p.name); return o.infoLog ?? ""; },
-    deleteShader: (s: Handle) => put("deleteShader", s.name),
-    deleteProgram: (p: Handle) => put("deleteProgram", p.name),
+    deleteShader: (s: Handle) => { gone(s); put("deleteShader", s.name); },
+    deleteProgram: (p: Handle) => { gone(p); put("deleteProgram", p.name); },
     getAttribLocation: (p: Handle, n: string) => { put("getAttribLocation", p.name, n); const loc = names.size; names.set(loc, `${p.name}.${n}`); return loc; },
     getUniformLocation: (p: Handle, n: string) => { put("getUniformLocation", p.name, n); const h: Handle = { kind: "uniform", name: `${p.name}.${n}` }; attribNames.set(h, h.name); return h; },
-    createVertexArray: () => { const h: Handle = { kind: "vao", name: NAMES[counts.vao++]! }; put("createVertexArray", h.name); return h; },
-    deleteVertexArray: (v: Handle) => put("deleteVertexArray", v.name),
-    createBuffer: () => { const h: Handle = { kind: "buffer", name: NAMES[counts.buffer++]! }; put("createBuffer", h.name); return h; },
-    deleteBuffer: (b: Handle) => put("deleteBuffer", b.name),
+    createVertexArray: () => { const h: Handle = born({ kind: "vao", name: NAMES[counts.vao++]! }); put("createVertexArray", h.name); return h; },
+    deleteVertexArray: (v: Handle) => { gone(v); put("deleteVertexArray", v.name); },
+    createBuffer: () => { const h: Handle = born({ kind: "buffer", name: NAMES[counts.buffer++]! }); put("createBuffer", h.name); return h; },
+    deleteBuffer: (b: Handle) => { gone(b); put("deleteBuffer", b.name); },
     viewport: (x: number, y: number, w: number, h: number) => put("viewport", x, y, w, h),
     clearColor: (r: number, g: number, b: number, a: number) => put("clearColor", r, g, b, a),
     clear: (m: number) => put("clear", sym(m)),
@@ -122,7 +130,7 @@ export function createFakeGl(o: FakeGlOptions): FakeGl {
       return (t as Record<string, unknown>)[k];
     },
     set(_t, k, v) {
-      if (k === "lost") { state.lost = v as boolean; if (v === false) { counts.shader = 0; counts.program = 0; counts.vao = 0; counts.buffer = 0; } return true; } // a restore starts a new generation of objects
+      if (k === "lost") { state.lost = v as boolean; if (v === false) { live.clear(); newGeneration(); } return true; } // a restore starts a new generation of objects
       if (k === "loseAfterArrowVs") { state.loseAfterArrowVs = v as boolean; return true; }
       throw new Error(`Gl2Like double: ${String(k)} is not assignable`);
     },
@@ -150,6 +158,10 @@ export interface FakeCanvas extends GlCanvasLike {
 
 export function createFakeCanvas(o: FakeCanvasOptions): FakeCanvas {
   const handlers = new Map<string, (e: GlEventLike) => void>();
+  // The last handler ever registered per type. `fire` delivers to a REMOVED listener too (a late or queued event, or a browser that has not yet dropped it): after
+  // `dispose` the controller must ignore L and R by itself (7.6, R31-11 (b); gl:U54-U57, mutants K168, K169), and a double that stopped delivering on removal would
+  // make that rule untestable. Registered listeners are exactly `handlers` (`listeners()`).
+  const lastOf = new Map<string, (e: GlEventLike) => void>();
   let first: string | undefined;
   const put = (...line: unknown[]): void => { o.log.push(canon(line)); };
   const c = {
@@ -166,9 +178,9 @@ export function createFakeCanvas(o: FakeCanvasOptions): FakeCanvas {
       if (type === "2d") { put("getContext", "2d"); return o.ctx2d === false || o.ctx2d === null ? null : {}; }
       return null;
     },
-    addEventListener(type: string, h: (e: GlEventLike) => void): void { handlers.set(type, h); put("addEventListener", type); },
+    addEventListener(type: string, h: (e: GlEventLike) => void): void { handlers.set(type, h); lastOf.set(type, h); put("addEventListener", type); },
     removeEventListener(type: string): void { handlers.delete(type); put("removeEventListener", type); },
-    fire(type: string): void { handlers.get(type)?.({ preventDefault: () => put("preventDefault") }); },
+    fire(type: string): void { (handlers.get(type) ?? lastOf.get(type))?.({ preventDefault: () => put("preventDefault") }); },
     listeners: () => [...handlers.keys()],
   };
   return c as FakeCanvas;

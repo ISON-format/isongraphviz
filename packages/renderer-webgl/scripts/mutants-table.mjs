@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-gl (K01..K156: 156 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
+// The K table of design 13.5 for fixtures/oracles-gl (K01..K172: 172 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
 // SCRATCH COPY of packages/renderer-webgl/src ("gl"); production code has no switchable variants and the package's src/ is never modified (display-list is
 // not copied: no mutant of this table lives there). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of
 // src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -233,4 +233,37 @@ export const MUTANTS = [
     G("control.ts", "      options.labels?.draw(plan);\n", "      if (!framesOnly) options.labels?.draw(plan);\n"),
     G("control.ts", '    render(): void {\n      if (phase === "ready") draw();', '    render(): void {\n      if (phase === "ready") { framesOnly = true; try { draw(); } finally { framesOnly = false; } }'),
   ]),
+  // ---- K157-K172: the rev 6 rows (single focus by DISTINCT pid, a clipped focused edge, the loss during creation, a second initialize, L and R after dispose) --------
+  m("K157", "G12 ignores a pid that repeats (a focused edge of several clipped segments is not counted as a focus)", [G("read.ts", FOC_LAYERS, "...byLayer[2]!.filter((p, i, a) => a.indexOf(p) === a.lastIndexOf(p)), ...byLayer[6]!.filter((p, i, a) => a.indexOf(p) === a.lastIndexOf(p)), ")]),
+  m("K158", "the planner writes the focus halo (layer 2) of a clipped edge for its first segment only", [G("plan.ts", "for (const s of edgeInstances.get(pid)!) if (flag === 0 ||", "for (const s of (flag === 2 ? edgeInstances.get(pid)!.slice(0, 1) : edgeInstances.get(pid)!)) if (flag === 0 ||")]),
+  m("K159", "readoutFromGl counts the instances of layers 2 and 6 as foci and refuses a clipped focused edge", [
+    G("readout.ts", "focusedEdges: Set<number>; arrows: Set<number>;\n}", "focusedEdges: Set<number>; arrows: Set<number>;\n  focusInstances: number;\n}"),
+    G("readout.ts", "focusedEdges: new Set(), arrows: new Set() };", "focusedEdges: new Set(), arrows: new Set(), focusInstances: 0 };"),
+    G("readout.ts", "else if (layerAt === 2) a.focusedEdges.add(pid); else a.edges.add(pid);", "else if (layerAt === 2) { a.focusedEdges.add(pid); a.focusInstances++; } else a.edges.add(pid);"),
+    G("readout.ts", "else if (layerAt === 6) a.focusedNodes.add(pid); else a.nodes.set", "else if (layerAt === 6) { a.focusedNodes.add(pid); a.focusInstances++; } else a.nodes.set"),
+    G("readout.ts", "  const a = account(plan);\n  const nodePids = [", '  const a = account(plan);\n  if (a.focusInstances > 1) throw bad("more than one focused instance");\n  const nodePids = ['),
+  ]),
+  m("K160", "a loss during creation calls getShaderInfoLog before the failure is reported", [G("execute.ts", 'if (gl.isContextLost()) throw failure("CONTEXT_LOST");\n        if (!ok)', 'if (gl.isContextLost()) { gl.getShaderInfoLog(s.handle); throw failure("CONTEXT_LOST"); }\n        if (!ok)')]),
+  m("K161", "a loss during creation still deletes the objects created so far", [
+    G("execute.ts", "    if (gl.isContextLost()) return;\n    for (let i = created.length - 1; i >= 0; i--) {", "    for (let i = created.length - 1; i >= 0; i--) {"),
+    G("execute.ts", 'e.detail?.startsWith("CONTEXT_LOST") === true) throw e;\n    cleanup();', 'e.detail?.startsWith("CONTEXT_LOST") === true) { cleanup(); throw e; }\n    cleanup();'),
+  ]),
+  m("K162", "a loss during creation is reported with the token COMPILE_FAILED instead of CONTEXT_LOST", [G("control.ts", 'const err = c.result === "failed" ? c.error : new IgrError("INVALID_INPUT", "INVALID_VALUE", "gl", "CONTEXT_LOST");', 'const err = c.result === "failed" ? c.error : new IgrError("INVALID_INPUT", "INVALID_VALUE", "gl", "COMPILE_FAILED");')]),
+  m("K163", "a loss during creation puts the controller in phase lost (onStatus) instead of leaving it in created", [G("control.ts", "        options.onError?.(err);\n        throw err;\n      }\n      try { draw(); }", '        options.onError?.(err);\n        if (c.result === "lost") { failure = undefined; phase = "lost"; notify(); }\n        throw err;\n      }\n      try { draw(); }')]),
+  m("K164", "dispose after a loss during creation releases the lost context (getExtension, loseContext)", [G("control.ts", "&& gl !== undefined && !lost()) releaseGlContext(gl);", '&& gl !== undefined && (!lost() || failure === "CONTEXT_LOST")) releaseGlContext(gl);')]),
+  m("K165", "a second initialize in created adds the two listeners again", [G("control.ts", "      if (!listening) {\n        canvas.addEventListener", "      if (true) {\n        canvas.addEventListener")]),
+  m("K166", "a second initialize in created after a failed one is ignored", [G("control.ts", 'if (phase !== "created") return; // the renderer', 'if (phase !== "created" || failure !== undefined) return; // the renderer')]),
+  m("K167", "status().contextLost after dispose is the value kept from the dispose", [
+    G("control.ts", "  let listening = false;\n", "  let listening = false;\n  let keptLost: boolean | undefined;\n"),
+    G("control.ts", "contextLost: gl !== undefined && gl.isContextLost(),", 'contextLost: phase === "disposed" && keptLost !== undefined ? keptLost : gl !== undefined && gl.isContextLost(),'),
+    G("control.ts", '      resources = undefined; plan = undefined; failure = undefined;\n      phase = "disposed";', '      resources = undefined; plan = undefined; failure = undefined;\n      keptLost = lost();\n      phase = "disposed";'),
+  ]),
+  m("K168", "after dispose a loss event still runs the loss handler (preventDefault)", [G("control.ts", '    if (phase === "created" || phase === "disposed") return;\n    event.preventDefault();', '    if (phase === "created") return;\n    event.preventDefault();\n    if (phase === "disposed") return;')]),
+  m("K169", "after dispose a restore event rebuilds the resources", [G("control.ts", 'if (phase !== "lost" && phase !== "failed") return; // a restore without a loss is ignored', 'if (phase !== "lost" && phase !== "failed" && phase !== "disposed") return; // a restore without a loss is ignored')]),
+  m("K170", "status().contextLost is derived from the phase (true only in lost), not from the context", [G("control.ts", "contextLost: gl !== undefined && gl.isContextLost(),", 'contextLost: phase === "lost",')]),
+  m("K171", "a loss event in created moves the controller to lost (preventDefault, labels.clear, onStatus)", [
+    G("control.ts", '    if (phase === "created" || phase === "disposed") return;\n    event.preventDefault();', '    if (phase === "disposed") return;\n    event.preventDefault();'),
+    G("control.ts", 'if (was === "ready") options.labels?.clear();', 'if (was === "ready" || was === "created") options.labels?.clear();'),
+  ]),
+  m("K172", "a loss event in created calls onStatus without a phase change", [G("control.ts", '    if (phase === "created" || phase === "disposed") return;\n    event.preventDefault();', '    if (phase === "created") { notify(); return; }\n    if (phase === "disposed") return;\n    event.preventDefault();')]),
 ];

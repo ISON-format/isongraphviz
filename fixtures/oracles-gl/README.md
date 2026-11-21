@@ -1,6 +1,6 @@
 # IGR-GL/1 oracle corpus (`oracles-gl`)
 
-Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere). Produced against design 31 (`31-CANVAS-WEBGL-DESIGN.md`, **rev 5**, 1,821 lines; first written against rev 2, regenerated against rev 3 and again against rev 5) by an
+Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere). **Revision note, design 31 rev 6 (2026-11-20):** the design was folded with the owner-adopted wording R31-07..R31-11 (text only, no Appendix byte, no shader byte); 30 rows were **appended** (B24, W48-W50, X19, X20, U50-U57, K157-K172, the last section), no existing row, id, expected file or mutant was touched, and the entries A-47 to A-52 and a resolved-in-rev-6 section were appended to `AMBIGUITIES.md`. Produced against design 31 (`31-CANVAS-WEBGL-DESIGN.md`, **rev 5**, 1,821 lines; first written against rev 2, regenerated against rev 3 and again against rev 5) by an
 independent oracle author who was given that design, design 30 rev 4 and design 27 rev 5, `docs/specs/IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures
 (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only data, the scenes, layouts, states and expected SVG documents of the draft corpus `fixtures/oracles-svg`
 (its `SHA256SUMS` digest `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd` is asserted before anything is generated), plus the formats
@@ -22,28 +22,28 @@ ambiguous, contradictory or could not be built, the literal reading used, and wh
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **336 rows** (the 279 rows, one per id of design 13.6, and the 57 gap rows of the last section).
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **366 rows** (the 279 rows, one per id of design 13.6, the 57 gap rows after rev 5 and the 30 rows after rev 6, see the last two sections).
 
 | Family | Rows | Content | Expected files |
 |---|---|---|---|
 | G | 11 | golden plans | plan/Gnn.glplan (binary, 7.2) |
-| B | 23 | buffer encoding, guard rule, plan sections | plan/Bnn.glplan; B08 renderer-level (also list); B10 error |
+| B | 24 | buffer encoding, guard rule, plan sections | plan/Bnn.glplan; B08 renderer-level (also list); B10 error |
 | H | 6 | the shader set | json/H0n.*.json, shaders/*.glsl |
-| W | 47 | the plan reader (bad plans; W47 accepts) | bad/Wnn.glplan (error INVALID_INPUT/SCHEMA), bad/FAULTS.tsv |
-| X | 18 | readouts | xr/Xnn.xr.json (X07 error) |
+| W | 50 | the plan reader (bad plans; W47 and W50 accept) | bad/Wnn.glplan (error INVALID_INPUT/SCHEMA), bad/FAULTS.tsv |
+| X | 20 | readouts | xr/Xnn.xr.json (X07 error) |
 | E | 11 | executor call logs against a fake context | gllog/Enn.log (E10, E11: log and error) |
-| U | 43 | the WebGL renderer (headless), the context controller | scripts/, plan/, states/, json/, calls/, gllog/ |
+| U | 51 | the WebGL renderer (headless), the context controller | scripts/, plan/, states/, json/, calls/, gllog/ |
 | P | 16 | the capability probe | json/Pnn.probe.json + gllog/Pnn.log |
 | D | 5 | differential (runtime) | no files (self-checks of the generator, README) |
-| K | 156 | mutants | no files (MUTANTS.tsv) |
-| **total** | **336** | | |
+| K | 172 | mutants | no files (MUTANTS.tsv) |
+| **total** | **366** | | |
 
-Rows with empty cells by design: D (5) and K (156); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W46, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
+Rows with empty cells by design: D (5) and K (172); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W46, W48, W49, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
 
 | Directory | Content |
 |---|---|
 | `plan/` | expected plans (binary `igr-gl/1`: header line, element table, label runs, three instance buffers) of rows G, B, X and the plans after each step of U scripts |
-| `bad/` | the 45 bad plans W02-W46, `X07.glplan`, `FAULTS.tsv` (the rule each bad plan breaks), `BASE.glplan` (the plan they are made from) |
+| `bad/` | the 47 bad plans W02-W46, W48, W49, `X07.glplan`, `FAULTS.tsv` (the rule each bad plan breaks), `BASE.glplan` (the plan they are made from) |
 | `gllog/` | executor call logs (E), controller logs (U20-U39), probe call logs (P): one canonical JSON line per effect, LF-terminated |
 | `calls/` | recorded Canvas streams: `X05.calls` (the Canvas stream of O1, all layers), `U13.calls` (the WebGL text layer, layer 8) |
 | `xr/` | readouts `igr-xr/1`: canonical JSON plus one LF |
@@ -3915,3 +3915,28 @@ The ledger notes `gl A-39` (single focus) and `gl A-40` (controller outcomes) re
 **Mutant matrix of K130-K156.** The mutants touch the G12 clause, the readout, the guard flags and the controller only, so each was run over the new rows and over every existing row that calls those functions (W01-W38, X01-X09, U20-U39 except U37, B14 and B13 by derivation); the other existing rows cannot change. Result: 27 of 27 killed with every named row changing. Rows that change although not named: K134 also changes X13-X15 and X17 (selected omitted entries); K138 the existing X06 and the new X14-X18; K142 the existing U28; K148 the new U41 and the existing U34; K153 the existing U36 (these existing rows already pinned those behaviours; no existing row pinned the focus clause or the three controller outcomes).
 
 **Not covered (recorded in AMBIGUITIES).** A-44 (a loss during the failed creation), A-46 (a second initialize after a failure, events after dispose, two foci read leniently), A-45 (the existing U rows do not follow the 13.2 sentence about an error cell).
+
+## Additions after design 31 rev 6 (R31-07, R31-09, R31-11 (a) and (b); rows B24, W48-W50, X19-X20, U50-U57, K157-K172)
+
+Design 31 rev 6 folded owner-adopted wording into 7.2 G12, 7.5, 7.6 and 13.2. The rules and the rows that fail when a rule is violated:
+
+| Rule | What it says | Rows that carry it |
+|---|---|---|
+| R31-07 (G12) | the focused pids of a plan number at most one **distinct** pid; a clipped focused edge repeats its pid (G11) and the repeat is not a second focus | existing: `W39`-`W46` (more than one distinct focus refused), `W47` and `X14` (a clipped focused edge accepted), mutants `K130`-`K136`; **new:** `B24` (planner output: a focused edge of two clipped segments, `also` selected and focused), `W48` (a clipped focused edge plus a second distinct focus: refused by G12 only), `W49` (two focused clipped edges: refused by G12 only), `W50` (the reader accepts the planner output of `B24`), `X19`, `X20` (the readout reports the one focus), mutants `K157`-`K159` |
+| R31-08 | a loss event in `created` is ignored (no effect line, status unchanged, `contextLost` true); the release rule's "not lost" is the context's own `isContextLost()` | existing and verified, no new row: `U42`, `U43`, mutants `K147`-`K149`; new mutants `K170`-`K172` also differ on them |
+| R31-09 | a loss during creation: detail `CONTEXT_LOST` with no driver text, `getShaderInfoLog` not called | **new:** `U50` (the log stops after `getShaderParameter arrow.vs`, `onError` and `reject` `CONTEXT_LOST`, no info-log call, no cleanup), `U51` (then dispose: no release), `U52` (then restore and a second initialize), mutants `K160`-`K164` |
+| R31-10 | 13.2: a controller row with a failed initialize has an empty `error` cell and the log as expected file; `info_log` / `expect_detail` only for `E10`, `E11` | existing and verified by script, no new row: `U25`, `U27`, `U31`, `U34`, `U36`, `U39` (and `E10`, `E11` carry both) |
+| R31-11 (a) | a second `initialize` in `created` after a failed one adds no listener again | **new:** `U52`, `U53` (two failed initializes, then a successful one, then dispose: two `addEventListener` lines in all, two `removeEventListener`), mutants `K165`, `K166` |
+| R31-11 (b) | after `dispose`, `L` and `R` are ignored and `status().contextLost` continues to report the context's own `isContextLost()` | **new:** `U54` (after dispose in `ready`), `U55` (in `lost`), `U56` (in `created`), `U57` (in `failed`): no line for the events, `contextLost` true after a loss and false after a restore (reading A-47), mutants `K167`-`K170` |
+
+Not written, by the task's own limits: R31-05, R31-06, R31-11 (c), R30-31-01 (open in the design); the items of rev 6 that belong to the display-list corpus. Open points found while writing the rows: AMBIGUITIES A-48 to A-52 (no row).
+
+**What was added.** `B24` (a real planner output of the existing scene `far-pair`, so the plan comes from this corpus's own planner; the B12 plan is reproduced byte for byte first), `states/B24.state.json`, `states/B24b.state.json`, `plan/B24.glplan`, `plan/B24b.glplan`, `bad/W48.glplan`, `bad/W49.glplan`, `bad/FAULTS-rev6.tsv` (the rule of each new bad plan; `bad/FAULTS.tsv` is not touched), `xr/X19.xr.json`, `xr/X20.xr.json`, `gllog/U50.log` ... `gllog/U57.log`; 17 new files, 30 new ids; the only existing files that differ are `EXPECT.tsv`, `MUTANTS.tsv`, `AMBIGUITIES.md` (appended lines only), this README and `SHA256SUMS`. No existing expected file is regenerated.
+
+**Rows.** `B24` is tier `both` (`planBytes()` equals the file, the `also` case is the selected and focused variant); `W48`, `W49` are single-fault bad plans (the reference reader reports exactly `G12`, and a second, older reader of this corpus rejects them with `INVALID_INPUT/SCHEMA` and accepts them with only G12 disabled); `W50` is the `files` form (AMBIGUITIES A-43 records that the V7 harness dispatches the `files` form for `W01` only, so the acceptance is also pinned through the strict reader by the X rows `X19`, `X20`, as for `W47`/`X14`); the controller rows use the existing format (13.2: `events`, `expect_status`, `expect_log`, an empty `error` cell, fake conventions of 7.6) and the plan `plan/G01.glplan`.
+
+**Independence.** Written from design 31 rev 6 (7.2 G11/G12, 7.5, 7.6 with the controller conventions, 13.2) by the same oracle author, who did not read, import or run any TypeScript or anything under `packages/`, and did not read another corpus's tools or expected files. The reference is `tools/rev6_ref.py` (the controller of rev 6 on top of `tools/gap_glref.py`) and `tools/rev6_gen.py`, `tools/rev6_finish.py` (not in `SHA256SUMS`; run `python -B -I tools/rev6_gen.py && python -B -I tools/rev6_finish.py` on a corpus without these rows; the old generator `tools/gl.py` does not know them and would remove them). Before anything is written the reference is checked against the existing corpus: it reproduces the logs and `status()` sequences of the 29 existing controller rows (U20-U36, U38-U49) byte for byte, the planner reproduces `plan/B12.glplan`, the existing readouts and the verdict of every existing bad plan are unchanged. The unchanged original generator was also run into a scratch directory (`python -B -I tools/gl.py --out DIR`): its 252 files and 279 rows equal the corpus files byte for byte except the index files and `bad/FAULTS.tsv`, so the rev 6 text did not change a byte of the first 279 rows.
+
+**Mutant matrix of K157-K172.** 16 of 16 killed, every named row changing (computed by `tools/rev6_gen.py`, the matrix is in `MUTANTS.tsv`). Each mutant was run over the new rows and over every existing row it can reach (all bad plans, all readouts of plans, the planner outputs of the G and B rows, the 29 existing controller rows). Rows that change although not named: `K159` also changes the existing `X14` (the readout of the clipped focused edge of `W47.b`); `K170` also changes `U33`, `U50`-`U52`, `U55`-`U57`. No mutant changes an existing row of another kind. `K158` changes no existing planner row: no existing row has a focused clipped edge, which is why `B24` was needed.
+
+**Digest.** The digest of the new `SHA256SUMS` cannot be recorded in this file (the README is one of the files it covers); it is given in the hand-over. For reference, the digest of `SHA256SUMS` before these additions was `b87ff2918a63f2acec56674b0b45b375f572ed8649340ca3bd7874d6a4084c5e`.

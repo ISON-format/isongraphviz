@@ -1,4 +1,4 @@
-// Unit tests of the planner, the guard rule, the reader and the readout beyond the corpus rows: the single-fault property of the W rows (bad/FAULTS.tsv is
+// Unit tests of the planner, the guard rule, the reader and the readout beyond the corpus rows: the single-fault property of the W rows (bad/FAULTS.tsv and bad/FAULTS-rev6.tsv are
 // the corpus's own record of the rule each bad plan breaks), the arithmetic of A.10, limits, immutability and the shape of an empty plan.
 import { describe, expect, it } from "vitest";
 import { GUARD_MARGIN, type DisplayList } from "isongraph-visualize-display-list";
@@ -97,11 +97,13 @@ describe("planGl", () => {
 });
 
 describe("the reader: the single-fault property of the W rows (design 7.2: 'each single-fault in the W rows')", () => {
-  const faults = readOracleText("bad/FAULTS.tsv").split("\n").slice(1).filter((l) => l !== "").map((l) => l.split("\t") as [string, string]);
-  it("there is one entry per reject row W02-W46 (W47 is the accept row and has none): the entries are exactly the W rows with an error cell", () => {
+  // the corpus records the rule of each bad plan in bad/FAULTS.tsv (W02-W46) and, since design rev 6, in the NEW file bad/FAULTS-rev6.tsv (W48, W49): both are read
+  const faultsOf = (p: string): [string, string][] => readOracleText(p).split("\n").slice(1).filter((l) => l !== "").map((l) => l.split("\t") as [string, string]);
+  const faults = [...faultsOf("bad/FAULTS.tsv"), ...faultsOf("bad/FAULTS-rev6.tsv")];
+  it("there is one entry per reject row W02-W46 and W48-W49 (W47 and W50 are the accept rows and have none): the entries are exactly the W rows with an error cell", () => {
     const rejects = readOracleText("EXPECT.tsv").split("\n").slice(1).map((l) => l.split("\t")).filter((c) => c[1] === "W" && c[7] !== undefined && c[7] !== "").map((c) => c[0]);
     expect(faults.map((f) => f[0])).toEqual(rejects);
-    expect(faults.map((f) => f[0])).toEqual(Array.from({ length: 45 }, (_, i) => `W${String(i + 2).padStart(2, "0")}`));
+    expect(faults.map((f) => f[0])).toEqual([...Array.from({ length: 45 }, (_, i) => `W${String(i + 2).padStart(2, "0")}`), "W48", "W49"]);
   });
   for (const [id, rule] of faults) {
     it(`${id}: rejected by ${rule}, and accepted when only ${rule} is skipped`, () => {
