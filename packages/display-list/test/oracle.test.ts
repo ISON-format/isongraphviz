@@ -16,11 +16,11 @@ describe("corpus integrity (13.1, 13.7)", () => {
     expect(sumsDigest(ORACLE_DIR)).toBe(ORACLE_DIGEST);
     console.log(`[oracles-dl] SHA256SUMS digest ${ORACLE_DIGEST} (draft corpus, not frozen; the claim stays claimable: false)`);
   });
-  it("458 ids: G 11, N 17, X 13, Y 20, O 17, F 5, S 43, P 16, B 4, C 25, Z 7, R 51, U 17, D 6, K 206", () => {
+  it("495 ids: G 11, N 17, X 13, Y 20, O 17, F 5, S 43, P 16, B 4, C 25, Z 7, R 63, U 21, D 6, K 227", () => {
     const by = new Map<string, number>();
     for (const r of oracle.rows) by.set(r.group, (by.get(r.group) ?? 0) + 1);
-    expect(oracle.rows.length).toBe(458);
-    expect(Object.fromEntries(by)).toEqual({ G: 11, N: 17, X: 13, Y: 20, O: 17, F: 5, S: 43, P: 16, B: 4, C: 25, Z: 7, R: 51, U: 17, D: 6, K: 206 });
+    expect(oracle.rows.length).toBe(495);
+    expect(Object.fromEntries(by)).toEqual({ G: 11, N: 17, X: 13, Y: 20, O: 17, F: 5, S: 43, P: 16, B: 4, C: 25, Z: 7, R: 63, U: 21, D: 6, K: 227 });
   });
   it("tiers: D rows subject, K rows empty, every other row core, both or (U) subject", () => {
     for (const r of oracle.rows) {

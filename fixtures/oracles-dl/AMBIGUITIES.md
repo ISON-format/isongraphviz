@@ -348,3 +348,44 @@ Source: design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; entries A-01..A-35 were wr
 * **Design text.** 13.2 gives the grammar `{"from":"calls","calls":path}` for R rows ("the stream with the row's list") and for U rows nothing but "scripts"; U09 has empty scene and layout cells.
 * **Literal reading used.** The new R and U rows carry the scene and layout of the list whose table the stream refers to (G01's for R45, R47-R50, U15-U17; the `loops2` one for R46 and R51), initial state; the reader needs only the table and the header hashes. The rows U15-U17 take `{"calls":"calls/Rnn.calls"}` like U09 but with the scene and layout cells filled so that the list is not implicit.
 * **Why / status.** Reading; if a runner cannot resolve the list of a U row from the cells it is a runner matter, not a design one.
+
+## A-53  6.6 (rev 6): "markers for more than one pid" versus "the count is of markers"; a pid in layers 2 and 6; the same pid twice in a layer (no row)
+
+* **Design text.** 6.6: "layers 2 and 6 together holding at most one pid" and, in the reader rules, "markers for more than one pid" (change log R31-02) next to "The focus count is of **markers** in layers 2 and 6" (R31-03, R31-04); 6.6 also says the pids of a layer are "ascending", 9.3 "strictly ascending".
+* **Literal reading used.** Every verdict that the two wordings could separate is rejected by another rule, so no row separates them. A pid that appears in both layers 2 and 6 is a node pid in layer 2 or an edge pid in layer 6 and is refused by the kind check (R31-04); the same pid twice in one layer is refused by the strict ascent of 9.3 and by the count of markers. A row for either stream would be **overdetermined** (two rules reject it, so it cannot be single-fault) and is not written. The count rows (R45-R48, R61, R62) use two **different** pids of the right kinds, where "pids" and "markers" agree.
+* **Why / status.** Reading, no verdict is affected. If the owner meant "distinct pids" for the count and a non-strict ascent for 6.6, the same-pid stream would be accepted; the text of 9.3 ("strictly") and of 6.6 ("count is of markers") excludes that.
+
+## A-54  6.6, 9.3 (rev 6): the stream reader's relation to the list beyond the table (no row)
+
+* **Design text.** `canvasStreamWitness(stream, list)` and `readoutFromCanvasStream(stream, list)` read the stream "with a strict reader"; the reader rules name the table (a pid "in the table"), the kind of the pid and the focus count; 9.3 says "addresses by pid through the list's table".
+* **Literal reading used.** The list is used for the table (and so for the number of nodes `ND`, which decides the kind of a pid) and nothing else: the reader does not check a layer-5 or layer-6 marker against the `flags` of the list, a layer-8 marker against the list's `T` records, or the painting of a layer against the list. A stream that marks an element the list does not mark is not checked by the reader (it is a mismatch, found by `compareReadouts` against the other backends, 9.5).
+* **Why / status.** Reading; nothing is written because the text states no such check. Recorded because the kind rule makes a reader that needs `ND` from the list the first place where the list is more than a table of addresses.
+
+## A-55  9.3 against 6.6 (rev 6): where the kind rule is stated
+
+* **Design text.** 9.3 says "A pid outside the table, or a node pid in an edge layer, is `INVALID_INPUT/SCHEMA`" in the sentence that reads the **plan** (`readoutFromGl`), and names no kind rule for an **edge pid in a node layer** or for the stream in that paragraph; its stream sentences say only "canonical lines, markers non-decreasing in layer and pids strictly ascending within a layer". The complete rule (layers 1-4 edge pids, 5-7 node pids, 8 either) is in 6.6 "Reader rules".
+* **Literal reading used.** 6.6 is the rule of the stream reader and 9.3 is not read as narrowing it: both directions are checked for the stream (rows R52-R55 a node pid in an edge layer, R56-R58 an edge pid in a node layer). Layer 8 takes both kinds (the existing `R16` and `C01` carry an edge label and node labels in layer 8).
+* **Why / status.** Editorial: a reader of 9.3 alone would not find the edge-pid-in-a-node-layer direction. No verdict is affected.
+
+## A-56  6.6 (rev 6): the unpainted wrong-kind marker (rows R59, R60, U20)
+
+* **Design text.** "The reader checks the kind of **every** marker pid against its layer" (R31-04), "the focus count is of markers ... whether or not painting calls follow" (R31-03); 9.3: "a marker without painting calls contributes nothing" (R44).
+* **Literal reading used.** The kind check is structural like the count: it applies to a marker whether or not painting calls follow, so a layer-5 marker for the edge pid 3 (R59) and a layer-4 marker for the node pid 2 (R60), neither with a painting call, are rejected. The sentence "contributes nothing" is about the **readout** (what is drawn, marked, an arrow, a label), not about the reader's structural stage.
+* **Why / status.** Reading from "every marker pid"; the opposite reading (kind checked on painted sections only) is the mutant K209, killed by R59, R60 and U20.
+
+## Resolved in rev 6 (disposition of earlier entries; the entries above are unchanged)
+
+Source: design 31 rev 6, change log "Rev 5 -> rev 6 (owner-adopted wording)", sections 6.6, 9.3, 4.7. Rev 6 is text only: no Appendix byte, no row or mutant id changes. "Matched" means the rev 6 text says what the literal reading of the entry used; no existing expected byte changes.
+
+| Entry | Rev 6 item | Disposition | Rows and mutants |
+|---|---|---|---|
+| A-45 (a stream with more than one focused element; the count is over markers) | R31-02, R31-03 | RESOLVED, reading matched: the count is of markers, painted or not | R45-R48, U15, U16 (existing); R61, R62 (new, complements); K188-K195, K218, K219 |
+| A-46 (the single-focus rule has no row and no mutant) | R31-01, R31-02 | RESOLVED: the rows and mutants of the rev 5 gap review carry it; the rev 6 change log says new rows were still needed for R31-02 and R31-04, written here | Y18-Y20, K197-K200 (R31-01); R45-R48, U15, U16, K188-K196 (R31-02); R52-R63, U18-U21, K201-K221 (new) |
+| A-47 (a state cannot name two focused elements) | R31-01 | RESOLVED, reading matched (`INVALID_STATE/SCHEMA`, 27 4.2 (iii)) | Y18, Y19, Y20 |
+| A-48 (error code of a rejected stream) | R31-02, R31-04 | RESOLVED, reading matched: `INVALID_INPUT/SCHEMA` is now stated | all stream rows with an error |
+| A-49 (markers or painted sections) | R31-03 | RESOLVED, reading matched: markers, painted or not; a lone marker is accepted and contributes no focus | R44, R48, R49, K191 (existing); R61, R62, R63, U21, K218-K221 (complements) |
+| A-50 (a pid in layers 2 and 6; a node pid in layer 2) | R31-04 | RESOLVED, no longer underspecified: the reader checks the kind of every marker pid against its layer, so a node pid in layer 2 is `INVALID_INPUT/SCHEMA`; a pid in both layers 2 and 6 is always rejected by the kind check (A-53) | R52-R60, U18-U20, K201-K217 |
+| A-51 (the list reader has no focus rule) | R31-05 | OPEN, not folded by rev 6 ("a focus rule D13 in the list reader; needs code"); no row written | none |
+| A-52 (where the list of a stream row comes from) | R31-06 | OPEN, not folded by rev 6 (13.2); the reading of A-52 is kept for the new rows R52-R63 and U18-U21 | none |
+
+Not touched (gl-only or open, no row written): R31-07, R31-08, R31-09, R31-10, R31-11 (a) and (b) (V7 plan, controller and logs: `oracles-gl`); R31-11 (c) and R30-31-01 (open, undecided).

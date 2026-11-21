@@ -205,3 +205,24 @@ K197	state check accepts a `focus` object with both keys `node` and `edge`	Y18	Y
 K198	state check accepts a `focus` array	Y19	Y19			killed
 K199	builder sets the focused bit on every element when a focus exists	Y20	Y20			killed
 K200	builder gives the incident edges of a focused node the focused bit	Y20	Y20			killed
+K201	stream reader does not check the kind of a layer-1 marker pid (a node pid in the edge-halo layer)	R52,U18	R52,U18			killed
+K202	stream reader does not check the kind of a layer-2 marker pid (a node pid in the focus-halo layer)	R53	R53			killed
+K203	stream reader does not check the kind of a layer-3 marker pid (a node pid in the edge-line layer)	R54	R54			killed
+K204	stream reader does not check the kind of a layer-4 marker pid (a node pid in the arrowhead layer)	R55,R60	R55,R60			killed
+K205	stream reader does not check the kind of a layer-5 marker pid (an edge pid in the selected-ring layer)	R56,R59,U19	R56,R59,U19		U20	killed
+K206	stream reader does not check the kind of a layer-6 marker pid (an edge pid in the focus-ring layer)	R57	R57			killed
+K207	stream reader does not check the kind of a layer-7 marker pid (an edge pid in the disc layer)	R58	R58			killed
+K208	stream reader has no marker-kind check (readout and witness)	R52,R53,R54,R55,R56,R57,R58,R59,R60,U18,U19,U20	R52,R53,R54,R55,R56,R57,R58,R59,R60,U18,U19,U20			killed
+K209	stream reader checks the kind of painted marker sections only (an unpainted wrong-kind marker passes)	R59,R60,U20	R59,R60,U20			killed
+K210	stream reader takes node pids only in layer 8 (an edge label marker is refused)	R16	R16		R39,R40,R41,R42,R43,R44,R49,R50,R51,R63,U09,U17,U21	killed
+K211	stream reader takes edge pids only in layer 8 (a node label marker is refused)	R16	R16		R39,R40,R41,R42,R43,R44,R49,R50,R51,R63,U09,U17,U21	killed
+K212	stream reader swaps the kinds of the layer groups (layers 1-4 node pids, 5-7 edge pids)	R16,R50	R16,R50		R39,R40,R41,R42,R43,R44,R49,R51,R63,U09,U17,U21	killed
+K213	stream reader takes pid = ND for an edge pid (node/edge boundary one low)	R16	R16		R39,R40,R41,R42,R43,R44,R49,R50,R51,R63,U09,U17,U21	killed
+K214	stream reader takes pid = ND + 1 for a node pid (node/edge boundary one high)	R16	R16		R39,R40,R41,R42,R43,R44,R49,R50,R51,R63,U09,U17,U21	killed
+K215	a wrong-kind marker is `INVALID_INPUT/INVALID_VALUE` instead of `SCHEMA`	R52,R56,U18	R52,R56,U18		R53,R54,R55,R57,R58,R59,R60,U19,U20	killed
+K216	readoutFromCanvasStream skips the marker-kind check, canvasStreamWitness keeps it	R52,R53,R54,R55,R56,R57,R58,R59,R60	R52,R53,R54,R55,R56,R57,R58,R59,R60			killed
+K217	canvasStreamWitness skips the marker-kind check, readoutFromCanvasStream keeps it	U18,U19,U20	U18,U19,U20			killed
+K218	single-focus count counts layer-2 markers but layer-6 painted sections only	R61,R62	R61,R62			killed
+K219	single-focus count counts layer-6 markers but layer-2 painted sections only	R62	R62		R48	killed
+K220	stream reader refuses a lone focus marker of layer 2 that has no painting calls	R63,U21	R63,U21			killed
+K221	canvasStreamWitness refuses a lone focus marker without painting calls, readoutFromCanvasStream accepts it	U21	U21			killed

@@ -1,5 +1,5 @@
 // The oracle row runner for fixtures/oracles-dl, renderer side (design 13.2, 13.3). The `both` rows of the function families are re-run against the
-// Canvas renderer (its list, stream, pick, bounds and readout), and the `subject` rows U01-U14 are the lifecycle scripts and the outcome files. The
+// Canvas renderer (its list, stream, pick, bounds and readout), and the `subject` rows U01-U21 are the lifecycle scripts and the outcome files. The
 // function side of every row is packages/display-list/test/oracle/runner.ts (imported, so the corpus logic exists once). Parameterized by the
 // implementation under test so that the same code runs against src/ and against scratch mutants (scripts/mutate.mjs).
 import { IgrError, hitTest, initialState, verifyManifest } from "isongraph-visualize-renderer-core";
@@ -214,8 +214,8 @@ async function u07(impl: RendererImpl, c: Oracle, row: Row): Promise<void> {
 }
 
 /**
- * The witness rows: U09 and U15-U17 (an inline input with a `calls` path). U09 has empty scene and layout cells: the list is the one of the C row whose stream
- * is named (the table is all the witness takes from it) and the expected file is json/U09.<C row>.witness.json. U15-U17 fill the scene and layout cells
+ * The witness rows: U09 and U15-U21 (an inline input with a `calls` path). U09 has empty scene and layout cells: the list is the one of the C row whose stream
+ * is named (the table is all the witness takes from it) and the expected file is json/U09.<C row>.witness.json. U15-U21 fill the scene and layout cells
  * (AMBIGUITIES A-52): the list is built from them with the initial state and the row names its outcome (an error, or the expected witness file).
  */
 async function witnessRow(impl: RendererImpl, c: Oracle, row: Row): Promise<void> {

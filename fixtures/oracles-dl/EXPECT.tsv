@@ -457,3 +457,40 @@ K197	K
 K198	K						
 K199	K						
 K200	K						
+R52	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R52.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R53	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R53.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R54	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R54.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R55	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R55.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R56	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R56.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R57	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R57.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R58	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R58.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R59	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R59.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R60	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R60.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R61	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R61.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R62	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R62.calls","from":"calls"}		INVALID_INPUT/SCHEMA
+R63	R	core	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R63.calls","from":"calls"}	xr/R63.xr.json	
+U18	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R52.calls"}		INVALID_INPUT/SCHEMA
+U19	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R56.calls"}		INVALID_INPUT/SCHEMA
+U20	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R59.calls"}		INVALID_INPUT/SCHEMA
+U21	U	subject	../oracles/o1-basic.scene.json	../oracles-igl/layouts/F01.layout.json	{"calls":"calls/R63.calls"}	json/U21.witness.json	
+K201	K						
+K202	K						
+K203	K						
+K204	K						
+K205	K						
+K206	K						
+K207	K						
+K208	K						
+K209	K						
+K210	K						
+K211	K						
+K212	K						
+K213	K						
+K214	K						
+K215	K						
+K216	K						
+K217	K						
+K218	K						
+K219	K						
+K220	K						
+K221	K						

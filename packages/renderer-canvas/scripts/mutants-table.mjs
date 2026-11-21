@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-dl (K01..K200 with the b-variants: 206 mutants) as source patches. Every mutant is a list of exact-text
+// The K table of design 13.5 for fixtures/oracles-dl (K01..K221 with the b-variants: 227 mutants) as source patches. Every mutant is a list of exact-text
 // patches applied to a SCRATCH COPY of packages/display-list/src ("dl") and packages/renderer-canvas/src ("cv"); production code has no switchable variants
 // and no src/ is ever modified (the K197 and K198 patches apply to a scratch copy of renderer-core/src, where the state check lives). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of src/
 // cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -15,6 +15,26 @@ const FOCUS_LINE = `      if (${FOCUS_COUNT}) throw schemaError(no, "at most one
 const STREAM_END = "  return sections;\n}";
 const STREAM_SIG = "limits?: { maxBytes?: number; maxLineUnits?: number }): StreamSection[] {";
 const STREAM_SIG_SKIP = "limits?: { maxBytes?: number; maxLineUnits?: number }, skipFocusRule = false): StreamSection[] {";
+// the marker-kind rule of the stream reader (rev 6, R31-04; rows R52-R60, U18-U20): layers 1-4 take edge pids, 5-7 node pids, 8 either
+const KIND_COND = "(layer <= 4 && pid <= nd) || (layer >= 5 && layer <= 7 && pid > nd)";
+const KIND_LINE = `      if (${KIND_COND}) throw schemaError(no, "the marker pid is of the wrong kind for its layer");\n`;
+const KIND_MSG = 'schemaError(no, "the marker pid is of the wrong kind for its layer")';
+const STREAM_SIG_SKIP_KIND = "limits?: { maxBytes?: number; maxLineUnits?: number }, skipKindRule = false): StreamSection[] {";
+const WITNESS_FILE = "canvas2d/witness.ts";
+const WITNESS_HEAD = "const sections = readStream(stream, list);\n  const nd = list.nodes.length;\n  const nodes = new Set<number>()";
+const READOUT_HEAD = "const sections = readStream(stream, list);\n  const nd = list.nodes.length;\n  const nodes: ReadoutParts";
+const SKIP_KIND_CALL = (head) => head.replace("readStream(stream, list)", "readStream(stream, list, undefined, true)");
+// the kind rule of one layer switched off: an edge layer (1-4) or a node layer (5-7)
+const kindOffAt = (layer) => (layer <= 4
+  ? KIND_COND.replace("layer <= 4 && pid <= nd", `layer <= 4 && layer !== ${layer} && pid <= nd`)
+  : KIND_COND.replace("layer >= 5 && layer <= 7 && pid > nd", `layer >= 5 && layer <= 7 && layer !== ${layer} && pid > nd`));
+// K209: the kind check moved to the painted sections after the read
+const KIND_PAINTED_ONLY = '  for (const s of sections) if (painted(s) && ((s.layer <= 4 && s.pid <= nd) || (s.layer >= 5 && s.layer <= 7 && s.pid > nd))) throw schemaError(s.line, "the marker pid is of the wrong kind for its layer");\n';
+// K218, K219: the single-focus count by markers in one focus layer and by painted sections in the other
+const FOCUS_MIXED = (byMarkers, byPainted) => `  if (sections.filter((s) => s.layer === ${byMarkers} || (s.layer === ${byPainted} && painted(s))).length > 1) throw schemaError(lines.length, "at most one focused element");\n`;
+// K220, K221: a lone focus marker without painting calls refused
+const LONE_FOCUS_READER = '  const fm = sections.filter((s) => s.layer === 2 || s.layer === 6);\n  if (fm.length === 1 && fm[0]!.layer === 2 && !painted(fm[0]!)) throw schemaError(fm[0]!.line, "a focus marker without painting calls");\n';
+const LONE_FOCUS_WITNESS = 'const fm = sections.filter((s) => s.layer === 2 || s.layer === 6);\n  if (fm.length === 1 && !painted(fm[0]!)) throw new IgrError("INVALID_INPUT", "SCHEMA", "line " + fm[0]!.line, "a focus marker without painting calls");\n  ';
 const FLOORDIV_GEOM = D("geometry.ts", 'import { divRound, isqrt } from "./num.js";', 'import { divRound, floorDiv, isqrt } from "./num.js";');
 const LET_RAW = D("lines.ts", "const raw = parts[i]!;", "let raw = parts[i]!;");
 
@@ -309,11 +329,46 @@ export const MUTANTS = [
     D("build.ts", "(focusNode === n.index ? 2 : 0)", "(focusEdge >= 0 || focusNode >= 0 ? 2 : 0)"),
   ]),
   m("K200", "builder gives the incident edges of a focused node the focused bit", [D("build.ts", "(focusEdge === e.index ? 2 : 0)", "(focusEdge === e.index || (focusNode >= 0 && (e.src === focusNode || e.tgt === focusNode)) ? 2 : 0)")]),
+  // ---- the marker-kind rule and the lone focus marker of rev 6 (R31-03, R31-04; rows R52-R63, U18-U21) ---------------------------------------------------
+  m("K201", "stream reader does not check the kind of a layer-1 marker pid (a node pid in the edge-halo layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(1))]),
+  m("K202", "stream reader does not check the kind of a layer-2 marker pid (a node pid in the focus-halo layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(2))]),
+  m("K203", "stream reader does not check the kind of a layer-3 marker pid (a node pid in the edge-line layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(3))]),
+  m("K204", "stream reader does not check the kind of a layer-4 marker pid (a node pid in the arrowhead layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(4))]),
+  m("K205", "stream reader does not check the kind of a layer-5 marker pid (an edge pid in the selected-ring layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(5))]),
+  m("K206", "stream reader does not check the kind of a layer-6 marker pid (an edge pid in the focus-ring layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(6))]),
+  m("K207", "stream reader does not check the kind of a layer-7 marker pid (an edge pid in the disc layer)", [D(STREAM_RULE, KIND_COND, kindOffAt(7))]),
+  m("K208", "stream reader has no marker-kind check (readout and witness)", [D(STREAM_RULE, KIND_COND, "false")]),
+  m("K209", "stream reader checks the kind of painted marker sections only (an unpainted wrong-kind marker passes)", [D(STREAM_RULE, KIND_LINE, ""), D(STREAM_RULE, STREAM_END, KIND_PAINTED_ONLY + STREAM_END)]),
+  m("K210", "stream reader takes node pids only in layer 8 (an edge label marker is refused)", [D(STREAM_RULE, KIND_COND, KIND_COND + " || (layer === 8 && pid > nd)")]),
+  m("K211", "stream reader takes edge pids only in layer 8 (a node label marker is refused)", [D(STREAM_RULE, KIND_COND, KIND_COND + " || (layer === 8 && pid <= nd)")]),
+  m("K212", "stream reader swaps the kinds of the layer groups (layers 1-4 node pids, 5-7 edge pids)", [D(STREAM_RULE, KIND_COND, "(layer <= 4 && pid > nd) || (layer >= 5 && layer <= 7 && pid <= nd)")]),
+  m("K213", "stream reader takes pid = ND for an edge pid (node/edge boundary one low)", [D(STREAM_RULE, KIND_COND, KIND_COND.replaceAll("nd", "(nd - 1)"))]),
+  m("K214", "stream reader takes pid = ND + 1 for a node pid (node/edge boundary one high)", [D(STREAM_RULE, KIND_COND, KIND_COND.replaceAll("nd", "(nd + 1)"))]),
+  m("K215", "a wrong-kind marker is `INVALID_INPUT/INVALID_VALUE` instead of `SCHEMA`", [
+    D(STREAM_RULE, 'import { readLines, resolveReadLimits, schemaError } from "../lines.js";', 'import { readLines, resolveReadLimits, schemaError } from "../lines.js";\nimport { IgrError } from "isongraph-visualize-renderer-core";'),
+    D(STREAM_RULE, KIND_MSG, 'new IgrError("INVALID_INPUT", "INVALID_VALUE", "line " + no, "the marker pid is of the wrong kind for its layer")'),
+  ]),
+  m("K216", "readoutFromCanvasStream skips the marker-kind check, canvasStreamWitness keeps it", [
+    D(STREAM_RULE, STREAM_SIG, STREAM_SIG_SKIP_KIND),
+    D(STREAM_RULE, KIND_COND, "!skipKindRule && (" + KIND_COND + ")"),
+    D(WITNESS_FILE, READOUT_HEAD, SKIP_KIND_CALL(READOUT_HEAD)),
+  ]),
+  m("K217", "canvasStreamWitness skips the marker-kind check, readoutFromCanvasStream keeps it", [
+    D(STREAM_RULE, STREAM_SIG, STREAM_SIG_SKIP_KIND),
+    D(STREAM_RULE, KIND_COND, "!skipKindRule && (" + KIND_COND + ")"),
+    D(WITNESS_FILE, WITNESS_HEAD, SKIP_KIND_CALL(WITNESS_HEAD)),
+  ]),
+  m("K218", "single-focus count counts layer-2 markers but layer-6 painted sections only", [D(STREAM_RULE, FOCUS_LINE, ""), D(STREAM_RULE, STREAM_END, FOCUS_MIXED(2, 6) + STREAM_END)]),
+  m("K219", "single-focus count counts layer-6 markers but layer-2 painted sections only", [D(STREAM_RULE, FOCUS_LINE, ""), D(STREAM_RULE, STREAM_END, FOCUS_MIXED(6, 2) + STREAM_END)]),
+  m("K220", "stream reader refuses a lone focus marker of layer 2 that has no painting calls", [D(STREAM_RULE, STREAM_END, LONE_FOCUS_READER + STREAM_END)]),
+  m("K221", "canvasStreamWitness refuses a lone focus marker without painting calls, readoutFromCanvasStream accepts it", [
+    D(WITNESS_FILE, WITNESS_HEAD, WITNESS_HEAD.replace("const nd = list.nodes.length;", LONE_FOCUS_WITNESS + "const nd = list.nodes.length;")),
+  ]),
 ];
 
 
 // ---- extra mutants of this implementation (not in the corpus table): one per behaviour pinned by the rows `ext:` (test/oracle/runner.ts, runExtra;
-// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 206 of the K table.
+// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 227 of the K table.
 const BS = String.fromCharCode(92);
 export const EXTRA_MUTANTS = [
   m("X01", "audit I-1: a record kind is looked up on a plain object (inherited names pass)", [D("read.ts", "const rank = RANK.get(kind);", "const rank = ({ H: 0, n: 1, e: 2, E: 3, A: 3, N: 4, T: 5 } as Record<string, number>)[kind];")]),

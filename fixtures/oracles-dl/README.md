@@ -1,6 +1,6 @@
 # IGR-DL/1 and IGR-CV/1 oracle corpus (`oracles-dl`)
 
-Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (52 entries, A-47 to A-52 added after the gap review) before judging any mismatch.
+Status: **DRAFT** (not frozen; no digest is pinned). Revision note: design 31 is now rev 6 (text only: rules R31-01 to R31-04 for this corpus, owner-adopted); 37 rows and mutants were appended for it, see the last section. Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (56 entries, A-47 to A-52 added after the gap review, A-53 to A-56 and a rev 6 disposition section after design 31 rev 6) before judging any mismatch.
 
 ## Independence statement
 
@@ -11,7 +11,7 @@ Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **458 rows** (432 of the rev 5 generation and the 26 gap rows of the last section). `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **495 rows** (432 of the rev 5 generation, the 26 gap rows and the 37 rows of the rev 6 section). `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
 
 | Family | Rows | with an error | what |
 |---|---|---|---|
@@ -26,11 +26,11 @@ Status: **DRAFT** (not frozen; no digest is pinned). Produced against design 31 
 | B | 4 | 0 | element bounds |
 | C | 25 | 9 | the Canvas call stream |
 | Z | 7 | 3 | device sizes |
-| R | 51 | 13 | readouts |
-| U | 17 | 2 | the Canvas renderer (lifecycle scripts, outcome files; U15-U17 witness rows) |
+| R | 63 | 24 | readouts |
+| U | 21 | 5 | the Canvas renderer (lifecycle scripts, outcome files; U15-U21 witness rows) |
 | D | 6 | 0 | differential (runtime; no files) |
-| K | 206 | 0 | mutants (empty cells) |
-| **total** | **458** | **88** | D and K rows (212) have empty cells by design; U10 has neither a file nor an expected cell |
+| K | 227 | 0 | mutants (empty cells) |
+| **total** | **495** | **102** | D and K rows (233) have empty cells by design; U10 has neither a file nor an expected cell |
 
 | Directory | Content |
 |---|---|
@@ -341,3 +341,23 @@ Every rejected stream is **single-fault** (accepted by the reference with only t
 **Mutant matrix of K188-K200.** The mutants touch the stream reader, the readouts, the witness, the state check and the focus flags only, so each was run over the new rows and over the existing rows that call those functions (R16, R39-R44, U09's two cases); the other existing rows cannot change. Result: 13 of 13 killed with every named row changing. K192 (the selection layers counted with the focus layers) also changes the existing R39, R40 and U09.
 
 **Not covered (recorded in AMBIGUITIES).** A-50 (a pid in layers 2 and 6; a node pid in layer 2), A-51 (the list reader has no focus rule although the change log says "every artifact"), A-49 (markers versus painted sections is a reading).
+
+## Additions for design 31 rev 6 (stream reader rules R31-02 to R31-04; rows R52-R63, U18-U21, K201-K221)
+
+Design 31 rev 6 (2026-11-20, text only: no Appendix byte, no row or mutant id changes) folded owner-adopted wording; four of its items concern this corpus. These 37 ids were **appended** (new ids; no existing expected byte or row changed; the only existing files that differ are `EXPECT.tsv` and `MUTANTS.tsv` (appended lines), `AMBIGUITIES.md` (appended entries A-53 to A-56 and a disposition section), this README (counts, a revision note and this section) and `SHA256SUMS`). The digest of `SHA256SUMS` is in the hand-over report, not here, because this file is covered by it.
+
+| Rev 6 rule | Carried by (existing rows, verified against this corpus) | New rows (this addition) |
+|---|---|---|
+| R31-01 a state with two foci is `INVALID_STATE/SCHEMA`; a list from a valid state has at most one focus | Y18 (both keys), Y19 (array), Y20 (one focus bit whatever else is selected); K197-K200 | none needed |
+| R31-02 markers for more than one pid in layers 2 and 6 together: `INVALID_INPUT/SCHEMA`, from the one reader of `readoutFromCanvasStream` and `canvasStreamWitness` | R45 (two nodes, layer 6), R46 (two edges, layer 2), R47 (edge in layer 2 + node in layer 6), R48 (unpainted layer 2 + painted layer 6), U15, U16 (witness); K188-K195 | R61 (painted layer 2 + unpainted layer 6), R62 (both unpainted). The same layer twice and a pid in both layers are overdetermined and have no row (A-53) |
+| R31-03 the count is of markers, painted or not; a lone marker is accepted and contributes no focus | R44, R48, R49, K191 | R63 (a lone unpainted layer-2 marker: accepted, readout equal to R01's and R49's), U21 (the witness of the R63 stream equals the C01 witness) |
+| R31-04 the kind of every marker pid against its layer (1-4 edge pids, 5-7 node pids, 8 either); wrong kind `INVALID_INPUT/SCHEMA`; the count is of markers | layer 8 takes both kinds: R16, U09 (the C01 stream has node labels and an edge label in layer 8) | R52 (node pid 2 in layer 1), R53 (node pid 1 in layer 2), R54 (node pid 2 in layer 3), R55 (node pid 1 in layer 4), R56 (edge pid 3 in layer 5), R57 (edge pid 3 in layer 6), R58 (edge pid 3 in layer 7), R59 (unpainted edge pid 3 in layer 5), R60 (unpainted node pid 2 in layer 4), U18 (witness of R52), U19 (witness of R56), U20 (witness of R59) |
+| mutants | K188-K200 | K201-K207 (kind not checked in one layer, per layer 1..7), K208 (no kind check), K209 (painted sections only), K210, K211 (layer 8 one kind only), K212 (groups swapped), K213, K214 (the node/edge boundary off by one), K215 (wrong error class), K216, K217 (the rule at one call site only), K218, K219 (count partly by painted sections), K220, K221 (a lone unpainted focus marker refused) |
+
+Every rejected stream is **single-fault**: a kind row (R52-R60) is accepted by the reference with only the kind check disabled and is rejected with only the count disabled (the kind check alone rejects it); a count row (R61, R62) is accepted with only the count disabled and rejected with only the kind check disabled; with both disabled every new stream passes every other rule of the strict reader (asserted by `tools/rev6_dl.py`). R63 is accepted. Rows R52-R63 are streams of the list `G01` (the scene and layout cells are G01's, as for R45) derived from the recorded replay by one marker edit each; `calls/R52.calls` ... `calls/R63.calls`, `xr/R63.xr.json`, `json/U21.witness.json` are the files.
+
+The new reference (`tools/rev6_dlref.py`: the strict reader with the kind check, the readout and the witness) first reproduces every existing expected result of the stream rows (R16, R39-R44, R49-R51, U09 (two cases), U17) and the verdicts of R45-R48, U15, U16 (the existing rejected streams are rejected by the count alone and none has a wrong-kind marker); every accepted stream that a row reads (R16, R39-R44, R49-R51, U09, U17) passes the kind check. **Mutant matrix of K201-K221:** the mutants touch the stream reader, the readout and the witness only, so each was run over the new rows and over the existing rows that call them (R16, R39-R51, U09 (two cases), U15-U17); 21 of 21 killed with every named row changing. K213 and K214 (the boundary) are killed by `R16` (and other accepted streams) only: a wrong-kind stream also holds right-kind markers of the same pids, so a boundary fault is rejected anyway on every new row.
+
+**Independence.** Written from design 31 rev 6 (4.1, 4.3, 4.8, 6.2, 6.3, 6.6, 9.1, 9.3) by an oracle author who read only the design files named for the task, the corpus itself and the frozen fixtures, and did not read, import or run any TypeScript or `packages/*`; standard library only. `tools/gen.py` does not know these rows. To rebuild only the additions, restore the corpus from version control and run `python -B -I tools/rev6_dl.py && python -B -I tools/rev6_finish_dl.py` (after the gap review scripts).
+
+**Not covered (recorded in AMBIGUITIES).** R31-05 (a list reader focus rule D13) and R31-06 (where a stream row's list comes from) are open in the design (A-51, A-52); R31-07 to R31-11 and R30-31-01 are gl-only or open. A-53 (the same pid twice or a pid in layers 2 and 6 is overdetermined), A-54 (the reader uses the list for the table only), A-55 (the kind rule is stated fully in 6.6, partly in 9.3), A-56 (the unpainted wrong-kind marker is a reading of "every marker").

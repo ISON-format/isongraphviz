@@ -1,4 +1,4 @@
-// The mutation matrix (design 13.5, 14 (3)): scripts/mutate.mjs over scratch copies of display-list/src and renderer-canvas/src. Every one of the 206 mutants
+// The mutation matrix (design 13.5, 14 (3)): scripts/mutate.mjs over scratch copies of display-list/src and renderer-canvas/src. Every one of the 227 mutants
 // of the K table must be KILLED by at least one row, and the rows the corpus names for it must be among its killers, except the two documented cases
 // (docs/isongraph-visualize-blueprint/reviews/31-implementation-notes.md): K84 (the corpus names S18, which design rev 4 moved to K87) and K154 (the
 // corpus row O14 is answered by renderer-core's own model check too, so the mutant is killed by the extra row ext:K154). A timeout would be INCONCLUSIVE and
@@ -10,13 +10,13 @@ import { describe, expect, it } from "vitest";
 import { PKG_DIR } from "../helpers.js";
 
 describe("mutation matrix", () => {
-  it("206 of 206 mutants killed, none survived or inconclusive, every named killer kills (two documented exceptions)", () => {
+  it("227 of 227 mutants killed, none survived or inconclusive, every named killer kills (two documented exceptions)", () => {
     const r = spawnSync(process.execPath, [join(PKG_DIR, "scripts", "mutate.mjs"), "--jobs", "2"], { cwd: PKG_DIR, encoding: "utf8", maxBuffer: 64 * 1024 * 1024, timeout: 3_000_000 });
     const report = JSON.parse(readFileSync(join(PKG_DIR, ".mutants", "report.json"), "utf8")) as { mutants: { id: string; status: string; killers?: string[]; named_not_killing?: string[] }[] };
     const by = (s: string) => report.mutants.filter((m) => m.status === s).map((m) => m.id);
     console.log(`[mutants] killed ${by("KILLED").length}, survived ${by("SURVIVED").join(",") || "none"}, inconclusive ${by("INCONCLUSIVE").join(",") || "none"}, harness errors ${by("HARNESS-ERROR").join(",") || "none"}`);
     const k = report.mutants.filter((m) => m.id.startsWith("K")), x = report.mutants.filter((m) => m.id.startsWith("X"));
-    expect(k).toHaveLength(206);
+    expect(k).toHaveLength(227);
     expect(x.length).toBeGreaterThanOrEqual(15);
     expect(x.filter((m) => m.status !== "KILLED").map((m) => m.id)).toEqual([]); // the extra mutants of the audit findings are killed too
     expect(by("SURVIVED")).toEqual([]);

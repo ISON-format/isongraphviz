@@ -11,7 +11,7 @@ export const REPO_DIR = resolve(PKG_DIR, "..", "..");
 export const ORACLE_DIR = join(REPO_DIR, "fixtures", "oracles-dl");
 export const DESIGN_PATH = join(REPO_DIR, "docs", "isongraph-visualize-blueprint", "31-CANVAS-WEBGL-DESIGN.md");
 /** The reference digest of fixtures/oracles-dl/SHA256SUMS (design 13.7: DRAFT, reference only, not frozen). */
-export const ORACLE_DIGEST = "8c954cdbb004a4bb0f880d95354cdef20c94ae42d3ccf070747783387ec15746";
+export const ORACLE_DIGEST = "18dbafa1473a2d94db857d1238c8576aac5ba3bfea3f239491766905f8d25452";
 
 export const sha256 = (b: Uint8Array | string): string => createHash("sha256").update(b).digest("hex");
 export const bytesOf = (s: string): Uint8Array => new TextEncoder().encode(s);

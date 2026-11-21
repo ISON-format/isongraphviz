@@ -21,9 +21,9 @@ for (const t of ["both", "subject"]) {
 }
 
 describe("tier bookkeeping", () => {
-  it("the renderer rows are the `both` rows (function and subject) and the `subject` rows U01-U09, U13-U17 (U10-U12 are heavy, D rows are runtime)", () => {
+  it("the renderer rows are the `both` rows (function and subject) and the `subject` rows U01-U09, U13-U21 (U10-U12 are heavy, D rows are runtime)", () => {
     expect(rows.filter((r) => r.tier === "both").length).toBe(oracle.rows.filter((r) => r.tier === "both" && RENDERER_GROUPS.has(r.group)).length);
-    expect(rows.filter((r) => r.tier === "subject").map((r) => r.id)).toEqual(["U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U13", "U14", "U15", "U16", "U17"]);
+    expect(rows.filter((r) => r.tier === "subject").map((r) => r.id)).toEqual(["U01", "U02", "U03", "U04", "U05", "U06", "U07", "U08", "U09", "U13", "U14", "U15", "U16", "U17", "U18", "U19", "U20", "U21"]);
     expect([...HEAVY]).toEqual(["U10", "U11", "U12"]);
   });
 });
