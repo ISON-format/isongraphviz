@@ -1,6 +1,6 @@
 // The K table of design 15.6 and 15.6a, restricted to the mutants whose named killer rows belong to interaction-core (rows E, I, V, L, B), as source patches:
-//   K01-K44, K72-K81, K84-K98, K122-K124, K126, K129-K153 (98 mutants; K129-K153 are the binding-table rows B14-B110 added with the gap rows, review 34).
-// The other 102 mutants of the corpus (K45-K71 companion, plan, gate, export; K82-K83 composed manifests; K99-K121, K125, K127, K128; K154-K200 PNG, binding chunk
+//   K01-K44, K72-K81, K84-K98, K122-K124, K126, K129-K153, K201-K232, K269-K310 (172 mutants; K129-K153 are the binding-table rows B14-B110 added with the gap rows, review 34; K201-K232 and K269-K310 are the rev 4 rows B111-B174 and E74-E102).
+// The other 139 mutants of the corpus (K45-K71 companion, plan, gate, export; K82-K83 composed manifests; K99-K121, K125, K127, K128; K154-K200, K233-K268, K311 PNG, binding chunk
 // and manifest) are the business of a11y-companion and export-core. Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/interaction-core/src; production code
 // has no switchable variants and src/ is never modified. A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring
 // of src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of 15.6a.
@@ -24,6 +24,18 @@ const KEYACT = KEY + ACT;
 const ACTTYPE_FIRST = '    { const at = plainEntries(e.get("action"))?.get("type"); if (!(typeof at === "string" && ACTIONS.has(at))) throw bad("UNKNOWN_ACTION", `${p}.action`); }\n';
 const ACTTAB = ACT + "    " + TABROW;
 const CLOSED = '    if (e === undefined || e.size !== 4 || !["action", "key", "mode", "mods"].every((k) => e.has(k))) throw bad("SCHEMA", `[${i}]`, "exactly action, key, mode, mods");';
+// text shared by the rev 4 mutants K201-K232 and K269-K310
+const PANOK = "return isInt(x) && isInt(y) && Math.abs(x) <= PIX_LIMIT && Math.abs(y) <= PIX_LIMIT;";
+const ZOOMOK = "return isInt(x) && x >= 1 && x <= 1_000_000;";
+const DIROK = 'DIRS.includes(f.get("dir")) && typeof f.get("extend") === "boolean"';
+const ENDOK = 'ok: (f) => f.get("end") === "src" || f.get("end") === "tgt" }],';
+const STEPOK = '["step", { fields: ["delta"], ok: (f) => isDelta(f.get("delta")) }],';
+const INCOK = '["incident", { fields: ["delta"], ok: (f) => isDelta(f.get("delta")) }],';
+const ISDELTA = "const isDelta = (v: unknown): v is 1 | -1 => v === 1 || v === -1;";
+const MODECHK = '    if (typeof mode !== "string" || !(mode === "normal" || mode === "marquee" || MODE.test(mode))) throw bad("INVALID_VALUE", `${p}.mode`);\n';
+const UNKACT = 'if (e === undefined || spec === undefined) throw bad("UNKNOWN_ACTION", path);';
+const LASTT = "!isInt(last_t) || last_t < -1 || last_t > 2 ** 52";
+const PINCHD = "d < 0 || d > 2 ** 41";
 
 export const MUTANTS = [
   // ---- pointer, wheel, pinch, long press, lasso (rows I) ------------------------------------------------------------------------------------------
@@ -149,6 +161,96 @@ export const MUTANTS = [
   m("K151", "zoom factor given as a string accepted", [P("bindings.ts", "return isInt(x) && x >= 1 && x <= 1_000_000;", "return (isInt(x) || typeof x === \"string\") && (x as never) >= 1 && (x as never) <= 1_000_000;")]),
   m("K152", "spatial extend 1 or 0 accepted as a boolean", [P("bindings.ts", "typeof f.get(\"extend\") === \"boolean\" }],", "(typeof f.get(\"extend\") === \"boolean\" || f.get(\"extend\") === 1 || f.get(\"extend\") === 0) }],")]),
   m("K153", "action type compared case-insensitively", [P("bindings.ts", "const spec = typeof type === \"string\" ? ACTIONS.get(type) : undefined;", "const spec = typeof type === \"string\" ? ACTIONS.get(type.toLowerCase()) : undefined;")]),
+  // ---- revision 4 rows B111-B174 and E74-E102 (corpus K201-K232 and K269-K310, added with the rev 4 round; design 32 rev 4, 6.4 and 5.1). Each is this implementation's
+  //      realization of the one-line text of MUTANTS.tsv; none is reference-only. K232 is realized as the range check of pan dx and dy judged after the Tab row (type checks before it): the only
+  //      reading under which B174 alone kills it (B105, a Tab row with dx 1.5, kills every other 'Tab before the fields' reading, K146 included). -----------------------------
+  m("K201", "pan dx and dy not range-checked (any integer accepted)", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y);")]),
+  m("K202", "pan dx not range-checked", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y) && Math.abs(y) <= PIX_LIMIT;")]),
+  m("K203", "pan dy not range-checked", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y) && Math.abs(x) <= PIX_LIMIT;")]),
+  m("K204", "pan lower bound not checked (only the upper bound)", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y) && x <= PIX_LIMIT && y <= PIX_LIMIT;")]),
+  m("K205", "pan upper bound 2^31 refused (strict below 2^31)", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y) && x < PIX_LIMIT && x >= -PIX_LIMIT && y < PIX_LIMIT && y >= -PIX_LIMIT;")]),
+  m("K206", "pan lower bound -2^31 refused (strict above -2^31)", [P("bindings.ts", PANOK, "return isInt(x) && isInt(y) && x <= PIX_LIMIT && x > -PIX_LIMIT && y <= PIX_LIMIT && y > -PIX_LIMIT;")]),
+  m("K207", "zoom factor not range-checked (any integer accepted)", [P("bindings.ts", ZOOMOK, "return isInt(x);")]),
+  m("K208", "zoom factor 0 accepted (lower bound 0 instead of 1)", [P("bindings.ts", ZOOMOK, "return isInt(x) && x >= 0 && x <= 1_000_000;")]),
+  m("K209", "zoom lower bound not checked (negative factors accepted)", [P("bindings.ts", ZOOMOK, "return isInt(x) && x <= 1_000_000;")]),
+  m("K210", "zoom factor 1000000 refused (strict below 1,000,000)", [P("bindings.ts", ZOOMOK, "return isInt(x) && x >= 1 && x < 1_000_000;")]),
+  m("K211", "zoom upper bound not checked", [P("bindings.ts", ZOOMOK, "return isInt(x) && x >= 1;")]),
+  m("K212", "any string accepted as a spatial dir", [P("bindings.ts", DIROK, "typeof f.get(\"dir\") === \"string\" && typeof f.get(\"extend\") === \"boolean\"")]),
+  m("K213", "spatial dir compared case-insensitively", [P("bindings.ts", DIROK, "DIRS.includes(typeof f.get(\"dir\") === \"string\" ? (f.get(\"dir\") as string).toLowerCase() : f.get(\"dir\")) && typeof f.get(\"extend\") === \"boolean\"")]),
+  m("K214", "spatial dir trimmed of white space before the comparison", [P("bindings.ts", DIROK, "DIRS.includes(typeof f.get(\"dir\") === \"string\" ? (f.get(\"dir\") as string).trim() : f.get(\"dir\")) && typeof f.get(\"extend\") === \"boolean\"")]),
+  m("K215", "any string accepted as an endpoint end", [P("bindings.ts", ENDOK, "ok: (f) => typeof f.get(\"end\") === \"string\" }],")]),
+  m("K216", "endpoint end compared case-insensitively", [P("bindings.ts", ENDOK, "ok: (f) => typeof f.get(\"end\") === \"string\" && ((f.get(\"end\") as string).toLowerCase() === \"src\" || (f.get(\"end\") as string).toLowerCase() === \"tgt\") }],")]),
+  m("K217", "endpoint end trimmed of white space before the comparison", [P("bindings.ts", ENDOK, "ok: (f) => typeof f.get(\"end\") === \"string\" && ((f.get(\"end\") as string).trim() === \"src\" || (f.get(\"end\") as string).trim() === \"tgt\") }],")]),
+  m("K218", "any integer accepted as a step delta", [P("bindings.ts", STEPOK, "[\"step\", { fields: [\"delta\"], ok: (f) => isInt(f.get(\"delta\")) }],")]),
+  m("K219", "any integer accepted as an incident delta", [P("bindings.ts", INCOK, "[\"incident\", { fields: [\"delta\"], ok: (f) => isInt(f.get(\"delta\")) }],")]),
+  m("K220", "delta 0 accepted", [P("bindings.ts", ISDELTA, "const isDelta = (v: unknown): v is 1 | -1 => v === 1 || v === -1 || v === 0;")]),
+  m("K221", "any positive integer accepted as a delta", [P("bindings.ts", ISDELTA, "const isDelta = (v: unknown): v is 1 | -1 => v === -1 || (isInt(v) && v >= 1);")]),
+  m("K222", "a non-string mode reported as SCHEMA instead of INVALID_VALUE", [P("bindings.ts", MODECHK, "    if (typeof mode !== \"string\") throw bad(\"SCHEMA\", `${p}.mode`);\n    if (!(mode === \"normal\" || mode === \"marquee\" || MODE.test(mode))) throw bad(\"INVALID_VALUE\", `${p}.mode`);\n")]),
+  m("K223", "mode converted with String() before the check (an array holding normal accepted)", [P("bindings.ts", MODECHK, "    if (!(String(mode) === \"normal\" || String(mode) === \"marquee\" || MODE.test(String(mode)))) throw bad(\"INVALID_VALUE\", `${p}.mode`);\n")]),
+  m("K224", "mods converted with Number() before the check (null, false, an empty array read as 0)", [P("bindings.ts", MODS, "    const mn: unknown = typeof mods === \"string\" ? mods : Number(mods);\n    if (!isInt(mn) || mn < 0 || mn > 15) throw bad(\"INVALID_VALUE\", `${p}.mods`);\n")]),
+  m("K225", "a non-string key reported as INVALID_VALUE instead of UNKNOWN_KEY", [P("bindings.ts", KEY, "    if (typeof key !== \"string\") throw bad(\"INVALID_VALUE\", `${p}.key`);\n    if (!isKeyToken(key)) throw bad(\"UNKNOWN_KEY\", `${p}.key`);\n")]),
+  m("K226", "a non-string key reported as SCHEMA instead of UNKNOWN_KEY", [P("bindings.ts", KEY, "    if (typeof key !== \"string\") throw bad(\"SCHEMA\", `${p}.key`);\n    if (!isKeyToken(key)) throw bad(\"UNKNOWN_KEY\", `${p}.key`);\n")]),
+  m("K227", "key converted with String() before the check (an array holding a accepted)", [P("bindings.ts", KEY, "    if (!isKeyToken(String(key))) throw bad(\"UNKNOWN_KEY\", `${p}.key`);\n")]),
+  m("K228", "an action that is not an object reported as SCHEMA instead of UNKNOWN_ACTION", [P("bindings.ts", UNKACT, "if (e === undefined) throw bad(\"SCHEMA\", path);\n  if (spec === undefined) throw bad(\"UNKNOWN_ACTION\", path);")]),
+  m("K229", "an action without a string type reported as INVALID_VALUE instead of UNKNOWN_ACTION", [P("bindings.ts", UNKACT, "if (e !== undefined && typeof type !== \"string\") throw bad(\"INVALID_VALUE\", path);\n  if (e === undefined || spec === undefined) throw bad(\"UNKNOWN_ACTION\", path);")]),
+  m("K230", "an action given as a string read as its type", [P("bindings.ts", "  const e = plainEntries(v);\n  const type = e?.get(\"type\");", "  const e = typeof v === \"string\" ? new Map<string, unknown>([[\"type\", v]]) : plainEntries(v);\n  const type = e?.get(\"type\");")]),
+  m("K231", "an action type converted with String() (an array holding fit read as fit)", [P("bindings.ts", "const spec = typeof type === \"string\" ? ACTIONS.get(type) : undefined;", "const spec = ACTIONS.get(String(type));")]),
+  m("K232", "Tab checked before the action fields (the range check of pan dx and dy is judged after the Tab row; the type checks stay before it, so B105 does not kill)", [
+    P("bindings.ts", PANOK, "return isInt(x) && isInt(y);"),
+    P("bindings.ts", ACTTAB, ACTTAB + "\n    if (action.type === \"pan\" && (Math.abs(action.dx) > PIX_LIMIT || Math.abs(action.dy) > PIX_LIMIT)) throw bad(\"INVALID_VALUE\", `${p}.action`);"),
+  ]),
+  // ---- pointer and pinch field ranges of the machine reader (rows E74-E102, R32-10) -----------------------------------------------------------------
+  //      K272 (last_t -1), K292 (t0 0) and K296 (id 0) refuse a value that the initial machine and every transcript step carry, and `step` re-reads its machine through the same strict reader
+  //      (the oracle reference checks a machine only in parseMachine), so these three are killed by many rows besides the named E60, E75/E77/E78 and E75/E77/E78: a deviation recorded in review, not a defect.
+  m("K269", "last_t: upper bound not checked", [P("machine.ts", LASTT, "!isInt(last_t) || last_t < -1")]),
+  m("K270", "last_t: lower bound not checked", [P("machine.ts", LASTT, "!isInt(last_t) || last_t > 2 ** 52")]),
+  m("K271", "last_t: the upper limit value itself refused (off by one)", [P("machine.ts", LASTT, "!isInt(last_t) || last_t < -1 || last_t >= 2 ** 52")]),
+  m("K272", "last_t: the lower limit value itself refused (off by one)", [P("machine.ts", LASTT, "!isInt(last_t) || last_t <= -1 || last_t > 2 ** 52")]),
+  m("K273", "pointer x: upper bound not checked", [P("machine.ts", "x: int(\"x\", -c, c)", "x: int(\"x\", -c)")]),
+  m("K274", "pointer x: lower bound not checked", [P("machine.ts", "x: int(\"x\", -c, c)", "x: int(\"x\", -Infinity, c)")]),
+  m("K275", "pointer x: the upper limit value itself refused (off by one)", [P("machine.ts", "x: int(\"x\", -c, c)", "x: int(\"x\", -c, c - 1)")]),
+  m("K276", "pointer x: the lower limit value itself refused (off by one)", [P("machine.ts", "x: int(\"x\", -c, c)", "x: int(\"x\", -c + 1, c)")]),
+  m("K277", "pointer x0: upper bound not checked", [P("machine.ts", "x0: int(\"x0\", -c, c)", "x0: int(\"x0\", -c)")]),
+  m("K278", "pointer x0: lower bound not checked", [P("machine.ts", "x0: int(\"x0\", -c, c)", "x0: int(\"x0\", -Infinity, c)")]),
+  m("K279", "pointer x0: the upper limit value itself refused (off by one)", [P("machine.ts", "x0: int(\"x0\", -c, c)", "x0: int(\"x0\", -c, c - 1)")]),
+  m("K280", "pointer x0: the lower limit value itself refused (off by one)", [P("machine.ts", "x0: int(\"x0\", -c, c)", "x0: int(\"x0\", -c + 1, c)")]),
+  m("K281", "pointer y: upper bound not checked", [P("machine.ts", "y: int(\"y\", -c, c)", "y: int(\"y\", -c)")]),
+  m("K282", "pointer y: lower bound not checked", [P("machine.ts", "y: int(\"y\", -c, c)", "y: int(\"y\", -Infinity, c)")]),
+  m("K283", "pointer y: the upper limit value itself refused (off by one)", [P("machine.ts", "y: int(\"y\", -c, c)", "y: int(\"y\", -c, c - 1)")]),
+  m("K284", "pointer y: the lower limit value itself refused (off by one)", [P("machine.ts", "y: int(\"y\", -c, c)", "y: int(\"y\", -c + 1, c)")]),
+  m("K285", "pointer y0: upper bound not checked", [P("machine.ts", "y0: int(\"y0\", -c, c)", "y0: int(\"y0\", -c)")]),
+  m("K286", "pointer y0: lower bound not checked", [P("machine.ts", "y0: int(\"y0\", -c, c)", "y0: int(\"y0\", -Infinity, c)")]),
+  m("K287", "pointer y0: the upper limit value itself refused (off by one)", [P("machine.ts", "y0: int(\"y0\", -c, c)", "y0: int(\"y0\", -c, c - 1)")]),
+  m("K288", "pointer y0: the lower limit value itself refused (off by one)", [P("machine.ts", "y0: int(\"y0\", -c, c)", "y0: int(\"y0\", -c + 1, c)")]),
+  m("K289", "pointer t0: upper bound not checked", [P("machine.ts", "t0: int(\"t0\", 0, 2 ** 52)", "t0: int(\"t0\", 0)")]),
+  m("K290", "pointer t0: lower bound not checked", [P("machine.ts", "t0: int(\"t0\", 0, 2 ** 52)", "t0: int(\"t0\", -Infinity, 2 ** 52)")]),
+  m("K291", "pointer t0: the upper limit value itself refused (off by one)", [P("machine.ts", "t0: int(\"t0\", 0, 2 ** 52)", "t0: int(\"t0\", 0, 2 ** 52 - 1)")]),
+  m("K292", "pointer t0: the lower limit value itself refused (off by one)", [P("machine.ts", "t0: int(\"t0\", 0, 2 ** 52)", "t0: int(\"t0\", 1, 2 ** 52)")]),
+  m("K293", "pointer id: upper bound not checked", [P("machine.ts", "id: int(\"id\", 0, 2 ** 31 - 1)", "id: int(\"id\", 0)")]),
+  m("K294", "pointer id: lower bound not checked", [P("machine.ts", "id: int(\"id\", 0, 2 ** 31 - 1)", "id: int(\"id\", -Infinity, 2 ** 31 - 1)")]),
+  m("K295", "pointer id: the upper limit value itself refused (off by one)", [P("machine.ts", "id: int(\"id\", 0, 2 ** 31 - 1)", "id: int(\"id\", 0, 2 ** 31 - 2)")]),
+  m("K296", "pointer id: the lower limit value itself refused (off by one)", [P("machine.ts", "id: int(\"id\", 0, 2 ** 31 - 1)", "id: int(\"id\", 1, 2 ** 31 - 1)")]),
+  m("K297", "pinch mx: upper bound not checked", [P("machine.ts", "Math.abs(mx) > c", "mx < -c")]),
+  m("K298", "pinch mx: lower bound not checked", [P("machine.ts", "Math.abs(mx) > c", "mx > c")]),
+  m("K299", "pinch mx: the upper limit value itself refused (off by one)", [P("machine.ts", "Math.abs(mx) > c", "mx >= c || mx < -c")]),
+  m("K300", "pinch mx: the lower limit value itself refused (off by one)", [P("machine.ts", "Math.abs(mx) > c", "mx > c || mx <= -c")]),
+  m("K301", "pinch my: upper bound not checked", [P("machine.ts", "Math.abs(my) > c", "my < -c")]),
+  m("K302", "pinch my: lower bound not checked", [P("machine.ts", "Math.abs(my) > c", "my > c")]),
+  m("K303", "pinch my: the upper limit value itself refused (off by one)", [P("machine.ts", "Math.abs(my) > c", "my >= c || my < -c")]),
+  m("K304", "pinch my: the lower limit value itself refused (off by one)", [P("machine.ts", "Math.abs(my) > c", "my > c || my <= -c")]),
+  m("K305", "pinch d: upper bound not checked", [P("machine.ts", PINCHD, "d < 0")]),
+  m("K306", "pinch d: lower bound not checked", [P("machine.ts", PINCHD, "d > 2 ** 41")]),
+  m("K307", "pinch d: the upper limit value itself refused (off by one)", [P("machine.ts", PINCHD, "d < 0 || d >= 2 ** 41")]),
+  m("K308", "pinch d: the lower limit value itself refused (off by one)", [P("machine.ts", PINCHD, "d <= 0 || d > 2 ** 41")]),
+  m("K309", "pointer and pinch fields not range-checked (the rev 3 reading, 'not range-checked again')", [
+    P("machine.ts", "if (!isInt(x) || x < lo || x > hi) throw badMachine(", "if (!isInt(x)) throw badMachine("),
+    P("machine.ts", " || d < 0 || d > 2 ** 41 || Math.abs(mx) > c || Math.abs(my) > c) throw badMachine(\"pinch\");", ") throw badMachine(\"pinch\");"),
+  ]),
+  m("K310", "pointer ranges checked on the first pointer only", [
+    P("machine.ts", "function readPointer(v: unknown): MPointer {", "function readPointer(v: unknown, strict = true): MPointer {"),
+    P("machine.ts", "if (!isInt(x) || x < lo || x > hi) throw badMachine(", "if (!isInt(x) || (strict && (x < lo || x > hi))) throw badMachine("),
+    P("machine.ts", "const p = readPointer(d.value);", "const p = readPointer(d.value, i === 0);"),
+  ]),
 ];
 
 /**

@@ -23,10 +23,10 @@ describe("the corpus is the pinned one", () => {
     }
     expect(sha256(corpus.read("SHA256SUMS"))).toBe(ORACLE_DIGEST);
   });
-  it("EXPECT.tsv has the 730 ids with the group counts of design 15.8", () => {
-    expect(corpus.rows.length).toBe(730);
+  it("EXPECT.tsv has the 1032 ids with the group counts of design 15.8", () => {
+    expect(corpus.rows.length).toBe(1032);
     const n = (g: string): number => corpus.rows.filter((r) => r.group === g).length;
-    expect({ C: n("C"), P: n("P"), Q: n("Q"), G: n("G"), M: n("M"), D: n("D"), K: n("K") }).toEqual({ C: 20, P: 11, Q: 4, G: 36, M: 5, D: 6, K: 200 });
+    expect({ C: n("C"), P: n("P"), Q: n("Q"), G: n("G"), M: n("M"), D: n("D"), K: n("K") }).toEqual({ C: 20, P: 11, Q: 4, G: 36, M: 5, D: 6, K: 311 });
   });
 });
 

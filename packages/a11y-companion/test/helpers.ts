@@ -11,7 +11,7 @@ export const REPO_DIR = resolve(PKG_DIR, "..", "..");
 export const ORACLE_DIR = join(REPO_DIR, "fixtures", "oracles-ia");
 export const DESIGN_PATH = join(REPO_DIR, "docs", "isongraph-visualize-blueprint", "32-INTERACTION-A11Y-EXPORT-DESIGN.md");
 /** The reference digest of fixtures/oracles-ia/SHA256SUMS (design 15.1: DRAFT, reference only, not frozen). */
-export const ORACLE_DIGEST = "bf6bddfd80398ecac324dce2bcee68e23ebca9047c603b709bd268eebc1f876e";
+export const ORACLE_DIGEST = "b63545239ee5efb5882b61e328c9f8d82a83c37df3f208ad99513426abaf48ac";
 
 export const sha256 = (b: Uint8Array | string): string => createHash("sha256").update(b).digest("hex");
 export const bytesOf = (s: string): Uint8Array => new TextEncoder().encode(s);

@@ -1,4 +1,4 @@
-// Conformance test (design 15, 16 (2)): the rows of fixtures/oracles-ia that belong to export-core, tier-aware: X (176) and H (7), core tier, byte equality or
+// Conformance test (design 15, 16 (2)): the rows of fixtures/oracles-ia that belong to export-core, tier-aware: X (274) and H (7), core tier, byte equality or
 // the stated error code. The accepted rows X10 (design 15.3) and X27-X30, X156-X158, X172 (gap rows) claim no bytes. K rows are mutants (scripts/mutate.mjs); D rows belong to a11y-companion and
 // interaction-core. Rows of the other families are not run here.
 import { readFileSync } from "node:fs";
@@ -19,7 +19,7 @@ describe("the corpus is the pinned one", () => {
   });
   it("EXPECT.tsv has the group counts of design 15.8 for X and H", () => {
     const n = (g: string): number => corpus.rows.filter((r) => r.group === g).length;
-    expect({ X: n("X"), H: n("H") }).toEqual({ X: 176, H: 7 });
+    expect({ X: n("X"), H: n("H") }).toEqual({ X: 274, H: 7 });
   });
 });
 for (const g of ["X", "H"]) {
@@ -30,7 +30,7 @@ for (const g of ["X", "H"]) {
 describe("tier bookkeeping", () => {
   it("the rows of the package are the core rows of X and H; the accepted rows (no bytes claimed) are X10 and the gap rows X27-X30, X156-X158, X172", () => {
     const mine = corpus.rows.filter((r) => GROUPS.has(r.group));
-    expect(mine.length).toBe(176 + 7);
+    expect(mine.length).toBe(274 + 7);
     expect(mine.every((r) => r.tier === "core")).toBe(true);
     expect(mine.filter((r) => r.expected === "" && r.error === "").map((r) => r.id)).toEqual(["X10", "X27", "X28", "X29", "X30", "X156", "X157", "X158", "X172"]);
   });

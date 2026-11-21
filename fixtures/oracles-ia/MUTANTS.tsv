@@ -199,3 +199,114 @@ K197	KILLED	X67,X68,X69,X70,X76	X67,X68,X69,X70,X76	required entries not checked
 K198	KILLED	X45,X46,X47,X48	X45,X46,X47,X48	a manifest that is not an object accepted
 K199	KILLED	X61	X61	extra keys in an artifact entry accepted
 K200	KILLED	X87,X88	X87,X88	listed files compared before the strict manifest reader
+K201	KILLED	B114,B115,B116,B117,B118,B119,B174	B114,B115,B116,B117,B118,B119,B174	pan dx and dy not range-checked (any integer accepted)
+K202	KILLED	B114,B115,B118,B174	B114,B115,B118,B174	pan dx not range-checked
+K203	KILLED	B116,B117,B119	B116,B117,B119	pan dy not range-checked
+K204	KILLED	B115,B117,B119	B115,B117,B119	pan lower bound not checked (only the upper bound)
+K205	KILLED	B111	B111	pan upper bound 2^31 refused (strict below 2^31)
+K206	KILLED	B111	B111	pan lower bound -2^31 refused (strict above -2^31)
+K207	KILLED	B120,B121,B122,B123,B124	B120,B121,B122,B123,B124	zoom factor not range-checked (any integer accepted)
+K208	KILLED	B120	B120	zoom factor 0 accepted (lower bound 0 instead of 1)
+K209	KILLED	B120,B121	B120,B121	zoom lower bound not checked (negative factors accepted)
+K210	KILLED	B112	B112	zoom factor 1000000 refused (strict below 1,000,000)
+K211	KILLED	B122,B123,B124	B122,B123,B124	zoom upper bound not checked
+K212	KILLED	B125,B126,B127,B128,B129	B125,B126,B127,B128,B129	any string accepted as a spatial dir
+K213	KILLED	B126	B126	spatial dir compared case-insensitively
+K214	KILLED	B128,B129	B128,B129	spatial dir trimmed of white space before the comparison
+K215	KILLED	B130,B131,B132,B133,B134	B130,B131,B132,B133,B134	any string accepted as an endpoint end
+K216	KILLED	B131	B131	endpoint end compared case-insensitively
+K217	KILLED	B133	B133	endpoint end trimmed of white space before the comparison
+K218	KILLED	B135,B136,B137	B135,B136,B137	any integer accepted as a step delta
+K219	KILLED	B138,B139,B140	B138,B139,B140	any integer accepted as an incident delta
+K220	KILLED	B136,B139	B136,B139	delta 0 accepted
+K221	KILLED	B135,B138	B135,B138	any positive integer accepted as a delta
+K222	KILLED	B141,B142,B143,B144,B145,B169	B141,B142,B143,B144,B145,B169	a non-string mode reported as SCHEMA instead of INVALID_VALUE
+K223	KILLED	B144	B144	mode converted with String() before the check (an array holding normal accepted)
+K224	KILLED	B146,B147,B148,B149,B170	B146,B147,B148,B149,B170	mods converted with Number() before the check (null, false, an empty array read as 0)
+K225	KILLED	B151,B152,B153,B154,B155,B171	B151,B152,B153,B154,B155,B171	a non-string key reported as INVALID_VALUE instead of UNKNOWN_KEY
+K226	KILLED	B151,B152,B153,B154,B155,B171	B151,B152,B153,B154,B155,B171	a non-string key reported as SCHEMA instead of UNKNOWN_KEY
+K227	KILLED	B151,B154	B151,B154	key converted with String() before the check (an array holding a accepted)
+K228	KILLED	B156,B157,B158,B159,B160,B161,B173	B156,B157,B158,B159,B160,B161,B173	an action that is not an object reported as SCHEMA instead of UNKNOWN_ACTION
+K229	KILLED	B162,B163,B164,B165,B166,B167,B168	B162,B163,B164,B165,B166,B167,B168	an action without a string type reported as INVALID_VALUE instead of UNKNOWN_ACTION
+K230	KILLED	B156,B173	B156,B173	an action given as a string read as its type
+K231	KILLED	B167	B167	an action type converted with String() (an array holding fit read as fit)
+K232	KILLED	B174	B174	Tab checked before the action fields
+K233	KILLED	X223,X224,X226	X223,X224,X226	embed checks the container before the hashes
+K234	KILLED	X227,X228	X227,X228	embed checks the already-bound state before the container
+K235	KILLED	X225,X226,X227,X228	X225,X226,X227,X228	embed checks the already-bound state before the hashes
+K236	KILLED	X233,X234	X233,X234	embed ignores extra keys of the binding object
+K237	KILLED	X236,X237,X238,X239,X240,X241,X242,X243,X244,X245,X253,X257,X259	X236,X237,X238,X239,X240,X241,X242,X243,X244,X245,X253,X257,X259	chunk types not checked
+K238	KILLED	X237,X238,X239,X240,X242,X243,X244,X245,X257,X259	X237,X238,X239,X240,X242,X243,X244,X245,X257,X259	only the first byte of a chunk type checked
+K239	KILLED	X237,X244	X237,X244	the fourth byte of a chunk type not checked
+K240	KILLED	X242,X259	X242,X259	0x5B accepted as a letter (range A to [)
+K241	KILLED	X241	X241	0x40 accepted as a letter (range @ to Z)
+K242	KILLED	X244	X244	0x7B accepted as a letter (range a to {)
+K243	KILLED	X243	X243	0x60 accepted as a letter (range ` to z)
+K244	KILLED	X245	X245	Latin-1 letters accepted in a chunk type
+K245	KILLED	X236,X237,X253	X236,X237,X253	digits accepted in a chunk type
+K246	KILLED	X247	X247	the first chunk compared to IHDR case-insensitively
+K247	KILLED	X248	X248	the last chunk compared to IEND case-insensitively
+K248	KILLED	X249,X250,X254,X258	X249,X250,X254,X258	IEND length not required to be 0
+K249	KILLED	X178,X180	X178,X180	a leading byte order mark skipped
+K250	KILLED	X181,X182,X183,X184,X185,X186	X181,X182,X183,X184,X185,X186	invalid UTF-8 decoded with replacement characters
+K251	KILLED	X183	X183	UTF-8 encoded surrogates (ED A0 80) accepted
+K252	KILLED	X191,X192,X193,X194	X191,X192,X193,X194	the first value of a repeated key read instead of the last
+K253	KILLED	X189,X190,X191,X193,X195	X189,X190,X191,X193,X195	a duplicate key reported as a syntax fault (SCHEMA)
+K254	KILLED	X189,X190,X191,X193	X189,X190,X191,X193	a duplicate key not detected by the canonical-bytes check
+K255	KILLED	X197,X198,X199,X200,X201,X202,X203,X204,X205,X206,X207,X208	X197,X198,X199,X200,X201,X202,X203,X204,X205,X206,X207,X208	numbers compared by value in the canonical-bytes check (398.0 and 1e2 accepted)
+K256	KILLED	X197,X198,X199,X200,X201,X202,X203,X204,X205,X206,X207,X208	X197,X198,X199,X200,X201,X202,X203,X204,X205,X206,X207,X208	a number spelled with a fraction or an exponent reported as SCHEMA instead of NON_CANONICAL
+K257	KILLED	X209	X209	-0 read as 0 and reported as NON_CANONICAL instead of SCHEMA
+K258	KILLED	X210,X211,X212,X213,X215	X210,X211,X212,X213,X215	a lone surrogate escape reported as a syntax fault (SCHEMA)
+K259	KILLED	X216,X217,X222	X216,X217,X222	artifact names judged before the closed key set and value types (entry order of passes swapped)
+K260	KILLED	X195,X196,X218,X219,X220	X195,X196,X218,X219,X220	canonical bytes judged right after the value-type pass, before names and order
+K261	KILLED	X196,X218,X220	X196,X218,X220	canonical bytes judged after the name pass but before the order pass
+K262	KILLED	X260,X261,X262,X263	X260,X261,X262,X263	expectedPngSize checked (and mismatching) even when no png is supplied
+K263	KILLED	X264,X265,X266	X264,X265,X266	a non-integer expectedPngSize reported as a configuration error instead of PNG_SIZE_MISMATCH
+K264	KILLED	X267,X268,X269	X267,X268,X269	an expectedPngSize dimension of 0 treated as any size
+K265	KILLED	X272,X273	X272,X273	expectedPngSize compared modulo 2^32
+K266	KILLED	X270,X271	X270,X271	expectedPngSize compared by absolute value
+K267	KILLED	X266	X266	expectedPngSize rounded before the comparison
+K268	KILLED	X267,X268,X269	X267,X268,X269	a falsy expectedPngSize dimension skips the check
+K269	KILLED	E97	E97	last_t: upper bound not checked
+K270	KILLED	E98	E98	last_t: lower bound not checked
+K271	KILLED	E74,E76,E77	E74,E76,E77	last_t: the upper limit value itself refused (off by one)
+K272	KILLED	E60	E60	last_t: the lower limit value itself refused (off by one)
+K273	KILLED	E79,E99	E79,E99	pointer x: upper bound not checked
+K274	KILLED	E80	E80	pointer x: lower bound not checked
+K275	KILLED	E74,E77	E74,E77	pointer x: the upper limit value itself refused (off by one)
+K276	KILLED	E75,E78	E75,E78	pointer x: the lower limit value itself refused (off by one)
+K277	KILLED	E81	E81	pointer x0: upper bound not checked
+K278	KILLED	E82	E82	pointer x0: lower bound not checked
+K279	KILLED	E74,E77	E74,E77	pointer x0: the upper limit value itself refused (off by one)
+K280	KILLED	E75,E78	E75,E78	pointer x0: the lower limit value itself refused (off by one)
+K281	KILLED	E83	E83	pointer y: upper bound not checked
+K282	KILLED	E84	E84	pointer y: lower bound not checked
+K283	KILLED	E74,E77	E74,E77	pointer y: the upper limit value itself refused (off by one)
+K284	KILLED	E75,E78	E75,E78	pointer y: the lower limit value itself refused (off by one)
+K285	KILLED	E85	E85	pointer y0: upper bound not checked
+K286	KILLED	E86,E100	E86,E100	pointer y0: lower bound not checked
+K287	KILLED	E74,E77	E74,E77	pointer y0: the upper limit value itself refused (off by one)
+K288	KILLED	E75,E78	E75,E78	pointer y0: the lower limit value itself refused (off by one)
+K289	KILLED	E87,E101	E87,E101	pointer t0: upper bound not checked
+K290	KILLED	E88	E88	pointer t0: lower bound not checked
+K291	KILLED	E74,E77	E74,E77	pointer t0: the upper limit value itself refused (off by one)
+K292	KILLED	E75,E77,E78	E75,E77,E78	pointer t0: the lower limit value itself refused (off by one)
+K293	KILLED	E89,E102	E89,E102	pointer id: upper bound not checked
+K294	KILLED	E90	E90	pointer id: lower bound not checked
+K295	KILLED	E74,E77	E74,E77	pointer id: the upper limit value itself refused (off by one)
+K296	KILLED	E75,E77,E78	E75,E77,E78	pointer id: the lower limit value itself refused (off by one)
+K297	KILLED	E91	E91	pinch mx: upper bound not checked
+K298	KILLED	E92	E92	pinch mx: lower bound not checked
+K299	KILLED	E77	E77	pinch mx: the upper limit value itself refused (off by one)
+K300	KILLED	E78	E78	pinch mx: the lower limit value itself refused (off by one)
+K301	KILLED	E93	E93	pinch my: upper bound not checked
+K302	KILLED	E94	E94	pinch my: lower bound not checked
+K303	KILLED	E77	E77	pinch my: the upper limit value itself refused (off by one)
+K304	KILLED	E78	E78	pinch my: the lower limit value itself refused (off by one)
+K305	KILLED	E95	E95	pinch d: upper bound not checked
+K306	KILLED	E96	E96	pinch d: lower bound not checked
+K307	KILLED	E77	E77	pinch d: the upper limit value itself refused (off by one)
+K308	KILLED	E78	E78	pinch d: the lower limit value itself refused (off by one)
+K309	KILLED	E79,E80,E81,E82,E83,E84,E85,E86,E87,E88,E89,E90,E91,E92,E93,E94,E95,E96,E99,E100,E101,E102	E79,E80,E81,E82,E83,E84,E85,E86,E87,E88,E89,E90,E91,E92,E93,E94,E95,E96,E99,E100,E101,E102	pointer and pinch fields not range-checked (the rev 3 reading, 'not range-checked again')
+K310	KILLED	E99,E100,E101,E102	E99,E100,E101,E102	pointer ranges checked on the first pointer only
+K311	KILLED	X227,X248,X251,X252,X256	X227,X248,X251,X252,X256	K158 restated (correction): last chunk not required to be IEND, the 45-byte minimum kept; X97 (33 bytes) is refused by the minimum and does not kill it, rows of at least 45 bytes do

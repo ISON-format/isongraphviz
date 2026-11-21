@@ -1,5 +1,5 @@
 // The K table of design 15.6 and 15.6a, restricted to the mutants whose named killer rows belong to export-core (rows X, H), as source patches:
-//   K63-K71, K109-K120, K127, K154-K200 (69 mutants; K154-K200 are the PNG container, binding chunk and manifest rows X27-X177 added with the gap rows, review 34). Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/export-core/src; production code
+//   K63-K71, K109-K120, K127, K154-K200, K233-K268, K311 (106 mutants; K154-K200 are the PNG container, binding chunk and manifest rows X27-X177 added with the gap rows, review 34; K233-K268 and K311 are the rev 4 rows X178-X275). Every mutant is a list of exact-text patches applied to a SCRATCH COPY of packages/export-core/src; production code
 //   has no switchable variants and src/ is never modified. A patch whose `find` text does not occur exactly `count` times is a harness error.
 const P = (file, find, replace, count = 1) => ({ file, find, replace, count });
 const m = (id, desc, patches) => ({ id, desc, patches });
@@ -16,6 +16,46 @@ const NAMELOOP = "  for (const e of entries) if (!NAMES.includes(e.name)) throw 
 const ORDLOOP = "  for (let i = 1; i < entries.length; i++) if (!(entries[i - 1]!.name < entries[i]!.name)) throw exportError(\"SCHEMA\", \"manifest.artifacts\", \"artifacts must be strictly ascending by name\");\n";
 const PARSEJSON = "  try { raw = JSON.parse(text); } catch { throw exportError(\"SCHEMA\", \"manifest\", \"not JSON\"); }\n";
 const SIZELE = "{ width: u32(png, 16), height: u32(png, 20) }";
+// text shared by the rev 4 mutants K233-K268 and K311
+const EMBED_OWN = "  const own: PngBinding = { scene: \"\", layout: \"\", state: \"\" };\n";
+/** An already-bound check that walks the chunk framing without validating it, so that it can run before the container check of parsePng. */
+const LENIENT_BOUND = "  { const cs: { type: string; start: number; length: number }[] = []; let at = 8; while (at + 12 <= src.length) { const length = u32(src, at); if (at + 12 + length > src.length) break; let type = \"\"; for (let i = 4; i < 8; i++) type += String.fromCharCode(src[at + i]!); cs.push({ type, start: at, length }); at += 12 + length; } if (bindingChunks(src, cs).length > 0) throw exportError(\"PNG_ALREADY_BOUND\", \"png\"); }\n";
+const LETTER = "(c >= 65 && c <= 90) || (c >= 97 && c <= 122)";
+const CTYPE = "if (!((c >= 65 && c <= 90) || (c >= 97 && c <= 122))) throw malformed(\"chunk type is not four ASCII letters\");";
+const FIRSTCHUNK = "chunks[0]!.type !== \"IHDR\"";
+const LASTCHUNK = "last.type !== \"IEND\" || last.length !== 0";
+const NAMES_DECL = "const NAMES = [\"layout\", \"png\", \"scene\", \"state\", \"svg\"];\n";
+const UTF8LINE = "  const text = utf8Decode(bytes);\n";
+const NEGZERO = "    if (Object.is(b, -0)) throw exportError(\"SCHEMA\", p, \"-0 is not an integer of the canonical form\"); // R32-07: not the foreign INVALID_NUMBER of the re-serialisation\n";
+const PUSHENTRY = "    entries.push({ bytes: b, media_type: mt, name: n as ArtifactName, sha256: s });";
+const ARTLOOP = "  for (const a of artifacts) if (a.bytes.length > limits.maxArtifactBytes)";
+/** A JSON walker for text that already parsed: the first value of a repeated key wins, and `dup` tells whether any key repeated. */
+const WALK = String.raw`
+function walkJson(t: string): { value: unknown; dup: boolean } {
+  let i = 0, dup = false;
+  const ws = (): void => { while (i < t.length && " \t\n\r".includes(t[i]!)) i++; };
+  const str = (): string => { const s = i; i++; while (t[i] !== "\"") { if (t[i] === "\\") i++; i++; } i++; return JSON.parse(t.slice(s, i)); };
+  const val = (): unknown => {
+    ws();
+    const c = t[i]!;
+    if (c === "{") { i++; const o: Record<string, unknown> = Object.create(null); ws(); if (t[i] === "}") { i++; return o; } for (;;) { ws(); const k = str(); ws(); i++; const v = val(); if (k in o) dup = true; else o[k] = v; ws(); if (t[i++] === "}") return o; } }
+    if (c === "[") { i++; const a: unknown[] = []; ws(); if (t[i] === "]") { i++; return a; } for (;;) { a.push(val()); ws(); if (t[i++] === "]") return a; } }
+    if (c === "\"") return str();
+    let j = i; while (j < t.length && !",]} \t\n\r".includes(t[j]!)) j++; const tok = t.slice(i, j); i = j; return JSON.parse(tok);
+  };
+  const value = val();
+  return { value, dup };
+}
+`;
+/** The canonical-bytes comparison against the text with every number token rewritten as String(Number(token)) (spellings ignored). */
+const NUMNORM = String.raw`const nb = Array.from(new TextEncoder().encode((() => { let o = "", i = 0; while (i < text.length) { const c = text[i]!; if (c === "\"") { let j = i + 1; while (text[j] !== "\"") { if (text[j] === "\\") j++; j++; } o += text.slice(i, j + 1); i = j + 1; } else if (c === "-" || (c >= "0" && c <= "9")) { let j = i; while (j < text.length && "+-.eE0123456789".includes(text[j]!)) j++; o += String(Number(text.slice(i, j))); i = j; } else { o += c; i++; } } return o; })()));
+  if (again.length !== nb.length || again.some((x, i) => x !== nb[i])) throw`;
+const FRACEXP = String.raw`if (/[0-9][.eE]|[eE][+-]?[0-9]/.test(text.replace(/"(?:[^"\\]|\\.)*"/g, ""))) throw exportError("SCHEMA", "manifest", "a number with a fraction or an exponent");
+  `;
+const LONESURR = String.raw`  if (/\\u[dD][89a-fA-F][0-9a-fA-F]{2}/.test(JSON.stringify(raw))) throw exportError("SCHEMA", "manifest", "a lone surrogate escape");
+`;
+/** The canonical-bytes check run on the entries read so far (the manifest of the passes up to the value types), used to move that pass earlier. */
+const CANON_EARLY = "  { const mm: Record<string, unknown> = { artifacts: entries, export: EXPORT_FORMAT, igr: \"IGR/1\", layout_sha256: top.get(\"layout_sha256\"), scene_sha256: top.get(\"scene_sha256\"), source_sha256: top.get(\"source_sha256\"), state_sha256: top.get(\"state_sha256\") }; if (top.has(\"svg_format\")) mm[\"svg_format\"] = top.get(\"svg_format\"); let a: Uint8Array | undefined; try { a = serializeExportManifest(mm as never); } catch { a = undefined; } if (a === undefined || a.length !== bytes.length || a.some((x, i) => x !== bytes[i])) throw exportError(\"NON_CANONICAL\", \"manifest\", \"not the canonical bytes\"); }\n";
 
 const PRED = "if (b === undefined || b.scene !== m.scene_sha256 || b.layout !== m.layout_sha256 || b.state !== m.state_sha256) throw";
 
@@ -118,6 +158,46 @@ export const MUTANTS = [
   m("K199", "extra keys in an artifact entry accepted", [P("manifest.ts", "e === undefined || e.size !== 4 ||", "e === undefined || e.size < 4 ||")]),
   m("K200", "listed files compared before the strict manifest reader", [P("bundle.ts", "  const m = readManifest(manifestCopy, limits.maxManifestBytes); // (1) synchronous: nothing else was copied yet",
     "  try { const lj = JSON.parse(new TextDecoder().decode(manifestCopy)) as { artifacts?: { name: string; bytes: number; sha256: string }[] };\n    for (const a of lj.artifacts ?? []) { const b = files.get(a.name);\n      if (b === undefined) throw exportError(\"ARTIFACT_MISMATCH\", a.name, \"listed but absent\");\n      if (b.length !== a.bytes || (await sha256Hex(b)) !== a.sha256) throw exportError(\"ARTIFACT_MISMATCH\", a.name, \"length or SHA-256 differs from the manifest\"); }\n  } catch (e) { if (e instanceof IaError) throw e; }\n  const m = readManifest(manifestCopy, limits.maxManifestBytes); // (1) synchronous: nothing else was copied yet")]),
+  // ---- revision 4 rows X178-X275 (corpus K233-K268 and K311, added with the rev 4 round; design 32 rev 4, 11.2-11.5). Each is this implementation's realization of the
+  //      one-line text of MUTANTS.tsv; none is reference-only. K311 repeats the patch of K158 (the correction: its killers are the rows of at least 45 bytes, X97 does not
+  //      kill either). K268 has the same effect as K264 on every row (a dimension of 0) and is kept under its own id. -----------------------------------------------------
+  m("K233", "embed checks the container before the hashes", [P("png.ts", EMBED_OWN, "  parsePng(src);\n" + EMBED_OWN)]),
+  m("K234", "embed checks the already-bound state before the container", [P("png.ts", EMBED_PARSE, LENIENT_BOUND + EMBED_PARSE)]),
+  m("K235", "embed checks the already-bound state before the hashes", [P("png.ts", EMBED_OWN, LENIENT_BOUND + EMBED_OWN)]),
+  m("K236", "embed ignores extra keys of the binding object", [P("png.ts", "bm === undefined || bm.size !== 3", "bm === undefined || bm.size < 3")]),
+  m("K237", "chunk types not checked", [P("png.ts", CTYPE, "void c;")]),
+  m("K238", "only the first byte of a chunk type checked", [P("png.ts", CTYPE, "if (i === 4 && !((c >= 65 && c <= 90) || (c >= 97 && c <= 122))) throw malformed(\"chunk type is not four ASCII letters\");")]),
+  m("K239", "the fourth byte of a chunk type not checked", [P("png.ts", CTYPE, "if (i < 7 && !((c >= 65 && c <= 90) || (c >= 97 && c <= 122))) throw malformed(\"chunk type is not four ASCII letters\");")]),
+  m("K240", "0x5B accepted as a letter (range A to [)", [P("png.ts", LETTER, "(c >= 65 && c <= 91) || (c >= 97 && c <= 122)")]),
+  m("K241", "0x40 accepted as a letter (range @ to Z)", [P("png.ts", LETTER, "(c >= 64 && c <= 90) || (c >= 97 && c <= 122)")]),
+  m("K242", "0x7B accepted as a letter (range a to {)", [P("png.ts", LETTER, "(c >= 65 && c <= 90) || (c >= 97 && c <= 123)")]),
+  m("K243", "0x60 accepted as a letter (range ` to z)", [P("png.ts", LETTER, "(c >= 65 && c <= 90) || (c >= 96 && c <= 122)")]),
+  m("K244", "Latin-1 letters accepted in a chunk type", [P("png.ts", LETTER, LETTER + " || (c >= 0xc0 && c <= 0xff && c !== 0xd7 && c !== 0xf7)")]),
+  m("K245", "digits accepted in a chunk type", [P("png.ts", LETTER, LETTER + " || (c >= 48 && c <= 57)")]),
+  m("K246", "the first chunk compared to IHDR case-insensitively", [P("png.ts", FIRSTCHUNK, "chunks[0]!.type.toUpperCase() !== \"IHDR\"")]),
+  m("K247", "the last chunk compared to IEND case-insensitively", [P("png.ts", LASTCHUNK, "last.type.toUpperCase() !== \"IEND\" || last.length !== 0")]),
+  m("K248", "IEND length not required to be 0", [P("png.ts", LASTCHUNK, "last.type !== \"IEND\"")]),
+  m("K249", "a leading byte order mark skipped", [P("manifest.ts", UTF8LINE, "  const text = ((t0: string | undefined) => (t0 !== undefined && t0.charCodeAt(0) === 0xfeff ? t0.slice(1) : t0))(utf8Decode(bytes));\n")]),
+  m("K250", "invalid UTF-8 decoded with replacement characters", [P("manifest.ts", UTF8LINE, "  const text = new TextDecoder(\"utf-8\", { ignoreBOM: true }).decode(bytes);\n")]),
+  m("K251", "UTF-8 encoded surrogates (ED A0 80) accepted", [P("limits.ts", " || (cp >= 0xd800 && cp <= 0xdfff)", "")]),
+  m("K252", "the first value of a repeated key read instead of the last", [P("manifest.ts", NAMES_DECL, NAMES_DECL + WALK), P("manifest.ts", PARSEJSON, PARSEJSON + "  raw = walkJson(text).value;\n")]),
+  m("K253", "a duplicate key reported as a syntax fault (SCHEMA)", [P("manifest.ts", NAMES_DECL, NAMES_DECL + WALK), P("manifest.ts", PARSEJSON, PARSEJSON + "  if (walkJson(text).dup) throw exportError(\"SCHEMA\", \"manifest\", \"duplicate key\");\n")]),
+  m("K254", "a duplicate key not detected by the canonical-bytes check", [P("manifest.ts", NAMES_DECL, NAMES_DECL + WALK), P("manifest.ts", CANON, "if (!walkJson(text).dup && (again.length !== bytes.length || again.some((x, i) => x !== bytes[i]))) throw")]),
+  m("K255", "numbers compared by value in the canonical-bytes check (398.0 and 1e2 accepted)", [P("manifest.ts", CANON, NUMNORM)]),
+  m("K256", "a number spelled with a fraction or an exponent reported as SCHEMA instead of NON_CANONICAL", [P("manifest.ts", CANON, FRACEXP + CANON)]),
+  m("K257", "-0 read as 0 and reported as NON_CANONICAL instead of SCHEMA", [P("manifest.ts", NEGZERO, ""), P("manifest.ts", PUSHENTRY, "    entries.push({ bytes: b + 0, media_type: mt, name: n as ArtifactName, sha256: s });")]),
+  m("K258", "a lone surrogate escape reported as a syntax fault (SCHEMA)", [P("manifest.ts", PARSEJSON, PARSEJSON + LONESURR)]),
+  m("K259", "artifact names judged before the closed key set and value types (entry order of passes swapped)", [P("manifest.ts", "  const allowed = [", "  { const arr0 = top.get(\"artifacts\"); if (Array.isArray(arr0)) for (const x of arr0) { const ee = plainEntries(x as unknown); const nn = ee?.get(\"name\"); if (typeof nn === \"string\" && !NAMES.includes(nn)) throw exportError(\"UNKNOWN_ARTIFACT\", \"manifest.artifacts\", \"unknown artifact name\"); } }\n  const allowed = [")]),
+  m("K260", "canonical bytes judged right after the value-type pass, before names and order", [P("manifest.ts", NAMELOOP, CANON_EARLY + NAMELOOP)]),
+  m("K261", "canonical bytes judged after the name pass but before the order pass", [P("manifest.ts", ORDLOOP, CANON_EARLY + ORDLOOP)]),
+  m("K262", "expectedPngSize checked (and mismatching) even when no png is supplied", [P("bundle.ts", ARTLOOP, "  if (png === undefined && size !== undefined) throw exportError(\"PNG_SIZE_MISMATCH\", \"png\", \"no png\");\n" + ARTLOOP)]),
+  m("K263", "a non-integer expectedPngSize reported as a configuration error instead of PNG_SIZE_MISMATCH", [P("bundle.ts", SIZECHK, "if (!Number.isInteger(size.width) || !Number.isInteger(size.height)) throw new IaError(\"INVALID_CONFIG\", \"NOT_INTEGER\", \"options.expectedPngSize\");\n    if (have.width !== size.width || have.height !== size.height) throw")]),
+  m("K264", "an expectedPngSize dimension of 0 treated as any size", [P("bundle.ts", SIZECHK, "if ((size.width !== 0 && have.width !== size.width) || (size.height !== 0 && have.height !== size.height)) throw")]),
+  m("K265", "expectedPngSize compared modulo 2^32", [P("bundle.ts", SIZECHK, "if (have.width !== size.width % 4294967296 || have.height !== size.height % 4294967296) throw")]),
+  m("K266", "expectedPngSize compared by absolute value", [P("bundle.ts", SIZECHK, "if (have.width !== Math.abs(size.width) || have.height !== Math.abs(size.height)) throw")]),
+  m("K267", "expectedPngSize rounded before the comparison", [P("bundle.ts", SIZECHK, "if (have.width !== Math.round(size.width) || have.height !== Math.round(size.height)) throw")]),
+  m("K268", "a falsy expectedPngSize dimension skips the check", [P("bundle.ts", SIZECHK, "if ((size.width && have.width !== size.width) || (size.height && have.height !== size.height)) throw")]),
+  m("K311", "K158 restated (correction): last chunk not required to be IEND, the 45-byte minimum kept", [P("png.ts", "if (last.type !== \"IEND\" || last.length !== 0) throw malformed(\"IEND must come last\");", "void last;")]),
 ];
 
 /** Mutants beyond the corpus table (audit 32-code-audit-b.md): ids start with `ext:`, killed by the behaviour checks of test/oracle/extra.ts. See scripts/ext-mutants.mjs. */

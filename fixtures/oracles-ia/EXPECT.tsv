@@ -729,3 +729,305 @@ K197	K
 K198	K						
 K199	K						
 K200	K						
+B111	B	core			inputs/B111.bindings.json		
+B112	B	core			inputs/B112.bindings.json		
+B113	B	core			inputs/B113.bindings.json		
+B114	B	core			inputs/B114.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B115	B	core			inputs/B115.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B116	B	core			inputs/B116.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B117	B	core			inputs/B117.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B118	B	core			inputs/B118.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B119	B	core			inputs/B119.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B120	B	core			inputs/B120.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B121	B	core			inputs/B121.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B122	B	core			inputs/B122.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B123	B	core			inputs/B123.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B124	B	core			inputs/B124.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B125	B	core			inputs/B125.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B126	B	core			inputs/B126.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B127	B	core			inputs/B127.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B128	B	core			inputs/B128.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B129	B	core			inputs/B129.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B130	B	core			inputs/B130.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B131	B	core			inputs/B131.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B132	B	core			inputs/B132.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B133	B	core			inputs/B133.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B134	B	core			inputs/B134.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B135	B	core			inputs/B135.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B136	B	core			inputs/B136.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B137	B	core			inputs/B137.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B138	B	core			inputs/B138.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B139	B	core			inputs/B139.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B140	B	core			inputs/B140.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B141	B	core			inputs/B141.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B142	B	core			inputs/B142.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B143	B	core			inputs/B143.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B144	B	core			inputs/B144.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B145	B	core			inputs/B145.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B146	B	core			inputs/B146.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B147	B	core			inputs/B147.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B148	B	core			inputs/B148.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B149	B	core			inputs/B149.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B150	B	core			inputs/B150.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B151	B	core			inputs/B151.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B152	B	core			inputs/B152.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B153	B	core			inputs/B153.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B154	B	core			inputs/B154.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B155	B	core			inputs/B155.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B156	B	core			inputs/B156.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B157	B	core			inputs/B157.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B158	B	core			inputs/B158.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B159	B	core			inputs/B159.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B160	B	core			inputs/B160.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B161	B	core			inputs/B161.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B162	B	core			inputs/B162.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B163	B	core			inputs/B163.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B164	B	core			inputs/B164.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B165	B	core			inputs/B165.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B166	B	core			inputs/B166.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B167	B	core			inputs/B167.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B168	B	core			inputs/B168.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B169	B	core			inputs/B169.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B170	B	core			inputs/B170.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B171	B	core			inputs/B171.bindings.json		INVALID_BINDINGS/UNKNOWN_KEY
+B172	B	core			inputs/B172.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+B173	B	core			inputs/B173.bindings.json		INVALID_BINDINGS/UNKNOWN_ACTION
+B174	B	core			inputs/B174.bindings.json		INVALID_BINDINGS/INVALID_VALUE
+X178	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X178.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X179	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X179.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X180	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json"},"manifest":"manifests/X180.manifest.json","op":"verify"}		INVALID_EXPORT/SCHEMA
+X181	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X181.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X182	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X182.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X183	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X183.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X184	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X184.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X185	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X185.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X186	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X186.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X187	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X187.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X188	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X188.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X189	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X189.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X190	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X190.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X191	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X191.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X192	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X192.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X193	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X193.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X194	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X194.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X195	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X195.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X196	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X196.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X197	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X197.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X198	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X198.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X199	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X199.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X200	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X200.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X201	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X201.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X202	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X202.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X203	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X203.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X204	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X204.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X205	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X205.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X206	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X206.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X207	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X207.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X208	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X208.manifest.json","op":"parse"}		INVALID_EXPORT/NON_CANONICAL
+X209	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X209.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X210	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X210.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X211	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X211.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X212	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X212.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X213	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X213.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X214	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X214.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X215	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X215.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X216	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X216.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X217	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X217.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X218	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X218.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X219	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X219.manifest.json","op":"parse"}		INVALID_EXPORT/UNKNOWN_ARTIFACT
+X220	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X220.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X221	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X221.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X222	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"manifest":"manifests/X222.manifest.json","op":"parse"}		INVALID_EXPORT/SCHEMA
+X223	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"E8A4357A01A4F47F46A18B8F1C22C15A9F8C26CB06ED6B31588CD5C11407A1DA","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X223.in.png"}		INVALID_EXPORT/SCHEMA
+X224	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"E8A4357A01A4F47F46A18B8F1C22C15A9F8C26CB06ED6B31588CD5C11407A1DA","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X224.in.png"}		INVALID_EXPORT/SCHEMA
+X225	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"E8A4357A01A4F47F46A18B8F1C22C15A9F8C26CB06ED6B31588CD5C11407A1DA","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X225.in.png"}		INVALID_EXPORT/SCHEMA
+X226	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"E8A4357A01A4F47F46A18B8F1C22C15A9F8C26CB06ED6B31588CD5C11407A1DA","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X226.in.png"}		INVALID_EXPORT/SCHEMA
+X227	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X227.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X228	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X228.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X229	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc"},"op":"embed","png":"png/X229.in.png"}		INVALID_EXPORT/SCHEMA
+X230	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X230.in.png"}		INVALID_EXPORT/SCHEMA
+X231	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X231.in.png"}		INVALID_EXPORT/SCHEMA
+X232	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{},"op":"embed","png":"png/X232.in.png"}		INVALID_EXPORT/SCHEMA
+X233	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","note":"x","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X233.in.png"}		INVALID_EXPORT/SCHEMA
+X234	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","source":"1e23b156a068aa5b7ffb5cc7c2e70e8ba5f9542ffe3e52f7c7f14c11bb9e030a","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X234.in.png"}		INVALID_EXPORT/SCHEMA
+X235	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"Layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","Scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","State":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X235.in.png"}		INVALID_EXPORT/SCHEMA
+X236	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X236.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X237	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X237.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X238	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X238.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X239	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X239.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X240	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X240.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X241	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X241.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X242	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X242.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X243	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X243.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X244	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X244.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X245	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X245.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X246	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X246.in.png"}	png/X246.png	
+X247	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X247.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X248	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X248.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X249	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X249.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X250	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X250.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X251	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X251.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X252	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"binding":{"layout":"2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db","scene":"e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc","state":"be5391e1488a46ccefeb7068c85106f689f19419cd46570a2492bd5060e7d87d"},"op":"embed","png":"png/X252.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X253	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X253.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X254	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X254.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X255	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X255.in.png"}	json/X255.binding.json	
+X256	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"op":"read","png":"png/X256.in.png"}		INVALID_EXPORT/PNG_MALFORMED
+X257	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X257.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X257.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X258	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X258.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X258.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X259	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"files":{"layout":"layouts/O1.layout.json","png":"png/X259.png","scene":"scenes/O1.scene.json","state":"states/O1.initial.state.json","svg":"data/O1.decl.svg"},"manifest":"manifests/X259.manifest.json","op":"verify"}		INVALID_EXPORT/PNG_MALFORMED
+X260	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg"],"expectedPngSize":{"height":2,"width":2},"op":"export"}	json/X260.manifest.json	
+X261	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":[],"expectedPngSize":{"height":1,"width":1},"op":"export"}	json/X261.manifest.json	
+X262	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg"],"expectedPngSize":{"height":0,"width":0},"op":"export"}	json/X262.manifest.json	
+X263	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":[],"expectedPngSize":{"height":-3,"width":1.5},"op":"export"}	json/X263.manifest.json	
+X264	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":1.5},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X265	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1.5,"width":1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X266	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":1.0000001},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X267	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":0,"width":0},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X268	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":0},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X269	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":0,"width":1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X270	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":-1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X271	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":-1,"width":1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X272	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":1,"width":4294967297},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X273	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":4294967297,"width":1},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X274	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["png"],"expectedPngSize":{"height":3,"width":3},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+X275	X	core	scenes/O1.scene.json	layouts/O1.layout.json	{"artifacts":["svg","png"],"expectedPngSize":{"height":1,"width":2},"op":"export"}		INVALID_EXPORT/PNG_SIZE_MISMATCH
+E74	E	core			{"machine":"inputs/E74.machine.json"}		
+E75	E	core			{"machine":"inputs/E75.machine.json"}		
+E76	E	core			{"machine":"inputs/E76.machine.json"}		
+E77	E	core			{"machine":"inputs/E77.machine.json"}		
+E78	E	core			{"machine":"inputs/E78.machine.json"}		
+E79	E	core			{"machine":"inputs/E79.machine.json"}		INVALID_MACHINE/SCHEMA
+E80	E	core			{"machine":"inputs/E80.machine.json"}		INVALID_MACHINE/SCHEMA
+E81	E	core			{"machine":"inputs/E81.machine.json"}		INVALID_MACHINE/SCHEMA
+E82	E	core			{"machine":"inputs/E82.machine.json"}		INVALID_MACHINE/SCHEMA
+E83	E	core			{"machine":"inputs/E83.machine.json"}		INVALID_MACHINE/SCHEMA
+E84	E	core			{"machine":"inputs/E84.machine.json"}		INVALID_MACHINE/SCHEMA
+E85	E	core			{"machine":"inputs/E85.machine.json"}		INVALID_MACHINE/SCHEMA
+E86	E	core			{"machine":"inputs/E86.machine.json"}		INVALID_MACHINE/SCHEMA
+E87	E	core			{"machine":"inputs/E87.machine.json"}		INVALID_MACHINE/SCHEMA
+E88	E	core			{"machine":"inputs/E88.machine.json"}		INVALID_MACHINE/SCHEMA
+E89	E	core			{"machine":"inputs/E89.machine.json"}		INVALID_MACHINE/SCHEMA
+E90	E	core			{"machine":"inputs/E90.machine.json"}		INVALID_MACHINE/SCHEMA
+E91	E	core			{"machine":"inputs/E91.machine.json"}		INVALID_MACHINE/SCHEMA
+E92	E	core			{"machine":"inputs/E92.machine.json"}		INVALID_MACHINE/SCHEMA
+E93	E	core			{"machine":"inputs/E93.machine.json"}		INVALID_MACHINE/SCHEMA
+E94	E	core			{"machine":"inputs/E94.machine.json"}		INVALID_MACHINE/SCHEMA
+E95	E	core			{"machine":"inputs/E95.machine.json"}		INVALID_MACHINE/SCHEMA
+E96	E	core			{"machine":"inputs/E96.machine.json"}		INVALID_MACHINE/SCHEMA
+E97	E	core			{"machine":"inputs/E97.machine.json"}		INVALID_MACHINE/SCHEMA
+E98	E	core			{"machine":"inputs/E98.machine.json"}		INVALID_MACHINE/SCHEMA
+E99	E	core			{"machine":"inputs/E99.machine.json"}		INVALID_MACHINE/SCHEMA
+E100	E	core			{"machine":"inputs/E100.machine.json"}		INVALID_MACHINE/SCHEMA
+E101	E	core			{"machine":"inputs/E101.machine.json"}		INVALID_MACHINE/SCHEMA
+E102	E	core			{"machine":"inputs/E102.machine.json"}		INVALID_MACHINE/SCHEMA
+K201	K						
+K202	K						
+K203	K						
+K204	K						
+K205	K						
+K206	K						
+K207	K						
+K208	K						
+K209	K						
+K210	K						
+K211	K						
+K212	K						
+K213	K						
+K214	K						
+K215	K						
+K216	K						
+K217	K						
+K218	K						
+K219	K						
+K220	K						
+K221	K						
+K222	K						
+K223	K						
+K224	K						
+K225	K						
+K226	K						
+K227	K						
+K228	K						
+K229	K						
+K230	K						
+K231	K						
+K232	K						
+K233	K						
+K234	K						
+K235	K						
+K236	K						
+K237	K						
+K238	K						
+K239	K						
+K240	K						
+K241	K						
+K242	K						
+K243	K						
+K244	K						
+K245	K						
+K246	K						
+K247	K						
+K248	K						
+K249	K						
+K250	K						
+K251	K						
+K252	K						
+K253	K						
+K254	K						
+K255	K						
+K256	K						
+K257	K						
+K258	K						
+K259	K						
+K260	K						
+K261	K						
+K262	K						
+K263	K						
+K264	K						
+K265	K						
+K266	K						
+K267	K						
+K268	K						
+K269	K						
+K270	K						
+K271	K						
+K272	K						
+K273	K						
+K274	K						
+K275	K						
+K276	K						
+K277	K						
+K278	K						
+K279	K						
+K280	K						
+K281	K						
+K282	K						
+K283	K						
+K284	K						
+K285	K						
+K286	K						
+K287	K						
+K288	K						
+K289	K						
+K290	K						
+K291	K						
+K292	K						
+K293	K						
+K294	K						
+K295	K						
+K296	K						
+K297	K						
+K298	K						
+K299	K						
+K300	K						
+K301	K						
+K302	K						
+K303	K						
+K304	K						
+K305	K						
+K306	K						
+K307	K						
+K308	K						
+K309	K						
+K310	K						
+K311	K						

@@ -12,7 +12,7 @@ on renderer-svg and display-list is the declared departure CCR-V11-7 (owner ruli
 ## Scripts
 
 `npm test` (fast: rows X and H, Appendix extraction and tracked-file equivalent, PNG/manifest/bundle/headless unit tests, surface tests), `npm run test:slow`
-(the mutation matrix: 69 corpus + 17 `ext:` mutants, 84 killed; the two survivors are documented equivalents: `ext:K112-scan` (V8 `JSON.parse` is iterative; the unguarded-parse half of K112 is killed by rows X31-X44, X86 and a unit check) and `ext:E16`), `npm run mutants`, `npm run typecheck`, `npm run build`,
+(the mutation matrix: 106 corpus + 17 `ext:` mutants, 121 killed; the two survivors are documented equivalents: `ext:K112-scan` (V8 `JSON.parse` is iterative; the unguarded-parse half of K112 is killed by rows X31-X44, X86 and a unit check) and `ext:E16`), `npm run mutants`, `npm run typecheck`, `npm run build`,
 `npm run smoke`, `npm run demo -- <file.ison> [--out dir] [--size WxH] [--events file.json]` (design 17.1), `npm run demo:build` then
 `npm run smoke:browser` (design 17.2, 17.4: one Chromium, smoke only; it covers the Canvas host and, after the `toggle SVG` button, the SVG host), `npm run demo:check`, `npm run check`.
 `demo/page.mjs` bundles renderer-canvas `./dom` (built with `pointer: "none"`, `liveRegion: "none"`, `canvasLabel: "none"`), renderer-svg `./dom` and its core
