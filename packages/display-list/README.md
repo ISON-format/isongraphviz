@@ -29,7 +29,7 @@ Build order: `scene-core`, `layout-core` and `renderer-core` must have been buil
 - `npm run smoke`: Node smoke (needs the build): the lists of three oracle examples equal the oracle bytes, round-trip through the strict reader; the pick buffer and the readout of `G01`.
 - On Windows always go through these scripts: `scripts/vitest.mjs` restores an upper-case drive letter (see `packages/renderer-core/README.md`).
 
-The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U21`, the demo, the browser smoke and the **mutation matrix** for the whole K table (227 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
+The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U21`, the demo, the browser smoke and the **mutation matrix** for the whole K table (251 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
 
 ## Tests and oracle
 

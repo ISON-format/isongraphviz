@@ -1,5 +1,5 @@
 // src/read.ts - parseDisplayList: the strict, linear, line-oriented reader of exactly the language of 4.1-4.2 (design 4.7).
-// Two stages: the lexer (lines.ts, D1: the line-boundary bytes and the bounds) and the record rules D2-D12. It never needs a model; it re-serializes
+// Two stages: the lexer (lines.ts, D1: the line-boundary bytes and the bounds) and the record rules D2-D13 (D13 is the one rule over the whole list). It never needs a model; it re-serializes
 // each parsed record and compares that canonical text with the line (D12).
 import { DEFAULT_DL_READ_LIMITS, DL_COORD_MAX, DL_FORMAT, VIEWPORT_MAX_PX } from "./constants.js";
 import { canonicalJson } from "./canon.js";
@@ -46,6 +46,7 @@ export function parseDisplayList(bytes: Uint8Array, limits?: { maxBytes?: number
   let prevKind = "", prevPid = -1;
   let lastTextRole = -1, lastTextPid = 0;
   const textPids = new Set<number>();
+  let focusCount = 0, secondFocus = 0; // D13: the number of E and N records with the focus bit (flags 2 or 3) and the line of the second
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i]!, no = i + 1;
@@ -98,6 +99,7 @@ export function parseDisplayList(bytes: Uint8Array, limits?: { maxBytes?: number
         if (!inRange(rec[2], 0, 3)) throw schemaError(no, "flags are 0..3");
         if (!inRange(rec[3], 0, 2) || rec.length - 4 !== 4 + 2 * rec[3]) throw schemaError(no, "form is 0..2 with 4, 6 or 8 numbers");
         for (let k = 4; k < rec.length; k++) if (!inBound(rec[k])) throw schemaError(no, "a coordinate is an integer within 2^40");
+        if (rec[2] >= 2 && ++focusCount === 2) secondFocus = no;
         eRecords.set(rec[1], rec.slice(4) as number[]);
         eCount++;
         break;
@@ -123,6 +125,7 @@ export function parseDisplayList(bytes: Uint8Array, limits?: { maxBytes?: number
         if (!inRange(rec[2], 0, 8)) throw schemaError(no, "kcls is 0..8");
         if (!inRange(rec[3], 0, 3)) throw schemaError(no, "flags are 0..3");
         if (!inBound(rec[4]) || !inBound(rec[5])) throw schemaError(no, "a coordinate is an integer within 2^40");
+        if (rec[3] >= 2 && ++focusCount === 2) secondFocus = no;
         nCount++;
         break;
       }
@@ -158,6 +161,8 @@ export function parseDisplayList(bytes: Uint8Array, limits?: { maxBytes?: number
   if (header.nd !== nodes.length || header.ed !== edges.length) throw schemaError(1, "ND and ED equal the numbers of n and e records");
   if (eCount !== edges.length || nCount !== nodes.length) throw schemaError(lines.length, "every pid has its E and its N");
   if (header.d === 1 && aCount !== eCount) throw schemaError(lines.length, "an A exists for every E iff D = 1");
+  // D13: a rule over the whole list, after the rules of each record: the second E or N record with the focus bit is refused, at its own line
+  if (secondFocus !== 0) throw schemaError(secondFocus, "D13: at most one E or N record has the focus bit");
   return {
     format: DL_FORMAT, width: header.w, height: header.h, directed: header.d === 1,
     artifactSha256: header.artifact, sceneSha256: header.scene, layoutSha256: header.layout, nodes, edges, records,

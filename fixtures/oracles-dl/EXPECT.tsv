@@ -494,3 +494,48 @@ K218	K
 K219	K						
 K220	K						
 K221	K						
+S44	S	core			{"expect_line":143,"file":"bad/S44.dl"}		INVALID_INPUT/SCHEMA
+S45	S	core			{"expect_line":99,"file":"bad/S45.dl"}		INVALID_INPUT/SCHEMA
+S46	S	core			{"expect_line":140,"file":"bad/S46.dl"}		INVALID_INPUT/SCHEMA
+S47	S	core			{"expect_line":143,"file":"bad/S47.dl"}		INVALID_INPUT/SCHEMA
+S48	S	core			{"expect_line":144,"file":"bad/S48.dl"}		INVALID_INPUT/SCHEMA
+S49	S	core			{"expect_line":137,"file":"bad/S49.dl"}		INVALID_INPUT/SCHEMA
+S50	S	core			{"expect_line":140,"file":"bad/S50.dl"}		INVALID_INPUT/SCHEMA
+S51	S	core			{"expect_line":61,"file":"bad/S51.dl"}		INVALID_INPUT/SCHEMA
+S52	S	core			{"expect_line":133,"file":"bad/S52.dl"}		INVALID_INPUT/SCHEMA
+S53	S	core			{"expect_line":141,"file":"bad/S53.dl"}		INVALID_INPUT/SCHEMA
+S54	S	core			{"expect_line":91,"file":"bad/S54.dl"}		INVALID_INPUT/SCHEMA
+S55	S	core			{"expect_line":8,"file":"bad/S55.dl"}		INVALID_INPUT/SCHEMA
+S56	S	core			{"expect_line":164,"file":"bad/S56.dl"}		INVALID_INPUT/SCHEMA
+S57	S	core			{"expect_line":61,"file":"bad/S57.dl"}		INVALID_INPUT/SCHEMA
+S58	S	core			dl/S58.dl		
+S59	S	core			dl/S59.dl		
+S60	S	core			dl/G05.dl		
+S61	S	core			dl/S61.dl		
+S62	S	core			dl/S62.dl		
+S63	S	core			dl/S63.dl		
+S64	S	core			{"expect_line":7,"file":"bad/S64.dl"}		INVALID_INPUT/SCHEMA
+K222	K						
+K223	K						
+K224	K						
+K225	K						
+K226	K						
+K227	K						
+K228	K						
+K229	K						
+K230	K						
+K231	K						
+K232	K						
+K233	K						
+K234	K						
+K235	K						
+K236	K						
+K237	K						
+K238	K						
+K239	K						
+K240	K						
+K241	K						
+K242	K						
+K243	K						
+K244	K						
+K245	K						

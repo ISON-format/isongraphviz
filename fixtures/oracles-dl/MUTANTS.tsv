@@ -226,3 +226,27 @@ K218	single-focus count counts layer-2 markers but layer-6 painted sections only
 K219	single-focus count counts layer-6 markers but layer-2 painted sections only	R62	R62		R48	killed
 K220	stream reader refuses a lone focus marker of layer 2 that has no painting calls	R63,U21	R63,U21			killed
 K221	canvasStreamWitness refuses a lone focus marker without painting calls, readoutFromCanvasStream accepts it	U21	U21			killed
+K222	reader has no focus rule (D13 absent: several focus bits accepted)	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64			killed
+K223	reader counts the focus bit on N records only (an E with the bit is not counted)	S45,S46,S49,S51,S52,S54,S64	S45,S46,S49,S51,S52,S54,S64			killed
+K224	reader counts the focus bit on E records only (an N with the bit is not counted)	S44,S46,S47,S48,S49,S50,S52,S53,S55	S44,S46,S47,S48,S49,S50,S52,S53,S55			killed
+K225	reader counts the focus bit only when `flags` is 2 (a record with flags 3 is not counted)	S47,S48,S49,S54	S47,S48,S49,S54			killed
+K226	reader counts the focus bit only when `flags` is 3 (a record with flags 2 is not counted)	S44,S45,S46,S47,S48,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S50,S51,S52,S53,S54,S55,S64			killed
+K227	reader allows two focus bits (refuses at the third; with exactly two the list is accepted)	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64			killed
+K228	reader reports the line of the first record with the focus bit instead of the second	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64			killed
+K229	reader reports the line of the last record with the focus bit (the third of three)	S53,S54	S53,S54			killed
+K230	D13 is applied before the rules of the records (an earlier faulty record is not the one reported)	S56,S57	S56,S57			killed
+K231	D13 is applied while the records are read (a faulty record after the second focus record is not reached)	S56	S56			killed
+K232	reader allows one focus E and one focus N (at most one per kind)	S46,S49,S52	S46,S49,S52			killed
+K233	reader refuses a second focus record only when the first was an N (an E first: two foci accepted)	S45,S46,S49,S51,S52,S54,S64	S45,S46,S49,S51,S52,S54,S64			killed
+K234	reader refuses a second focus record only when the first was an E (an N first: two foci accepted)	S44,S47,S48,S50,S53,S55	S44,S47,S48,S50,S53,S55			killed
+K235	reader compares each E or N record with the previous E or N record only (two focus records that are not neighbours are accepted)	S44,S45,S46,S47,S48,S49,S53,S54	S44,S45,S46,S47,S48,S49,S53,S54			killed
+K236	reader compares each record with the previous line only (an A between two E records hides the first)	S44,S45,S46,S47,S48,S49,S51,S52,S53,S54	S44,S45,S46,S47,S48,S49,S51,S52,S53,S54			killed
+K237	reader counts the selected bit (`flags` 1 or 3) instead of the focus bit	S44,S45,S46,S61,S63	S44,S45,S46,S61,S63		S01,S47,S48,S50,S51,S52,S53,S54,S55,S64	killed
+K238	reader counts a record with flags 3 twice (one record with flags 3 is refused)	S47,S49,S62,S63	S47,S49,S62,S63		S01,S54	killed
+K239	reader reports the line number of the second focus record minus one (a zero-based line)	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64			killed
+K240	the D13 error is `INVALID_INPUT/INVALID_VALUE` instead of `SCHEMA`	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64	S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S64			killed
+K241	reader reads the focus bit of an E from `form` and of an N from `kcls` (the wrong field)	S01,S60,S61	S01,S60,S61		S44,S45,S46,S47,S48,S49,S50,S51,S52,S53,S54,S55,S58,S59,S62,S63,S64	killed
+K242	reader does not examine the last E or N record of the list	S55	S55			killed
+K243	reader does not examine the first N record	S52	S52		S55	killed
+K244	reader does not examine the first E record	S51	S51		S64	killed
+K245	reader applies D13 to a directed list only (an undirected list with two focus records is accepted)	S64	S64			killed

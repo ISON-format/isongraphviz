@@ -20,7 +20,7 @@ export const SVG_DIR = join(FIXTURES, "oracles-svg");
 export const DL_DIR = join(FIXTURES, "oracles-dl");
 /** The digests recorded at oracle time (design 13.1, 13.7): a regenerated corpus changes the rows this harness reads, so the gate fails loudly. */
 export const SVG_DIGEST = "63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd";
-export const DL_DIGEST = "18dbafa1473a2d94db857d1238c8576aac5ba3bfea3f239491766905f8d25452";
+export const DL_DIGEST = "438ad17ebb065d86354b6e17feeb875d12e3b17cc75ea4105278ab103ed5fb34";
 
 export const sha256 = (b: Uint8Array | string): string => createHash("sha256").update(b).digest("hex");
 export const text = (b: Uint8Array): string => new TextDecoder().decode(b);

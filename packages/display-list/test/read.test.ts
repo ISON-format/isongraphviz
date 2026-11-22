@@ -98,3 +98,49 @@ describe("the record rules", () => {
     expect(parse(serializeDisplayList(list)).records).toEqual([]);
   });
 });
+
+// Rule D13 (design 4.7, R31-05, ruled 2026-11-22): at most one E or N record of the whole list has the focus bit (flags 2 or 3); the second such
+// record is INVALID_INPUT/SCHEMA at ITS line; D13 is applied after the rules of each record. G01: line 5 is its E, lines 7 and 8 its N records.
+describe("D13: at most one E or N record has the focus bit", () => {
+  const E = '["E",3,0,0,', N1 = '["N",1,0,0,', N2 = '["N",2,0,0,';
+  const withFlags = (edits: { e?: number; n1?: number; n2?: number }): string => {
+    let s = G01;
+    if (edits.e !== undefined) s = s.replace(E, `["E",3,${edits.e},0,`);
+    if (edits.n1 !== undefined) s = s.replace(N1, `["N",1,0,${edits.n1},`);
+    if (edits.n2 !== undefined) s = s.replace(N2, `["N",2,0,${edits.n2},`);
+    return s;
+  };
+  const refused = (s: string): { code: string; path: string | undefined } => {
+    try { parse(s); } catch (e) { return { code: `${(e as IgrError).code}/${(e as IgrError).reason}`, path: (e as IgrError).path }; }
+    return { code: "none", path: undefined };
+  };
+  it("two N records with the focus bit: refused at the line of the second", () => {
+    expect(refused(withFlags({ n1: 2, n2: 2 }))).toEqual({ code: "INVALID_INPUT/SCHEMA", path: "line 8" });
+  });
+  it("an E and an N with the focus bit: refused at the N (the second in the list)", () => {
+    expect(refused(withFlags({ e: 2, n1: 2 }))).toEqual({ code: "INVALID_INPUT/SCHEMA", path: "line 7" });
+  });
+  it("flags 3 counts as the focus bit like flags 2, in either order", () => {
+    expect(refused(withFlags({ n1: 3, n2: 2 })).path).toBe("line 8");
+    expect(refused(withFlags({ n1: 2, n2: 3 })).path).toBe("line 8");
+    expect(refused(withFlags({ e: 3, n1: 3 })).path).toBe("line 7");
+  });
+  it("three focus bits: the error is at the second, not the third", () => {
+    expect(refused(withFlags({ e: 2, n1: 3, n2: 2 })).path).toBe("line 7");
+  });
+  it("one focus bit, none, or flags 1 (selected only) on every record are accepted", () => {
+    for (const edits of [{ e: 2 }, { n1: 2 }, { n2: 3 }, { e: 3 }, {}, { e: 1, n1: 1, n2: 1 }, { e: 1, n1: 3, n2: 1 }]) {
+      expect(refused(withFlags(edits)).code, JSON.stringify(edits)).toBe("none");
+    }
+  });
+  it("a record rule outranks D13 whether the faulty record comes before the first focus record or after the second", () => {
+    // after: a T of 25 units (D9, line 9) behind two focused N records
+    const after = withFlags({ n1: 2, n2: 2 }).replace('"1"]', `"${"x".repeat(25)}"]`);
+    expect(refused(after)).toEqual({ code: "INVALID_INPUT/SCHEMA", path: "line 9" });
+    // before: an E with flags 4 (D6, line 5) ahead of two focused N records
+    expect(refused(withFlags({ e: 4, n1: 2, n2: 2 }))).toEqual({ code: "INVALID_INPUT/SCHEMA", path: "line 5" });
+  });
+  it("a list built from a model never has two (the builder and the reader agree): Y03 and Y06 are accepted", () => {
+    for (const f of ["dl/Y03.dl", "dl/Y06.dl", "dl/Y16.dl"]) expect(refused(readOracleText(f)).code, f).toBe("none");
+  });
+});

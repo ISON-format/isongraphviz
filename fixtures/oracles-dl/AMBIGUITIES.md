@@ -389,3 +389,35 @@ Source: design 31 rev 6, change log "Rev 5 -> rev 6 (owner-adopted wording)", se
 | A-52 (where the list of a stream row comes from) | R31-06 | OPEN, not folded by rev 6 (13.2); the reading of A-52 is kept for the new rows R52-R63 and U18-U21 | none |
 
 Not touched (gl-only or open, no row written): R31-07, R31-08, R31-09, R31-10, R31-11 (a) and (b) (V7 plan, controller and logs: `oracles-gl`); R31-11 (c) and R30-31-01 (open, undecided).
+
+## A-57  13.2: the `S` row grammar has no field for the line number that D13 states (rows S44-S57, S64)
+
+* **Design text.** 4.7: failures are `INVALID_INPUT/SCHEMA` "with the line number in `detail`"; D13 (R31-05) says "the line number in `detail` being that of the second such record". 13.2 and 13.3 give an `S` row an input that is a path (or the inline `{"file":...,"limits":...,"also":[...]}`), an empty `expected` and an `error` cell `CODE/REASON`; no existing `S` row states a line number, and no `S` grammar says how a row would.
+* **Literal reading used.** The line is the one thing that tells D13's two readings apart (the second record against the first, the last or an earlier fault), so the rejected rows of D13 carry it in their inline input as `"expect_line": N` (the 1-based line of the record that the rule names; `{"expect_line":143,"file":"bad/S44.dl"}`), next to the `file` key that a reader of 13.2 already knows. This follows the precedent of `expect_detail` of `gl:E10` and `E11` (an extra inline key that states a part of the failure the `error` cell cannot). The `error` cell stays `INVALID_INPUT/SCHEMA`; a runner that does not know `expect_line` still checks the rejection and passes. No other `S` row (S02-S43) is changed.
+* **Why / status.** Editorial, a grammar gap, not a verdict. The line is a **number**, not the text of `detail`: where an implementation puts it (`detail`, a `path` such as `line 7`) is not a corpus matter.
+
+## A-58  4.7 D13 supersedes A-51 (the list reader had no focus rule)
+
+* **Design text.** 4.7 D13 and change-log row R31-05 (ruled 2026-11-22): "at most one `E` or `N` record of the whole list has the focus bit (`flags` 2 or 3). A second record with the bit is `INVALID_INPUT/SCHEMA`, the line number in `detail` being that of the second such record ... a rule over the whole list, applied after the rules of each record; single-fault like the others".
+* **Literal reading used.** D13 is the "new rule D13 with a single-fault `S` row" that A-51 named. A-51 stays as written (a record of what the corpus said before the ruling); this entry is its disposition: **RESOLVED by D13**. Both focus-bearing values count (`flags` 2 and 3), on `E` and on `N`, whatever the kind of the first record; `flags` 1 (selected only) and 0 do not. The rows are S44-S64 (S44-S55 and S64 single-fault rejections, S56 and S57 the precedence rows of A-59, S58-S63 the controls that must stay accepted); the mutants K222-K245.
+* **Why / status.** Reading matched to the text; no existing expected byte changes (every existing list of the corpus has at most one focus bit, asserted by `tools/rev7_dl.py`).
+
+## A-59  4.7 D13 against the other rules: what "applied after the rules of each record" decides (rows S56, S57)
+
+* **Design text.** "D13 is a rule over the whole list, applied after the rules of each record." The other whole-list rules (D4 counts and `A` presence of D5, line number 0 or the header) are not ordered against D13 by any sentence.
+* **Literal reading used.** Against the **per-record** rules (D6 `E`, D7 `A`, D8 `N`, D9 `T`, D12 canonical text) the order is stated: a faulty record is reported first, whether it comes before the first focus record (S57: an `E` with `flags` 4 ahead of two focused `N`) or after the second (S56: a `T` text of 25 units after two focused `N`); the line is that of the faulty record. Both rows are therefore **two-fault** lists and are judged by the line (like `S32` and `S40` they are declared exceptions to single-fault; the generator asserts that with the per-record rule alone off the line is D13's, and with D13 alone off it is the record's). No row orders D13 against the whole-list rules D4 and D5 (a header count, a missing `A`), and none is written: a row would encode a guess about a line number the text does not give.
+* **Why / status.** Reading from "after the rules of each record". Mutants K230 (D13 before the records) and K231 (D13 while the records are read) are the two ways to get it wrong.
+
+## A-60  Where the new accepted lists and ids live (rows S58-S63, S60 reuses G05)
+
+* **Design text.** 13.3 lists the `dl/` files as expected lists of the G, N, X, Y, O rows and `bad/` as the rejected lists; it reserves no `S` id above `S43` and no `K` id above `K221`.
+* **Literal reading used.** New ids continue the numbering: `S44`-`S64`, `K222`-`K245`. The rejected lists are `bad/S44.dl`-`bad/S57.dl` and `bad/S64.dl`. The accepted controls S58, S59, S61, S62, S63 are files `dl/S58.dl` etc. (a list is a list; no reader and no test globs the directory) and S60 names the existing `dl/G05.dl` (no focus bit; the `row` for the list as it stands). Every control is `G05` or `G02`/`O01` edited in `flags` only, so it is accepted by every other rule. `bad/S55.dl` is built on `O01` (a list without `T`) so that the second focus record is the last record of the file; the lists of the other rows are `G05` (20 nodes, 37 edges; directed) except `S64` (`G02`, undirected: the two `E` records follow each other with no `A` between).
+* **Why / status.** Editorial; no verdict is affected.
+
+## Resolved for D13 (disposition of an earlier entry; the entries above are unchanged)
+
+Source: design 31 4.7 rule D13 and change-log row R31-05 (ruled 2026-11-22). Append-only: no existing expected byte, row, mutant or ambiguity line changes.
+
+| Entry | Rule | Disposition | Rows and mutants |
+|---|---|---|---|
+| A-51 (the list reader has no focus rule) | D13, R31-05 | RESOLVED by D13: a second focus-bearing `E` or `N` record is `INVALID_INPUT/SCHEMA` at its line | S44-S57, S64 (rejected), S58-S63 (accepted); K222-K245 |

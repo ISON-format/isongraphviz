@@ -591,7 +591,7 @@ MUT_OFF = {"K72": {"cr"}, "K73": {"indent", "blank"}, "K74": {"finallf"}, "K75":
            "K80": {"flags", "form", "ncoords"}, "K81": {"a_presence"}, "K82": {"a_geom"}, "K83": {"a_adjacent"},
            "K84": {"order", "t_role", "t_order", "t_once"}, "K85": {"t_text"}, "K86": {"ebound", "nbound"},
            "K87": {"order"}, "K88": {"canon_num"}, "K89": {"kind"}, "K91": {"maxline"}, "K92": {"kcls"},
-           "K160": {"tbound"}}
+           "K160": {"tbound"}, "K222": {"focus"}}
 
 
 class ReadError(Exception):
@@ -668,6 +668,70 @@ def _norm_numbers(v):
 
 def _isint(v):
     return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _d13(en, fail, directed=True):
+    """D13 (design 31 4.7, R31-05, ruled 2026-11-22): at most one `E` or `N` record of the whole list has the focus bit
+    (`flags` 2 or 3); the second such record is rejected, the line number is that of the second one.
+    `en` is every E and N record that reached the flags rule, in list order: (kind, line, flags, other) with `other` the
+    `form` of an E and the `kcls` of an N.  The variants K223-K245 are the mutants of rows S44-S64 (tools/rev7_dl.py)."""
+    code, reason = "INVALID_INPUT", ("INVALID_VALUE" if M("K240") else "SCHEMA")
+    if M("K245") and not directed:
+        return
+    if M("K223"):
+        en = [r for r in en if r[0] == "N"]
+    if M("K224"):
+        en = [r for r in en if r[0] == "E"]
+    if M("K242"):
+        en = en[:-1]
+    if M("K243"):
+        k = [i for i, r in enumerate(en) if r[0] == "N"]
+        en = [r for i, r in enumerate(en) if not (k and i == k[0])]
+    if M("K244"):
+        k = [i for i, r in enumerate(en) if r[0] == "E"]
+        en = [r for i, r in enumerate(en) if not (k and i == k[0])]
+
+    def isf(r):
+        fl = r[2]
+        if M("K225"):
+            return fl == 2
+        if M("K226"):
+            return fl == 3
+        if M("K237"):
+            return bool(fl & 1)
+        if M("K241"):
+            return r[3] in (2, 3)
+        return fl in (2, 3)
+
+    foc = [r for r in en if isf(r)]
+    if M("K238"):
+        foc = [r for r in en for _ in range(2 if r[2] == 3 else 1) if isf(r)]
+    hit = None
+    if M("K232"):
+        for kind in ("E", "N"):
+            fk = [r for r in foc if r[0] == kind]
+            if len(fk) >= 2 and (hit is None or fk[1][1] < hit[1]):
+                hit = fk[1]
+    elif M("K235") or M("K236"):
+        for a, b in zip(en, en[1:]):
+            if isf(a) and isf(b) and (not M("K236") or b[1] == a[1] + 1):
+                hit = b
+                break
+    elif len(foc) >= 2:
+        if M("K233") and foc[0][0] == "E":
+            hit = None
+        elif M("K234") and foc[0][0] == "N":
+            hit = None
+        elif M("K227"):
+            hit = foc[2] if len(foc) >= 3 else None
+        elif M("K228"):
+            hit = foc[0]
+        elif M("K229"):
+            hit = foc[-1]
+        else:
+            hit = foc[1]
+    if hit is not None:
+        fail("focus", hit[1] - 1 if M("K239") else hit[1], code, reason)
 
 
 def parse_dl(data, max_bytes=DEFAULT_READ_BYTES, max_line=DEFAULT_LINE_UNITS, off=frozenset()):
@@ -815,6 +879,15 @@ def parse_dl(data, max_bytes=DEFAULT_READ_BYTES, max_line=DEFAULT_LINE_UNITS, of
     e_pids = []
     lim = DL_COORD_MAX
     last_tpid, tpids = 0, set()
+    en = []                                   # D13: every E and N record that reached its flags rule
+    if M("K230"):                             # mutant: D13 before the rules of the records
+        pre = []
+        for i, v, l in recs:
+            if isinstance(v, list) and v and v[0] == "E" and len(v) >= 5 and all(_isint(x) for x in v[1:]):
+                pre.append(("E", i, v[2], v[3]))
+            elif isinstance(v, list) and v and v[0] == "N" and len(v) == 6 and all(_isint(x) for x in v[1:]):
+                pre.append(("N", i, v[3], v[2]))
+        _d13(pre, fail)
     for i, v, l in recs:
         if not isinstance(v, list) or not v or v[0] in ("H", "n", "e"):
             prev = v
@@ -827,6 +900,9 @@ def parse_dl(data, max_bytes=DEFAULT_READ_BYTES, max_line=DEFAULT_LINE_UNITS, of
                 prev = v
                 continue
             pid, fl, form = v[1], v[2], v[3]
+            en.append(("E", i, fl, form))
+            if M("K231"):                     # mutant: D13 inline, while the records are read
+                _d13(en, fail)
             if pid != exp_e:
                 fail("pid_e", i)
             exp_e = pid + 1
@@ -862,6 +938,9 @@ def parse_dl(data, max_bytes=DEFAULT_READ_BYTES, max_line=DEFAULT_LINE_UNITS, of
                 prev = v
                 continue
             pid, kc, fl, x, y = v[1:]
+            en.append(("N", i, fl, kc))
+            if M("K231"):
+                _d13(en, fail)
             if pid != exp_n:
                 fail("pid_n", i)
             exp_n = pid + 1
@@ -921,6 +1000,8 @@ def parse_dl(data, max_bytes=DEFAULT_READ_BYTES, max_line=DEFAULT_LINE_UNITS, of
             if {"canon_num", "canon"} & set(off):
                 continue
             raise ReadError("INVALID_INPUT", "SCHEMA", "canon_num", i)
+    # D13 focus: a rule over the whole list, after the rules of each record
+    _d13(en, fail, D == 1)
     return {"h": hdr, "nodes": nodes, "edges": edges, "n": n_t, "e": e_t}
 
 

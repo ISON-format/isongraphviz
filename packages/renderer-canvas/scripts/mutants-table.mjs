@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-dl (K01..K221 with the b-variants: 227 mutants) as source patches. Every mutant is a list of exact-text
+// The K table of design 13.5 for fixtures/oracles-dl (K01..K245 with the b-variants: 251 mutants) as source patches. Every mutant is a list of exact-text
 // patches applied to a SCRATCH COPY of packages/display-list/src ("dl") and packages/renderer-canvas/src ("cv"); production code has no switchable variants
 // and no src/ is ever modified (the K197 and K198 patches apply to a scratch copy of renderer-core/src, where the state check lives). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of src/
 // cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -35,6 +35,13 @@ const FOCUS_MIXED = (byMarkers, byPainted) => `  if (sections.filter((s) => s.la
 // K220, K221: a lone focus marker without painting calls refused
 const LONE_FOCUS_READER = '  const fm = sections.filter((s) => s.layer === 2 || s.layer === 6);\n  if (fm.length === 1 && fm[0]!.layer === 2 && !painted(fm[0]!)) throw schemaError(fm[0]!.line, "a focus marker without painting calls");\n';
 const LONE_FOCUS_WITNESS = 'const fm = sections.filter((s) => s.layer === 2 || s.layer === 6);\n  if (fm.length === 1 && !painted(fm[0]!)) throw new IgrError("INVALID_INPUT", "SCHEMA", "line " + fm[0]!.line, "a focus marker without painting calls");\n  ';
+// rule D13 of the list reader (4.7, R31-05; rows S44-S64, K222-K245): the exact lines of read.ts the K222-K245 patches hit
+const D13_DECL = "let focusCount = 0, secondFocus = 0; // D13: the number of E and N records with the focus bit (flags 2 or 3) and the line of the second";
+const D13_E = "if (rec[2] >= 2 && ++focusCount === 2) secondFocus = no;";
+const D13_N = "if (rec[3] >= 2 && ++focusCount === 2) secondFocus = no;";
+const D13_THROW = 'if (secondFocus !== 0) throw schemaError(secondFocus, "D13: at most one E or N record has the focus bit");';
+const D13_LOOP = "  for (let i = 0; i < lines.length; i++) {\n    const line = lines[i]!, no = i + 1;\n    let rec: unknown;";
+const D13_PRE = '  let early = 0, c0 = 0;\n  for (let j = 0; j < lines.length && early === 0; j++) {\n    let r: any; try { r = JSON.parse(lines[j]!); } catch { continue; }\n    if (Array.isArray(r) && ((r[0] === "E" && r[2] >= 2) || (r[0] === "N" && r[3] >= 2)) && ++c0 === 2) early = j + 1;\n  }\n  if (early !== 0) throw schemaError(early, "D13 before the records");\n';
 const FLOORDIV_GEOM = D("geometry.ts", 'import { divRound, isqrt } from "./num.js";', 'import { divRound, floorDiv, isqrt } from "./num.js";');
 const LET_RAW = D("lines.ts", "const raw = parts[i]!;", "let raw = parts[i]!;");
 
@@ -364,11 +371,62 @@ export const MUTANTS = [
   m("K221", "canvasStreamWitness refuses a lone focus marker without painting calls, readoutFromCanvasStream accepts it", [
     D(WITNESS_FILE, WITNESS_HEAD, WITNESS_HEAD.replace("const nd = list.nodes.length;", LONE_FOCUS_WITNESS + "const nd = list.nodes.length;")),
   ]),
+  // ---- rule D13, the single focus of the list reader (R31-05; rows S44-S64) -----------------------------------------------------------------
+  m("K222", "reader has no focus rule (D13 absent: several focus bits accepted)", [D("read.ts", D13_THROW, "void 0;")]),
+  m("K223", "reader counts the focus bit on N records only (an E with the bit is not counted)", [D("read.ts", D13_E, "void 0;")]),
+  m("K224", "reader counts the focus bit on E records only (an N with the bit is not counted)", [D("read.ts", D13_N, "void 0;")]),
+  m("K225", "reader counts the focus bit only when `flags` is 2 (a record with flags 3 is not counted)", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2", "rec[2] === 2")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2", "rec[3] === 2"))]),
+  m("K226", "reader counts the focus bit only when `flags` is 3 (a record with flags 2 is not counted)", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2", "rec[2] === 3")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2", "rec[3] === 3"))]),
+  m("K227", "reader allows two focus bits (refuses at the third; with exactly two the list is accepted)", [D("read.ts", D13_E, D13_E.replace("=== 2", "=== 3")), D("read.ts", D13_N, D13_N.replace("=== 2", "=== 3"))]),
+  m("K228", "reader reports the line of the first record with the focus bit instead of the second", [
+    D("read.ts", D13_E, D13_E.replace("=== 2", "=== 1")), D("read.ts", D13_N, D13_N.replace("=== 2", "=== 1")), D("read.ts", "if (secondFocus !== 0) throw", "if (focusCount > 1) throw"),
+  ]),
+  m("K229", "reader reports the line of the last record with the focus bit (the third of three)", [
+    D("read.ts", D13_E, "if (rec[2] >= 2) { focusCount++; secondFocus = no; }"), D("read.ts", D13_N, "if (rec[3] >= 2) { focusCount++; secondFocus = no; }"), D("read.ts", "if (secondFocus !== 0) throw", "if (focusCount > 1) throw"),
+  ]),
+  m("K230", "D13 is applied before the rules of the records (an earlier faulty record is not the one reported)", [D("read.ts", D13_LOOP, D13_PRE + D13_LOOP)]),
+  m("K231", "D13 is applied while the records are read (a faulty record after the second focus record is not reached)", [
+    D("read.ts", D13_E, 'if (rec[2] >= 2 && ++focusCount === 2) throw schemaError(no, "D13 while reading");'), D("read.ts", D13_N, 'if (rec[3] >= 2 && ++focusCount === 2) throw schemaError(no, "D13 while reading");'),
+  ]),
+  m("K232", "reader allows one focus E and one focus N (at most one per kind)", [
+    D("read.ts", D13_DECL, D13_DECL.replace("let focusCount = 0,", "let focusCount = 0, focusE = 0, focusN = 0,")),
+    D("read.ts", D13_E, "if (rec[2] >= 2 && ++focusE === 2 && secondFocus === 0) secondFocus = no;"), D("read.ts", D13_N, "if (rec[3] >= 2 && ++focusN === 2 && secondFocus === 0) secondFocus = no;"),
+  ]),
+  m("K233", "reader refuses a second focus record only when the first was an N (an E first: two foci accepted)", [
+    D("read.ts", D13_DECL, D13_DECL.replace("let focusCount = 0,", "let firstN = false, focusCount = 0,")),
+    D("read.ts", D13_E, "if (rec[2] >= 2) focusCount++;"), D("read.ts", D13_N, "if (rec[3] >= 2) { if (++focusCount === 1) firstN = true; else if (focusCount === 2 && firstN) secondFocus = no; }"),
+  ]),
+  m("K234", "reader refuses a second focus record only when the first was an E (an N first: two foci accepted)", [
+    D("read.ts", D13_DECL, D13_DECL.replace("let focusCount = 0,", "let firstE = false, focusCount = 0,")),
+    D("read.ts", D13_E, "if (rec[2] >= 2) { if (++focusCount === 1) firstE = true; else if (focusCount === 2) secondFocus = no; }"), D("read.ts", D13_N, "if (rec[3] >= 2 && ++focusCount === 2 && firstE) secondFocus = no;"),
+  ]),
+  m("K235", "reader compares each E or N record with the previous E or N record only (two focus records that are not neighbours are accepted)", [
+    D("read.ts", D13_DECL, D13_DECL.replace("let focusCount = 0,", "let prevFocus = false, focusCount = 0,")),
+    D("read.ts", D13_E, "{ const f = rec[2] >= 2; if (f && prevFocus && secondFocus === 0) secondFocus = no; prevFocus = f; }"), D("read.ts", D13_N, "{ const f = rec[3] >= 2; if (f && prevFocus && secondFocus === 0) secondFocus = no; prevFocus = f; }"),
+  ]),
+  m("K236", "reader compares each record with the previous line only (an A between two E records hides the first)", [
+    D("read.ts", D13_DECL, D13_DECL.replace("let focusCount = 0,", "let prevFocus = false, focusCount = 0,")),
+    D("read.ts", D13_E, '{ const f = rec[2] >= 2; if (f && prevFocus && prevKind === "E" && secondFocus === 0) secondFocus = no; prevFocus = f; }'), D("read.ts", D13_N, '{ const f = rec[3] >= 2; if (f && prevFocus && prevKind === "N" && secondFocus === 0) secondFocus = no; prevFocus = f; }'),
+  ]),
+  m("K237", "reader counts the selected bit (`flags` 1 or 3) instead of the focus bit", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2", "(rec[2] & 1) === 1")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2", "(rec[3] & 1) === 1"))]),
+  m("K238", "reader counts a record with flags 3 twice (one record with flags 3 is refused)", [
+    D("read.ts", D13_E, "if (rec[2] >= 2 && (focusCount += rec[2] === 3 ? 2 : 1) >= 2 && secondFocus === 0) secondFocus = no;"), D("read.ts", D13_N, "if (rec[3] >= 2 && (focusCount += rec[3] === 3 ? 2 : 1) >= 2 && secondFocus === 0) secondFocus = no;"),
+  ]),
+  m("K239", "reader reports the line number of the second focus record minus one (a zero-based line)", [D("read.ts", "throw schemaError(secondFocus, ", "throw schemaError(secondFocus - 1, ")]),
+  m("K240", "the D13 error is `INVALID_INPUT/INVALID_VALUE` instead of `SCHEMA`", [
+    D("read.ts", 'import type { DisplayList, DlRecord, WireEdge, WireNode } from "./types.js";', 'import type { DisplayList, DlRecord, WireEdge, WireNode } from "./types.js";\nimport { IgrError } from "isongraph-visualize-renderer-core";'),
+    D("read.ts", D13_THROW, 'if (secondFocus !== 0) throw new IgrError("INVALID_INPUT", "INVALID_VALUE", "line " + secondFocus, "D13");'),
+  ]),
+  m("K241", "reader reads the focus bit of an E from `form` and of an N from `kcls` (the wrong field)", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2", "rec[3] >= 2").replace(") secondFocus", " && true) secondFocus")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2", "rec[2] >= 2"))]),
+  m("K242", "reader does not examine the last E or N record of the list", [D("read.ts", D13_N, D13_N.replace("rec[3] >= 2 &&", "rec[3] >= 2 && rec[1] !== nodes.length &&"))]),
+  m("K243", "reader does not examine the first N record", [D("read.ts", D13_N, D13_N.replace("rec[3] >= 2 &&", "rec[3] >= 2 && rec[1] !== 1 &&"))]),
+  m("K244", "reader does not examine the first E record", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2 &&", "rec[2] >= 2 && rec[1] !== nodes.length + 1 &&"))]),
+  m("K245", "reader applies D13 to a directed list only (an undirected list with two focus records is accepted)", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2 &&", "header!.d === 1 && rec[2] >= 2 &&")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2 &&", "header!.d === 1 && rec[3] >= 2 &&"))]),
 ];
 
 
 // ---- extra mutants of this implementation (not in the corpus table): one per behaviour pinned by the rows `ext:` (test/oracle/runner.ts, runExtra;
-// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 227 of the K table.
+// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 251 of the K table.
 const BS = String.fromCharCode(92);
 export const EXTRA_MUTANTS = [
   m("X01", "audit I-1: a record kind is looked up on a plain object (inherited names pass)", [D("read.ts", "const rank = RANK.get(kind);", "const rank = ({ H: 0, n: 1, e: 2, E: 3, A: 3, N: 4, T: 5 } as Record<string, number>)[kind];")]),

@@ -130,16 +130,28 @@ async function listRow(impl: Impl, c: Oracle, row: Row): Promise<void> {
   }
 }
 
+/** The line number of a strict-reader error: the reader puts it in the path as "line N" (the design says `detail`; a "line N" in either is read). */
+function lineOf(e: unknown): number | undefined {
+  if (!(e instanceof IgrError)) return undefined;
+  for (const t of [e.path, e.detail]) { const m = typeof t === "string" ? /^line (\d+)(?!\d)/.exec(t) : null; if (m) return Number(m[1]); }
+  return undefined;
+}
+
 // ---- S rows: the strict reader ----------------------------------------------------------------------------------------------
 async function readerRow(impl: Impl, c: Oracle, row: Row): Promise<void> {
   const inline = /^[{[]/.test(row.input);
   const input = inline ? parseInput(row) : { file: row.input };
   const cases: { file: string; limits?: { maxBytes?: number; maxLineUnits?: number } }[] = [{ file: input["file"] as string, limits: input["limits"] as never }, ...((input["also"] as { file: string }[]) ?? [])];
+  const wantLine = input["expect_line"] as number | undefined; // D13 rows (A-57): the 1-based line of the record the rule names
   for (const k of cases) {
     const bytes = c.bytes(k.file);
-    let got = "none", list: ReturnType<Impl["parseDisplayList"]> | undefined;
-    try { list = impl.parseDisplayList(bytes, k.limits); } catch (e) { got = code(e); }
-    if (row.error) { if (got !== row.error) fail(`${row.id} ${k.file}: got ${got} want ${row.error}`); continue; }
+    let got = "none", gotLine: number | undefined, list: ReturnType<Impl["parseDisplayList"]> | undefined;
+    try { list = impl.parseDisplayList(bytes, k.limits); } catch (e) { got = code(e); gotLine = lineOf(e); }
+    if (row.error) {
+      if (got !== row.error) fail(`${row.id} ${k.file}: got ${got} want ${row.error}`);
+      if (wantLine !== undefined && gotLine !== wantLine) fail(`${row.id} ${k.file}: rejected at line ${String(gotLine)} want line ${wantLine}`);
+      continue;
+    }
     if (got !== "none") fail(`${row.id} ${k.file}: rejected with ${got}`);
     eqBytes(`${row.id} ${k.file} re-serialization`, impl.serializeDisplayList(list!, k.limits ? { maxBytes: k.limits.maxBytes ?? bytes.length } : undefined), bytes);
   }
