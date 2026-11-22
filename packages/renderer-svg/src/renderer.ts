@@ -50,6 +50,8 @@ export function resolveRendererOptions(host: Host, options: unknown): Resolved {
   if (capUnits !== undefined && (capUnits < 0 || capUnits > LIMIT_MAX)) throw bad("OUT_OF_RANGE", "options.capacity.maxDrawnLabelUnits");
   if (capUnits !== undefined && givenSvg && capUnits !== svg.maxDrawnLabelUnits) throw bad("INVALID_VALUE", "options.capacity.maxDrawnLabelUnits", "must equal svg.maxDrawnLabelUnits");
   const units = capUnits ?? (givenSvg ? svg.maxDrawnLabelUnits : d.maxDrawnLabelUnits);
+  // R30-31-01: the one value is the manifest's capacity, which must be positive (27 8.3); a RENDERER with a budget of 0 is refused here like V6 and V7 (renderSvg called directly still accepts 0)
+  if (units < 1) throw bad("OUT_OF_RANGE", "options.capacity.maxDrawnLabelUnits", "the label budget of a renderer must be positive");
   const name = o["name"] === undefined ? "svg-renderer" : o["name"];
   const version = o["version"] === undefined ? "0.0.0" : o["version"];
   if (typeof name !== "string" || typeof version !== "string") throw bad("SCHEMA", "options", "name and version must be strings");

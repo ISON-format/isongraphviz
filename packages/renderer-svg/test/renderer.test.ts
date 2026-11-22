@@ -231,6 +231,19 @@ describe("audit M-1: the one label-budget value is range-checked at creation (12
     expect(errOf(() => createSvgSubject({ capacity: { maxDrawnLabelUnits: -5 } }))).toBe("INVALID_INPUT/OUT_OF_RANGE");
     expect(errOf(() => createSvgRenderer({ capacity: { maxDrawnLabelUnits: 2 ** 31 } }))).toBe("none");
   });
+  it("R30-31-01: a renderer label budget of 0 is INVALID_INPUT/OUT_OF_RANGE (the code V6 and V7 use), from capacity or from svg", () => {
+    for (const o of [{ capacity: { maxDrawnLabelUnits: 0 } }, { svg: { maxDrawnLabelUnits: 0 } }, { capacity: { maxDrawnLabelUnits: 0 }, svg: { maxDrawnLabelUnits: 0 } }]) {
+      expect(errOf(() => createSvgRenderer(o)), JSON.stringify(o)).toBe("INVALID_INPUT/OUT_OF_RANGE");
+      expect(errOf(() => svgManifest("headless", o)), JSON.stringify(o)).toBe("INVALID_INPUT/OUT_OF_RANGE");
+      expect(errOf(() => svgManifest("dom", o)), JSON.stringify(o)).toBe("INVALID_INPUT/OUT_OF_RANGE");
+      expect(errOf(() => createSvgSubject(o)), JSON.stringify(o)).toBe("INVALID_INPUT/OUT_OF_RANGE");
+    }
+    expect(errOf(() => createSvgRenderer({ capacity: { maxDrawnLabelUnits: 1 } }))).toBe("none");
+  });
+  it("R30-31-01: renderSvg called directly still accepts a budget of 0 (a document with no drawn labels)", async () => {
+    const { model, state } = await o1();
+    expect(() => renderSvg(model, state, { maxDrawnLabelUnits: 0 })).not.toThrow();
+  });
   it("a renderer that can be created can render: svg() never fails with OUT_OF_RANGE", async () => {
     const { model } = await o1();
     const r = createSvgRenderer({ capacity: { maxDrawnLabelUnits: 2 ** 31 } });
