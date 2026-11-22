@@ -310,3 +310,38 @@ K308	KILLED	E78	E78	pinch d: the lower limit value itself refused (off by one)
 K309	KILLED	E79,E80,E81,E82,E83,E84,E85,E86,E87,E88,E89,E90,E91,E92,E93,E94,E95,E96,E99,E100,E101,E102	E79,E80,E81,E82,E83,E84,E85,E86,E87,E88,E89,E90,E91,E92,E93,E94,E95,E96,E99,E100,E101,E102	pointer and pinch fields not range-checked (the rev 3 reading, 'not range-checked again')
 K310	KILLED	E99,E100,E101,E102	E99,E100,E101,E102	pointer ranges checked on the first pointer only
 K311	KILLED	X227,X248,X251,X252,X256	X227,X248,X251,X252,X256	K158 restated (correction): last chunk not required to be IEND, the 45-byte minimum kept; X97 (33 bytes) is refused by the minimum and does not kill it, rows of at least 45 bytes do
+K312	KILLED	G46,G47,G48,G51,G54,G55,G59	G46,G47,G48,G51,G54,G55,G59	ITEM_DUPLICATE counted once per extra occurrence (the old reading: a position four times gives three findings)
+K313	KILLED	G49,G50,G51,G52,G55	G49,G50,G51,G52,G55	only the first repeated position is reported
+K314	KILLED	G49,G50,G51,G52,G55	G49,G50,G51,G52,G55	repeated positions ordered by their first occurrence
+K315	KILLED	G49,G50,G51,G52,G55	G49,G50,G51,G52,G55	repeated positions ordered by position number
+K316	KILLED	G51	G51	repeated positions ordered by their last occurrence
+K317	KILLED	G52	G52	ITEM_DUPLICATE findings listed before the ITEM_MISSING findings
+K318	KILLED	G53,G54,G55,G58	G53,G54,G55,G58	a repeated position outside 1..n is not reported as ITEM_DUPLICATE
+K319	KILLED	G57	G57	a position counts as repeated only when the later item equals the earlier one entirely
+K320	KILLED	G45,G49,G50,G51,G52,G53,G55,G56,G57,G58	G45,G49,G50,G51,G52,G53,G55,G56,G57,G58	ITEM_DUPLICATE reported only for a position that occurs three or more times (at the third occurrence)
+K321	KILLED	G64,G65,G66,G67,G68,G69,G124	G64,G65,G66,G67,G68,G69,G124	mode not type-checked: a mode that is not a string is reported as MODE_INVALID
+K322	KILLED	G64,G65,G66,G67,G68,G124	G64,G65,G66,G67,G68,G124	mode type-checked only when the input states a mode
+K323	KILLED	G130,G131,G132,G137	G130,G131,G132,G137	a string mode outside normal and marquee refused as INVALID_TREE/SCHEMA instead of the MODE_INVALID finding
+K324	KILLED	G111,G112,G113,G114,G115,G116,G117,G118,G119,G123	G111,G112,G113,G114,G115,G116,G117,G118,G119,G123	live fields not type-checked: ill-typed politeness, atomic or text reported as LIVE_* findings
+K325	KILLED	G117,G118,G119	G117,G118,G119	live.text not type-checked: a text that is not a string reported as LIVE_TOO_LONG
+K326	KILLED	G111,G123	G111,G123	live.atomic: the string true accepted (truthiness) and then reported as LIVE_NOT_ATOMIC
+K327	KILLED	G109	G109	live null treated as an absent live (LIVE_MISSING) instead of INVALID_TREE/SCHEMA
+K328	KILLED	G137	G137	an absent live refused as INVALID_TREE/SCHEMA instead of LIVE_MISSING
+K329	KILLED	G134,G136	G134,G136	a string politeness other than polite refused as INVALID_TREE/SCHEMA instead of LIVE_NOT_POLITE
+K330	KILLED	G135,G136	G135,G136	live.atomic false refused as INVALID_TREE/SCHEMA instead of LIVE_NOT_ATOMIC
+K331	KILLED	G61,G64,G65,G66,G67,G68,G69,G72,G73,G79,G80,G81,G84,G86,G89,G90,G92,G93,G94,G95,G96,G97,G99,G100,G105,G106,G107,G108,G109,G111,G112,G113,G114,G115,G117,G118,G119,G120,G121,G122,G123,G124	G61,G64,G65,G66,G67,G68,G69,G72,G73,G79,G80,G81,G84,G86,G89,G90,G92,G93,G94,G95,G96,G97,G99,G100,G105,G106,G107,G108,G109,G111,G112,G113,G114,G115,G117,G118,G119,G120,G121,G122,G123,G124	the type error is raised after the checks and only when no check failed (precedence swapped)
+K332	KILLED	G90,G92,G94,G96,G98,G99,G106,G108,G120,G122	G90,G92,G94,G96,G98,G99,G106,G108,G120,G122	only the first item is type-checked
+K333	KILLED	G84,G104,G108	G84,G104,G108	a boolean accepted where an integer is required
+K334	KILLED	G78,G98,G112	G78,G98,G112	the integers 0 and 1 accepted where a boolean is required
+K335	KILLED	G80,G106	G80,G106	a non-integer number accepted where an integer is required
+K336	KILLED	G76,G77,G78	G76,G77,G78	list.role and list.multiselectable not type-checked
+K337	KILLED	G72,G73,G74,G121	G72,G73,G74,G121	container.description, name and role not type-checked
+K338	KILLED	G60,G62,G63	G60,G62,G63	companion, layout_sha256 and scene_sha256 not type-checked
+K339	KILLED	G79,G80,G81	G79,G80,G81	list.set_size not type-checked
+K340	KILLED	G83,G84	G83,G84	list.window.first and list.window.count not type-checked
+K341	KILLED	G89,G90,G92	G89,G90,G92	item id, kind, name and roledescription not type-checked
+K342	KILLED	G97,G98,G99,G100	G97,G98,G99,G100	item focused and selected not type-checked
+K343	KILLED	G105,G106,G107,G108,G120,G122	G105,G106,G107,G108,G120,G122	item set_size and tabindex not type-checked
+K344	KILLED	G101,G103,G104	G101,G103,G104	item position not type-checked: a position that is not an integer reported as POSITION_INVALID
+K345	KILLED	G93,G94,G95,G96	G93,G94,G95,G96	item address shape not checked
+K346	KILLED	G128,G129	G128,G129	an ill-typed tree checked (INVALID_TREE/SCHEMA) in the svg-native composition, where the tree is ignored

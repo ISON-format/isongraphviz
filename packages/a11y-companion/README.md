@@ -14,7 +14,7 @@ interaction-core (`Binding`, `DEFAULT_BINDINGS`, `IaError`), scene-core (`./prim
 ## Scripts
 
 `npm test` (fast, about 2 s: oracle rows C, P, Q, G, M tier-aware, Appendix extraction and tracked-file equivalent, TypeScript-only items of 15.7, D04-D06 with a
-handful of seeds, surface tests), `npm run test:slow` (60 seeds per D row, hostile ids; the mutation matrix), `npm run mutants` (33 mutants of design 15.6 plus 19 `ext:` mutants of the audit response on
+handful of seeds, surface tests), `npm run test:slow` (60 seeds per D row, hostile ids; the mutation matrix), `npm run mutants` (33 mutants of design 15.6, the 35 mutants K312-K346 of the rulings R32-14 and R32-15, plus 19 `ext:` mutants of the audit response on
 scratch copies in `.mutants/`; production code has no switchable variants), `npm run typecheck` (core without DOM lib, dom with DOM lib, tests), `npm run build`,
 `npm run smoke` (Node), `npm run check`. `scripts/vitest.mjs` runs vitest from an upper-case drive letter (Windows path-case workaround). The one-page demo and
 the browser smoke live in `packages/export-core` (they bundle all V11 packages).

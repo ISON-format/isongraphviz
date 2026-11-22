@@ -426,52 +426,114 @@ def _depth(v, d=1):
     return d
 
 
-def _tree_shape(t):
+def _tree_shape(t, in_mode=None):
+    """Design 10, 'Shape versus finding' (R32-15): a tree whose fields do not have the JSON types stated in 9.2 is INVALID_TREE/SCHEMA before any check
+    runs. A field of the right type with a wrong value is not decided here (a finding of its check). Written from the design text alone.
+    The K3xx switches below are the oracle's own reference faults (MUTANTS.tsv, K312 onward)."""
     S = IaErr("INVALID_TREE", "SCHEMA")
+    isi = (lambda v: isinstance(v, int)) if M("K333") else ((lambda v: isinstance(v, (int, float)) and not isinstance(v, bool)) if M("K335") else _isi)
+    isb = (lambda v: isinstance(v, bool) or (isinstance(v, int) and v in (0, 1))) if M("K334") else (lambda v: isinstance(v, bool))
+    iss = lambda v: isinstance(v, str)
     if not isinstance(t, dict) or _depth(t) > 8:
         raise S
+    keys = ["id_prefix"] if M("K338") else ["companion", "id_prefix", "layout_sha256", "scene_sha256"]
+    for k in keys:
+        if not iss(t.get(k)):
+            raise S
+    if not M("K321") and not (M("K322") and in_mode is None):
+        if not iss(t.get("mode")):
+            raise S
+        if M("K323") and t["mode"] not in ("normal", "marquee"):
+            raise S
     c = t.get("container")
-    if not isinstance(c, dict) or not all(isinstance(c.get(k), str) for k in ("description", "name", "role")):
+    if not isinstance(c, dict):
+        raise S
+    if not M("K337") and not all(iss(c.get(k)) for k in ("description", "name", "role")):
         raise S
     l = t.get("list")
-    if not isinstance(l, dict) or not _isi(l.get("set_size")) or not isinstance(l.get("window"), dict):
+    if not isinstance(l, dict) or not isinstance(l.get("window"), dict):
+        raise S
+    if not M("K336") and not (iss(l.get("role")) and isb(l.get("multiselectable"))):
+        raise S
+    if not M("K339") and not isi(l.get("set_size")):
         raise S
     w = l["window"]
-    if not (_isi(w.get("first")) and _isi(w.get("count"))):
+    if not M("K340") and not (isi(w.get("first")) and isi(w.get("count"))):
         raise S
-    if not isinstance(t.get("items"), list) or not isinstance(t.get("id_prefix"), str):
+    if not isinstance(t.get("items"), list):
         raise S
     for it in t["items"]:
         if not isinstance(it, dict):
             raise S
-        for k in ("id", "kind", "name", "roledescription"):
-            if not isinstance(it.get(k), str):
-                raise S
-        for k in ("focused", "selected"):
-            if not isinstance(it.get(k), bool):
-                raise S
-        for k in ("position", "set_size", "tabindex"):
-            if not _isi(it.get(k)):
-                raise S
-        a = it.get("address")
-        if not isinstance(a, dict) or len(a) != 1 or not (("node" in a) or ("edge" in a)):
+        if not M("K341"):
+            for k in ("id", "kind", "name", "roledescription"):
+                if not iss(it.get(k)):
+                    raise S
+        if not M("K342"):
+            for k in ("focused", "selected"):
+                if not isb(it.get(k)):
+                    raise S
+        if not M("K343"):
+            for k in ("set_size", "tabindex"):
+                if not isi(it.get(k)):
+                    raise S
+        if not M("K344") and not isi(it.get("position")):
             raise S
-    if "live" in t and not isinstance(t["live"], dict):
+        a = it.get("address")
+        if not M("K345") and (not isinstance(a, dict) or len(a) != 1 or not (("node" in a) or ("edge" in a))):
+            raise S
+        if M("K332"):
+            break
+    if "live" in t and not (M("K327") and t["live"] is None):
+        lv = t["live"]
+        if not isinstance(lv, dict):
+            raise S
+        if not M("K324"):
+            if not (isb(lv.get("atomic")) or (M("K326") and lv.get("atomic") in ("true", "false"))):
+                raise S
+            if not (iss(lv.get("politeness")) and iss(lv.get("role"))):
+                raise S
+            if not M("K325") and not iss(lv.get("text")):
+                raise S
+            if M("K329") and lv["politeness"] != "polite":
+                raise S
+            if M("K330") and lv["atomic"] is not True:
+                raise S
+    elif M("K328") and "live" not in t:
         raise S
 
 
-def run_gate(m, st, tree=None, composition="companion", bindings=None, window=None, fidelity=None, reduced=None,
-             readout=None, canvas_label=None, svg=None, mode=None, tab_stops=None):
+def run_gate(m, st, tree=None, composition="companion", **kw):
+    if M("K331") and composition == "companion" and tree is not None and kw.get("svg") is None:
+        # reference fault: the type check runs after the checks and is raised only when no check failed (precedence swapped)
+        try:
+            _tree_shape(tree, kw.get("mode"))
+        except IaErr as e:
+            try:
+                r = _run_gate(m, st, tree, composition, True, **kw)
+            except Exception:
+                raise e
+            if r["verdict"] == "fail":
+                return r
+            raise e
+    return _run_gate(m, st, tree, composition, False, **kw)
+
+
+def _run_gate(m, st, tree, composition, skip_shape, bindings=None, window=None, fidelity=None, reduced=None,
+              readout=None, canvas_label=None, svg=None, mode=None, tab_stops=None):
     I = "INVALID_INPUT"
     if composition not in ("companion", "svg-native"):
         raise IaErr(I, "SCHEMA")
     if composition == "companion":
         if svg is not None or tree is None:
             raise IaErr(I, "SCHEMA")
-        _tree_shape(tree)
+        if not skip_shape:
+            _tree_shape(tree, mode)
     else:
         if svg is None:
             raise IaErr(I, "SCHEMA")
+        if M("K346") and tree is not None:
+            _tree_shape(tree, mode)
     table = bindings if bindings is not None else DEFAULT_BINDINGS
     tr = traversal(m, st)
     n = len(tr)
@@ -508,29 +570,69 @@ def run_gate(m, st, tree=None, composition="companion", bindings=None, window=No
         if tree["list"]["window"] != exp and not M("K102"):
             f.append(fnd("WINDOW_MISMATCH"))
         w = tree["list"]["window"]
-        need = set(p for p in range(w["first"], w["first"] + w["count"]) if 1 <= p <= n)
+        try:
+            need = set(p for p in range(w["first"], w["first"] + w["count"]) if 1 <= p <= n)
+        except TypeError:
+            if not M("K340"):
+                raise
+            need = set()
         if fpos is not None:
             need.add(fpos)
         if stop is not None:
             need.add(stop)
         have = {}
         dups = []
-        for it in tree["items"]:
+        cnt = {}
+        first_idx = {}
+        last_idx = {}
+        first_item = {}
+        for idx, it in enumerate(tree["items"]):
             p = it["position"]
-            if p in have:
-                dups.append(p)
             have[p] = True
+            cnt[p] = cnt.get(p, 0) + 1
+            last_idx[p] = idx
+            if cnt[p] == 1:
+                first_idx[p] = idx
+                first_item[p] = it
+            if M("K318") and not (1 <= p <= n):
+                continue
+            # R32-14: once per position value that occurs two or more times, in the order of its second occurrence
+            if M("K312"):
+                hit = cnt[p] >= 2
+            elif M("K320"):
+                hit = cnt[p] == 3
+            elif M("K319"):
+                hit = cnt[p] == 2 and it == first_item[p]
+            else:
+                hit = cnt[p] == 2
+            if hit:
+                dups.append(p)
+        if M("K313"):
+            dups = dups[:1]
+        if M("K314"):
+            dups.sort(key=lambda p: first_idx[p])
+        if M("K315"):
+            dups.sort()
+        if M("K316"):
+            dups.sort(key=lambda p: last_idx[p])
+        if M("K317"):
+            for p in dups:
+                f.append(fnd("ITEM_DUPLICATE", p))
         for p in sorted(need):
             if p not in have:
                 f.append(fnd("ITEM_MISSING", p))
-        for p in dups:
-            f.append(fnd("ITEM_DUPLICATE", p))
+        if not M("K317"):
+            for p in dups:
+                f.append(fnd("ITEM_DUPLICATE", p))
     add("G1-REACH", f)
     # G2
     if comp:
         f = []
         for it in tree["items"]:
             p = it["position"]
+            if M("K344") and not _isi(p):
+                f.append(fnd("POSITION_INVALID", p))
+                continue
             if not (1 <= p <= n):
                 f.append(fnd("POSITION_INVALID", p))
                 continue

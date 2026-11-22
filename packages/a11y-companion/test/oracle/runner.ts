@@ -198,12 +198,18 @@ export async function runRow(impl: Impl, c: Corpus, row: Row): Promise<void> {
   }
 }
 
-/** Every core row of the package's groups, result by result (the mutation harness reads these). */
+/** A runner that asserts on zero rows proves nothing: an empty list is refused. */
+export function nonEmpty<T>(xs: readonly T[], what: string): readonly T[] {
+  if (xs.length === 0) throw new Error(`no rows: ${what}`);
+  return xs;
+}
+
+/** Every core row of the package's groups, result by result (the mutation harness reads these). A corpus with no row of this package is an error, never a green run. */
 export async function runAll(impl: Impl, c: Corpus): Promise<RowResult[]> {
   const out: RowResult[] = [];
   for (const row of c.rows) {
     if (!GROUPS.has(row.group) || row.tier !== "core") continue;
     try { await runRow(impl, c, row); out.push({ id: row.id, ok: true }); } catch (e) { out.push({ id: row.id, ok: false, detail: e instanceof Error ? e.message : String(e) }); }
   }
-  return out;
+  return nonEmpty(out, "runAll over the rows of a11y-companion") as RowResult[];
 }

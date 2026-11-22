@@ -1,10 +1,10 @@
 # IGR-IA/1 oracle corpus (`oracles-ia`)
 
 Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere; the third-party `verifyScene` / `verifyLayout` / `bindLayout` / `parseState` run over the authored
-`scenes/`, `layouts/`, `states/` files, required by design 32 15.1, has not been done). Produced against design 32 (`32-INTERACTION-A11Y-EXPORT-DESIGN.md`, written against **rev 2**, refreshed against **rev 3**: rev 3 changes no expected file, `EXPECT.tsv` row or input file; extended against **rev 4** by the rev 4 round below: rows only, appended) by an oracle author who
+`scenes/`, `layouts/`, `states/` files, required by design 32 15.1, has not been done). Produced against design 32 (`32-INTERACTION-A11Y-EXPORT-DESIGN.md`, written against **rev 2**, refreshed against **rev 3**: rev 3 changes no expected file, `EXPECT.tsv` row or input file; extended against **rev 4** by the rev 4 round below: rows only, appended; the rulings R32-14 and R32-15 of 2026-11-21 add rows `G45`-`G140` and mutants `K312`-`K346` in the round below, rows only, appended) by an oracle author who
 was given only that design, designs 27 (rev 5), 30 (rev 4) and 31 (rev 5), `docs/specs/IGS-1.md`, `docs/specs/IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures
 (`fixtures/oracles`, `fixtures/oracles-igl`) and the file-format conventions (README, `EXPECT.tsv`, `SHA256SUMS`, `generated/GENERATED.tsv`) of the other corpora.
-Read `AMBIGUITIES.md` before judging any mismatch: it lists 94 places where the design was ambiguous, contradictory or could not be built, with the reading used (A-01 to A-70 the first round, A-71 to A-74 the rev 3 refresh, A-75 to A-84 the gap round, A-85 to A-94 the rev 4 round; its sections `RESOLVED-IN-REV4` and `Correction of K158` say what rev 4 settled).
+Read `AMBIGUITIES.md` before judging any mismatch: it lists 105 places where the design was ambiguous, contradictory or could not be built, with the reading used (A-01 to A-70 the first round, A-71 to A-74 the rev 3 refresh, A-75 to A-84 the gap round, A-85 to A-94 the rev 4 round, A-95 to A-105 the R32-14 / R32-15 round; its sections `RESOLVED-IN-REV4` and `Correction of K158` say what rev 4 settled).
 
 ## Independence statement
 
@@ -28,6 +28,7 @@ python tools/gen.py                # rebuilds every generated file (all but tool
 python tools/gen.py --mutant K05   # prints, for the named mutant, which of its killer rows change
 python tools/gaps.py --write       # after gen.py: appends the gap-round rows B14-B110, X27-X177, K129-K200 (refuses to run twice)
 python tools/gaps2.py --write      # after gaps.py: appends the rev 4 rows B111-B174, E74-E102, X178-X275, K201-K311, the AMBIGUITIES.md section, rewrites this README and SHA256SUMS (refuses to run twice)
+python tools/gaps3.py --write      # after gaps2.py: appends the rows G45-G140 and the mutants K312-K346 of the R32-14 / R32-15 round, the AMBIGUITIES.md section, rewrites this README and SHA256SUMS (refuses to run twice)
 ```
 
 `gen.py` wipes the generated directories first, so it regenerates from empty. It builds all rows, writes the files, runs the self-checks (every tree and state file canonical; every
@@ -37,7 +38,7 @@ Verify with `sha256sum -c SHA256SUMS` from this directory. The digest of `SHA256
 
 ## Layout
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error`, one row per id (**1032 rows**), `group` the leading letter, `tier` `core` except `D` (`diff`) and `K` (empty); `scene`, `layout` paths relative to this
+`EXPECT.tsv`: header `id group tier scene layout input expected error`, one row per id (**1163 rows**), `group` the leading letter, `tier` `core` except `D` (`diff`) and `K` (empty); `scene`, `layout` paths relative to this
 directory (never leaving it) or empty; `input` a relative path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` empty or `CODE/REASON`. One row = one scene, one layout, one input.
 
 | Directory | Content |
@@ -66,16 +67,16 @@ directory (never leaving it) or empty; `input` a relative path or inline JSON (s
 | C | 20 | 20 | companion trees, windows, live text |
 | P | 11 | 11 | DOM plans (full build and update) and the invariant I-C1 |
 | Q | 4 | 4 | executor logs over the recording DOM |
-| G | 36 | 36 | accessibility gate reports (single-fault rows over three base rows) |
+| G | 132 | 132 | accessibility gate reports (single-fault rows over three base rows; `G45`-`G140`: the R32-14 and R32-15 rows) |
 | X | 274 | 274 | export bundle, PNG binding chunk, manifest and bundle verification |
 | M | 5 | 5 | composed capability manifests |
 | H | 7 | 7 | headless outputs and argument errors |
 | D | 6 | 0 | differential tier (runtime, seeds from the caller; empty cells) |
-| K | 311 | 0 | mutants (test code; empty cells) |
-| **total** | **1032** | **715** | |
+| K | 346 | 0 | mutants (test code; empty cells) |
+| **total** | **1163** | **811** | |
 
 Tier `core` is every row of E, I, V, L, B, C, P, Q, G, X, M, H (byte equality against the written rules, level IA0); `diff` (D) is a runtime tier of the test suite; K rows are mutants in test code.
-Rows with an `error` and no expected file: B03, B04, B05, B06, B07, B08, B09, B10, B11, B13, B27, B28, B29, B30, B31, B32, B33, B34, B35, B36, B37, B38, B39, B40, B41, B42, B43, B44, B45, B46, B47, B48, B49, B50, B51, B52, B53, B54, B55, B56, B57, B58, B59, B60, B61, B62, B63, B64, B65, B66, B67, B68, B69, B70, B71, B72, B73, B74, B75, B76, B77, B78, B79, B80, B81, B82, B83, B84, B85, B86, B87, B88, B89, B90, B91, B92, B93, B94, B95, B96, B97, B98, B99, B100, B101, B102, B103, B104, B105, B106, B107, B108, B109, B110, B114, B115, B116, B117, B118, B119, B120, B121, B122, B123, B124, B125, B126, B127, B128, B129, B130, B131, B132, B133, B134, B135, B136, B137, B138, B139, B140, B141, B142, B143, B144, B145, B146, B147, B148, B149, B150, B151, B152, B153, B154, B155, B156, B157, B158, B159, B160, B161, B162, B163, B164, B165, B166, B167, B168, B169, B170, B171, B172, B173, B174, E02, E03, E04, E05, E06, E07, E08, E09, E10, E11, E12, E13, E14, E15, E16, E17, E18, E19, E20, E21, E22, E23, E33, E34, E35, E36, E37, E38, E39, E40, E41, E42, E43, E50, E51, E52, E53, E54, E55, E61, E62, E63, E70, E71, E72, E79, E80, E81, E82, E83, E84, E85, E86, E87, E88, E89, E90, E91, E92, E93, E94, E95, E96, E97, E98, E99, E100, E101, E102, H05, H06, H07, M04, M05, P10, X06, X07, X09, X11, X12, X13, X14, X15, X16, X17, X18, X19, X20, X21, X22, X23, X24, X25, X26, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44, X45, X46, X47, X48, X49, X50, X51, X52, X53, X54, X55, X56, X57, X58, X59, X60, X61, X62, X63, X64, X65, X66, X67, X68, X69, X70, X71, X72, X73, X74, X75, X76, X77, X78, X79, X80, X81, X82, X83, X84, X85, X86, X87, X88, X89, X90, X91, X92, X93, X94, X95, X96, X97, X98, X99, X100, X101, X102, X103, X104, X105, X106, X107, X108, X109, X110, X121, X122, X123, X124, X130, X131, X132, X133, X134, X135, X136, X137, X138, X139, X140, X141, X142, X143, X144, X145, X146, X147, X148, X149, X150, X151, X152, X153, X154, X155, X159, X160, X161, X162, X163, X164, X165, X166, X167, X168, X169, X170, X171, X175, X176, X178, X179, X180, X181, X182, X183, X184, X185, X186, X187, X188, X189, X190, X191, X192, X193, X194, X195, X196, X197, X198, X199, X200, X201, X202, X203, X204, X205, X206, X207, X208, X209, X210, X211, X212, X213, X214, X215, X216, X217, X218, X219, X220, X221, X222, X223, X224, X225, X226, X227, X228, X229, X230, X231, X232, X233, X234, X235, X236, X237, X238, X239, X240, X241, X242, X243, X244, X245, X247, X248, X249, X250, X251, X252, X253, X254, X256, X257, X258, X259, X264, X265, X266, X267, X268, X269, X270, X271, X272, X273, X274, X275.
+Rows with an `error` and no expected file: B03, B04, B05, B06, B07, B08, B09, B10, B11, B13, B27, B28, B29, B30, B31, B32, B33, B34, B35, B36, B37, B38, B39, B40, B41, B42, B43, B44, B45, B46, B47, B48, B49, B50, B51, B52, B53, B54, B55, B56, B57, B58, B59, B60, B61, B62, B63, B64, B65, B66, B67, B68, B69, B70, B71, B72, B73, B74, B75, B76, B77, B78, B79, B80, B81, B82, B83, B84, B85, B86, B87, B88, B89, B90, B91, B92, B93, B94, B95, B96, B97, B98, B99, B100, B101, B102, B103, B104, B105, B106, B107, B108, B109, B110, B114, B115, B116, B117, B118, B119, B120, B121, B122, B123, B124, B125, B126, B127, B128, B129, B130, B131, B132, B133, B134, B135, B136, B137, B138, B139, B140, B141, B142, B143, B144, B145, B146, B147, B148, B149, B150, B151, B152, B153, B154, B155, B156, B157, B158, B159, B160, B161, B162, B163, B164, B165, B166, B167, B168, B169, B170, B171, B172, B173, B174, E02, E03, E04, E05, E06, E07, E08, E09, E10, E11, E12, E13, E14, E15, E16, E17, E18, E19, E20, E21, E22, E23, E33, E34, E35, E36, E37, E38, E39, E40, E41, E42, E43, E50, E51, E52, E53, E54, E55, E61, E62, E63, E70, E71, E72, E79, E80, E81, E82, E83, E84, E85, E86, E87, E88, E89, E90, E91, E92, E93, E94, E95, E96, E97, E98, E99, E100, E101, E102, G60, G61, G62, G63, G64, G65, G66, G67, G68, G69, G70, G71, G72, G73, G74, G75, G76, G77, G78, G79, G80, G81, G82, G83, G84, G85, G86, G87, G88, G89, G90, G91, G92, G93, G94, G95, G96, G97, G98, G99, G100, G101, G102, G103, G104, G105, G106, G107, G108, G109, G110, G111, G112, G113, G114, G115, G116, G117, G118, G119, G120, G121, G122, G123, G124, G125, G126, G127, H05, H06, H07, M04, M05, P10, X06, X07, X09, X11, X12, X13, X14, X15, X16, X17, X18, X19, X20, X21, X22, X23, X24, X25, X26, X31, X32, X33, X34, X35, X36, X37, X38, X39, X40, X41, X42, X43, X44, X45, X46, X47, X48, X49, X50, X51, X52, X53, X54, X55, X56, X57, X58, X59, X60, X61, X62, X63, X64, X65, X66, X67, X68, X69, X70, X71, X72, X73, X74, X75, X76, X77, X78, X79, X80, X81, X82, X83, X84, X85, X86, X87, X88, X89, X90, X91, X92, X93, X94, X95, X96, X97, X98, X99, X100, X101, X102, X103, X104, X105, X106, X107, X108, X109, X110, X121, X122, X123, X124, X130, X131, X132, X133, X134, X135, X136, X137, X138, X139, X140, X141, X142, X143, X144, X145, X146, X147, X148, X149, X150, X151, X152, X153, X154, X155, X159, X160, X161, X162, X163, X164, X165, X166, X167, X168, X169, X170, X171, X175, X176, X178, X179, X180, X181, X182, X183, X184, X185, X186, X187, X188, X189, X190, X191, X192, X193, X194, X195, X196, X197, X198, X199, X200, X201, X202, X203, X204, X205, X206, X207, X208, X209, X210, X211, X212, X213, X214, X215, X216, X217, X218, X219, X220, X221, X222, X223, X224, X225, X226, X227, X228, X229, X230, X231, X232, X233, X234, X235, X236, X237, X238, X239, X240, X241, X242, X243, X244, X245, X247, X248, X249, X250, X251, X252, X253, X254, X256, X257, X258, X259, X264, X265, X266, X267, X268, X269, X270, X271, X272, X273, X274, X275.
 
 ## Appendix A reproduction (`APPENDIX-A.tsv`)
 
@@ -475,6 +476,48 @@ difference the design asks for, `K112` on `X25`, is a recorded `UNSTRUCTURED/Rec
 
 `K311` restates `K158` (the correction, see `AMBIGUITIES.md`): `K158` names `X97`, a 33-byte file that the 45-byte minimum refuses before the IEND rule, so it does not kill that mutation.
 
+### Mutants of the R32-14 / R32-15 round (K312 to K346)
+
+`K312`-`K346` (`tools/gaps3.py`) are switchable faults of `tools/companion.py` (the gate and its tree-shape check), not of the design's table; each names the new rows that kill it, re-evaluated on the stored inputs with the mutant active: KILLED 35.
+
+| Mutant | Verdict | Named killer rows | Mutation |
+|---|---|---|---|
+| K312 | KILLED | G46,G47,G48,G51,G54,G55,G59 | ITEM_DUPLICATE counted once per extra occurrence (the old reading: a position four times gives three findings) |
+| K313 | KILLED | G49,G50,G51,G52,G55 | only the first repeated position is reported |
+| K314 | KILLED | G49,G50,G51,G52,G55 | repeated positions ordered by their first occurrence |
+| K315 | KILLED | G49,G50,G51,G52,G55 | repeated positions ordered by position number |
+| K316 | KILLED | G51 | repeated positions ordered by their last occurrence |
+| K317 | KILLED | G52 | ITEM_DUPLICATE findings listed before the ITEM_MISSING findings |
+| K318 | KILLED | G53,G54,G55,G58 | a repeated position outside 1..n is not reported as ITEM_DUPLICATE |
+| K319 | KILLED | G57 | a position counts as repeated only when the later item equals the earlier one entirely |
+| K320 | KILLED | G45,G49,G50,G51,G52,G53,G55,G56,G57,G58 | ITEM_DUPLICATE reported only for a position that occurs three or more times (at the third occurrence) |
+| K321 | KILLED | G64,G65,G66,G67,G68,G69,G124 | mode not type-checked: a mode that is not a string is reported as MODE_INVALID |
+| K322 | KILLED | G64,G65,G66,G67,G68,G124 | mode type-checked only when the input states a mode |
+| K323 | KILLED | G130,G131,G132,G137 | a string mode outside normal and marquee refused as INVALID_TREE/SCHEMA instead of the MODE_INVALID finding |
+| K324 | KILLED | G111,G112,G113,G114,G115,G116,G117,G118,G119,G123 | live fields not type-checked: ill-typed politeness, atomic or text reported as LIVE_* findings |
+| K325 | KILLED | G117,G118,G119 | live.text not type-checked: a text that is not a string reported as LIVE_TOO_LONG |
+| K326 | KILLED | G111,G123 | live.atomic: the string true accepted (truthiness) and then reported as LIVE_NOT_ATOMIC |
+| K327 | KILLED | G109 | live null treated as an absent live (LIVE_MISSING) instead of INVALID_TREE/SCHEMA |
+| K328 | KILLED | G137 | an absent live refused as INVALID_TREE/SCHEMA instead of LIVE_MISSING |
+| K329 | KILLED | G134,G136 | a string politeness other than polite refused as INVALID_TREE/SCHEMA instead of LIVE_NOT_POLITE |
+| K330 | KILLED | G135,G136 | live.atomic false refused as INVALID_TREE/SCHEMA instead of LIVE_NOT_ATOMIC |
+| K331 | KILLED | G61,G64,G65,G66,G67,G68,G69,G72,G73,G79,G80,G81,G84,G86,G89,G90,G92,G93,G94,G95,G96,G97,G99,G100,G105,G106,G107,G108,... | the type error is raised after the checks and only when no check failed (precedence swapped) |
+| K332 | KILLED | G90,G92,G94,G96,G98,G99,G106,G108,G120,G122 | only the first item is type-checked |
+| K333 | KILLED | G84,G104,G108 | a boolean accepted where an integer is required |
+| K334 | KILLED | G78,G98,G112 | the integers 0 and 1 accepted where a boolean is required |
+| K335 | KILLED | G80,G106 | a non-integer number accepted where an integer is required |
+| K336 | KILLED | G76,G77,G78 | list.role and list.multiselectable not type-checked |
+| K337 | KILLED | G72,G73,G74,G121 | container.description, name and role not type-checked |
+| K338 | KILLED | G60,G62,G63 | companion, layout_sha256 and scene_sha256 not type-checked |
+| K339 | KILLED | G79,G80,G81 | list.set_size not type-checked |
+| K340 | KILLED | G83,G84 | list.window.first and list.window.count not type-checked |
+| K341 | KILLED | G89,G90,G92 | item id, kind, name and roledescription not type-checked |
+| K342 | KILLED | G97,G98,G99,G100 | item focused and selected not type-checked |
+| K343 | KILLED | G105,G106,G107,G108,G120,G122 | item set_size and tabindex not type-checked |
+| K344 | KILLED | G101,G103,G104 | item position not type-checked: a position that is not an integer reported as POSITION_INVALID |
+| K345 | KILLED | G93,G94,G95,G96 | item address shape not checked |
+| K346 | KILLED | G128,G129 | an ill-typed tree checked (INVALID_TREE/SCHEMA) in the svg-native composition, where the tree is ignored |
+
 ## Rows that claim no bytes, and items outside the oracle (design 15.3, 15.7)
 
 **Accepted rows** (`expected` and `error` both empty) claim only that the function returns without error and claim **no bytes**: B02, B14, B15, B16, B17, B18, B19, B20, B21, B22, B23, B24, B25, B26, B111, B112, B113, E01, E24, E25, E26, E27, E28, E29, E30, E31, E32, E44, E56, E60, E73, E74, E75, E76, E77, E78, X10, X27, X28, X29, X30, X156, X157, X158, X172 (45 rows).
@@ -497,6 +540,17 @@ Design 32 rev 4 folded the owner-adopted rules R32-01 to R32-13 and R32-16 (text
 
 Rules that need no row (R32-01 carried by `X31`-`X48`, R32-11, R32-12, R32-13, R32-16 text only; R32-14, R32-15 open) and the new ambiguities are in `AMBIGUITIES.md` (sections `R32 rule -> carrying rows`, `A-85` to `A-94`). "Earlier rows" of R32-01 and all single-fault rows still hold under the rev 4 text (the new reference agrees with every earlier row it can evaluate: see `AMBIGUITIES.md`).
 The digest of `SHA256SUMS` is reported with the round and is **not** stored here (this README is covered by it). `APPENDIX-A.tsv` and `PARITY.tsv` are unchanged.
+
+## R32-14 / R32-15 round (rows only, appended)
+
+The owner ruled R32-14 and R32-15 on 2026-11-21 and design 32 rev 4 folded them (section 10; change-log rows R32-14, R32-15). `tools/gaps3.py` adds rows and mutants only; **no earlier file, row or line changed** (the old `EXPECT.tsv`, `MUTANTS.tsv` and `AMBIGUITIES.md` are exact prefixes of the new ones; the generator `gen.py` gives the same bytes before and after the edit of `tools/companion.py`, and the 36 earlier `G` rows are re-evaluated with the new reference and agree).
+
+| Family | Added | Ids | Content |
+|---|---|---|---|
+| G | 96 | G45-G140 | `ITEM_DUPLICATE` once per repeated position value in second-occurrence order (15 rows); `INVALID_TREE/SCHEMA` for an ill-typed tree field (68 rows: one wrong JSON type per field of 9.2 and section 10, precedence rows, a tree that is an array or a string); the svg-native composition ignoring the tree (2 rows); controls: a right type with a wrong value keeps its finding (11 rows) |
+| K | 35 | K312-K346 | mutants of those rows (every one killed by at least one new row) |
+
+Every one of these rows is a `companion` composition row (or the svg-native control) whose `input` has the form of the earlier `G` rows (`state`, `tree`, optional `mode`, `fidelity`, `reducedMotion`, `readout`, `tabStops`, `composition`, `svg`); a row with an expected file names `gates/<id>.gate.json`, a row with an error names `INVALID_TREE/SCHEMA` and no file. Points the text does not decide (absent and extra keys, the type of an item's `description`, the payload of an address, `null` as the tree, wrong values of unchecked fields) are `AMBIGUITIES.md` A-95 to A-105 and have no row. The digest of `SHA256SUMS` is reported with the round and is **not** stored here (this README is covered by it). `APPENDIX-A.tsv` and `PARITY.tsv` are unchanged.
 
 ## Notes
 
