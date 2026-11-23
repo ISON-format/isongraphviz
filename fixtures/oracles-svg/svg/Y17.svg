@@ -201,7 +201,7 @@
 <desc>n5 R1 6</desc>
 <path class="igr-line" d="M 749.137 259.706 L 778.166 54.841" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 749.137 259.706 L 778.166 54.841"/>
-<text class="igr-elabel" x="763.651" y="153.274" text-anchor="middle">R1</text>
+<text class="igr-elabel" x="782.651" y="153.274" text-anchor="middle">R1</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a39222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
 <title>R1</title>

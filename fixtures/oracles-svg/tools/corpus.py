@@ -24,7 +24,7 @@ def _find_design():
 
 DESIGN = _find_design()
 
-FAMILY_ORDER = "GNXYOFTUDK"
+FAMILY_ORDER = "GNXYOFTUDKL"
 TAB = chr(9)
 LF = chr(10)
 GENERATED_DIRS = ["svg", "states", "scenes", "layouts", "inputs", "json", "bad", "scripts", "generated"]
@@ -144,10 +144,22 @@ K110 N15
 K111 N15
 K112 T31,T02,T15,T16
 K113 T32
-K114 F02""".split("\n"):
+K114 F02
+K115 G05,G08,N14
+K116 G09,N14
+K117 G05,G08
+K118 G08,G09
+K119 G08,G09
+K120 G01,G08
+K121 G07,X04
+K122 G05,G08
+K123 L01
+K124 L02
+K125 L03
+K126 L04""".split("\n"):
     k, v = line.split()
     KILLERS[k] = v.split(",")
-assert len(KILLERS) == 114
+assert len(KILLERS) == 126
 
 MUT_TEXT = {
     "K01": "coordinates via double toFixed(3)", "K02": "trailing zeros kept", "K03": "-0 printed for tiny negatives",
@@ -186,7 +198,12 @@ MUT_TEXT = {
     "K105": "export svg returns bytes", "K106": "manifest differs / labels.edge", "K107": "render() builds document",
     "K108": "capacity/svg label units may differ", "K109": "degenerate anchor floorDiv (V7)",
     "K110": "parallel midpoint floorDiv (V8)", "K111": "parallel Lf nearest root (V9)",
-    "K112": "pick keeps edge over node", "K113": "reader skips style compare", "K114": "maxSvgBytes boundary accepts one byte more"}
+    "K112": "pick keeps edge over node", "K113": "reader skips style compare", "K114": "maxSvgBytes boundary accepts one byte more",
+    "K115": "label placement skipped (default positions)", "K116": "placement offsets applied to x only", "K117": "placement offsets applied to y only",
+    "K118": "placement called twice (node labels, edge labels separately)", "K119": "placement order: edge labels before node labels",
+    "K120": "node obstacles at the label baseline (cy + 24 px), not the centre", "K121": "label units counted before the elision", "K122": "node obstacles ignored by the placement",
+    "K123": "hidden nodes are obstacles of the placement", "K124": "visible nodes without a drawn label dropped from the obstacles",
+    "K125": "labels of hidden nodes take part in the placement", "K126": "label units counted in code points"}
 
 
 def sig(files, err):
@@ -410,6 +427,9 @@ def mutant_matrix(full=False, log=print):
         rows_to_run = [r.id for r in R.ROWS if r.run] if full else named
         got = run_rows(rows_to_run, {k})
         changed = [i for i in rows_to_run if got[i] != base[i]]
+        if int(k[1:]) <= 122:
+            # R-H: the lines of K01-K122 keep the content they had before the appended family L (MUTANTS.tsv stays append-only); L rows are judged by K123-K126
+            changed = [i for i in changed if not i.startswith("L")]
         killed_by = [i + ("[exception]" if got[i].startswith("EXC:") else "") for i in named if i in changed]
         if killed_by:
             verdict = "KILLED"
@@ -444,9 +464,11 @@ def render_readme(files, rows_out, app, mtable, nfz):
     amb = open(os.path.join(HERE, "doc", "AMBIGUITIES.md"), encoding="utf-8", newline="").read()
     st3 = open(os.path.join(HERE, "doc", "status_rev3.md"), encoding="utf-8", newline="").read()
     new3 = open(os.path.join(HERE, "doc", "new_rev3.md"), encoding="utf-8", newline="").read()
+    new5 = open(os.path.join(HERE, "doc", "new_rev5.md"), encoding="utf-8", newline="").read()
     mk = "## Defects (the text contradicts itself"
     assert mk in amb
     amb = amb.replace(mk, st3.lstrip(chr(10)) + mk, 1).rstrip(chr(10)) + chr(10) + new3
+    amb = amb.rstrip(chr(10)) + chr(10) + new5   # R-H revision: appended, the text above stays an exact prefix
     namb = len(re.findall(r"^[*][*]A-[0-9]+[.]", amb, re.M))
     fam = {}
     for r in rows_out:
@@ -458,7 +480,7 @@ def render_readme(files, rows_out, app, mtable, nfz):
             f[2] += 1
     names = {"G": "golden documents", "N": "numbers and geometry", "X": "text, escaping, identities", "Y": "state hooks",
              "O": "options and validation", "F": "size limits", "T": "round trip, pick, reader", "U": "the renderer",
-             "D": "differential (runtime)", "K": "mutants (empty cells)"}
+             "D": "differential (runtime)", "K": "mutants (empty cells)", "L": "LP/1 placement integration (R-H)"}
     counts = "| Family | Rows | With files or inline input | With `error` |" + LF + "|---|---|---|---|" + LF
     for k in FAMILY_ORDER:
         counts += "| %s %s | %d | %d | %d |" % (k, names[k], fam[k][0], fam[k][1], fam[k][2]) + LF

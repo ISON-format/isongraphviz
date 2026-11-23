@@ -75,7 +75,7 @@
 <desc>&lt;script&gt;alert("x")&lt;/script&gt; &lt;i&gt;&amp;amp;&lt;/i&gt; &amp;amp;</desc>
 <path class="igr-line" d="M 577.275 188.58 L 44.175 188.58" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 577.275 188.58 L 44.175 188.58"/>
-<text class="igr-elabel" x="310.725" y="184.58" text-anchor="middle">&lt;i&gt;&amp;amp;&lt;/i&gt;</text>
+<text class="igr-elabel" x="310.725" y="170.58" text-anchor="middle">&lt;i&gt;&amp;amp;&lt;/i&gt;</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a2227222c22737263223a7b226964223a22733a612662222c2274797065223a22612662227d2c22746774223a7b226964223a22733a5c22222c2274797065223a227127227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="'" tabindex="-1">
 <title>'</title>

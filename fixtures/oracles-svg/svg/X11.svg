@@ -60,7 +60,7 @@
 <desc>u�v R x�y�z</desc>
 <path class="igr-line" d="M 855.9 300 L 44.1 300" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 855.9 300 L 44.1 300"/>
-<text class="igr-elabel" x="450" y="296" text-anchor="middle">R</text>
+<text class="igr-elabel" x="450" y="282" text-anchor="middle">R</text>
 </g>
 </g>
 </svg>

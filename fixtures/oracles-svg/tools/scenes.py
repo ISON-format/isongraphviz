@@ -194,3 +194,18 @@ def build_simple_scenes(A):
     for k, n in enumerate(leaves):
         hp[n] = (40000 + (k % 20) * 45000, 40000 + (k // 20) * 50000)
     A.add("hub", True, leaves + [hub], [(hub, "R", n) for n in leaves], pos=lambda nd: hp)
+
+    # --- L01-L04 (R-H, LP/1 integration rows): two to three nodes each, positions in thousandths (zoom 1000 shows 1 layout unit as 1 px)
+    # L01 lp-hid-box: the hidden node i:2 sits where the default label of i:1 would be (its disc box would block it)
+    l1, l2 = (P, "i:1"), (P, "i:2")
+    A.add("lp-hid-box", True, [l1, l2], [], pos=lambda nd: {l1: (200000, 200000), l2: (200000, 230000)})
+    # L02 lp-nolabel: the visible node s: has an EMPTY label (no <text>) and sits where the default label of s:aaaa would be
+    e0, e1 = (P, "s:"), (P, "s:aaaa")
+    A.add("lp-nolabel", True, [e0, e1], [], pos=lambda nd: {e1: (200000, 200000), e0: (200000, 230000)})
+    # L03 lp-hid-label: the hidden node i:1 (label "1", earlier in model order) has a default label box that overlaps the default label box of s:aaaa,
+    # while the disc box of i:1 does not touch that label box
+    h1, h2 = (P, "i:1"), (P, "s:aaaa")
+    A.add("lp-hid-label", True, [h1, h2], [], pos=lambda nd: {h1: (300000, 200000), h2: (312000, 200000)})
+    # L04 lp-astral: the label of s:<6 x U+1F600> is 12 UTF-16 units (6 code points) and its box overlaps the label box of s:bbbb only at 12 units
+    u1, u2 = (P, "s:bbbb"), (P, "s:" + "\U0001F600" * 6)
+    A.add("lp-astral", True, [u1, u2], [], pos=lambda nd: {u1: (248000, 200000), u2: (200000, 200000)})

@@ -248,3 +248,7 @@ K111	K
 K112	K						
 K113	K						
 K114	K						
+L01	L	both	scenes/lp-hid-box.scene.json	layouts/lp-hid-box.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":1,"labels":"full"},"size":{"height":600,"width":900},"state":"states/L01.state.json"}	svg/L01.svg	
+L02	L	both	scenes/lp-nolabel.scene.json	layouts/lp-nolabel.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":4,"labels":"full"},"size":{"height":600,"width":900},"state":"states/L02.state.json"}	svg/L02.svg	
+L03	L	both	scenes/lp-hid-label.scene.json	layouts/lp-hid-label.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":4,"labels":"full"},"size":{"height":600,"width":900},"state":"states/L03.state.json"}	svg/L03.svg	
+L04	L	both	scenes/lp-astral.scene.json	layouts/lp-astral.layout.json	{"expect_fidelity":{"edge_labels":true,"label_units":16,"labels":"full"},"size":{"height":600,"width":900},"state":"states/L04.state.json"}	svg/L04.svg	

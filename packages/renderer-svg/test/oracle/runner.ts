@@ -533,7 +533,7 @@ export interface RowResult { id: string; ok: boolean; detail?: string }
 
 export async function runRow(impl: Impl, c: Oracle, row: Row): Promise<void> {
   switch (row.group) {
-    case "G": case "N": case "X": case "Y": case "O": case "F": return docRow(impl, c, row);
+    case "G": case "N": case "X": case "Y": case "O": case "F": case "L": return docRow(impl, c, row);
     case "T": {
       const n = row.id;
       if (n === "T01") return t01(impl, c, row);

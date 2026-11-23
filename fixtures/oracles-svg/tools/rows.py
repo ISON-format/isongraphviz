@@ -175,6 +175,7 @@ def build_all():
     fam_T()
     fam_U()
     fam_DK()
+    fam_L()
 
 
 def sp(name):
@@ -1223,3 +1224,13 @@ def fam_DK():
         add_row("D%02d" % k, "subject", "", "", "", None)
     for k in range(1, 115):
         add_row("K%02d" % k if k < 100 else "K%d" % k, "", "", "", "", None)
+
+
+def fam_L():
+    """L01-L04 (R-H, design 30 rev 5 7.5 (e)): rows appended after the K rows for the placement integration. Viewport: centre (450, 300) layout px, zoom 1000."""
+    vpt = svg.vp(450000, 300000, 1000, 900, 600)
+    for rid, name, hid in (("L01", "lp-hid-box", ["i:2"]), ("L02", "lp-nolabel", []), ("L03", "lp-hid-label", ["i:1"]), ("L04", "lp-astral", [])):
+        m = mdl(*sp(name))
+        idx = [i for i, n in enumerate(m.nodes) if n["ref"]["id"] in hid]
+        put_state(f"states/{rid}.state.json", m, svg.mk_state(m, vpt, hid_nodes=idx))
+        doc_row(rid, *sp(name), state=f"states/{rid}.state.json")

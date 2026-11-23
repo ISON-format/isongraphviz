@@ -1,4 +1,4 @@
-// Guards the mutation harness without running it: the K table has the 114 ids of design 15.6, every patch applies exactly the stated number of
+// Guards the mutation harness without running it: the K table has the 114 ids of design 15.6 plus K115-K126 (R-H, design 30 rev 5), every patch applies exactly the stated number of
 // times to the CURRENT src/ (so a refactoring cannot silently turn a mutant into a no-op), and production code carries no switchable variants.
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -9,8 +9,8 @@ import { ORACLE_DIR, PKG_DIR } from "./helpers.js";
 const SRC = join(PKG_DIR, "src");
 
 describe("the K table (scripts/mutants-table.mjs)", () => {
-  it("has K01..K114 once each, each with a description and at least one patch", () => {
-    expect(MUTANTS.map((m) => m.id)).toEqual(Array.from({ length: 114 }, (_, i) => `K${String(i + 1).padStart(2, "0")}`));
+  it("has K01..K126 once each, each with a description and at least one patch", () => {
+    expect(MUTANTS.map((m) => m.id)).toEqual(Array.from({ length: 126 }, (_, i) => `K${String(i + 1).padStart(2, "0")}`));
     for (const m of MUTANTS) { expect(m.desc, m.id).toBeTruthy(); expect(m.patches.length, m.id).toBeGreaterThan(0); }
   });
   it("matches the ids of the corpus MUTANTS.tsv", () => {

@@ -88,7 +88,7 @@
 <desc>n8 R n1</desc>
 <path class="igr-line" d="M 38.535 512.664 L 304.365 87.336" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 38.535 512.664 L 304.365 87.336"/>
-<text class="igr-elabel" x="171.45" y="296" text-anchor="middle">R</text>
+<text class="igr-elabel" x="171.45" y="282" text-anchor="middle">R</text>
 </g>
 </g>
 </svg>

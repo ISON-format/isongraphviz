@@ -218,7 +218,7 @@
 <desc>6 R0 3</desc>
 <path class="igr-line" d="M 775.943 54.306 L 747.693 136.355" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 775.943 54.306 L 747.693 136.355"/>
-<text class="igr-elabel" x="761.818" y="91.331" text-anchor="middle">R0</text>
+<text class="igr-elabel" x="761.818" y="109.331" text-anchor="middle">R0</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a225232222c22737263223a7b226964223a22693a36222c2274797065223a22706572736f6e227d2c22746774223a7b226964223a22693a3137222c2274797065223a2270726f6a656374227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R2" tabindex="-1">
 <title>R2</title>
@@ -309,7 +309,7 @@
 <desc>n5 R1 6</desc>
 <path class="igr-line" d="M 749.137 259.706 L 778.166 54.841" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 749.137 259.706 L 778.166 54.841"/>
-<text class="igr-elabel" x="763.651" y="153.274" text-anchor="middle">R1</text>
+<text class="igr-elabel" x="782.651" y="153.274" text-anchor="middle">R1</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a225231222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a39222c2274797065223a22706572736f6e227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R1" tabindex="-1">
 <title>R1</title>
@@ -323,7 +323,7 @@
 <desc>n5 R1 12</desc>
 <path class="igr-line" d="M 753.039 260.967 L 862.104 53.581" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 753.039 260.967 L 862.104 53.581"/>
-<text class="igr-elabel" x="807.572" y="153.274" text-anchor="middle">R1</text>
+<text class="igr-elabel" x="807.572" y="171.274" text-anchor="middle">R1</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a225233222c22737263223a7b226964223a22733a6e35222c2274797065223a2270726f6a656374227d2c22746774223a7b226964223a22693a3133222c2274797065223a22636f6d70616e79227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R3" tabindex="-1">
 <title>R3</title>

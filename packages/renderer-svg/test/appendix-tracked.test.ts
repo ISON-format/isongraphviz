@@ -43,7 +43,7 @@ describe("Appendix A from the tracked oracle files (runs without the design file
   });
   it("A.4: the degenerate edge at zoom 10 (three lines of N14)", async () => {
     const lines = ['<path class="igr-line" d="M 447.904 299.466 L 452.096 300.534" marker-end="url(#igr-arrow)"/>', '<path class="igr-pick" d="M 447.904 299.466 L 452.096 300.534"/>',
-      '<text class="igr-elabel" x="450" y="296" text-anchor="middle">KNOWS</text>'];
+      '<text class="igr-elabel" x="450" y="268" text-anchor="middle">KNOWS</text>'];
     const n14 = readOracleText("svg/N14.svg");
     expect(n14).toContain(lines.join("\n") + "\n");
     const { model, state } = await o1();

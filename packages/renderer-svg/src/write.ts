@@ -1,6 +1,6 @@
 // src/write.ts - renderSvg, renderSvgDetailed, writeSvg (design sections 2, 5, 6, 7, 8, 14.2). Streams the document line by line.
 import {
-  IgrError, effectiveVisibility, graphSummary, isRenderModel, lookupElement, serializeState, statusText, summaryText,
+  IgrError, effectiveVisibility, graphSummary, isRenderModel, lookupElement, placeLabels, serializeState, statusText, summaryText,
 } from "isongraph-visualize-renderer-core";
 import type { ModelEdge, ModelNode, RenderModel, SemanticState } from "isongraph-visualize-renderer-core";
 import { ELABEL_DY, LABEL_DY, NODE_R, RING_FOC, RING_SEL, SVG_FORMAT, THEME_LINES, XML_DECLARATION } from "./constants.js";
@@ -94,7 +94,41 @@ export function writeSvg(model: RenderModel, state: SemanticState, options: SvgO
     list.forEach((j, p) => { kind[j] = KIND_PARALLEL; rank[j] = p; groupSize[j] = list.length; });
   }
 
+  // the geometry of every visible edge, once (6): the paths feed the emission, the label anchors feed the placement
+  const geom: (EdgeGeom | undefined)[] = new Array<EdgeGeom | undefined>(model.edges.length).fill(undefined);
+  for (const e of model.edges) {
+    if (!vis.edges[e.index]) continue;
+    const A = pos[e.src]!, B = pos[e.tgt]!;
+    const k = kind[e.index]!;
+    geom[e.index] = k === KIND_LOOP ? selfLoop(A.x, A.y, rank[e.index]!)
+      : k === KIND_DEGENERATE ? degenerate(A, B)
+      : k === KIND_STRAIGHT ? straight(A, B)
+      : parallel(A, B, pos[Math.min(e.src, e.tgt)]!, pos[Math.max(e.src, e.tgt)]!, rank[e.index]!, groupSize[e.index]!);
+  }
+
   const plan = planLabels(model, vis.nodes, vis.edges, o.labels, o.edgeLabels, o.maxDrawnLabelUnits);
+
+  // label placement LP/1 (7.5 (e), design 37 rev 3): ONE call per document. Obstacles: every visible node in model order. Labels: the drawn node labels in model
+  // node order, then the drawn edge labels in model edge order, with `units` = the UTF-16 length of the drawn text and the default position (LABEL_DY, ELABEL_DY).
+  const obstacles: { cx: bigint; cy: bigint }[] = [];
+  for (const n of model.nodes) if (vis.nodes[n.index]) obstacles.push({ cx: pos[n.index]!.x, cy: pos[n.index]!.y });
+  const drawn: { kind: "node" | "edge"; units: number; x: bigint; y: bigint }[] = [];
+  const nodeSlot = new Int32Array(model.nodes.length).fill(-1), edgeSlot = new Int32Array(model.edges.length).fill(-1);
+  for (const n of model.nodes) {
+    const text = plan.nodeText[n.index];
+    if (text === undefined) continue;
+    nodeSlot[n.index] = drawn.length;
+    drawn.push({ kind: "node", units: text.length, x: pos[n.index]!.x, y: pos[n.index]!.y + BigInt(LABEL_DY) * E6 });
+  }
+  for (const e of model.edges) {
+    const text = plan.edgeText[e.index];
+    if (text === undefined) continue;
+    edgeSlot[e.index] = drawn.length;
+    drawn.push({ kind: "edge", units: text.length, x: geom[e.index]!.ax, y: geom[e.index]!.ay - BigInt(ELABEL_DY) * E6 });
+  }
+  const placed = drawn.length > 0 ? placeLabels({ nodes: obstacles, labels: drawn }) : [];
+  const labelX = (slot: number): string => fmt(drawn[slot]!.x + BigInt(placed[slot]!.dx) * E6);
+  const labelY = (slot: number): string => fmt(drawn[slot]!.y + BigInt(placed[slot]!.dy) * E6);
 
   // ---- emission --------------------------------------------------------------------------------------------------------
   let total = 0;
@@ -131,7 +165,7 @@ export function writeSvg(model: RenderModel, state: SemanticState, options: SvgO
       if (foc) emit(`<circle class="igr-ring-foc" cx="${X}" cy="${Y}" r="${RING_FOC}"/>`);
       emit(`<circle class="igr-shape" cx="${X}" cy="${Y}" r="${NODE_R}"/>`);
       const text = plan.nodeText[n.index];
-      if (text !== undefined) emit(`<text class="igr-label" x="${X}" y="${fmt(pos[n.index]!.y + BigInt(LABEL_DY) * E6)}" text-anchor="middle">${TEXT(text)}</text>`);
+      if (text !== undefined) emit(`<text class="igr-label" x="${labelX(nodeSlot[n.index]!)}" y="${labelY(nodeSlot[n.index]!)}" text-anchor="middle">${TEXT(text)}</text>`);
       emit("</g>");
     }
     emit("</g>");
@@ -143,12 +177,7 @@ export function writeSvg(model: RenderModel, state: SemanticState, options: SvgO
     for (const e of model.edges) {
       if (!vis.edges[e.index]) continue;
       const sel = selEdge.has(e.index), foc = focusEdge === e.index;
-      const A = pos[e.src]!, B = pos[e.tgt]!;
-      const k = kind[e.index]!;
-      const g: EdgeGeom = k === KIND_LOOP ? selfLoop(A.x, A.y, rank[e.index]!)
-        : k === KIND_DEGENERATE ? degenerate(A, B)
-        : k === KIND_STRAIGHT ? straight(A, B)
-        : parallel(A, B, pos[Math.min(e.src, e.tgt)]!, pos[Math.max(e.src, e.tgt)]!, rank[e.index]!, groupSize[e.index]!);
+      const g = geom[e.index]!;
       emit(`<g id="${elementDomId(P, { edge: e.ref })}" class="igr-edge${sel ? " igr-selected" : ""}${foc ? " igr-focused" : ""}" role="graphics-symbol" aria-roledescription="edge" aria-label="${ATTR(e.label)}" tabindex="${tabEdge === e.index ? "0" : "-1"}">`);
       emit(`<title>${TEXT(e.label)}</title>`);
       emit(`<desc>${TEXT(`${model.nodes[e.src]!.label} ${e.ref.rel} ${model.nodes[e.tgt]!.label}`)}</desc>`);
@@ -157,7 +186,7 @@ export function writeSvg(model: RenderModel, state: SemanticState, options: SvgO
       emit(`<path class="igr-line" d="${g.d}"${model.directed ? ` marker-end="url(#${P}-arrow)"` : ""}/>`);
       emit(`<path class="igr-pick" d="${g.d}"/>`);
       const text = plan.edgeText[e.index];
-      if (text !== undefined) emit(`<text class="igr-elabel" x="${fmt(g.ax)}" y="${fmt(g.ay - BigInt(ELABEL_DY) * E6)}" text-anchor="middle">${TEXT(text)}</text>`);
+      if (text !== undefined) emit(`<text class="igr-elabel" x="${labelX(edgeSlot[e.index]!)}" y="${labelY(edgeSlot[e.index]!)}" text-anchor="middle">${TEXT(text)}</text>`);
       emit("</g>");
     }
     emit("</g>");

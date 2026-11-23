@@ -31,7 +31,7 @@
   "agrees_with_model": true,
   "edges": 37,
   "nodes": 20,
-  "readout_sha256": "fa635b701b057a5d159bf61e07e3438c8514495eebac338f4e023a81577e3588",
+  "readout_sha256": "14ea0e1d8a9d1d6d6fb93c713fc330142cb39bfd25c73745202a7d95ca761387",
   "row": "G05"
  },
  {
@@ -45,21 +45,21 @@
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 6,
-  "readout_sha256": "bfddb5292a98d1fd3789cb0a0686fb1e75c3d1c501e17502737e7d99397a90f2",
+  "readout_sha256": "e9b7d7bf5d8718b9db2b3bf64284fef3713dfa7ffda08a9912bdacff7daa4d53",
   "row": "G07"
  },
  {
   "agrees_with_model": true,
   "edges": 37,
   "nodes": 20,
-  "readout_sha256": "4e764b8b902d61905befbefaeb98811bdd2b2fa1c4598765176c87dd56ddb33a",
+  "readout_sha256": "000fd500144b9e7d63416a9c7e8197d7dacb9a5d5db4698be2c24f56ce5794de",
   "row": "G08"
  },
  {
   "agrees_with_model": true,
   "edges": 1,
   "nodes": 2,
-  "readout_sha256": "a93e59a1d26a7ac33625b7a0a747f22a070cae81d2df87bb063d28751137fd21",
+  "readout_sha256": "4df1ef66c4a7f97ca1d2153fc836a4a37daba40425b6377168d5bfded3edba5f",
   "row": "G09"
  },
  {
@@ -80,56 +80,56 @@
   "agrees_with_model": true,
   "edges": 3,
   "nodes": 4,
-  "readout_sha256": "1b944ad3e00d53c7b0f65b8cdc476edd5f36cbdb4071ca44f57e5bde89defe1d",
+  "readout_sha256": "52362a2e277012615748d5b923f9ba23b2018fb62ed5cce5a39c55ff2c918f93",
   "row": "N02"
  },
  {
   "agrees_with_model": true,
   "edges": 16,
   "nodes": 32,
-  "readout_sha256": "50faa337a8a88235151c1586cee5b4fba6fcf580f4679128d5f1005d56a5ec02",
+  "readout_sha256": "a7b73a9401381857c526355392a0d4b442938922ee801d46d692c7db78d53ac3",
   "row": "N03"
  },
  {
   "agrees_with_model": true,
   "edges": 3,
   "nodes": 6,
-  "readout_sha256": "1879006504337fb388cd2f1daa89f61d0c936e813ea880906c85b888a98f5ebd",
+  "readout_sha256": "0b6675d488f0261d90d75715b274c960005e9013c757d3ffe58839c52749a33d",
   "row": "N04"
  },
  {
   "agrees_with_model": true,
   "edges": 3,
   "nodes": 6,
-  "readout_sha256": "7c3222d58e44c18dae0b5590f7ab5aae630a8ecdbed40e36763eaf4b857d9e31",
+  "readout_sha256": "cb9982538a79ae34efbbf54fbaa3ffafb7f8a7da6d9e82286f69b07000a03db0",
   "row": "N05"
  },
  {
   "agrees_with_model": true,
   "edges": 3,
   "nodes": 6,
-  "readout_sha256": "8722945b6ca101b7b1d729b6b918fd3bbb440adb9e3d3817244481b16a94cf93",
+  "readout_sha256": "fa3a2ce1464c54f3a7fdbeee821dfd65cbfca776a029c31665661ad172c36ac3",
   "row": "N06"
  },
  {
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 3,
-  "readout_sha256": "205e4a5ce26aadd8a80a8225115f628662a8d082910cd3e71953f3d8812c3350",
+  "readout_sha256": "c08992b3d717c696086088edf237bf6e362faadde5ce23079b5048e23c35e798",
   "row": "N07"
  },
  {
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 3,
-  "readout_sha256": "46d8fdd3b699aba5108fa3db49b881706b44a5e52cd00d693ade632f269c8399",
+  "readout_sha256": "24028c8a3e098231cd4db000bee7779e4b106a19abd793f59953c55b08a1b03f",
   "row": "N07b"
  },
  {
   "agrees_with_model": true,
   "edges": 5,
   "nodes": 2,
-  "readout_sha256": "78430dc2cbd0bb12d59a309d79bb5fffceda9420655cb12867a122b1a2e80c6f",
+  "readout_sha256": "8e66aaebf3caf2f4d49731403cdbd1782a04d8078e604e40dc841fe87e4d7faf",
   "row": "N08"
  },
  {
@@ -171,14 +171,14 @@
   "agrees_with_model": true,
   "edges": 1,
   "nodes": 2,
-  "readout_sha256": "695f6374ece3168237854cc118a7935927f79a7aa27c6d14c25648301509615d",
+  "readout_sha256": "7a866deef45c0b037a7cecec44558c7020ec1449e84392a99dc3b4ea68861f81",
   "row": "N14"
  },
  {
   "agrees_with_model": true,
   "edges": 25,
   "nodes": 28,
-  "readout_sha256": "43d2e18fd8c5b1a12af6945310552ebd233ee6efeab5576a757d9bf33b0e710e",
+  "readout_sha256": "5a9ac48704cd4dbdab061fa8a36d8896b80ab8f675edcdcf6c6e9aad9ac47e19",
   "row": "N15"
  },
  {
@@ -192,7 +192,7 @@
   "agrees_with_model": true,
   "edges": 5,
   "nodes": 6,
-  "readout_sha256": "8c811d24e71f17484e01a849d965ed9dce82087631c2c2bfd9ee6f6635783c01",
+  "readout_sha256": "675dfd01a10c45dcad7d34581f2da494e44f12fd68c93f4fd6a1421f758770a8",
   "row": "X02"
  },
  {
@@ -234,7 +234,7 @@
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 3,
-  "readout_sha256": "5560d595c558bef006f0122eea0f4d601adf4c0af4aa4d27459ab58767352bbd",
+  "readout_sha256": "c253483fbdc3397399dec9be91a8a3a207ca18177ed4cbd330fecc2d50f8c0a1",
   "row": "X08"
  },
  {
@@ -248,28 +248,28 @@
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 3,
-  "readout_sha256": "d9d7d572ecdb5cdfa83fab4f9d11f30f5814665f6e18e471ee3df3ab15b3de1e",
+  "readout_sha256": "ba4e8a5d75f0362b68f9d5776c954c28875c607bcbfbaf05ed74ff4b8b881bb1",
   "row": "X10"
  },
  {
   "agrees_with_model": true,
   "edges": 3,
   "nodes": 3,
-  "readout_sha256": "32dbcb87a5f6faf7b79faa71abaec125a65f2fee88d6c6f2183529128ae0b9c1",
+  "readout_sha256": "8c32cf74daf5edaa40c64e502a0c0cf11aa0523da39388c53c5dd9398010a126",
   "row": "X11"
  },
  {
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 4,
-  "readout_sha256": "ad2c39a17f9e19e0f47a61f39e6b2185f4131229633722fd85460efcec8561ac",
+  "readout_sha256": "686f0fee0940c90faf1cc62d298418562e05141c79419d779174339fad08fc0e",
   "row": "X12"
  },
  {
   "agrees_with_model": true,
   "edges": 2,
   "nodes": 10,
-  "readout_sha256": "3f382e0dc6c384119c9f5de0cc63e12c444fd5f175b20528a8b78f6a2bd898b5",
+  "readout_sha256": "22c60d320ef7173e31c9a6aa9e26bac878e4b75d8d88c282dad7d4a385113174",
   "row": "X13"
  },
  {
@@ -339,7 +339,7 @@
   "agrees_with_model": true,
   "edges": 36,
   "nodes": 20,
-  "readout_sha256": "d9a373d4ee7654d1fa6a5c704cc3190dfdfe3efa8ef84244670e0aea524a553d",
+  "readout_sha256": "f84d0d70c47e4fb2a3d1bb2fdbd022585c0881e1d53c1e0483697fff5bc5302b",
   "row": "Y08"
  },
  {
@@ -360,14 +360,14 @@
   "agrees_with_model": true,
   "edges": 37,
   "nodes": 20,
-  "readout_sha256": "0ce5fadc7d3ef99c29a275a28b79d986b5c5856b578bd37ec22f7868b4871258",
+  "readout_sha256": "7d13fb933680118cf003eea91b7631f3f6f521272900e355f18e9fabf21113f9",
   "row": "Y11"
  },
  {
   "agrees_with_model": true,
   "edges": 30,
   "nodes": 19,
-  "readout_sha256": "5da84f7235acf4dd02912354c13c501a5fe699496b023bcaa6c045eb4c618f26",
+  "readout_sha256": "5318df1f289c40e0bab2e9e9a936e2581255042f873af18b7d847be607081203",
   "row": "Y12"
  },
  {
@@ -388,7 +388,7 @@
   "agrees_with_model": true,
   "edges": 18,
   "nodes": 13,
-  "readout_sha256": "671e82ad78f5150af49a37406cc6750e36204723f6039beff395ef263efeee41",
+  "readout_sha256": "f653656f3703eb79c24c21cc1fd431292e5dc074ec081a1a0755d4b43099f650",
   "row": "Y17"
  },
  {

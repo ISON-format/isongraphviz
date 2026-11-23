@@ -26,22 +26,22 @@
 <g id="igr-n-7b226964223a22733a7a30222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z0" tabindex="0">
 <title>p z0</title>
 <circle class="igr-shape" cx="0" cy="0" r="10"/>
-<text class="igr-label" x="0" y="24" text-anchor="middle">z0</text>
+<text class="igr-label" x="0" y="38" text-anchor="middle">z0</text>
 </g>
 <g id="igr-n-7b226964223a22733a7a31222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z1" tabindex="-1">
 <title>p z1</title>
 <circle class="igr-shape" cx="0" cy="-0.001" r="10"/>
-<text class="igr-label" x="0" y="23.999" text-anchor="middle">z1</text>
+<text class="igr-label" x="0" y="-17.001" text-anchor="middle">z1</text>
 </g>
 <g id="igr-n-7b226964223a22733a7a32222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z2" tabindex="-1">
 <title>p z2</title>
 <circle class="igr-shape" cx="-0.001" cy="0.001" r="10"/>
-<text class="igr-label" x="-0.001" y="24.001" text-anchor="middle">z2</text>
+<text class="igr-label" x="-23.001" y="4.001" text-anchor="middle">z2</text>
 </g>
 <g id="igr-n-7b226964223a22733a7a33222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p z3" tabindex="-1">
 <title>p z3</title>
 <circle class="igr-shape" cx="0.001" cy="0" r="10"/>
-<text class="igr-label" x="0.001" y="24" text-anchor="middle">z3</text>
+<text class="igr-label" x="23.001" y="4" text-anchor="middle">z3</text>
 </g>
 </g>
 <g class="igr-edges">
@@ -50,21 +50,21 @@
 <desc>z0 R z1</desc>
 <path class="igr-line" d="M 0 0 L 0 -0.001"/>
 <path class="igr-pick" d="M 0 0 L 0 -0.001"/>
-<text class="igr-elabel" x="0" y="-4.001" text-anchor="middle">R</text>
+<text class="igr-elabel" x="0" y="-32.001" text-anchor="middle">R</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a7a31222c2274797065223a2270227d2c22746774223a7b226964223a22733a7a32222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
 <title>R</title>
 <desc>z1 R z2</desc>
 <path class="igr-line" d="M 0 -0.001 L -0.001 0.001"/>
 <path class="igr-pick" d="M 0 -0.001 L -0.001 0.001"/>
-<text class="igr-elabel" x="-0.001" y="-4" text-anchor="middle">R</text>
+<text class="igr-elabel" x="14.999" y="-18" text-anchor="middle">R</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a7a32222c2274797065223a2270227d2c22746774223a7b226964223a22733a7a33222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
 <title>R</title>
 <desc>z2 R z3</desc>
 <path class="igr-line" d="M -0.001 0.001 L 0.001 0"/>
 <path class="igr-pick" d="M -0.001 0.001 L 0.001 0"/>
-<text class="igr-elabel" x="0" y="-4" text-anchor="middle">R</text>
+<text class="igr-elabel" x="-15" y="-18" text-anchor="middle">R</text>
 </g>
 </g>
 </svg>

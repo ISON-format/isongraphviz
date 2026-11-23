@@ -27,7 +27,7 @@
 <g id="igr-n-7b226964223a22693a31222c2274797065223a22706572736f6e227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="person 1" tabindex="0">
 <title>person 1</title>
 <circle class="igr-shape" cx="447.904" cy="299.466" r="10"/>
-<text class="igr-label" x="447.904" y="323.466" text-anchor="middle">1</text>
+<text class="igr-label" x="447.904" y="282.466" text-anchor="middle">1</text>
 </g>
 <g id="igr-n-7b226964223a22733a616e6e222c2274797065223a22706572736f6e227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="person ann" tabindex="-1">
 <title>person ann</title>
@@ -41,7 +41,7 @@
 <desc>1 KNOWS ann</desc>
 <path class="igr-line" d="M 447.904 299.466 L 452.096 300.534" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 447.904 299.466 L 452.096 300.534"/>
-<text class="igr-elabel" x="450" y="296" text-anchor="middle">KNOWS</text>
+<text class="igr-elabel" x="450" y="268" text-anchor="middle">KNOWS</text>
 </g>
 </g>
 </svg>

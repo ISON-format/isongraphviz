@@ -13,11 +13,11 @@ describe("corpus integrity (15.3)", () => {
     expect(verifySums(ORACLE_DIR)).toEqual([]);
     console.log(`[oracles-svg] SHA256SUMS digest ${sumsDigest(ORACLE_DIR)} (draft corpus, not pinned)`);
   });
-  it("249 ids: G 10, N 16, X 15, Y 17, O 22, F 6, T 32, U 13, D 4, K 114", () => {
+  it("253 ids: G 10, N 16, X 15, Y 17, O 22, F 6, T 32, U 13, D 4, K 114, L 4 (L appended by R-H)", () => {
     const by = new Map<string, number>();
     for (const r of oracle.rows) by.set(r.group, (by.get(r.group) ?? 0) + 1);
-    expect(oracle.rows.length).toBe(249);
-    expect(Object.fromEntries(by)).toEqual({ G: 10, N: 16, X: 15, Y: 17, O: 22, F: 6, T: 32, U: 13, D: 4, K: 114 });
+    expect(oracle.rows.length).toBe(253);
+    expect(Object.fromEntries(by)).toEqual({ G: 10, N: 16, X: 15, Y: 17, O: 22, F: 6, T: 32, U: 13, D: 4, K: 114, L: 4 });
   });
   it("tiers: D rows subject, K rows empty; every document row is core, both or (U) subject", () => {
     for (const r of oracle.rows) {

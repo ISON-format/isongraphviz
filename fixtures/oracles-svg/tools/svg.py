@@ -11,6 +11,7 @@ mutants of design section 15.6 (`MUT`, set by `--mutant Knn`).
 The corpus generator is `corpus.py`; run `python tools/svg.py` to regenerate.
 """
 import sys, os, json, math, hashlib, re, unicodedata
+import importlib.util
 from fractions import Fraction
 
 MUT = set()
@@ -18,6 +19,17 @@ MUT = set()
 
 def M(k):
     return k in MUT
+
+
+# LP/1 (design 37 rev 3, ruling R-H): the label placement is the independent Python reference of fixtures/oracles-lp. It is loaded by path (this
+# file never reads TypeScript); `place_labels(nodes, labels)` takes micro-pixel tuples and returns whole-pixel offsets.
+_LP_PATH = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "oracles-lp", "tools", "lp.py"))
+_wb = sys.dont_write_bytecode
+sys.dont_write_bytecode = True   # no __pycache__ in the sibling corpus
+_lp_spec = importlib.util.spec_from_file_location("lp_reference_lp1", _LP_PATH)
+LP = importlib.util.module_from_spec(_lp_spec)
+_lp_spec.loader.exec_module(LP)
+sys.dont_write_bytecode = _wb
 
 
 # ----------------------------------------------------------------------------
@@ -1049,6 +1061,64 @@ def label_plan(model, vn, ve, o):
     return ntext, etext, fid, total
 
 
+def label_offsets(model, vn, ve, o, X, Y, plan, ntext, etext):
+    """LP/1 (design 37 rev 3, 30 section 7.5 rev 5): ONE call of the reference placement per document.
+
+    nodes  = every visible node in model node order, (X, Y) in micro-pixels;
+    labels = the drawn node labels in model node order, then the drawn edge labels in model edge order;
+             units = UTF-16 length of the drawn text; default x, y = (X, Y + 24 px) / (anchor x, anchor y - 4 px).
+    Returns ({node index: (dx, dy)}, {edge index: (dx, dy)}) in whole pixels."""
+    nl = [(i, "node", len16(ntext[i]), X[i], Y[i] + 24 * S) for i in range(len(model.nodes)) if ntext.get(i) is not None]
+    el = [(i, "edge", len16(etext[i]), plan[i][1][0], plan[i][1][1] - 4 * S) for i in range(len(model.edges)) if etext.get(i) is not None]
+    if M("K121"):
+        # units counted BEFORE the elision of the label pass (the length of the model label, not of the drawn text)
+        nl = [(i, k, len16(model.nodes[i]["label"]), x, y) for (i, k, u, x, y) in nl]
+        el = [(i, k, len16(model.edges[i]["label"]), x, y) for (i, k, u, x, y) in el]
+    if M("K126"):
+        # units counted in code points instead of UTF-16 units
+        nl = [(i, k, len(ntext[i]), x, y) for (i, k, u, x, y) in nl]
+        el = [(i, k, len(etext[i]), x, y) for (i, k, u, x, y) in el]
+    if M("K125"):
+        # the labels of HIDDEN nodes take part in the placement (placed in model node order among the drawn node labels)
+        nl = [(i, "node", len16(ntext[i] if ntext.get(i) is not None else dl(model.nodes[i]["label"])), X[i], Y[i] + 24 * S)
+              for i in range(len(model.nodes)) if ntext.get(i) is not None or (not vn[i] and dl(model.nodes[i]["label"]) != "")]
+    vis_nodes = [i for i in range(len(model.nodes)) if vn[i]]
+    if M("K123"):
+        nodes = [(X[i], Y[i]) for i in range(len(model.nodes))]                     # K123: hidden nodes are obstacles too
+    elif M("K124"):
+        nodes = [(X[i], Y[i]) for i in vis_nodes if ntext.get(i) is not None]       # K124: visible nodes without a drawn label are dropped
+    elif M("K120"):
+        nodes = [(X[i], Y[i] + 24 * S) for i in vis_nodes]                          # K120: node obstacles at the label baseline, not the centre
+    elif M("K122"):
+        nodes = []                                                                  # K122: node obstacles ignored
+    else:
+        nodes = [(X[i], Y[i]) for i in vis_nodes]
+    on, oe = {}, {}
+    if M("K118"):
+        # two calls: node labels see no edge label, edge labels see no node label
+        res = LP.place_labels(nodes, [(k, u, x, y) for (_i, k, u, x, y) in nl])
+        for (i, *_r), d in zip(nl, res):
+            on[i] = d
+        res = LP.place_labels(nodes, [(k, u, x, y) for (_i, k, u, x, y) in el])
+        for (i, *_r), d in zip(el, res):
+            oe[i] = d
+    else:
+        seq = (el + nl) if M("K119") else (nl + el)                                  # K119: edge labels before node labels
+        res = LP.place_labels(nodes, [(k, u, x, y) for (_i, k, u, x, y) in seq])
+        for (i, k, *_r), d in zip(seq, res):
+            (on if k == "node" else oe)[i] = d
+    if M("K115"):
+        on = {i: (0, 0) for i in on}
+        oe = {i: (0, 0) for i in oe}
+    if M("K116"):
+        on = {i: (d[0], 0) for i, d in on.items()}
+        oe = {i: (d[0], 0) for i, d in oe.items()}
+    if M("K117"):
+        on = {i: (0, d[1]) for i, d in on.items()}
+        oe = {i: (0, d[1]) for i, d in oe.items()}
+    return on, oe
+
+
 def _cat_class(model, cat, vn=None):
     cats = model.categories
     if M("K60") and vn is not None:
@@ -1069,6 +1139,7 @@ def doc_lines(model, state, o):
     X, Y = screen_positions(model, state)
     plan = edge_plan(model, state, vn, ve, X, Y)
     ntext, etext, fid, units = label_plan(model, vn, ve, o)
+    off_n, off_e = label_offsets(model, vn, ve, o, X, Y, plan, ntext, etext)
     v = state["viewport"]
     W, H = v["width"], v["height"]
     f = _focus_of(model, state)
@@ -1166,7 +1237,8 @@ def doc_lines(model, state, o):
             yield shape
             t = ntext.get(i)
             if t is not None:
-                yield f'<text class="igr-label" x="{cx}" y="{fmt(Y[i] + 24 * S)}" text-anchor="middle">{TEXT(t)}</text>\n'
+                dx, dy = off_n[i]
+                yield f'<text class="igr-label" x="{fmt(X[i] + dx * S)}" y="{fmt(Y[i] + 24 * S + dy * S)}" text-anchor="middle">{TEXT(t)}</text>\n'
             yield "</g>\n"
         yield "</g>\n"
 
@@ -1230,7 +1302,8 @@ def doc_lines(model, state, o):
             yield pick
             t = etext.get(i)
             if t is not None:
-                yield f'<text class="igr-elabel" x="{fmt(anchor[0])}" y="{fmt(anchor[1] - 4 * S)}" text-anchor="middle">{TEXT(t)}</text>\n'
+                dx, dy = off_e[i]
+                yield f'<text class="igr-elabel" x="{fmt(anchor[0] + dx * S)}" y="{fmt(anchor[1] - 4 * S + dy * S)}" text-anchor="middle">{TEXT(t)}</text>\n'
             yield "</g>\n"
         yield "</g>\n"
 

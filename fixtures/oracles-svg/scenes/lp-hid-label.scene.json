@@ -1,0 +1,1 @@
+{"address_scheme":"igs-addr/1","edges":[],"graph":{"directed":true,"profile":"simple"},"igs":"IGS/1","nodes":[{"category":"p","label":"1","ref":{"id":"i:1","type":"p"}},{"category":"p","label":"aaaa","ref":{"id":"s:aaaa","type":"p"}}],"source":{"artifact_sha256":"ba962a5441fe25ca00c93f53964ce8ce2c4bd799c8e3e3d210007cab03eaf4bc","serialization_profile":"ison-v1"}}

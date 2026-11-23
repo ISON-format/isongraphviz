@@ -4,6 +4,7 @@ Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere). Pr
 **rev 3**; first written against rev 2, regenerated against rev 3) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `IGS-1.md`, `IGL-1.md`,
 `docs/conformance/README.md` and the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`), plus the **format and layout
 conventions** (README, `EXPECT.tsv`, `SHA256SUMS`, `generated/GENERATED.tsv`) of the draft corpora `oracles-igr`, `-lod`, `-stable`.
+**R-H revision (2026-11-22, design 30 rev 5 and design 37 `LP/1` **rev 3**, width 9 px per UTF-16 unit; first generated against rev 2, 7 px, and regenerated).** By an explicit owner ruling (R-H, an exception to the ledger rule R-C that covers only the label-position content) the expected bytes were regenerated for the new label placement: the writer of `tools/svg.py` calls the independent LP/1 reference `fixtures/oracles-lp/tools/lp.py` once per document. **Only label positions changed**: 26 of the 79 documents differ from the previous revision in the `x` and `y` attributes of `<text class="igr-label|igr-elabel">` elements and nowhere else (278 labels moved), `json/T14.readouts.json` differs only in the `readout_sha256` of 24 entries, and every other expected file is byte-identical; `tools/labelmove_check.py` proves this against `git show HEAD:`. The 249 old `EXPECT.tsv` rows and ids are unchanged. **Appended (R-C, new ids): family `L`, rows `L01`-`L04`** (four authored scenes `lp-*`, four state files, four documents), listed after the `K` rows, that give the placement integration the collisions the old rows lack; `MUTANTS.tsv` gained K115-K126 (the placement integration; they have no `K` row in `EXPECT.tsv`). Every old file, `T14.readouts.json` included, is unaffected by `L01`-`L04` (family `L` is not in the T14 list).
 Read `AMBIGUITIES.md` before judging any mismatch: it lists {{NAMBIG}} places where the design was ambiguous, contradictory or
 could not be built (A-01 to A-07 are defects of the design of rev 2; A-54 to A-61 are new findings against rev 3), the reading used, why, and for every old entry whether rev 3 resolved it and whether the reading matched.
 
@@ -11,8 +12,8 @@ could not be built (A-01 to A-07 are defects of the design of rev 2; A-54 to A-6
 
 * Every expected byte comes from the Python code in `tools/` (standard library only: `hashlib`, `json`, `math`, `re`, `xml.etree.ElementTree`
   for the well-formedness self-check). `tools/svg.py` is the reference (arithmetic of section 3, model, state, reducer subset, accessible
-  text, exact hit test, document writer, strict reader, id codec, `pickElement`, a small renderer/lifecycle simulation, and the 114 switchable
-  mutants); `tools/corpus.py` is the driver; `tools/rows.py`, `tools/scenes.py`, `tools/searches.py` define the rows, the authored scenes
+  text, exact hit test, document writer, strict reader, id codec, `pickElement`, a small renderer/lifecycle simulation, and the 126 switchable
+  mutants); since rev 5 it loads `fixtures/oracles-lp/tools/lp.py` (the independent LP/1 reference, by path, standard library only) for the label offsets and reads no TypeScript; `tools/corpus.py` is the driver; `tools/rows.py`, `tools/scenes.py`, `tools/searches.py` define the rows, the authored scenes
   and the seeded searches.
 * The author did **not** read, import, copy or run any TypeScript, `packages/*`, the V5 implementation (none existed), the review files or the author
   notes of design 30, or any tool code of earlier corpora (in particular `oracles-igr/tools/igr.py`): everything V5 needs of IGR/1 was re-implemented
@@ -28,7 +29,7 @@ could not be built (A-01 to A-07 are defects of the design of rev 2; A-54 to A-6
 ## What is here
 
 `EXPECT.tsv`: header `id group tier scene layout input expected error` (15.3), **{{NROWS}} rows** (one per id of 15.8: G 10, N 16, X 15, Y 17, O 22,
-F 6, T 32, U 13, D 4, K 114), {{NDATA}} of them carrying files or inline inputs, the {{NEMPTY}} `D`/`K` rows empty by design. `group` is the
+F 6, T 32, U 13, D 4, K 114, and since R-H L 4, appended last), {{NDATA}} of them carrying files or inline inputs, the {{NEMPTY}} `D`/`K` rows empty by design. `group` is the
 leading letter. `scene`, `layout` are paths relative to the corpus directory (`../oracles/...`, `../oracles-igl/...` allowed); `input` is a path or
 inline JSON (starts with `{` or `[`); `expected` is a path or empty; `error` is `CODE/REASON` or empty; the {{NERR}} rows with an `error` have no
 expected file. Rows are listed in family order (G, N, X, Y, O, F, T, U, D, K). One row = one scene, one layout, one input (see A-05, A-06 for the
@@ -59,6 +60,7 @@ python tools/svg.py --out DIR          # the same into DIR (used for the byte-id
 python tools/svg.py --no-matrix        # skip the mutant matrix (MUTANTS.tsv is then not written)
 python tools/svg.py --mutant K08       # run one mutant over every row and list the rows that change
 python tools/svg.py --check-appendix   # print the Appendix A reproduction table only
+python tools/labelmove_check.py        # R-H proof: against `git show HEAD:`, only label x/y changed in the documents, every other file identical (needs git)
 ```
 
 Python 3.12, standard library only, no network, no clock, no randomness (the two searches use a fixed 32-bit LCG and fixed seeds, recorded below).
@@ -74,7 +76,7 @@ expat well-formedness of every document, and the rule of 15.4 for conflicting po
 
 ## Row families, inputs and expected files
 
-**Documents (G, N, X, Y, O, F01, F04).** `input` = `{"size":{"width":W,"height":H},"state":"initial"|"<path>","options":{...}?,"expect_fidelity":{"edge_labels","label_units","labels"}?}`
+**Documents (G, N, X, Y, O, L, F01, F04).** `input` = `{"size":{"width":W,"height":H},"state":"initial"|"<path>","options":{...}?,"expect_fidelity":{"edge_labels","label_units","labels"}?}`
 (15.3). `"initial"` is `initialState(model, size)`; a path is a state file (canonical IGR-CJ/1 bytes bound to the row's scene and layout). The `"NaN"` token is the double.
 `expected` = `svg/<id>.svg`, or empty with `error`. `expect_fidelity` is the fidelity of `renderSvgDetailed` and is present on every row that renders.
 `Y14` and `Y15` (core) load their state file with plain JSON (A-11), not `parseState`.
@@ -83,6 +85,15 @@ expat well-formedness of every document, and the rule of 15.4 for conflicting po
   `N01` by a residue search; `N11`/`N12` use `igl:V45`/`igl:V46`. **X** text, escaping and identities. **Y** state hooks (A.2 is `Y03`, A.3 is `Y07`; `Y17` hides all `company` nodes of `mixed20`, see A-54).
   **O** options and validation (error rows: `O10`-`O12`, `O14`-`O22`). **F** size limits: `F01` (exact length, equals `G01`), `F04` (exact length of `hub`) expect documents; `F02`, `F03`, `F06` expect
   `RESOURCE_LIMIT/BYTES_LIMIT`; `F05` is inline (see `T`-style files below).
+
+**L** (R-H, appended after the `K` rows; documents, tier both, same input form as G; scene `scenes/lp-*.scene.json`, FIXED layout, state `states/Lnn.state.json` at centre (450, 300), zoom 1000, 900x600, so one layout unit is one pixel). Each row is one collision that only one of the mutants K123-K126 gets wrong:
+
+| Row | Scene | Content | Mutant killed |
+|---|---|---|---|
+| `L01` | `lp-hid-box` | the HIDDEN node `i:2` sits 30 px below `i:1`, inside the default label box of `i:1`; the label stays at its default position | K123 hidden nodes are obstacles |
+| `L02` | `lp-nolabel` | the visible node `s:` has an empty label (no `<text>`) and sits 30 px below `s:aaaa`; the label of `s:aaaa` moves up (`y=183`) | K124 nodes without a drawn label dropped |
+| `L03` | `lp-hid-label` | the hidden node `i:1` (label `1`, earlier in model order) has a default label box that overlaps that of `s:aaaa` 12 px to its right, its disc box does not; the label of `s:aaaa` stays at its default position | K125 labels of hidden nodes take part |
+| `L04` | `lp-astral` | `s:bbbb` and a label of six U+1F600 (12 UTF-16 units, 6 code points) 48 px apart: the boxes collide only at 12 units; the astral label moves up | K126 units in code points |
 
 **T** round trip, pick and reader.
 
@@ -111,7 +122,7 @@ Files: `json/U06.headless.manifest.json`, `json/U06.dom.manifest.json` (IGR-CJ/1
 `json/U11.witness-honesty.json`, `json/U12.cap.json`, `json/U13.render.json` (A-10). `U10` has no expected file.
 
 **D, K.** `D01`-`D04` are runtime tiers (caller seeds, kit-generated models): no file; `tools/svg.py` (`RefRenderer`, `render_svg`, `read_svg`, `pick_element`, `hit_test`) is a ready reference for them. `K01`-`K114` are
-mutants of the V5 test suite (empty cells); their definitions and the killers that were measured are below.
+mutants of the V5 test suite (empty cells); their definitions and the killers that were measured are below. `K115`-`K126` (R-H, placement integration) are mutants only: they have **no** `K` row in `EXPECT.tsv` (the rows are not changed by R-H) and are listed in `MUTANTS.tsv`.
 
 ## The two searches and the residue construction
 
@@ -127,8 +138,8 @@ mutants of the V5 test suite (empty cells); their definitions and the killers th
 
 ## Mutants (15.6)
 
-Each of the 114 mutants is a switch of `tools/svg.py` (`--mutant Knn`; `svg.MUT`). For each mutant the generator runs **every row** with the mutant active and compares the row's output (files and error) with the unmutated run
-(`MUTANTS.tsv`: `mutant, description, named_killers, killing_rows, named_not_killing, other_changed_rows, verdict`). Row outputs are not recomputed from mutated inputs: inputs (scenes, states, bad files, expectations that
+Each of the 126 mutants (K01-K114 from design 15.6; K115-K126 added by R-H for the placement integration, design 30 rev 5) is a switch of `tools/svg.py` (`--mutant Knn`; `svg.MUT`). For each mutant the generator runs **every row** with the mutant active and compares the row's output (files and error) with the unmutated run
+(`MUTANTS.tsv`: `mutant, description, named_killers, killing_rows, named_not_killing, other_changed_rows, verdict`); for K01-K122 the rows of family `L` are left out of `other_changed_rows`, so that their lines are exactly those of the revision before `L01`-`L04`). Row outputs are not recomputed from mutated inputs: inputs (scenes, states, bad files, expectations that
 depend on lengths) are produced once by the unmutated reference.
 
 {{MUT_SUMMARY}}

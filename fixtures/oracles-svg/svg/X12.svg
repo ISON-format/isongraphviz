@@ -51,14 +51,14 @@
 <desc>&lt;?pi?&gt; R &amp;#x41;</desc>
 <path class="igr-line" d="M 577.275 300 L 44.175 300" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 577.275 300 L 44.175 300"/>
-<text class="igr-elabel" x="310.725" y="296" text-anchor="middle">R</text>
+<text class="igr-elabel" x="310.725" y="282" text-anchor="middle">R</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a5d5d3e222c2274797065223a2270227d2c22746774223a7b226964223a22733a2d2d3e222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
 <title>R</title>
 <desc>]]&gt; R --&gt;</desc>
 <path class="igr-line" d="M 855.825 300 L 322.725 300" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 855.825 300 L 322.725 300"/>
-<text class="igr-elabel" x="589.275" y="296" text-anchor="middle">R</text>
+<text class="igr-elabel" x="589.275" y="282" text-anchor="middle">R</text>
 </g>
 </g>
 </svg>

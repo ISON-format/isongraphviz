@@ -46,7 +46,7 @@
 <desc>	x R y&#13;&#10;z</desc>
 <path class="igr-line" d="M 44.1 300 L 855.9 300" marker-end="url(#igr-arrow)"/>
 <path class="igr-pick" d="M 44.1 300 L 855.9 300"/>
-<text class="igr-elabel" x="450" y="296" text-anchor="middle">R</text>
+<text class="igr-elabel" x="450" y="282" text-anchor="middle">R</text>
 </g>
 <g id="igr-e-7b226f7264223a2230222c2272656c223a2252222c22737263223a7b226964223a22733a615c6e625c74635c72222c2274797065223a2270227d2c22746774223a7b226964223a22733a5c7478222c2274797065223a2270227d7d" class="igr-edge" role="graphics-symbol" aria-roledescription="edge" aria-label="R" tabindex="-1">
 <title>R</title>

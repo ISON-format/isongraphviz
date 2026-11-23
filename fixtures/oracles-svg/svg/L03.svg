@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="igr-svg" width="900" height="600" viewBox="0 0 900 600" role="graphics-document" aria-roledescription="graph" aria-labelledby="igr-title" aria-describedby="igr-desc" data-igr-svg="igr-svg/1" data-igr-artifact="ba962a5441fe25ca00c93f53964ce8ce2c4bd799c8e3e3d210007cab03eaf4bc" data-igr-scene="657108f9f739b7bb66006ad7eaf171f30ef6bc7e012ab52960b3a6626f489fa9" data-igr-layout="a9a546248b4ddfd23ea2056a11a10fd58f393d61c056473b9d6aaced6f77552c">
+<title id="igr-title">Directed graph with 2 nodes and 0 edges. Node categories: p (2).</title>
+<desc id="igr-desc">0 selected, 1 hidden.</desc>
+<style>
+.igr-svg{font:12px sans-serif}
+.igr-shape{stroke:#fff;stroke-width:2}
+.igr-k0 .igr-shape{fill:#2a78d6}
+.igr-k1 .igr-shape{fill:#eb6834}
+.igr-k2 .igr-shape{fill:#1baf7a}
+.igr-k3 .igr-shape{fill:#eda100}
+.igr-k4 .igr-shape{fill:#e87ba4}
+.igr-k5 .igr-shape{fill:#008300}
+.igr-k6 .igr-shape{fill:#4a3aa7}
+.igr-k7 .igr-shape{fill:#e34948}
+.igr-kx .igr-shape{fill:#7a7975}
+.igr-line{fill:none;stroke:currentColor;stroke-opacity:.6;stroke-width:2}
+.igr-pick{fill:none;stroke:transparent;stroke-width:10;pointer-events:stroke}
+.igr-arrow{fill:currentColor;fill-opacity:.6}
+.igr-ring-sel{fill:none;stroke:currentColor;stroke-width:3}
+.igr-ring-foc{fill:none;stroke:currentColor;stroke-width:2;stroke-dasharray:4 3}
+.igr-halo-sel{fill:none;stroke:currentColor;stroke-width:6;stroke-opacity:.35}
+.igr-halo-foc{fill:none;stroke:currentColor;stroke-width:10;stroke-opacity:.25;stroke-dasharray:6 4}
+.igr-label,.igr-elabel{fill:currentColor;unicode-bidi:isolate;pointer-events:none}
+</style>
+<defs><marker id="igr-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path class="igr-arrow" d="M 0 0 L 10 5 L 0 10 z"/></marker></defs>
+<g class="igr-nodes">
+<g id="igr-n-7b226964223a22733a61616161222c2274797065223a2270227d" class="igr-node igr-k0" role="graphics-symbol" aria-roledescription="node" aria-label="p aaaa" tabindex="0">
+<title>p aaaa</title>
+<circle class="igr-shape" cx="312" cy="200" r="10"/>
+<text class="igr-label" x="312" y="224" text-anchor="middle">aaaa</text>
+</g>
+</g>
+<g class="igr-edges">
+</g>
+</svg>
