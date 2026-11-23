@@ -1,0 +1,281 @@
+mutant	kind	verdict	n_killing_rows	killing_rows	stress_rows_changed	description
+K001	cfg	KILLED	99	E09,F11,F13,F14,F15,F18,F20,F21,F22,F23,F24,F25,F27,G-NR-1px-1,G-NR-0,G-NL-1px-1,G-NL-0,G-NT-1px-1,G-NT-0,G-NB-1px-1,G-NB-0,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,...	not-run	gap 0 px instead of 1 px (boxes may touch)
+K002	cfg	KILLED	267	E03,E09,E10,E11,E12,E13,CN01u1,CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN15u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,...	not-run	gap 2 px instead of 1 px
+K003	cfg	KILLED	241	E03,E09,E10,E11,E12,E13,CN01u1,CN02u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN15u1,CN18u1,CN19u1,CN20u1,CN22u1,CN23u1,CN27u1,CN01u4,CN02u4,CN03u4,CN04u4,...	not-run	non-strict inequality (<=) on all four tests with the 1 px gap (exactly 1 px apart collides)
+K004	cfg	KILLED	113	CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,CN14u4,CN19u4,CN20u4,CN21u4,CN25u4,CN26u4,CN27u4,CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,CE14u4,CE16u4,CE17u4,CE19u4,...	not-run	non-strict only on the x tests
+K005	cfg	KILLED	177	E03,E09,E10,E11,E12,E13,CN01u1,CN02u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN15u1,CN18u1,CN19u1,CN20u1,CN22u1,CN23u1,CN27u1,CN01u4,CN02u4,CN05u4,CN06u4,...	not-run	non-strict only on the y tests
+K006	cfg	KILLED	64	E09,F11,F13,F15,F18,F20,F21,F24,F25,F27,G-NT-1px-1,G-NT-0,G-NB-1px-1,G-NB-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HC3-1pxm1,...	not-run	gap 1 px on x only, 0 on y
+K007	cfg	KILLED	67	F14,F15,F21,F22,F23,F24,G-NR-1px-1,G-NR-0,G-NL-1px-1,G-NL-0,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HNR-1px-1,G-HNR-0,G-HNL-1px-1,G-HNL-0,G-HLR-1px-1,...	not-run	gap 1 px on y only, 0 on x
+K008	cfg	KILLED	56	E09,F14,F18,F20,F21,F24,F27,G-NR-1px-1,G-NR-0,G-NB-1px-1,G-NB-0,G-LL-1px-1,G-LL-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HNR-1px-1,G-HNR-0,G-HLL-1px-1,G-HLL-0,...	not-run	gap applied on one side of each pair only (asymmetric)
+K009	cfg	KILLED	4	G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999	not-run	gap measured as a Euclidean distance (corners)
+K010	cfg	KILLED	172	E07,E13,CN03u1,CN07u1,CN09u1,CN13u1,CN19u1,CN21u1,CN22u1,CN25u1,CN27u1,CN03u4,CN07u4,CN09u4,CN13u4,CN19u4,CN21u4,CN22u4,CN25u4,CN27u4,CE04u1,CE08u1,CE10u1,CE13u1,CE16u1,...	not-run	collision test without the condition 'a.left < b.right'
+K011	cfg	KILLED	149	E13,CN04u1,CN08u1,CN10u1,CN14u1,CN17u1,CN20u1,CN21u1,CN23u1,CN26u1,CN27u1,CN29u1,CN04u4,CN08u4,CN10u4,CN14u4,CN17u4,CN20u4,CN21u4,CN23u4,CN26u4,CN27u4,CN29u4,CE05u1,CE09u1,...	not-run	collision test without the condition 'b.left < a.right'
+K012	cfg	KILLED	194	E03,E10,E11,E12,E13,CN01u1,CN05u1,CN09u1,CN10u1,CN11u1,CN15u1,CN16u1,CN17u1,CN21u1,CN22u1,CN23u1,CN27u1,CN28u1,CN29u1,CN01u4,CN05u4,CN09u4,CN10u4,CN11u4,CN15u4,...	not-run	collision test without the condition 'a.top < b.bottom'
+K013	cfg	KILLED	179	E08,E09,E13,E15,E16,CN02u1,CN06u1,CN07u1,CN08u1,CN12u1,CN13u1,CN14u1,CN18u1,CN19u1,CN20u1,CN24u1,CN25u1,CN26u1,CN02u4,CN06u4,CN07u4,CN08u4,CN12u4,CN13u4,CN14u4,...	not-run	collision test without the condition 'b.top < a.bottom'
+K014	cfg	KILLED	111	CE06u4,CE07u4,CE10u4,CE11u4,CE12u4,CE13u4,CE14u4,CE15u4,CE16u4,CE17u4,CE18u4,CE19u4,CE20u4,CE21u4,CE22u4,CE23u4,CE24u4,CE25u4,CE26u4,CE27u4,CE28u4,CE29u4,W16,W20,W24,...	not-run	label width 7 px per unit (the rev 2 value)
+K015	cfg	KILLED	77	W20,W24,F06,F14,F15,F21,F22,F23,F24,G-NR-1px-1,G-NR-0,G-NL-1px-1,G-NL-0,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HNR-1px-1,G-HNR-0,...	not-run	label width 8 px per unit
+K016	cfg	KILLED	128	CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,CN14u4,CN19u4,CN20u4,CN21u4,CN25u4,CN26u4,CN27u4,CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,CE14u4,CE16u4,CE17u4,CE19u4,...	not-run	label width 10 px per unit
+K017	cfg	KILLED	124	CE06u4,CE07u4,CE10u4,CE11u4,CE12u4,CE13u4,CE14u4,CE15u4,CE16u4,CE17u4,CE18u4,CE19u4,CE20u4,CE21u4,CE22u4,CE23u4,CE24u4,CE25u4,CE26u4,CE27u4,CE28u4,CE29u4,W16,W20,W24,...	not-run	label width 6 px per unit (the rev 0 value)
+K018	cfg	KILLED	24	G-HNR-1px-1,G-HNL-1px-1,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,G-HLL-0,D01,D02,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,N-Z1pxm1,M10,R2-N03,R2-G05t,R2-F04h	not-run	label half width floored to whole pixels (floor(4.5u))
+K019	cfg	KILLED	14	G-HNR-1px,G-HNL-1px,G-HLR-1px,G-HLL-1px,I04,D01,D04,D06,D07,D08,N-Z1px,R01,R2-F04,R2-F04h	not-run	label half width rounded up to whole pixels (ceil(4.5u))
+K020	cfg	KILLED	58	F11,F15,F20,F21,F24,F25,G-NT-1px-1,G-NT-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HC3-1pxm1,O05,D01,D02,D03,D05,D06,...	not-run	label top = Y - 9 px (height 12)
+K021	cfg	KILLED	145	E03,E10,E11,E12,E13,CN01u1,CN05u1,CN09u1,CN10u1,CN15u1,CN22u1,CN23u1,CN27u1,CN01u4,CN05u4,CN09u4,CN10u4,CN15u4,CN22u4,CN23u4,CN27u4,CE03u1,CE10u1,CE11u1,CE15u1,...	not-run	label top = Y - 11 px (height 14)
+K022	cfg	KILLED	45	E09,F18,F20,F24,F27,G-NB-1px-1,G-NB-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,O05,D01,D02,D03,D05,D06,D08,T01,...	not-run	label bottom = Y + 2 px (height 12)
+K023	cfg	KILLED	108	E09,E13,CN02u1,CN06u1,CN07u1,CN08u1,CN18u1,CN19u1,CN20u1,CN02u4,CN06u4,CN07u4,CN08u4,CN18u4,CN19u4,CN20u4,CE02u1,CE08u1,CE09u1,CE12u1,CE24u1,CE25u1,CE26u1,CE02u4,CE08u4,...	not-run	label bottom = Y + 4 px (height 14)
+K024	cfg	KILLED	80	E09,F11,F13,F14,F15,F18,F20,F21,F22,F23,F24,F25,F27,G-NR-1px-1,G-NR-0,G-NL-1px-1,G-NL-0,G-NT-1px-1,G-NT-0,G-NB-1px-1,G-NB-0,G-NC-0.8-0.8,G-NC-0.999999-0.999999,G-NC-0-0,G-HNR-1px-1,...	not-run	node box half size 12 px (24 px square)
+K025	cfg	KILLED	235	E03,E09,E10,E11,E12,CN01u1,CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN15u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN25u1,...	not-run	node box half size 14 px (28 px square)
+K026	cfg	KILLED	117	E09,CE04u1,CE05u1,CE06u1,CE07u1,CE16u1,CE17u1,CE04u4,CE05u4,CE06u4,CE07u4,CE16u4,CE17u4,W03,W04,W07,W08,W11,W12,W15,W16,W19,W20,W23,W24,...	not-run	node box half size 10 px (the disc only)
+K027	cfg	KILLED	74	E03,E04,E10,E11,E12,E14,CN01u1,CN01u4,F01,F02,F03,F08,F19,O06,B03,B07,I01,I02,I03,I04,I12,I05,I10,D02,D03,...	not-run	node candidates 1 and 2 swapped
+K028	cfg	KILLED	38	E09,E15,CN02u1,CN02u4,F08,O07,B06,B07,I01,I02,I03,I04,I12,I05,I10,D02,T01,T02,T03,T04,T05,T06,T07,T08,T09,...	not-run	node candidates 2 and 3 swapped
+K029	cfg	KILLED	34	CN03u1,CN03u4,W01,W05,W09,W13,W17,W21,F08,G-HC3-1px,I02,I03,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,T04,T05,...	not-run	node candidates 3 and 4 swapped
+K030	cfg	KILLED	6	F08,I03,I04,I12,I05,I10	not-run	node candidates 4 and 5 swapped
+K031	cfg	KILLED	7	F08,I03,I04,I12,I05,I10,D06	not-run	node candidates 5 and 6 swapped
+K032	cfg	KILLED	3	F08,I04,D06	not-run	node candidates 6 and 7 swapped
+K033	cfg	KILLED	2	F08,I04	not-run	node candidates 7 and 8 swapped
+K034	cfg	KILLED	2	F08,I04	not-run	node candidates 8 and 9 swapped
+K035	cfg	KILLED	2	F08,I04	not-run	node candidates 9 and 10 swapped
+K036	cfg	KILLED	6	CN10u1,CN10u4,F08,I04,D01,D07	not-run	node candidates 10 and 11 swapped
+K037	cfg	KILLED	8	CN11u1,CN11u4,F08,F15,I04,I12,I05,I10	not-run	node candidates 11 and 12 swapped
+K038	cfg	KILLED	4	CN12u1,CN12u4,F08,I04	not-run	node candidates 12 and 13 swapped
+K039	cfg	KILLED	3	CN13u1,CN13u4,F08	not-run	node candidates 13 and 14 swapped
+K040	cfg	KILLED	1	F08	not-run	node candidates 14 and 15 swapped
+K041	cfg	KILLED	6	CN15u1,CN15u4,F08,I12,I05,I10	not-run	node candidates 15 and 16 swapped
+K042	cfg	KILLED	8	CN16u1,CN16u4,F08,I12,I05,I10,R15,R2-F04	not-run	node candidates 16 and 17 swapped
+K043	cfg	KILLED	4	F08,I12,I05,I10	not-run	node candidates 17 and 18 swapped
+K044	cfg	KILLED	3	F08,D01,D07	not-run	node candidates 18 and 19 swapped
+K045	cfg	KILLED	1	F08	not-run	node candidates 19 and 20 swapped
+K046	cfg	KILLED	3	CN20u1,CN20u4,F08	not-run	node candidates 20 and 21 swapped
+K047	cfg	KILLED	1	F08	not-run	node candidates 21 and 22 swapped
+K048	cfg	KILLED	3	F08,I10,R2-F04h	not-run	node candidates 22 and 23 swapped
+K049	cfg	KILLED	4	CN23u1,CN23u4,F08,I10	not-run	node candidates 23 and 24 swapped
+K050	cfg	KILLED	3	CN24u1,CN24u4,F08	not-run	node candidates 24 and 25 swapped
+K051	cfg	KILLED	3	CN25u1,CN25u4,F08	not-run	node candidates 25 and 26 swapped
+K052	cfg	KILLED	1	F08	not-run	node candidates 26 and 27 swapped
+K053	cfg	KILLED	3	CN27u1,CN27u4,F08	not-run	node candidates 27 and 28 swapped
+K054	cfg	KILLED	5	CN28u1,CN28u4,F08,I10,R2-F04h	not-run	node candidates 28 and 29 swapped
+K055	cfg	KILLED	110	E05,E07,E13,CE01u1,CE01u4,F07,F24,G-NR-1px,G-NL-1px,G-NB-1px,G-LR-1px,G-LR-1px-1,G-LR-0,G-LL-1px,G-LL-1px-1,G-LL-0,G-LT-1px,G-LT-1px-1,G-LT-0,G-LB-1px,G-LB-1px-1,G-LB-0,G-NC-1px-1px,G-LC-1px-1px,G-NC-1px-0,...	not-run	edge candidates 1 and 2 swapped
+K056	cfg	KILLED	21	E13,F07,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,G-HLL-0,B04,I06,I07,I08,I11,I09,D01,D03,H04,H05,R2-X10	not-run	edge candidates 2 and 3 swapped
+K057	cfg	KILLED	23	E13,F07,G-LT-1px-1,G-LT-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,O01,O03,O04,B02,I06,I09,D08,R13,R2-G05,R2-G08,R2-F04,R2-G05h,R2-N17h	not-run	edge candidates 3 and 4 swapped
+K058	cfg	KILLED	7	F07,O04,O05,I06,I09,R09,R2-G11	not-run	edge candidates 4 and 5 swapped
+K059	cfg	KILLED	21	CE05u1,CE05u4,W04,W08,W12,W16,W20,W24,F07,G-NR-1px-1,G-NR-0,G-HNR-1px-1,G-HNR-0,I06,I09,M-1-1pxm1,M-500000-1pxm1,M-999999-1pxm1,H03,R01,R09	not-run	edge candidates 5 and 6 swapped
+K060	cfg	KILLED	10	CE06u1,CE06u4,F07,B05,I07,I11,D05,H05,R13,R2-G08	not-run	edge candidates 6 and 7 swapped
+K061	cfg	KILLED	1	F07	not-run	edge candidates 7 and 8 swapped
+K062	cfg	KILLED	2	F07,R2-G05t	not-run	edge candidates 8 and 9 swapped
+K063	cfg	KILLED	1	F07	not-run	edge candidates 9 and 10 swapped
+K064	cfg	KILLED	1	F07	not-run	edge candidates 10 and 11 swapped
+K065	cfg	KILLED	14	F07,D02,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R01	not-run	edge candidates 11 and 12 swapped
+K066	cfg	KILLED	29	CE12u1,CE12u4,F07,I07,I11,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R09,R13,R2-G08,...	not-run	edge candidates 12 and 13 swapped
+K067	cfg	KILLED	3	F07,R2-N17,R2-N17h	not-run	edge candidates 13 and 14 swapped
+K068	cfg	KILLED	1	F07	not-run	edge candidates 14 and 15 swapped
+K069	cfg	KILLED	10	CE15u1,CE15u4,F07,I11,D05,D08,H05,R09,R2-G05t,R2-N17h	not-run	edge candidates 15 and 16 swapped
+K070	cfg	KILLED	1	F07	not-run	edge candidates 16 and 17 swapped
+K071	cfg	KILLED	15	CE17u1,CE17u4,F07,D02,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10	not-run	edge candidates 17 and 18 swapped
+K072	cfg	KILLED	7	CE18u1,CE18u4,F07,I11,D01,D05,H05	not-run	edge candidates 18 and 19 swapped
+K073	cfg	KILLED	1	F07	not-run	edge candidates 19 and 20 swapped
+K074	cfg	KILLED	4	CE20u1,CE20u4,F07,D06	not-run	edge candidates 20 and 21 swapped
+K075	cfg	KILLED	19	CE21u1,CE21u4,F07,I11,D02,D05,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01	not-run	edge candidates 21 and 22 swapped
+K076	cfg	KILLED	4	F07,D01,R2-G05t,R2-F04h	not-run	edge candidates 22 and 23 swapped
+K077	cfg	KILLED	1	F07	not-run	edge candidates 23 and 24 swapped
+K078	cfg	KILLED	11	CE24u1,CE24u4,F07,F24,I11,D01,D05,D06,H05,R01,R2-G05t	not-run	edge candidates 24 and 25 swapped
+K079	cfg	KILLED	2	F07,D08	not-run	edge candidates 25 and 26 swapped
+K080	cfg	KILLED	1	F07	not-run	edge candidates 26 and 27 swapped
+K081	cfg	KILLED	7	CE27u1,CE27u4,F07,I11,D01,D05,H05	not-run	edge candidates 27 and 28 swapped
+K082	cfg	KILLED	1	F07	not-run	edge candidates 28 and 29 swapped
+K083	cfg	KILLED	53	CN12u1,CN13u1,CN14u1,CN15u1,CN16u1,CN17u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN24u1,CN25u1,CN26u1,CN27u1,CN28u1,CN29u1,CN12u4,CN13u4,CN14u4,CN15u4,CN16u4,CN17u4,CN18u4,...	not-run	node candidate list truncated at 11 (the last 18 dropped)
+K084	cfg	KILLED	37	CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN24u1,CN25u1,CN26u1,CN27u1,CN28u1,CN29u1,CN18u4,CN19u4,CN20u4,CN21u4,CN22u4,CN23u4,CN24u4,CN25u4,CN26u4,CN27u4,CN28u4,CN29u4,F08,...	not-run	node candidate list truncated at 17 (the last 12 dropped)
+K085	cfg	KILLED	7	CN29u1,CN29u4,F08,F13,F25,I10,R2-F04h	not-run	node candidate list truncated at 28 (the last 1 dropped)
+K086	cfg	KILLED	75	CE12u1,CE13u1,CE14u1,CE15u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,CE25u1,CE26u1,CE27u1,CE28u1,CE29u1,CE12u4,CE13u4,CE14u4,CE15u4,CE16u4,CE17u4,CE18u4,...	not-run	edge candidate list truncated at 11 (the last 18 dropped)
+K087	cfg	KILLED	55	CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,CE25u1,CE26u1,CE27u1,CE28u1,CE29u1,CE18u4,CE19u4,CE20u4,CE21u4,CE22u4,CE23u4,CE24u4,CE25u4,CE26u4,CE27u4,CE28u4,CE29u4,F07,...	not-run	edge candidate list truncated at 17 (the last 12 dropped)
+K088	cfg	KILLED	9	CE29u1,CE29u4,F07,F14,F27,D01,D05,R09,R2-F04h	not-run	edge candidate list truncated at 28 (the last 1 dropped)
+K089	cfg	KILLED	83	E03,E04,E10,E11,E12,E14,CN01u1,CN01u4,F01,F02,F03,F08,F11,F19,F21,F23,O06,B03,B07,I01,I02,I03,I04,I12,I05,...	not-run	node candidate 1: dy + 1
+K090	cfg	KILLED	48	E09,E15,CN02u1,CN02u4,F08,F19,O07,B06,B07,I01,I02,I03,I04,I12,I05,I10,D01,D02,D03,D05,D06,D07,T01,T02,T03,...	not-run	node candidate 2: dy + 1
+K091	cfg	KILLED	42	CN03u1,CN03u4,W01,W05,W09,W13,W17,W21,F08,F21,F23,G-HC3-1px,G-HC3-1pxm1,I02,I03,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,...	not-run	node candidate 3: dy + 1
+K092	cfg	KILLED	21	CN04u1,CN04u4,W02,W06,W10,W14,W18,W22,F08,G-HC3-1pxm1,I03,I04,I12,I05,I10,D01,D07,R05,R07,R10,R2-F04h	not-run	node candidate 4: dy + 1
+K093	cfg	KILLED	27	CN05u1,CN05u4,F08,F21,F23,F25,I03,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,...	not-run	node candidate 5: dy + 1
+K094	cfg	KILLED	25	CN06u1,CN06u4,F08,F17,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R10,R15	not-run	node candidate 6: dy + 1
+K095	cfg	KILLED	19	CN07u1,CN07u4,F08,I04,D01,D02,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-N17h	not-run	node candidate 7: dy + 1
+K096	cfg	KILLED	5	CN08u1,CN08u4,F08,F19,I04	not-run	node candidate 8: dy + 1
+K097	cfg	KILLED	9	CN09u1,CN09u4,F08,F21,I04,R02,R04,R07,R2-F04h	not-run	node candidate 9: dy + 1
+K098	cfg	KILLED	8	CN10u1,CN10u4,F08,F23,I04,D01,D07,R2-F04h	not-run	node candidate 10: dy + 1
+K099	cfg	KILLED	13	CN11u1,CN11u4,F08,F09,F15,F25,I04,I12,I05,I10,D01,D07,R2-F04	not-run	node candidate 11: dy + 1
+K100	cfg	KILLED	7	CN12u1,CN12u4,F08,I04,I12,I05,I10	not-run	node candidate 12: dy + 1
+K101	cfg	KILLED	3	CN13u1,CN13u4,F08	not-run	node candidate 13: dy + 1
+K102	cfg	KILLED	5	CN14u1,CN14u4,F08,F19,R02	not-run	node candidate 14: dy + 1
+K103	cfg	KILLED	8	CN15u1,CN15u4,F08,F26,I12,I05,I10,R2-F04h	not-run	node candidate 15: dy + 1
+K104	cfg	KILLED	10	CN16u1,CN16u4,F08,F23,I12,I05,I10,R15,R2-F04,R2-F04h	not-run	node candidate 16: dy + 1
+K105	cfg	KILLED	6	CN17u1,CN17u4,F08,I12,I05,I10	not-run	node candidate 17: dy + 1
+K106	cfg	KILLED	9	CN18u1,CN18u4,F08,I12,I05,I10,D01,D07,R2-F04h	not-run	node candidate 18: dy + 1
+K107	cfg	KILLED	4	CN19u1,CN19u4,F08,F25	not-run	node candidate 19: dy + 1
+K108	cfg	KILLED	4	CN20u1,CN20u4,F08,F19	not-run	node candidate 20: dy + 1
+K109	cfg	KILLED	5	CN21u1,CN21u4,F08,F25,R2-F04	not-run	node candidate 21: dy + 1
+K110	cfg	KILLED	5	CN22u1,CN22u4,F08,I10,R2-F04h	not-run	node candidate 22: dy + 1
+K111	cfg	KILLED	5	CN23u1,CN23u4,F08,I10,R2-F04h	not-run	node candidate 23: dy + 1
+K112	cfg	KILLED	4	CN24u1,CN24u4,F08,I10	not-run	node candidate 24: dy + 1
+K113	cfg	KILLED	3	CN25u1,CN25u4,F08	not-run	node candidate 25: dy + 1
+K114	cfg	KILLED	4	CN26u1,CN26u4,F08,F21	not-run	node candidate 26: dy + 1
+K115	cfg	KILLED	5	CN27u1,CN27u4,F08,F25,R2-F04h	not-run	node candidate 27: dy + 1
+K116	cfg	KILLED	8	CN28u1,CN28u4,F08,F11,F21,F23,I10,R2-F04h	not-run	node candidate 28: dy + 1
+K117	cfg	KILLED	8	CN29u1,CN29u4,F08,F13,F15,F25,I10,R2-F04h	not-run	node candidate 29: dy + 1
+K118	cfg	KILLED	83	E03,E04,E10,E11,E12,E14,CN01u1,CN01u4,F01,F02,F03,F08,F11,F19,F21,F23,O06,B03,B07,I01,I02,I03,I04,I12,I05,...	not-run	node candidate 1: dx one off (|h|+1 or 0+1)
+K119	cfg	KILLED	48	E09,E15,CN02u1,CN02u4,F08,F19,O07,B06,B07,I01,I02,I03,I04,I12,I05,I10,D01,D02,D03,D05,D06,D07,T01,T02,T03,...	not-run	node candidate 2: dx one off (|h|+1 or 0+1)
+K120	cfg	KILLED	41	CN03u1,CN03u4,W01,W05,W09,W13,W17,W21,F08,F21,F23,G-HC3-1px,I02,I03,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,...	not-run	node candidate 3: dx one off (|h|+1 or 0+1)
+K121	cfg	KILLED	20	CN04u1,CN04u4,W02,W06,W10,W14,W18,W22,F08,G-HC3-1pxm1,I03,I04,I12,I05,I10,D01,D07,R05,R07,R2-F04h	not-run	node candidate 4: dx one off (|h|+1 or 0+1)
+K122	cfg	KILLED	27	CN05u1,CN05u4,F08,F21,F23,F25,I03,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,...	not-run	node candidate 5: dx one off (|h|+1 or 0+1)
+K123	cfg	KILLED	25	CN06u1,CN06u4,F08,F17,I04,I12,I05,I10,D01,D02,D06,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R10,R15	not-run	node candidate 6: dx one off (|h|+1 or 0+1)
+K124	cfg	KILLED	19	CN07u1,CN07u4,F08,I04,D01,D02,D07,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-N17h	not-run	node candidate 7: dx one off (|h|+1 or 0+1)
+K125	cfg	KILLED	5	CN08u1,CN08u4,F08,F19,I04	not-run	node candidate 8: dx one off (|h|+1 or 0+1)
+K126	cfg	KILLED	9	CN09u1,CN09u4,F08,F21,I04,R02,R04,R07,R2-F04h	not-run	node candidate 9: dx one off (|h|+1 or 0+1)
+K127	cfg	KILLED	8	CN10u1,CN10u4,F08,F23,I04,D01,D07,R2-F04h	not-run	node candidate 10: dx one off (|h|+1 or 0+1)
+K128	cfg	KILLED	13	CN11u1,CN11u4,F08,F09,F15,F25,I04,I12,I05,I10,D01,D07,R2-F04	not-run	node candidate 11: dx one off (|h|+1 or 0+1)
+K129	cfg	KILLED	7	CN12u1,CN12u4,F08,I04,I12,I05,I10	not-run	node candidate 12: dx one off (|h|+1 or 0+1)
+K130	cfg	KILLED	3	CN13u1,CN13u4,F08	not-run	node candidate 13: dx one off (|h|+1 or 0+1)
+K131	cfg	KILLED	6	CN14u1,CN14u4,F08,F19,F21,R02	not-run	node candidate 14: dx one off (|h|+1 or 0+1)
+K132	cfg	KILLED	8	CN15u1,CN15u4,F08,F26,I12,I05,I10,R2-F04h	not-run	node candidate 15: dx one off (|h|+1 or 0+1)
+K133	cfg	KILLED	10	CN16u1,CN16u4,F08,F23,I12,I05,I10,R15,R2-F04,R2-F04h	not-run	node candidate 16: dx one off (|h|+1 or 0+1)
+K134	cfg	KILLED	6	CN17u1,CN17u4,F08,I12,I05,I10	not-run	node candidate 17: dx one off (|h|+1 or 0+1)
+K135	cfg	KILLED	9	CN18u1,CN18u4,F08,I12,I05,I10,D01,D07,R2-F04h	not-run	node candidate 18: dx one off (|h|+1 or 0+1)
+K136	cfg	KILLED	4	CN19u1,CN19u4,F08,F25	not-run	node candidate 19: dx one off (|h|+1 or 0+1)
+K137	cfg	KILLED	5	CN20u1,CN20u4,F08,F19,F21	not-run	node candidate 20: dx one off (|h|+1 or 0+1)
+K138	cfg	KILLED	5	CN21u1,CN21u4,F08,F25,R2-F04	not-run	node candidate 21: dx one off (|h|+1 or 0+1)
+K139	cfg	KILLED	5	CN22u1,CN22u4,F08,I10,R2-F04h	not-run	node candidate 22: dx one off (|h|+1 or 0+1)
+K140	cfg	KILLED	5	CN23u1,CN23u4,F08,I10,R2-F04h	not-run	node candidate 23: dx one off (|h|+1 or 0+1)
+K141	cfg	KILLED	4	CN24u1,CN24u4,F08,I10	not-run	node candidate 24: dx one off (|h|+1 or 0+1)
+K142	cfg	KILLED	3	CN25u1,CN25u4,F08	not-run	node candidate 25: dx one off (|h|+1 or 0+1)
+K143	cfg	KILLED	3	CN26u1,CN26u4,F08	not-run	node candidate 26: dx one off (|h|+1 or 0+1)
+K144	cfg	KILLED	5	CN27u1,CN27u4,F08,F25,R2-F04h	not-run	node candidate 27: dx one off (|h|+1 or 0+1)
+K145	cfg	KILLED	7	CN28u1,CN28u4,F08,F21,F23,I10,R2-F04h	not-run	node candidate 28: dx one off (|h|+1 or 0+1)
+K146	cfg	KILLED	7	CN29u1,CN29u4,F08,F13,F25,I10,R2-F04h	not-run	node candidate 29: dx one off (|h|+1 or 0+1)
+K147	cfg	KILLED	134	E05,E07,E13,CE01u1,CE01u4,F04,F05,F06,F07,F12,F22,F24,G-NR-1px,G-NL-1px,G-NT-1px,G-NT-1px-1,G-NT-0,G-NB-1px,G-LR-1px,G-LR-1px-1,G-LR-0,G-LL-1px,G-LL-1px-1,G-LL-0,G-LT-1px,...	not-run	edge candidate 1: dy + 1
+K148	cfg	KILLED	69	E08,E13,E16,CE02u1,CE02u4,F07,F20,F24,G-NB-1px-1,G-NB-0,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,...	not-run	edge candidate 2: dy + 1
+K149	cfg	KILLED	64	E13,CE03u1,CE03u4,F07,F16,G-NT-1px-1,G-NT-0,G-LT-1px-1,G-LT-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,O01,O03,O04,O05,O06,B02,B03,I06,I07,I11,...	not-run	edge candidate 3: dy + 1
+K150	cfg	KILLED	59	CE04u1,CE04u4,W03,W07,W11,W15,W19,W23,F07,F20,F24,G-NL-1px-1,G-NL-0,G-HNL-1px-1,G-HNL-0,O04,O05,I06,I09,D01,D02,D03,D06,D08,T01,...	not-run	edge candidate 4: dy + 1
+K151	cfg	KILLED	44	CE05u1,CE05u4,W04,W08,W12,W16,W20,W24,F07,F22,G-NR-1px-1,G-NR-0,G-HNR-1px-1,G-HNR-0,I06,I09,D01,D02,D03,D06,D08,T01,T02,T03,T04,...	not-run	edge candidate 5: dy + 1
+K152	cfg	KILLED	37	CE06u1,CE06u4,F07,F20,B05,I07,I11,D01,D02,D03,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,...	not-run	edge candidate 6: dy + 1
+K153	cfg	KILLED	27	CE07u1,CE07u4,F07,I07,I11,D01,D02,D05,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R09,R2-G08,R2-G05h,...	not-run	edge candidate 7: dy + 1
+K154	cfg	KILLED	26	CE08u1,CE08u4,F07,F20,F22,D01,D02,D03,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R09,R2-F04,R2-G05t,...	not-run	edge candidate 8: dy + 1
+K155	cfg	KILLED	11	CE09u1,CE09u4,F07,F20,F22,F24,D01,D05,D06,D08,R13	not-run	edge candidate 9: dy + 1
+K156	cfg	KILLED	21	CE10u1,CE10u4,F07,D01,D02,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04,R2-G05h,R2-F04h	not-run	edge candidate 10: dy + 1
+K157	cfg	KILLED	21	CE11u1,CE11u4,F07,F22,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R01,R2-F04h	not-run	edge candidate 11: dy + 1
+K158	cfg	KILLED	30	CE12u1,CE12u4,F07,I07,I11,D01,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R09,R13,...	not-run	edge candidate 12: dy + 1
+K159	cfg	KILLED	12	CE13u1,CE13u4,F07,D01,D06,D08,R01,R07,R2-N17,R2-F04,R2-G05t,R2-N17h	not-run	edge candidate 13: dy + 1
+K160	cfg	KILLED	23	CE14u1,CE14u4,F07,F20,F22,D02,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R07,R13,R2-G08,R2-G05t,R2-F04h	not-run	edge candidate 14: dy + 1
+K161	cfg	KILLED	25	CE15u1,CE15u4,F07,F18,I11,D01,D02,D05,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R09,R2-G08,R2-G05t,R2-N17h	not-run	edge candidate 15: dy + 1
+K162	cfg	KILLED	8	CE16u1,CE16u4,F07,D01,D08,R13,R2-F04,R2-G05t	not-run	edge candidate 16: dy + 1
+K163	cfg	KILLED	18	CE17u1,CE17u4,F07,D01,D02,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04h	not-run	edge candidate 17: dy + 1
+K164	cfg	KILLED	8	CE18u1,CE18u4,F07,I11,D01,D05,D08,H05	not-run	edge candidate 18: dy + 1
+K165	cfg	KILLED	7	CE19u1,CE19u4,F07,D05,R09,R2-G05t,R2-F04h	not-run	edge candidate 19: dy + 1
+K166	cfg	KILLED	7	CE20u1,CE20u4,F07,D01,D06,D08,R2-F04h	not-run	edge candidate 20: dy + 1
+K167	cfg	KILLED	23	CE21u1,CE21u4,F07,I11,D01,D02,D05,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R2-G08,R2-F04h	not-run	edge candidate 21: dy + 1
+K168	cfg	KILLED	8	CE22u1,CE22u4,F07,D01,D05,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 22: dy + 1
+K169	cfg	KILLED	17	CE23u1,CE23u4,F07,D01,D02,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04h	not-run	edge candidate 23: dy + 1
+K170	cfg	KILLED	14	CE24u1,CE24u4,F07,F10,F24,I11,D01,D05,D06,H05,R01,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 24: dy + 1
+K171	cfg	KILLED	22	CE25u1,CE25u4,F07,F20,F24,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-G05t	not-run	edge candidate 25: dy + 1
+K172	cfg	KILLED	5	CE26u1,CE26u4,F07,D01,D06	not-run	edge candidate 26: dy + 1
+K173	cfg	KILLED	10	CE27u1,CE27u4,F07,I11,D01,D05,H05,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 27: dy + 1
+K174	cfg	KILLED	7	CE28u1,CE28u4,F07,D05,R2-G08,R2-G05h,R2-F04h	not-run	edge candidate 28: dy + 1
+K175	cfg	KILLED	9	CE29u1,CE29u4,F07,F14,F27,D01,D05,R09,R2-F04h	not-run	edge candidate 29: dy + 1
+K176	cfg	KILLED	142	E05,E07,E13,CE01u1,CE01u4,F04,F05,F06,F07,F12,F22,F24,G-NR-1px,G-NL-1px,G-NL-1px-1,G-NL-0,G-NT-1px,G-NB-1px,G-LR-1px,G-LR-1px-1,G-LR-0,G-LL-1px,G-LL-1px-1,G-LL-0,G-LT-1px,...	not-run	edge candidate 1: dx one off (|h|+1 or 0+1)
+K177	cfg	KILLED	85	E08,E13,E16,CE02u1,CE02u4,F07,F20,G-NL-1px-1,G-NL-0,G-NB-1px-1,G-NB-0,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-LB-1px-1,G-LB-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HNL-1px-1,G-HNL-0,...	not-run	edge candidate 2: dx one off (|h|+1 or 0+1)
+K178	cfg	KILLED	78	E13,CE03u1,CE03u4,F07,F16,G-NL-1px-1,G-NL-0,G-NT-1px-1,G-NT-0,G-LT-1px-1,G-LT-0,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-NC-0-0,G-LC-0-0,G-HNL-1px-1,G-HNL-0,O01,O03,O04,O06,B02,B03,...	not-run	edge candidate 3: dx one off (|h|+1 or 0+1)
+K179	cfg	KILLED	58	CE04u1,CE04u4,W03,W07,W11,W15,W19,W23,F07,F20,F24,G-NL-1px-1,G-NL-0,G-HNL-1px-1,G-HNL-0,O04,O05,I06,I09,D02,D03,D06,D08,T01,T02,...	not-run	edge candidate 4: dx one off (|h|+1 or 0+1)
+K180	cfg	KILLED	44	CE05u1,CE05u4,W04,W08,W12,W16,W20,W24,F07,F22,G-NR-1px-1,G-NR-0,G-HNR-1px-1,G-HNR-0,I06,I09,D01,D02,D03,D06,D08,T01,T02,T03,T04,...	not-run	edge candidate 5: dx one off (|h|+1 or 0+1)
+K181	cfg	KILLED	38	CE06u1,CE06u4,F07,F20,B05,I07,I11,D01,D02,D03,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,...	not-run	edge candidate 6: dx one off (|h|+1 or 0+1)
+K182	cfg	KILLED	27	CE07u1,CE07u4,F07,I07,I11,D01,D02,D05,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R09,R2-G08,R2-G05h,...	not-run	edge candidate 7: dx one off (|h|+1 or 0+1)
+K183	cfg	KILLED	26	CE08u1,CE08u4,F07,F20,F22,D01,D02,D03,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R09,R2-F04,R2-G05t,...	not-run	edge candidate 8: dx one off (|h|+1 or 0+1)
+K184	cfg	KILLED	23	CE09u1,CE09u4,F07,F20,F22,F24,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R13	not-run	edge candidate 9: dx one off (|h|+1 or 0+1)
+K185	cfg	KILLED	21	CE10u1,CE10u4,F07,D01,D02,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04,R2-G05h,R2-F04h	not-run	edge candidate 10: dx one off (|h|+1 or 0+1)
+K186	cfg	KILLED	21	CE11u1,CE11u4,F07,F22,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R01,R2-F04h	not-run	edge candidate 11: dx one off (|h|+1 or 0+1)
+K187	cfg	KILLED	30	CE12u1,CE12u4,F07,I07,I11,D01,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R09,R13,...	not-run	edge candidate 12: dx one off (|h|+1 or 0+1)
+K188	cfg	KILLED	12	CE13u1,CE13u4,F07,D01,D06,D08,R01,R07,R2-N17,R2-F04,R2-G05t,R2-N17h	not-run	edge candidate 13: dx one off (|h|+1 or 0+1)
+K189	cfg	KILLED	22	CE14u1,CE14u4,F07,F22,D02,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R07,R13,R2-G08,R2-G05t,R2-F04h	not-run	edge candidate 14: dx one off (|h|+1 or 0+1)
+K190	cfg	KILLED	25	CE15u1,CE15u4,F07,F18,I11,D01,D02,D05,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R09,R2-G08,R2-G05t,R2-N17h	not-run	edge candidate 15: dx one off (|h|+1 or 0+1)
+K191	cfg	KILLED	20	CE16u1,CE16u4,F07,D01,D02,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R13,R2-F04,R2-G05t	not-run	edge candidate 16: dx one off (|h|+1 or 0+1)
+K192	cfg	KILLED	18	CE17u1,CE17u4,F07,D01,D02,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04h	not-run	edge candidate 17: dx one off (|h|+1 or 0+1)
+K193	cfg	KILLED	8	CE18u1,CE18u4,F07,I11,D01,D05,D08,H05	not-run	edge candidate 18: dx one off (|h|+1 or 0+1)
+K194	cfg	KILLED	19	CE19u1,CE19u4,F07,D02,D05,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R09,R2-G05t,R2-F04h	not-run	edge candidate 19: dx one off (|h|+1 or 0+1)
+K195	cfg	KILLED	19	CE20u1,CE20u4,F07,D01,D02,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04h	not-run	edge candidate 20: dx one off (|h|+1 or 0+1)
+K196	cfg	KILLED	23	CE21u1,CE21u4,F07,I11,D01,D02,D05,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R01,R2-G08,R2-F04h	not-run	edge candidate 21: dx one off (|h|+1 or 0+1)
+K197	cfg	KILLED	8	CE22u1,CE22u4,F07,D01,D05,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 22: dx one off (|h|+1 or 0+1)
+K198	cfg	KILLED	16	CE23u1,CE23u4,F07,D02,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04h	not-run	edge candidate 23: dx one off (|h|+1 or 0+1)
+K199	cfg	KILLED	14	CE24u1,CE24u4,F07,F10,F24,I11,D01,D05,D06,H05,R01,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 24: dx one off (|h|+1 or 0+1)
+K200	cfg	KILLED	22	CE25u1,CE25u4,F07,F20,F24,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-G05t	not-run	edge candidate 25: dx one off (|h|+1 or 0+1)
+K201	cfg	KILLED	5	CE26u1,CE26u4,F07,D01,D06	not-run	edge candidate 26: dx one off (|h|+1 or 0+1)
+K202	cfg	KILLED	10	CE27u1,CE27u4,F07,I11,D01,D05,H05,R2-F04,R2-G05t,R2-F04h	not-run	edge candidate 27: dx one off (|h|+1 or 0+1)
+K203	cfg	KILLED	7	CE28u1,CE28u4,F07,D05,R2-G08,R2-G05h,R2-G05t	not-run	edge candidate 28: dx one off (|h|+1 or 0+1)
+K204	cfg	KILLED	10	CE29u1,CE29u4,F07,F14,F27,D01,D05,R09,R2-G05t,R2-F04h	not-run	edge candidate 29: dx one off (|h|+1 or 0+1)
+K205	cfg	KILLED	12	CN12u1,CN13u1,CN14u1,CN12u4,CN13u4,CN14u4,F08,I04,I12,I05,I10,R02	not-run	node d order with the pair 1,2 swapped ((42, -69, -83, 56, -97, 70))
+K206	cfg	KILLED	25	F07,I07,I11,D02,D03,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H05,R07,R2-N17,R2-F04,R2-G05t,R2-N17h,R2-F04h	not-run	edge d order with the pair 1,2 swapped ((46, -42, -56, 60, -70, 74))
+K207	cfg	KILLED	10	CN18u1,CN19u1,CN20u1,CN18u4,CN19u4,CN20u4,F08,I12,I05,I10	not-run	node d order with the pair 3,4 swapped ((-69, 42, 56, -83, -97, 70))
+K208	cfg	KILLED	12	CE18u1,CE19u1,CE20u1,CE18u4,CE19u4,CE20u4,F07,I11,D06,D08,H05,R2-F04h	not-run	edge d order with the pair 3,4 swapped ((-42, 46, 60, -56, -70, 74))
+K209	cfg	KILLED	8	CN24u1,CN25u1,CN26u1,CN24u4,CN25u4,CN26u4,F08,I10	not-run	node d order with the pair 5,6 swapped ((-69, 42, -83, 56, 70, -97))
+K210	cfg	KILLED	9	F07,I11,D05,D06,D08,H05,R01,R2-F04,R2-F04h	not-run	edge d order with the pair 5,6 swapped ((-42, 46, -56, 60, 74, -70))
+K211	cfg	KILLED	35	CN12u1,CN13u1,CN14u1,CN15u1,CN16u1,CN17u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN12u4,CN13u4,CN14u4,CN15u4,CN16u4,CN17u4,CN18u4,CN19u4,CN20u4,CN21u4,CN22u4,CN23u4,F08,...	not-run	node d order ascending (-97,-83,-69,42,56,70)
+K212	cfg	KILLED	51	CE12u1,CE13u1,CE14u1,CE15u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE12u4,CE13u4,CE14u4,CE15u4,CE16u4,CE17u4,CE18u4,CE19u4,CE20u4,F07,F18,I07,I11,D01,D02,D03,...	not-run	edge d order ascending (-70,-56,-42,46,60,74)
+K213	cfg	KILLED	24	CN12u1,CN13u1,CN14u1,CN18u1,CN19u1,CN20u1,CN24u1,CN25u1,CN26u1,CN12u4,CN13u4,CN14u4,CN18u4,CN19u4,CN20u4,CN24u4,CN25u4,CN26u4,F08,I04,I12,I05,I10,R02	not-run	node d order by increasing |d| (42,-69,56,-83,70,-97)
+K214	cfg	KILLED	33	CE18u1,CE19u1,CE20u1,CE18u4,CE19u4,CE20u4,F07,I07,I11,D02,D03,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,...	not-run	edge d order with each pair reversed (46,-42,60,-56,74,-70)
+K215	cfg	KILLED	43	CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN24u1,CN25u1,CN26u1,CN28u1,CN29u1,CN13u4,CN14u4,CN16u4,CN17u4,CN19u4,CN20u4,CN21u4,CN22u4,CN23u4,CN24u4,CN25u4,...	not-run	node side candidates at d instead of d+20
+K216	cfg	KILLED	72	CE13u1,CE14u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,CE25u1,CE26u1,CE27u1,CE28u1,CE29u1,CE13u4,CE14u4,CE16u4,CE17u4,CE18u4,CE19u4,CE20u4,CE21u4,CE22u4,...	not-run	edge side candidates at d+20 instead of d
+K217	cfg	KILLED	37	CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN13u4,CN14u4,CN16u4,CN17u4,CN19u4,CN20u4,CN22u4,CN23u4,CN25u4,CN26u4,CN28u4,CN29u4,F08,...	not-run	node side candidates at d+19
+K218	cfg	KILLED	39	CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN13u4,CN14u4,CN16u4,CN17u4,CN19u4,CN20u4,CN22u4,CN23u4,CN25u4,CN26u4,CN28u4,CN29u4,F08,...	not-run	node side candidates at d+21
+K219	cfg	KILLED	15	CN13u1,CN16u1,CN25u1,CN28u1,CN13u4,CN16u4,CN25u4,CN28u4,F08,I12,I05,I10,R15,R2-F04,R2-F04h	not-run	added node candidates in the order (0,d), (-h,d+20), (h,d+20)
+K220	cfg	KILLED	44	CE12u1,CE15u1,CE18u1,CE21u1,CE24u1,CE27u1,CE12u4,CE15u4,CE18u4,CE21u4,CE24u4,CE27u4,F07,F18,F24,I07,I11,D01,D02,D03,D05,D06,D08,T01,T02,...	not-run	added edge candidates in the order (h,d), (-h,d), (0,d)
+K221	cfg	KILLED	88	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	node h = ceil(9u/2) + 13
+K222	cfg	KILLED	88	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	node h = ceil(9u/2) + 15
+K223	cfg	KILLED	116	CE04u1,CE05u1,CE08u1,CE09u1,CE10u1,CE11u1,CE13u1,CE14u1,CE16u1,CE17u1,CE19u1,CE20u1,CE22u1,CE23u1,CE25u1,CE26u1,CE28u1,CE29u1,CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,...	not-run	edge h = ceil(9u/2) + 9
+K224	cfg	KILLED	116	CE04u1,CE05u1,CE08u1,CE09u1,CE10u1,CE11u1,CE13u1,CE14u1,CE16u1,CE17u1,CE19u1,CE20u1,CE22u1,CE23u1,CE25u1,CE26u1,CE28u1,CE29u1,CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,...	not-run	edge h = ceil(9u/2) + 11
+K225	cfg	KILLED	90	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	node h uses the edge offset (ceil(9u/2) + 10)
+K226	cfg	KILLED	136	CE04u1,CE05u1,CE06u1,CE07u1,CE08u1,CE09u1,CE10u1,CE11u1,CE12u1,CE13u1,CE14u1,CE15u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,CE25u1,CE26u1,CE27u1,CE28u1,...	not-run	edge h uses the node offset (ceil(9u/2) + 14)
+K227	cfg	KILLED	49	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,W01,W02,W09,W10,G-HC3-1px,G-HC3-1pxm1,I02,...	not-run	node h with floor(9u/2) instead of ceil (rounding down)
+K228	cfg	KILLED	50	CE04u1,CE05u1,CE08u1,CE09u1,CE10u1,CE11u1,CE13u1,CE14u1,CE16u1,CE17u1,CE19u1,CE20u1,CE22u1,CE23u1,CE25u1,CE26u1,CE28u1,CE29u1,W03,W04,W11,W12,G-HNR-1px-1,G-HNR-0,G-HNL-1px-1,...	not-run	edge h with floor(9u/2) instead of ceil (rounding down)
+K229	cfg	KILLED	81	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CE04u1,CE05u1,CE08u1,CE09u1,CE10u1,CE11u1,CE13u1,...	not-run	node and edge h with floor(9u/2)
+K230	cfg	KILLED	89	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	node h = ceil(7u/2) + 14 (the rev 2 formula)
+K231	cfg	KILLED	116	CE04u1,CE05u1,CE08u1,CE09u1,CE10u1,CE11u1,CE13u1,CE14u1,CE16u1,CE17u1,CE19u1,CE20u1,CE22u1,CE23u1,CE25u1,CE26u1,CE28u1,CE29u1,CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,...	not-run	edge h = ceil(7u/2) + 10 (the rev 2 formula)
+K232	cfg	KILLED	88	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	node h = 4u + 14
+K233	cfg	KILLED	95	CE04u4,CE05u4,CE08u4,CE09u4,CE10u4,CE11u4,CE13u4,CE14u4,CE16u4,CE17u4,CE19u4,CE20u4,CE22u4,CE23u4,CE25u4,CE26u4,CE28u4,CE29u4,W07,W08,W11,W12,W15,W16,W19,...	not-run	edge h = 5u + 10
+K234	cfg	KILLED	141	CE04u1,CE05u1,CE06u1,CE07u1,CE08u1,CE09u1,CE10u1,CE11u1,CE12u1,CE13u1,CE14u1,CE15u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,CE25u1,CE26u1,CE27u1,CE28u1,...	not-run	edge h = 9u + 10 (full width instead of half)
+K235	cfg	KILLED	37	F09,F10,F13,F14,F15,F16,F17,F18,F19,F20,F21,F22,F23,F25,F26,F27,D01,D02,D05,D06,D08,T01,T02,T03,T04,...	not-run	fallback is the default position (0,0) (the rev 1 rule)
+K236	cfg	KILLED	49	F01,F02,F03,F04,F05,F06,F07,F08,F09,F10,F11,F12,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,I10,...	not-run	fallback is the last candidate (29)
+K237	cfg	KILLED	52	F01,F02,F03,F04,F05,F06,F07,F08,F09,F10,F11,F12,F13,F14,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,...	not-run	fallback is candidate 2
+K238	cfg	KILLED	46	F01,F02,F03,F04,F05,F06,F07,F08,F11,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,I10,I11,D01,D02,...	not-run	fallback is the LAST minimum on ties instead of the first
+K239	cfg	KILLED	7	F07,F08,F17,F18,F25,I10,I11	not-run	cost counts colliding boxes, not DISTINCT boxes (identical boxes counted once each)
+K240	cfg	KILLED	27	F19,F20,F21,F22,F23,F25,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R09,R2-G08,R2-F04,...	not-run	cost ignores the placed label boxes (node boxes only)
+K241	cfg	KILLED	37	F09,F10,F13,F14,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,F27,D01,D02,D05,D08,T01,T02,T03,T04,...	not-run	cost ignores the node boxes (placed label boxes only)
+K242	cfg	KILLED	31	F11,F13,F14,F15,F18,F20,F21,F23,F25,F27,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,...	not-run	cost counts collisions with a gap of 0 instead of 1 px
+K243	cfg	KILLED	12	F10,F13,F14,F18,F26,F27,D01,D05,D06,D08,R2-F04,R2-F04h	not-run	fallback minimum searched among the first 11 candidates only
+K244	cfg	KILLED	116	E09,E15,CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN11u1,CN12u1,CN13u1,CN14u1,CN15u1,CN16u1,CN17u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN24u1,...	not-run	node labels do not see nodes
+K245	cfg	KILLED	43	F08,F19,F21,F23,F25,O07,B07,I01,I02,I03,I04,I12,I05,I10,D01,D02,D03,D05,D06,D07,T01,T02,T03,T04,T05,...	not-run	node labels do not see earlier labels
+K246	cfg	KILLED	5	E15,F25,X02,X05,R07	not-run	node labels ignore the node of the same ordinal (own node)
+K247	cfg	KILLED	158	E08,E16,CE02u1,CE03u1,CE04u1,CE05u1,CE06u1,CE07u1,CE08u1,CE09u1,CE10u1,CE11u1,CE12u1,CE13u1,CE14u1,CE15u1,CE16u1,CE17u1,CE18u1,CE19u1,CE20u1,CE21u1,CE22u1,CE23u1,CE24u1,...	not-run	edge labels do not see node boxes
+K248	cfg	KILLED	31	O06,B03,D01,D02,D03,D05,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H06,R01,R09,R10,R2-G08,R2-G09,R2-N03,...	not-run	edge labels do not see node labels
+K249	cfg	KILLED	67	E13,F07,F20,F22,F24,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-LC-0.8-0.8,G-LC-0.999999-0.999999,G-LC-0-0,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,G-HLL-0,O01,O02,O03,O04,O05,...	not-run	edge labels do not see earlier edge labels
+K250	cfg	KILLED	31	O06,B03,D01,D02,D03,D05,D06,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,H06,R01,R09,R10,R2-G08,R2-G09,R2-N03,...	not-run	edge labels processed before node labels (results in input order)
+K251	cfg	KILLED	93	E13,F07,F08,F19,F20,F21,F22,F23,F24,F25,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-LC-0.8-0.8,G-LC-0.999999-0.999999,G-LC-0-0,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,G-HLL-0,...	not-run	labels processed in reverse order
+K252	cfg	KILLED	61	E13,F07,F08,F19,F20,F21,F22,F23,F24,F25,O04,B01,I02,I03,I04,I12,I05,I06,I07,I10,I11,I09,D01,D02,D03,...	not-run	placed box recorded at the default position instead of the chosen one
+K253	cfg	KILLED	25	F19,F20,F21,F22,F23,F25,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,M10,R2-F04,R2-G05t,R2-F04h	not-run	a fallback label is not recorded
+K254	cfg	KILLED	61	E13,F07,F08,F19,F20,F21,F22,F23,F24,F25,O04,O05,B01,I02,I03,I04,I12,I05,I06,I07,I10,I11,I09,D01,D02,...	not-run	only labels chosen at the default are recorded
+K255	cfg	KILLED	93	E13,F07,F08,F19,F20,F21,F22,F23,F24,F25,G-LR-1px-1,G-LR-0,G-LL-1px-1,G-LL-0,G-LT-1px-1,G-LT-0,G-LB-1px-1,G-LB-0,G-LC-0.8-0.8,G-LC-0.999999-0.999999,G-LC-0-0,G-HLR-1px-1,G-HLR-0,G-HLL-1px-1,G-HLL-0,...	not-run	nothing recorded (labels never see earlier labels)
+K256	cfg	KILLED	339	E03,E04,E05,E07,E08,E09,E10,E11,E12,E13,E14,E15,E16,CN01u1,CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN11u1,CN12u1,...	not-run	last free candidate instead of the first
+K257	cfg	KILLED	167	E03,E04,E05,E07,E10,E11,E12,E13,E14,CN01u1,CN01u4,CE01u1,CE01u4,F01,F02,F03,F04,F05,F06,F07,F08,F11,F12,F19,F21,...	not-run	candidate 1 (default) is not tried
+K258	cfg	KILLED	251	E08,E09,E13,E15,E16,CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN11u1,CN12u1,CN13u1,CN14u1,CN15u1,CN16u1,CN17u1,CN18u1,CN19u1,CN20u1,CN21u1,...	not-run	dy sign flipped in the output
+K259	cfg	KILLED	184	CN03u1,CN04u1,CN07u1,CN08u1,CN09u1,CN10u1,CN13u1,CN14u1,CN16u1,CN17u1,CN19u1,CN20u1,CN22u1,CN23u1,CN25u1,CN26u1,CN28u1,CN29u1,CN03u4,CN04u4,CN07u4,CN08u4,CN09u4,CN10u4,CN13u4,...	not-run	dx sign flipped in the output
+K260	cfg	KILLED	56	G-NL-1px-1,G-NT-1px-1,G-LL-1px-1,G-LB-1px-1,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-HNR-1px,G-HNL-1px-1,G-HLL-1px-1,G-HC3-1pxm1,D01,D02,D03,D06,D07,D08,T01,T02,T03,T04,T05,T06,T07,...	not-run	coordinates floored to whole pixels before the test
+K261	cfg	KILLED	49	G-NR-1px-1,G-NL-1px-1,G-NT-1px-1,G-NB-1px-1,G-LR-1px-1,G-LL-1px-1,G-LT-1px-1,G-LB-1px-1,G-NC-0.8-0.8,G-LC-0.8-0.8,G-NC-0.999999-0.999999,G-LC-0.999999-0.999999,G-HNL-1px,G-HLR-1px-1,G-HLL-1px-1,G-HC3-1pxm1,D01,D02,D03,D06,D07,D08,T01,T02,T03,...	not-run	coordinates rounded to whole pixels before the test
+K262	cfg	KILLED	3	NF-p1pxm1,NF-m1pxm1,NF-C62	not-run	coordinates and boxes in float64
+K263	cfg	KILLED	6	W21,W22,W23,W24,H03,H06	not-run	units capped at 100
+K264	cfg	KILLED	10	W17,W18,W19,W20,W21,W22,W23,W24,H03,H06	not-run	units capped at 39
+K265	cfg	KILLED	22	W13,W14,W15,W16,W17,W18,W19,W20,W21,W22,W23,W24,H03,H06,R01,R04,R05,R07,R09,R2-G07,R2-F04,R2-F04h	not-run	units capped at 11
+K266	grid	UNKILLED	0			grid: cell index by truncation toward zero instead of floor
+K267	grid	KILLED	175	CN02u1,CN03u1,CN04u1,CN05u1,CN06u1,CN07u1,CN08u1,CN09u1,CN10u1,CN11u1,CN12u1,CN13u1,CN14u1,CN15u1,CN16u1,CN17u1,CN18u1,CN19u1,CN20u1,CN21u1,CN22u1,CN23u1,CN24u1,CN25u1,CN26u1,...	S01,S02	grid: a box is stored only in its first cell
+K268	grid	KILLED	106	E13,CE06u4,CE07u4,CE08u4,CE09u4,CE10u4,CE11u4,CE12u4,CE13u4,CE14u4,CE15u4,CE16u4,CE17u4,CE18u4,CE19u4,CE20u4,CE21u4,CE22u4,CE23u4,CE24u4,CE25u4,CE26u4,CE27u4,CE28u4,CE29u4,...	S01,S02	grid: a candidate is tested only against its first cell
+K269	grid	KILLED	14	T05,N-A-1x-05p02,N-A-1x-05p0499999,N-A-1y-05p02,N-A-1y-05p0499999,N-A0x-05p02,N-A0x-05p0499999,N-A0y-05p02,N-A0y-05p0499999,N-A1x-05p02,N-A1x-05p0499999,N-A1y-05p02,N-A1y-05p0499999	S02	grid: no 1 px growth of the tested box (literal reading of rev 0 section 7)
+K270	grid	UNKILLED	0			grid: right and bottom edges on a cell boundary belong to the previous cell (exclusive end)
+K271	grid	UNKILLED	0			grid: cells of 63 px
+K272	grid	UNKILLED	0			grid: cells of 65 px
+K273	grid	UNKILLED	0			grid: cells of 64 px, truncation toward zero AND exclusive end
+K274	grid	UNKILLED	0			grid: cells of 1000 px
+K275	grid	KILLED	24	F07,I11,T03,T04,T05,T07,T08,T09,N-B-1-1pxm1,N-A-1x-05p02,N-A-1x-05p0499999,N-A-1y-05p02,N-A-1y-05p0499999,NF-m1pxm1,H03,H05,H06,R01,R06,R07,R13,R15	S01,S03	grid: cell index by absolute value (the sign of the coordinate is lost)
+K276	grid	KILLED	37	E13,F07,I06,I07,I11,I09,T03,T04,T05,T07,T08,T09,N-A-1x-05p02,N-A-1x-05p0499999,N-A-1y-05p02,N-A-1y-05p0499999,N-A0x-05p02,N-A0x-05p0499999,N-A0y-05p02,N-A0y-05p0499999,N-Z1pxm1,NF-C62,H03,H04,H05,...	S01,S03	grid: left and top edges truncated toward zero, right and bottom edges floored
+K277	grid	UNKILLED	0			grid: a box whose exact edges are already stored is not stored again (dedupe, allowed by rev 1)
+K278	grid	KILLED	8	F07,F08,F17,F18,F25,I10,I11	S03	grid: fallback cost counts stored copies of a box (duplicates stored again), not distinct boxes
+K279	grid	KILLED	37	F07,F08,F11,F17,F18,F19,F20,F21,F23,F25,I10,I11,D01,D02,D05,D06,D08,T01,T02,T03,T04,T05,T06,T07,T08,...	S01,S02,S03	grid: fallback cost counts the cells a colliding box is found in (a box in several cells is counted several times)
+K280	grid	UNKILLED	0			grid: dedupe of identical boxes AND fallback cost counting stored copies

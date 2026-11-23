@@ -1,0 +1,5 @@
+kind	tier	free1	free2	free3	free4	free5	free6	free7	free8	free9	free10	free11	free12	free13	free14	free15	free16	free17	free18	free19	free20	free21	free22	free23	free24	free25	free26	free27	free28	free29	fallback1	fallback2	fallback3	fallback4	fallback5	fallback6	fallback7	fallback8	fallback9	fallback10	fallback11	fallback12	fallback13	fallback14	fallback15	fallback16	fallback17	fallback18	fallback19	fallback20	fallback21	fallback22	fallback23	fallback24	fallback25	fallback26	fallback27	fallback28	fallback29
+edge	core	415	98	95	123	65	80	28	17	12	69	62	75	14	50	24	17	18	10	6	9	24	10	15	25	10	4	15	6	7	66	22	50	60	13	26	59	16	2	4	5	12	8	3	1	0	11	0	1	11	2	6	3	2	2	1	5	1	22
+edge	stress	1115	266	272	149	187	121	79	57	58	41	36	39	26	40	41	69	42	38	11	7	107	9	15	11	10	3	215	55	8	119	75	15	117	20	10	30	27	8	1	2	3	1	2	25	10	4	2	2	2	0	2	0	0	0	0	0	0	0
+node	core	584	130	141	30	28	27	19	5	10	7	11	7	3	5	6	9	6	26	4	4	7	14	8	4	3	3	5	39	7	30	2	61	5	2	1	0	0	0	1	4	0	0	0	2	1	0	0	0	0	0	16	6	0	0	0	0	1	1
+node	stress	2239	570	111	72	20	9	16	11	7	6	12	11	1	1	2	2	2	1	1	1	1	2	1	1	1	1	1	1	1	571	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0

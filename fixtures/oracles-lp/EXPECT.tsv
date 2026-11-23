@@ -1,0 +1,375 @@
+id	group	tier	input	expected	error	note
+E01	E	core	inputs/E01.json	expected/E01.json		empty input: no nodes, no labels -> []
+E02	E	core	inputs/E02.json	expected/E02.json		20 nodes, no labels -> []
+E03	E	core	inputs/E03.json	expected/E03.json		one node, its node label at the default position: free (gap to own node exactly 1 px)
+E04	E	core	inputs/E04.json	expected/E04.json		one node label, no nodes: default
+E05	E	core	inputs/E05.json	expected/E05.json		one edge label, no nodes: default
+E06	E	core	inputs/E06.json	expected/E06.json		100 nodes, no labels -> []
+E07	E	core	inputs/E07.json	expected/E07.json		five edge labels far apart, no nodes: all default
+E08	E	core	inputs/E08.json	expected/E08.json		edge label whose anchor is the centre of a node: default (u=2: box 294..306 x 286..299 vs node 287..313) collides, (0,-14) is 2 px above the node
+E09	E	core	inputs/E09.json	expected/E09.json		node label blocked at the default by ANOTHER node 40 px below its own node (box 227..253 touches the label box 214..227): (0,-41) is free
+E10	E	core	inputs/E10.json	expected/E10.json		units 1 label with own node: default
+E11	E	core	inputs/E11.json	expected/E11.json		own node with half-pixel coordinates (500000 micro-px): default, flush at exactly 1 px
+E12	E	core	inputs/E12.json	expected/E12.json		three identical nodes (same position) are one obstacle: same result as one node (E03)
+E13	E	core	inputs/E13.json	expected/E13.json		only edge labels in the list (u 2, 4, 6 on one anchor)
+E14	E	core	inputs/E14.json	expected/E14.json		node label whose own node is NOT in nodes: no obstacle, default
+E15	E	core	inputs/E15.json	expected/E15.json		node label whose default position is inside its own node (y = cy + 10): (0,-41) is the first free one
+E16	E	core	inputs/E16.json	expected/E16.json		short edge: endpoints 30 px apart, u=2 label at the midpoint (box 109..121 x 86..99) collides with both endpoint boxes (87..113 and 117..143 x 87..113); (0,-14) (box y 72..85) is free
+CN01u1	C	core	inputs/CN01u1.json	expected/CN01u1.json		node label u=1: candidates 1..0 blocked by node(s), candidate 1 free (blockers found by a whole-pixel search)
+CN02u1	C	core	inputs/CN02u1.json	expected/CN02u1.json		node label u=1: candidates 1..1 blocked by node(s), candidate 2 free (blockers found by a whole-pixel search)
+CN03u1	C	core	inputs/CN03u1.json	expected/CN03u1.json		node label u=1: candidates 1..2 blocked by node(s), candidate 3 free (blockers found by a whole-pixel search)
+CN04u1	C	core	inputs/CN04u1.json	expected/CN04u1.json		node label u=1: candidates 1..3 blocked by node(s), candidate 4 free (blockers found by a whole-pixel search)
+CN05u1	C	core	inputs/CN05u1.json	expected/CN05u1.json		node label u=1: candidates 1..4 blocked by node(s), candidate 5 free (blockers found by a whole-pixel search)
+CN06u1	C	core	inputs/CN06u1.json	expected/CN06u1.json		node label u=1: candidates 1..5 blocked by node(s), candidate 6 free (blockers found by a whole-pixel search)
+CN07u1	C	core	inputs/CN07u1.json	expected/CN07u1.json		node label u=1: candidates 1..6 blocked by node(s), candidate 7 free (blockers found by a whole-pixel search)
+CN08u1	C	core	inputs/CN08u1.json	expected/CN08u1.json		node label u=1: candidates 1..7 blocked by node(s), candidate 8 free (blockers found by a whole-pixel search)
+CN09u1	C	core	inputs/CN09u1.json	expected/CN09u1.json		node label u=1: candidates 1..8 blocked by node(s), candidate 9 free (blockers found by a whole-pixel search)
+CN10u1	C	core	inputs/CN10u1.json	expected/CN10u1.json		node label u=1: candidates 1..9 blocked by node(s), candidate 10 free (blockers found by a whole-pixel search)
+CN11u1	C	core	inputs/CN11u1.json	expected/CN11u1.json		node label u=1: candidates 1..10 blocked by node(s), candidate 11 free (blockers found by a whole-pixel search)
+CN12u1	C	core	inputs/CN12u1.json	expected/CN12u1.json		node label u=1: candidates 1..11 blocked by node(s), candidate 12 free (blockers found by a whole-pixel search)
+CN13u1	C	core	inputs/CN13u1.json	expected/CN13u1.json		node label u=1: candidates 1..12 blocked by node(s), candidate 13 free (blockers found by a whole-pixel search)
+CN14u1	C	core	inputs/CN14u1.json	expected/CN14u1.json		node label u=1: candidates 1..13 blocked by node(s), candidate 14 free (blockers found by a whole-pixel search)
+CN15u1	C	core	inputs/CN15u1.json	expected/CN15u1.json		node label u=1: candidates 1..14 blocked by node(s), candidate 15 free (blockers found by a whole-pixel search)
+CN16u1	C	core	inputs/CN16u1.json	expected/CN16u1.json		node label u=1: candidates 1..15 blocked by node(s), candidate 16 free (blockers found by a whole-pixel search)
+CN17u1	C	core	inputs/CN17u1.json	expected/CN17u1.json		node label u=1: candidates 1..16 blocked by node(s), candidate 17 free (blockers found by a whole-pixel search)
+CN18u1	C	core	inputs/CN18u1.json	expected/CN18u1.json		node label u=1: candidates 1..17 blocked by node(s), candidate 18 free (blockers found by a whole-pixel search)
+CN19u1	C	core	inputs/CN19u1.json	expected/CN19u1.json		node label u=1: candidates 1..18 blocked by node(s), candidate 19 free (blockers found by a whole-pixel search)
+CN20u1	C	core	inputs/CN20u1.json	expected/CN20u1.json		node label u=1: candidates 1..19 blocked by node(s), candidate 20 free (blockers found by a whole-pixel search)
+CN21u1	C	core	inputs/CN21u1.json	expected/CN21u1.json		node label u=1: candidates 1..20 blocked by node(s), candidate 21 free (blockers found by a whole-pixel search)
+CN22u1	C	core	inputs/CN22u1.json	expected/CN22u1.json		node label u=1: candidates 1..21 blocked by node(s), candidate 22 free (blockers found by a whole-pixel search)
+CN23u1	C	core	inputs/CN23u1.json	expected/CN23u1.json		node label u=1: candidates 1..22 blocked by node(s), candidate 23 free (blockers found by a whole-pixel search)
+CN24u1	C	core	inputs/CN24u1.json	expected/CN24u1.json		node label u=1: candidates 1..23 blocked by node(s), candidate 24 free (blockers found by a whole-pixel search)
+CN25u1	C	core	inputs/CN25u1.json	expected/CN25u1.json		node label u=1: candidates 1..24 blocked by node(s), candidate 25 free (blockers found by a whole-pixel search)
+CN26u1	C	core	inputs/CN26u1.json	expected/CN26u1.json		node label u=1: candidates 1..25 blocked by node(s), candidate 26 free (blockers found by a whole-pixel search)
+CN27u1	C	core	inputs/CN27u1.json	expected/CN27u1.json		node label u=1: candidates 1..26 blocked by node(s), candidate 27 free (blockers found by a whole-pixel search)
+CN28u1	C	core	inputs/CN28u1.json	expected/CN28u1.json		node label u=1: candidates 1..27 blocked by node(s), candidate 28 free (blockers found by a whole-pixel search)
+CN29u1	C	core	inputs/CN29u1.json	expected/CN29u1.json		node label u=1: candidates 1..28 blocked by node(s), candidate 29 free (blockers found by a whole-pixel search)
+CN01u4	C	core	inputs/CN01u4.json	expected/CN01u4.json		node label u=4: candidates 1..0 blocked by node(s), candidate 1 free (blockers found by a whole-pixel search)
+CN02u4	C	core	inputs/CN02u4.json	expected/CN02u4.json		node label u=4: candidates 1..1 blocked by node(s), candidate 2 free (blockers found by a whole-pixel search)
+CN03u4	C	core	inputs/CN03u4.json	expected/CN03u4.json		node label u=4: candidates 1..2 blocked by node(s), candidate 3 free (blockers found by a whole-pixel search)
+CN04u4	C	core	inputs/CN04u4.json	expected/CN04u4.json		node label u=4: candidates 1..3 blocked by node(s), candidate 4 free (blockers found by a whole-pixel search)
+CN05u4	C	core	inputs/CN05u4.json	expected/CN05u4.json		node label u=4: candidates 1..4 blocked by node(s), candidate 5 free (blockers found by a whole-pixel search)
+CN06u4	C	core	inputs/CN06u4.json	expected/CN06u4.json		node label u=4: candidates 1..5 blocked by node(s), candidate 6 free (blockers found by a whole-pixel search)
+CN07u4	C	core	inputs/CN07u4.json	expected/CN07u4.json		node label u=4: candidates 1..6 blocked by node(s), candidate 7 free (blockers found by a whole-pixel search)
+CN08u4	C	core	inputs/CN08u4.json	expected/CN08u4.json		node label u=4: candidates 1..7 blocked by node(s), candidate 8 free (blockers found by a whole-pixel search)
+CN09u4	C	core	inputs/CN09u4.json	expected/CN09u4.json		node label u=4: candidates 1..8 blocked by node(s), candidate 9 free (blockers found by a whole-pixel search)
+CN10u4	C	core	inputs/CN10u4.json	expected/CN10u4.json		node label u=4: candidates 1..9 blocked by node(s), candidate 10 free (blockers found by a whole-pixel search)
+CN11u4	C	core	inputs/CN11u4.json	expected/CN11u4.json		node label u=4: candidates 1..10 blocked by node(s), candidate 11 free (blockers found by a whole-pixel search)
+CN12u4	C	core	inputs/CN12u4.json	expected/CN12u4.json		node label u=4: candidates 1..11 blocked by node(s), candidate 12 free (blockers found by a whole-pixel search)
+CN13u4	C	core	inputs/CN13u4.json	expected/CN13u4.json		node label u=4: candidates 1..12 blocked by node(s), candidate 13 free (blockers found by a whole-pixel search)
+CN14u4	C	core	inputs/CN14u4.json	expected/CN14u4.json		node label u=4: candidates 1..13 blocked by node(s), candidate 14 free (blockers found by a whole-pixel search)
+CN15u4	C	core	inputs/CN15u4.json	expected/CN15u4.json		node label u=4: candidates 1..14 blocked by node(s), candidate 15 free (blockers found by a whole-pixel search)
+CN16u4	C	core	inputs/CN16u4.json	expected/CN16u4.json		node label u=4: candidates 1..15 blocked by node(s), candidate 16 free (blockers found by a whole-pixel search)
+CN17u4	C	core	inputs/CN17u4.json	expected/CN17u4.json		node label u=4: candidates 1..16 blocked by node(s), candidate 17 free (blockers found by a whole-pixel search)
+CN18u4	C	core	inputs/CN18u4.json	expected/CN18u4.json		node label u=4: candidates 1..17 blocked by node(s), candidate 18 free (blockers found by a whole-pixel search)
+CN19u4	C	core	inputs/CN19u4.json	expected/CN19u4.json		node label u=4: candidates 1..18 blocked by node(s), candidate 19 free (blockers found by a whole-pixel search)
+CN20u4	C	core	inputs/CN20u4.json	expected/CN20u4.json		node label u=4: candidates 1..19 blocked by node(s), candidate 20 free (blockers found by a whole-pixel search)
+CN21u4	C	core	inputs/CN21u4.json	expected/CN21u4.json		node label u=4: candidates 1..20 blocked by node(s), candidate 21 free (blockers found by a whole-pixel search)
+CN22u4	C	core	inputs/CN22u4.json	expected/CN22u4.json		node label u=4: candidates 1..21 blocked by node(s), candidate 22 free (blockers found by a whole-pixel search)
+CN23u4	C	core	inputs/CN23u4.json	expected/CN23u4.json		node label u=4: candidates 1..22 blocked by node(s), candidate 23 free (blockers found by a whole-pixel search)
+CN24u4	C	core	inputs/CN24u4.json	expected/CN24u4.json		node label u=4: candidates 1..23 blocked by node(s), candidate 24 free (blockers found by a whole-pixel search)
+CN25u4	C	core	inputs/CN25u4.json	expected/CN25u4.json		node label u=4: candidates 1..24 blocked by node(s), candidate 25 free (blockers found by a whole-pixel search)
+CN26u4	C	core	inputs/CN26u4.json	expected/CN26u4.json		node label u=4: candidates 1..25 blocked by node(s), candidate 26 free (blockers found by a whole-pixel search)
+CN27u4	C	core	inputs/CN27u4.json	expected/CN27u4.json		node label u=4: candidates 1..26 blocked by node(s), candidate 27 free (blockers found by a whole-pixel search)
+CN28u4	C	core	inputs/CN28u4.json	expected/CN28u4.json		node label u=4: candidates 1..27 blocked by node(s), candidate 28 free (blockers found by a whole-pixel search)
+CN29u4	C	core	inputs/CN29u4.json	expected/CN29u4.json		node label u=4: candidates 1..28 blocked by node(s), candidate 29 free (blockers found by a whole-pixel search)
+CE01u1	C	core	inputs/CE01u1.json	expected/CE01u1.json		edge label u=1: candidates 1..0 blocked by node(s), candidate 1 free (blockers found by a whole-pixel search)
+CE02u1	C	core	inputs/CE02u1.json	expected/CE02u1.json		edge label u=1: candidates 1..1 blocked by node(s), candidate 2 free (blockers found by a whole-pixel search)
+CE03u1	C	core	inputs/CE03u1.json	expected/CE03u1.json		edge label u=1: candidates 1..2 blocked by node(s), candidate 3 free (blockers found by a whole-pixel search)
+CE04u1	C	core	inputs/CE04u1.json	expected/CE04u1.json		edge label u=1: candidates 1..3 blocked by node(s), candidate 4 free (blockers found by a whole-pixel search)
+CE05u1	C	core	inputs/CE05u1.json	expected/CE05u1.json		edge label u=1: candidates 1..4 blocked by node(s), candidate 5 free (blockers found by a whole-pixel search)
+CE06u1	C	core	inputs/CE06u1.json	expected/CE06u1.json		edge label u=1: candidates 1..5 blocked by node(s), candidate 6 free (blockers found by a whole-pixel search)
+CE07u1	C	core	inputs/CE07u1.json	expected/CE07u1.json		edge label u=1: candidates 1..6 blocked by node(s), candidate 7 free (blockers found by a whole-pixel search)
+CE08u1	C	core	inputs/CE08u1.json	expected/CE08u1.json		edge label u=1: candidates 1..7 blocked by node(s), candidate 8 free (blockers found by a whole-pixel search)
+CE09u1	C	core	inputs/CE09u1.json	expected/CE09u1.json		edge label u=1: candidates 1..8 blocked by node(s), candidate 9 free (blockers found by a whole-pixel search)
+CE10u1	C	core	inputs/CE10u1.json	expected/CE10u1.json		edge label u=1: candidates 1..9 blocked by node(s), candidate 10 free (blockers found by a whole-pixel search)
+CE11u1	C	core	inputs/CE11u1.json	expected/CE11u1.json		edge label u=1: candidates 1..10 blocked by node(s), candidate 11 free (blockers found by a whole-pixel search)
+CE12u1	C	core	inputs/CE12u1.json	expected/CE12u1.json		edge label u=1: candidates 1..11 blocked by node(s), candidate 12 free (blockers found by a whole-pixel search)
+CE13u1	C	core	inputs/CE13u1.json	expected/CE13u1.json		edge label u=1: candidates 1..12 blocked by node(s), candidate 13 free (blockers found by a whole-pixel search)
+CE14u1	C	core	inputs/CE14u1.json	expected/CE14u1.json		edge label u=1: candidates 1..13 blocked by node(s), candidate 14 free (blockers found by a whole-pixel search)
+CE15u1	C	core	inputs/CE15u1.json	expected/CE15u1.json		edge label u=1: candidates 1..14 blocked by node(s), candidate 15 free (blockers found by a whole-pixel search)
+CE16u1	C	core	inputs/CE16u1.json	expected/CE16u1.json		edge label u=1: candidates 1..15 blocked by node(s), candidate 16 free (blockers found by a whole-pixel search)
+CE17u1	C	core	inputs/CE17u1.json	expected/CE17u1.json		edge label u=1: candidates 1..16 blocked by node(s), candidate 17 free (blockers found by a whole-pixel search)
+CE18u1	C	core	inputs/CE18u1.json	expected/CE18u1.json		edge label u=1: candidates 1..17 blocked by node(s), candidate 18 free (blockers found by a whole-pixel search)
+CE19u1	C	core	inputs/CE19u1.json	expected/CE19u1.json		edge label u=1: candidates 1..18 blocked by node(s), candidate 19 free (blockers found by a whole-pixel search)
+CE20u1	C	core	inputs/CE20u1.json	expected/CE20u1.json		edge label u=1: candidates 1..19 blocked by node(s), candidate 20 free (blockers found by a whole-pixel search)
+CE21u1	C	core	inputs/CE21u1.json	expected/CE21u1.json		edge label u=1: candidates 1..20 blocked by node(s), candidate 21 free (blockers found by a whole-pixel search)
+CE22u1	C	core	inputs/CE22u1.json	expected/CE22u1.json		edge label u=1: candidates 1..21 blocked by node(s), candidate 22 free (blockers found by a whole-pixel search)
+CE23u1	C	core	inputs/CE23u1.json	expected/CE23u1.json		edge label u=1: candidates 1..22 blocked by node(s), candidate 23 free (blockers found by a whole-pixel search)
+CE24u1	C	core	inputs/CE24u1.json	expected/CE24u1.json		edge label u=1: candidates 1..23 blocked by node(s), candidate 24 free (blockers found by a whole-pixel search)
+CE25u1	C	core	inputs/CE25u1.json	expected/CE25u1.json		edge label u=1: candidates 1..24 blocked by node(s), candidate 25 free (blockers found by a whole-pixel search)
+CE26u1	C	core	inputs/CE26u1.json	expected/CE26u1.json		edge label u=1: candidates 1..25 blocked by node(s), candidate 26 free (blockers found by a whole-pixel search)
+CE27u1	C	core	inputs/CE27u1.json	expected/CE27u1.json		edge label u=1: candidates 1..26 blocked by node(s), candidate 27 free (blockers found by a whole-pixel search)
+CE28u1	C	core	inputs/CE28u1.json	expected/CE28u1.json		edge label u=1: candidates 1..27 blocked by node(s), candidate 28 free (blockers found by a whole-pixel search)
+CE29u1	C	core	inputs/CE29u1.json	expected/CE29u1.json		edge label u=1: candidates 1..28 blocked by node(s), candidate 29 free (blockers found by a whole-pixel search)
+CE01u4	C	core	inputs/CE01u4.json	expected/CE01u4.json		edge label u=4: candidates 1..0 blocked by node(s), candidate 1 free (blockers found by a whole-pixel search)
+CE02u4	C	core	inputs/CE02u4.json	expected/CE02u4.json		edge label u=4: candidates 1..1 blocked by node(s), candidate 2 free (blockers found by a whole-pixel search)
+CE03u4	C	core	inputs/CE03u4.json	expected/CE03u4.json		edge label u=4: candidates 1..2 blocked by node(s), candidate 3 free (blockers found by a whole-pixel search)
+CE04u4	C	core	inputs/CE04u4.json	expected/CE04u4.json		edge label u=4: candidates 1..3 blocked by node(s), candidate 4 free (blockers found by a whole-pixel search)
+CE05u4	C	core	inputs/CE05u4.json	expected/CE05u4.json		edge label u=4: candidates 1..4 blocked by node(s), candidate 5 free (blockers found by a whole-pixel search)
+CE06u4	C	core	inputs/CE06u4.json	expected/CE06u4.json		edge label u=4: candidates 1..5 blocked by node(s), candidate 6 free (blockers found by a whole-pixel search)
+CE07u4	C	core	inputs/CE07u4.json	expected/CE07u4.json		edge label u=4: candidates 1..6 blocked by node(s), candidate 7 free (blockers found by a whole-pixel search)
+CE08u4	C	core	inputs/CE08u4.json	expected/CE08u4.json		edge label u=4: candidates 1..7 blocked by node(s), candidate 8 free (blockers found by a whole-pixel search)
+CE09u4	C	core	inputs/CE09u4.json	expected/CE09u4.json		edge label u=4: candidates 1..8 blocked by node(s), candidate 9 free (blockers found by a whole-pixel search)
+CE10u4	C	core	inputs/CE10u4.json	expected/CE10u4.json		edge label u=4: candidates 1..9 blocked by node(s), candidate 10 free (blockers found by a whole-pixel search)
+CE11u4	C	core	inputs/CE11u4.json	expected/CE11u4.json		edge label u=4: candidates 1..10 blocked by node(s), candidate 11 free (blockers found by a whole-pixel search)
+CE12u4	C	core	inputs/CE12u4.json	expected/CE12u4.json		edge label u=4: candidates 1..11 blocked by node(s), candidate 12 free (blockers found by a whole-pixel search)
+CE13u4	C	core	inputs/CE13u4.json	expected/CE13u4.json		edge label u=4: candidates 1..12 blocked by node(s), candidate 13 free (blockers found by a whole-pixel search)
+CE14u4	C	core	inputs/CE14u4.json	expected/CE14u4.json		edge label u=4: candidates 1..13 blocked by node(s), candidate 14 free (blockers found by a whole-pixel search)
+CE15u4	C	core	inputs/CE15u4.json	expected/CE15u4.json		edge label u=4: candidates 1..14 blocked by node(s), candidate 15 free (blockers found by a whole-pixel search)
+CE16u4	C	core	inputs/CE16u4.json	expected/CE16u4.json		edge label u=4: candidates 1..15 blocked by node(s), candidate 16 free (blockers found by a whole-pixel search)
+CE17u4	C	core	inputs/CE17u4.json	expected/CE17u4.json		edge label u=4: candidates 1..16 blocked by node(s), candidate 17 free (blockers found by a whole-pixel search)
+CE18u4	C	core	inputs/CE18u4.json	expected/CE18u4.json		edge label u=4: candidates 1..17 blocked by node(s), candidate 18 free (blockers found by a whole-pixel search)
+CE19u4	C	core	inputs/CE19u4.json	expected/CE19u4.json		edge label u=4: candidates 1..18 blocked by node(s), candidate 19 free (blockers found by a whole-pixel search)
+CE20u4	C	core	inputs/CE20u4.json	expected/CE20u4.json		edge label u=4: candidates 1..19 blocked by node(s), candidate 20 free (blockers found by a whole-pixel search)
+CE21u4	C	core	inputs/CE21u4.json	expected/CE21u4.json		edge label u=4: candidates 1..20 blocked by node(s), candidate 21 free (blockers found by a whole-pixel search)
+CE22u4	C	core	inputs/CE22u4.json	expected/CE22u4.json		edge label u=4: candidates 1..21 blocked by node(s), candidate 22 free (blockers found by a whole-pixel search)
+CE23u4	C	core	inputs/CE23u4.json	expected/CE23u4.json		edge label u=4: candidates 1..22 blocked by node(s), candidate 23 free (blockers found by a whole-pixel search)
+CE24u4	C	core	inputs/CE24u4.json	expected/CE24u4.json		edge label u=4: candidates 1..23 blocked by node(s), candidate 24 free (blockers found by a whole-pixel search)
+CE25u4	C	core	inputs/CE25u4.json	expected/CE25u4.json		edge label u=4: candidates 1..24 blocked by node(s), candidate 25 free (blockers found by a whole-pixel search)
+CE26u4	C	core	inputs/CE26u4.json	expected/CE26u4.json		edge label u=4: candidates 1..25 blocked by node(s), candidate 26 free (blockers found by a whole-pixel search)
+CE27u4	C	core	inputs/CE27u4.json	expected/CE27u4.json		edge label u=4: candidates 1..26 blocked by node(s), candidate 27 free (blockers found by a whole-pixel search)
+CE28u4	C	core	inputs/CE28u4.json	expected/CE28u4.json		edge label u=4: candidates 1..27 blocked by node(s), candidate 28 free (blockers found by a whole-pixel search)
+CE29u4	C	core	inputs/CE29u4.json	expected/CE29u4.json		edge label u=4: candidates 1..28 blocked by node(s), candidate 29 free (blockers found by a whole-pixel search)
+W01	W	core	inputs/W01.json	expected/W01.json		node label u=1: candidate 3 is (1h, -20), h = ceil(7*1/2)+14 = 19
+W02	W	core	inputs/W02.json	expected/W02.json		node label u=1: candidate 4 is (-1h, -20), h = ceil(7*1/2)+14 = 19
+W03	W	core	inputs/W03.json	expected/W03.json		edge label u=1: candidate 4 is (1h, 0), h = ceil(7*1/2)+10 = 15
+W04	W	core	inputs/W04.json	expected/W04.json		edge label u=1: candidate 5 is (-1h, 0), h = ceil(7*1/2)+10 = 15
+W05	W	core	inputs/W05.json	expected/W05.json		node label u=2: candidate 3 is (1h, -20), h = ceil(7*2/2)+14 = 23
+W06	W	core	inputs/W06.json	expected/W06.json		node label u=2: candidate 4 is (-1h, -20), h = ceil(7*2/2)+14 = 23
+W07	W	core	inputs/W07.json	expected/W07.json		edge label u=2: candidate 4 is (1h, 0), h = ceil(7*2/2)+10 = 19
+W08	W	core	inputs/W08.json	expected/W08.json		edge label u=2: candidate 5 is (-1h, 0), h = ceil(7*2/2)+10 = 19
+W09	W	core	inputs/W09.json	expected/W09.json		node label u=3: candidate 3 is (1h, -20), h = ceil(7*3/2)+14 = 28
+W10	W	core	inputs/W10.json	expected/W10.json		node label u=3: candidate 4 is (-1h, -20), h = ceil(7*3/2)+14 = 28
+W11	W	core	inputs/W11.json	expected/W11.json		edge label u=3: candidate 4 is (1h, 0), h = ceil(7*3/2)+10 = 24
+W12	W	core	inputs/W12.json	expected/W12.json		edge label u=3: candidate 5 is (-1h, 0), h = ceil(7*3/2)+10 = 24
+W13	W	core	inputs/W13.json	expected/W13.json		node label u=12: candidate 3 is (1h, -20), h = ceil(7*12/2)+14 = 68
+W14	W	core	inputs/W14.json	expected/W14.json		node label u=12: candidate 4 is (-1h, -20), h = ceil(7*12/2)+14 = 68
+W15	W	core	inputs/W15.json	expected/W15.json		edge label u=12: candidate 4 is (1h, 0), h = ceil(7*12/2)+10 = 64
+W16	W	core	inputs/W16.json	expected/W16.json		edge label u=12: candidate 5 is (-1h, 0), h = ceil(7*12/2)+10 = 64
+W17	W	core	inputs/W17.json	expected/W17.json		node label u=40: candidate 3 is (1h, -20), h = ceil(7*40/2)+14 = 194
+W18	W	core	inputs/W18.json	expected/W18.json		node label u=40: candidate 4 is (-1h, -20), h = ceil(7*40/2)+14 = 194
+W19	W	core	inputs/W19.json	expected/W19.json		edge label u=40: candidate 4 is (1h, 0), h = ceil(7*40/2)+10 = 190
+W20	W	core	inputs/W20.json	expected/W20.json		edge label u=40: candidate 5 is (-1h, 0), h = ceil(7*40/2)+10 = 190
+W21	W	core	inputs/W21.json	expected/W21.json		node label u=200: candidate 3 is (1h, -20), h = ceil(7*200/2)+14 = 914
+W22	W	core	inputs/W22.json	expected/W22.json		node label u=200: candidate 4 is (-1h, -20), h = ceil(7*200/2)+14 = 914
+W23	W	core	inputs/W23.json	expected/W23.json		edge label u=200: candidate 4 is (1h, 0), h = ceil(7*200/2)+10 = 910
+W24	W	core	inputs/W24.json	expected/W24.json		edge label u=200: candidate 5 is (-1h, 0), h = ceil(7*200/2)+10 = 910
+F01	F	core	inputs/F01.json	expected/F01.json		node label u=1 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F02	F	core	inputs/F02.json	expected/F02.json		node label u=3 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F03	F	core	inputs/F03.json	expected/F03.json		node label u=12 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F04	F	core	inputs/F04.json	expected/F04.json		edge label u=1 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F05	F	core	inputs/F05.json	expected/F05.json		edge label u=3 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F06	F	core	inputs/F06.json	expected/F06.json		edge label u=12 with all 29 candidates blocked by nodes (found by search): fallback to the candidate of least cost (value from the reference, cost recomputed independently by the generator)
+F07	F	core	inputs/F07.json	expected/F07.json		31 identical edge labels u=2 on one anchor: all 29 candidates are mutually free (candidates 1..29 in order), then the 30th and 31st have no free candidate
+F08	F	core	inputs/F08.json	expected/F08.json		31 identical node labels u=2 on one node: candidates 1..29 in order, then two fallbacks
+F09	F	core	inputs/F09.json	expected/F09.json		node label u=2, all 29 blocked, the least-cost candidate is neither the first nor the last (candidate 11, cost 1) [seeded search 11]
+F10	F	core	inputs/F10.json	expected/F10.json		edge label u=2, all 29 blocked, the least-cost candidate is neither the first nor the last (candidate 24, cost 3) [seeded search 12]
+F11	F	core	inputs/F11.json	expected/F11.json		node label u=3, all 29 blocked, the least-cost candidate is the first (the default, candidate 1, cost 1) [seeded search 13]
+F12	F	core	inputs/F12.json	expected/F12.json		edge label u=3, all 29 blocked, the least-cost candidate is the first (the default, candidate 1, cost 2) [seeded search 14]
+F13	F	core	inputs/F13.json	expected/F13.json		node label u=2, all 29 blocked, the least-cost candidate is the last (candidate 29, cost 1) [seeded search 15]
+F14	F	core	inputs/F14.json	expected/F14.json		edge label u=2, all 29 blocked, the least-cost candidate is the last (candidate 29, cost 1) [seeded search 16]
+F15	F	core	inputs/F15.json	expected/F15.json		node label u=2, all 29 blocked, the minimum cost is reached by several candidates (first-minimum wins, last-minimum would differ; candidate 11, cost 1) [seeded search 17]
+F16	F	core	inputs/F16.json	expected/F16.json		edge label u=2, all 29 blocked, a tie for the minimum cost (first wins; candidate 3, cost 3) [seeded search 18]
+F17	F	core	inputs/F17.json	expected/F17.json		node label u=2, duplicated (identical) node boxes: counting identical boxes once changes the winner (candidate 6, cost 1; counting copies would pick another) [seeded search 19]
+F18	F	core	inputs/F18.json	expected/F18.json		edge label u=2, duplicated node boxes: distinct counting changes the winner (candidate 15, cost 1) [seeded search 20]
+F19	F	core	inputs/F19.json	expected/F19.json		six node labels, the last falls back and its cost depends on earlier PLACED LABEL boxes (ignoring them changes the winner; candidate 2, cost 1) [seeded search 21]
+F20	F	core	inputs/F20.json	expected/F20.json		six edge labels, the last falls back and its cost depends on NODE boxes (ignoring them changes the winner; candidate 6, cost 1) [seeded search 22]
+F21	F	core	inputs/F21.json	expected/F21.json		six node labels, the last falls back; costing with a gap of 0 instead of 1 px would change the winner (candidate 3, cost 1) [seeded search 23]
+F22	F	core	inputs/F22.json	expected/F22.json		six edge labels with fallbacks: recording a placed box at the default instead of its chosen position changes a later result (candidate 9, cost 1) [seeded search 24]
+F23	F	core	inputs/F23.json	expected/F23.json		six node labels: a fallback label that is not recorded changes a later result (candidate 10, cost 1) [seeded search 25]
+F24	F	core	inputs/F24.json	expected/F24.json		six edge labels, identical-ish anchors: labels that never see earlier labels give another result (candidate 1, cost 1) [seeded search 26]
+F25	F	core	inputs/F25.json	expected/F25.json		eight node labels, mostly identical defaults: earlier identical placed boxes count once in the cost (counting copies changes the winner; candidate 11, cost 1) [seeded search 27]
+F26	F	core	inputs/F26.json	expected/F26.json		node label u=2: the winner lies beyond candidate 11 (a min over the first 11 only would differ; candidate 15, cost 1) [seeded search 28]
+F27	F	core	inputs/F27.json	expected/F27.json		edge label u=2: the winner lies beyond candidate 11 (candidate 29, cost 2) [seeded search 29]
+G-NR-1px	G	core	inputs/G-NR-1px.json	expected/G-NR-1px.json		node box right of the label box at a gap of 1px px (u=2 edge label 491..509 x 490..503): free, default stays
+G-NR-1px-1	G	core	inputs/G-NR-1px-1.json	expected/G-NR-1px-1.json		node box right of the label box at a gap of 1px-1 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 5
+G-NR-0	G	core	inputs/G-NR-0.json	expected/G-NR-0.json		node box right of the label box at a gap of 0 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 5
+G-NL-1px	G	core	inputs/G-NL-1px.json	expected/G-NL-1px.json		node box left of the label box at a gap of 1px px (u=2 edge label 491..509 x 490..503): free, default stays
+G-NL-1px-1	G	core	inputs/G-NL-1px-1.json	expected/G-NL-1px-1.json		node box left of the label box at a gap of 1px-1 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 4
+G-NL-0	G	core	inputs/G-NL-0.json	expected/G-NL-0.json		node box left of the label box at a gap of 0 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 4
+G-NT-1px	G	core	inputs/G-NT-1px.json	expected/G-NT-1px.json		node box above the label box at a gap of 1px px (u=2 edge label 491..509 x 490..503): free, default stays
+G-NT-1px-1	G	core	inputs/G-NT-1px-1.json	expected/G-NT-1px-1.json		node box above the label box at a gap of 1px-1 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 3
+G-NT-0	G	core	inputs/G-NT-0.json	expected/G-NT-0.json		node box above the label box at a gap of 0 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 3
+G-NB-1px	G	core	inputs/G-NB-1px.json	expected/G-NB-1px.json		node box below the label box at a gap of 1px px (u=2 edge label 491..509 x 490..503): free, default stays
+G-NB-1px-1	G	core	inputs/G-NB-1px-1.json	expected/G-NB-1px-1.json		node box below the label box at a gap of 1px-1 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 2
+G-NB-0	G	core	inputs/G-NB-0.json	expected/G-NB-0.json		node box below the label box at a gap of 0 px (u=2 edge label 491..509 x 490..503): collides, hand-derived first free candidate is 2
+G-LR-1px	G	core	inputs/G-LR-1px.json	expected/G-LR-1px.json		label B right of label A (both u=2 edge labels) at a gap of 1px px: B free at its default
+G-LR-1px-1	G	core	inputs/G-LR-1px-1.json	expected/G-LR-1px-1.json		label B right of label A (both u=2 edge labels) at a gap of 1px-1 px: B collides, hand-derived candidate 2
+G-LR-0	G	core	inputs/G-LR-0.json	expected/G-LR-0.json		label B right of label A (both u=2 edge labels) at a gap of 0 px: B collides, hand-derived candidate 2
+G-LL-1px	G	core	inputs/G-LL-1px.json	expected/G-LL-1px.json		label B left of label A (both u=2 edge labels) at a gap of 1px px: B free at its default
+G-LL-1px-1	G	core	inputs/G-LL-1px-1.json	expected/G-LL-1px-1.json		label B left of label A (both u=2 edge labels) at a gap of 1px-1 px: B collides, hand-derived candidate 2
+G-LL-0	G	core	inputs/G-LL-0.json	expected/G-LL-0.json		label B left of label A (both u=2 edge labels) at a gap of 0 px: B collides, hand-derived candidate 2
+G-LT-1px	G	core	inputs/G-LT-1px.json	expected/G-LT-1px.json		label B below label A (both u=2 edge labels) at a gap of 1px px: B free at its default
+G-LT-1px-1	G	core	inputs/G-LT-1px-1.json	expected/G-LT-1px-1.json		label B below label A (both u=2 edge labels) at a gap of 1px-1 px: B collides, hand-derived candidate 3
+G-LT-0	G	core	inputs/G-LT-0.json	expected/G-LT-0.json		label B below label A (both u=2 edge labels) at a gap of 0 px: B collides, hand-derived candidate 3
+G-LB-1px	G	core	inputs/G-LB-1px.json	expected/G-LB-1px.json		label B above label A (both u=2 edge labels) at a gap of 1px px: B free at its default
+G-LB-1px-1	G	core	inputs/G-LB-1px-1.json	expected/G-LB-1px-1.json		label B above label A (both u=2 edge labels) at a gap of 1px-1 px: B collides, hand-derived candidate 2
+G-LB-0	G	core	inputs/G-LB-0.json	expected/G-LB-0.json		label B above label A (both u=2 edge labels) at a gap of 0 px: B collides, hand-derived candidate 2
+G-NC-1px-1px	G	core	inputs/G-NC-1px-1px.json	expected/G-NC-1px-1px.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 1000000 micro-px, y gap 1000000 micro-px: free (a gap of 1 px on either axis separates) (4 scenes 4000 px apart)
+G-LC-1px-1px	G	core	inputs/G-LC-1px-1px.json	expected/G-LC-1px-1px.json		label B at the four corners of label A (both u=2), x gap 1000000 micro-px, y gap 1000000 micro-px: free (4 scenes 4000 px apart)
+G-NC-1px-0	G	core	inputs/G-NC-1px-0.json	expected/G-NC-1px-0.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 1000000 micro-px, y gap 0 micro-px: free (a gap of 1 px on either axis separates) (4 scenes 4000 px apart)
+G-LC-1px-0	G	core	inputs/G-LC-1px-0.json	expected/G-LC-1px-0.json		label B at the four corners of label A (both u=2), x gap 1000000 micro-px, y gap 0 micro-px: free (4 scenes 4000 px apart)
+G-NC-0-1px	G	core	inputs/G-NC-0-1px.json	expected/G-NC-0-1px.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 0 micro-px, y gap 1000000 micro-px: free (a gap of 1 px on either axis separates) (4 scenes 4000 px apart)
+G-LC-0-1px	G	core	inputs/G-LC-0-1px.json	expected/G-LC-0-1px.json		label B at the four corners of label A (both u=2), x gap 0 micro-px, y gap 1000000 micro-px: free (4 scenes 4000 px apart)
+G-NC-0.8-0.8	G	core	inputs/G-NC-0.8-0.8.json	expected/G-NC-0.8-0.8.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 800000 micro-px, y gap 800000 micro-px: collide (both axis gaps < 1 px) (4 scenes 4000 px apart)
+G-LC-0.8-0.8	G	core	inputs/G-LC-0.8-0.8.json	expected/G-LC-0.8-0.8.json		label B at the four corners of label A (both u=2), x gap 800000 micro-px, y gap 800000 micro-px: collide (4 scenes 4000 px apart)
+G-NC-0.999999-0.999999	G	core	inputs/G-NC-0.999999-0.999999.json	expected/G-NC-0.999999-0.999999.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 999999 micro-px, y gap 999999 micro-px: collide (both axis gaps < 1 px) (4 scenes 4000 px apart)
+G-LC-0.999999-0.999999	G	core	inputs/G-LC-0.999999-0.999999.json	expected/G-LC-0.999999-0.999999.json		label B at the four corners of label A (both u=2), x gap 999999 micro-px, y gap 999999 micro-px: collide (4 scenes 4000 px apart)
+G-NC-0-0	G	core	inputs/G-NC-0-0.json	expected/G-NC-0-0.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 0 micro-px, y gap 0 micro-px: collide (both axis gaps < 1 px) (4 scenes 4000 px apart)
+G-LC-0-0	G	core	inputs/G-LC-0-0.json	expected/G-LC-0-0.json		label B at the four corners of label A (both u=2), x gap 0 micro-px, y gap 0 micro-px: collide (4 scenes 4000 px apart)
+G-NC-1px-0.999999	G	core	inputs/G-NC-1px-0.999999.json	expected/G-NC-1px-0.999999.json		node boxes at the four corners (NE, NW, SE, SW) of a u=2 label, x gap 1000000 micro-px, y gap 999999 micro-px: free (a gap of 1 px on either axis separates) (4 scenes 4000 px apart)
+G-LC-1px-0.999999	G	core	inputs/G-LC-1px-0.999999.json	expected/G-LC-1px-0.999999.json		label B at the four corners of label A (both u=2), x gap 1000000 micro-px, y gap 999999 micro-px: free (4 scenes 4000 px apart)
+G-HNR-1px	G	core	inputs/G-HNR-1px.json	expected/G-HNR-1px.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box right of it at a gap of 1px px (half-pixel edge): free
+G-HNR-1px-1	G	core	inputs/G-HNR-1px-1.json	expected/G-HNR-1px-1.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box right of it at a gap of 1px-1 px (half-pixel edge): collides, hand-derived candidate 5 (h = 14+10 = 24)
+G-HNR-0	G	core	inputs/G-HNR-0.json	expected/G-HNR-0.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box right of it at a gap of 0 px (half-pixel edge): collides, hand-derived candidate 5 (h = 14+10 = 24)
+G-HNL-1px	G	core	inputs/G-HNL-1px.json	expected/G-HNL-1px.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box left of it at a gap of 1px px (half-pixel edge): free
+G-HNL-1px-1	G	core	inputs/G-HNL-1px-1.json	expected/G-HNL-1px-1.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box left of it at a gap of 1px-1 px (half-pixel edge): collides, hand-derived candidate 4 (h = 14+10 = 24)
+G-HNL-0	G	core	inputs/G-HNL-0.json	expected/G-HNL-0.json		odd u=3 edge label (box 486.5..513.5 x 490..503), node box left of it at a gap of 0 px (half-pixel edge): collides, hand-derived candidate 4 (h = 14+10 = 24)
+G-HLR-1px	G	core	inputs/G-HLR-1px.json	expected/G-HLR-1px.json		odd u=3: label B right of label A (both u=3 edge labels, half-pixel edges) at a gap of 1px px: B free at its default
+G-HLR-1px-1	G	core	inputs/G-HLR-1px-1.json	expected/G-HLR-1px-1.json		odd u=3: label B right of label A (both u=3 edge labels, half-pixel edges) at a gap of 1px-1 px: B collides, hand-derived candidate 2
+G-HLR-0	G	core	inputs/G-HLR-0.json	expected/G-HLR-0.json		odd u=3: label B right of label A (both u=3 edge labels, half-pixel edges) at a gap of 0 px: B collides, hand-derived candidate 2
+G-HLL-1px	G	core	inputs/G-HLL-1px.json	expected/G-HLL-1px.json		odd u=3: label B left of label A (both u=3 edge labels, half-pixel edges) at a gap of 1px px: B free at its default
+G-HLL-1px-1	G	core	inputs/G-HLL-1px-1.json	expected/G-HLL-1px-1.json		odd u=3: label B left of label A (both u=3 edge labels, half-pixel edges) at a gap of 1px-1 px: B collides, hand-derived candidate 2
+G-HLL-0	G	core	inputs/G-HLL-0.json	expected/G-HLL-0.json		odd u=3: label B left of label A (both u=3 edge labels, half-pixel edges) at a gap of 0 px: B collides, hand-derived candidate 2
+G-HC3-1px	G	core	inputs/G-HC3-1px.json	expected/G-HC3-1px.json		odd u=1 node label: candidates 1 and 2 blocked, an extra node box 1px above the box of candidate 3 (h = 5+14 = 19): candidate 3 taken
+G-HC3-1pxm1	G	core	inputs/G-HC3-1pxm1.json	expected/G-HC3-1pxm1.json		odd u=1 node label: candidates 1 and 2 blocked, an extra node box 1px-1 above the box of candidate 3 (h = 5+14 = 19): candidate 3 collides, first free one derived by the reference
+O01	O	core	inputs/O01.json	expected/O01.json		order A,B (edge u=2, defaults 5 px apart): A default, B moves
+O02	O	core	inputs/O02.json	expected/O02.json		order B,A (the same labels swapped): B default, A moves; the result differs from O01 (asserted)
+O03	O	core	inputs/O03.json	expected/O03.json		three labels, order A,B,C
+O04	O	core	inputs/O04.json	expected/O04.json		three labels, order C,A,B
+O05	O	core	inputs/O05.json	expected/O05.json		three labels, order B,C,A
+O06	O	core	inputs/O06.json	expected/O06.json		node label before edge label (the caller's order): node label default, the edge label on the same default moves
+O07	O	core	inputs/O07.json	expected/O07.json		edge label before node label (the function does not reorder): edge label default, the node label moves
+B01	B	core	inputs/B01.json	expected/B01.json		A is pushed to (0,-14) by a node; B's default is exactly A's chosen box: B must see A at its CHOSEN position
+B02	B	core	inputs/B02.json	expected/B02.json		chain: A default; B (5 px below) pushed; C on B's neighbourhood collides
+B03	B	core	inputs/B03.json	expected/B03.json		node label first (own node (200,200)); an edge label with the same default (box 214..227, free of the own node) must move: edge labels see node labels
+B04	B	core	inputs/B04.json	expected/B04.json		edge label then edge label on the same default: edge labels see earlier edge labels
+B05	B	core	inputs/B05.json	expected/B05.json		edge label default on top of a node box, no label near it: edge labels see node boxes
+B06	B	core	inputs/B06.json	expected/B06.json		node label whose default is blocked by another node's box (node at (212,224)): node labels see other nodes
+B07	B	core	inputs/B07.json	expected/B07.json		two node labels of nodes 14 px apart (the labels overlap): second moves, first stays
+I01	I	core	inputs/I01.json	expected/I01.json		two node labels, identical defaults (u=3)
+I02	I	core	inputs/I02.json	expected/I02.json		three identical node labels
+I03	I	core	inputs/I03.json	expected/I03.json		five identical node labels
+I04	I	core	inputs/I04.json	expected/I04.json		twelve identical node labels u=3 (half width 13.5): the side candidate (h,-34) has its left edge at cx+14.5, exactly 1 px from the right edge cx+13.5 of the column label (0,-41), so it is free: candidates 1..12 in order
+I12	I	core	inputs/I12.json	expected/I12.json		twelve identical node labels u=4 (half width 18 > 13): the side candidates (+-h,-34) and (+-h,-6) overlap the column candidates, so candidates 7..10 are skipped: 1..6, 11, 12 (hand-derived prefix; the rest from the reference)
+I05	I	core	inputs/I05.json	expected/I05.json		twelve identical node labels u=8 (half width 36 > 13): the side candidates (+-h,-34) overlap the column candidate (0,-41) in x and y, (+-h,-6) overlap the box at the default, so candidates 7..10 are skipped, label 7 takes candidate 11, label 8 candidate 12 (hand-derived prefix; the rest from the reference)
+I06	I	core	inputs/I06.json	expected/I06.json		five identical edge labels u=2
+I07	I	core	inputs/I07.json	expected/I07.json		six identical edge labels u=4: (+-h,0) collide with the label at the default (10 < 4.5u+1 for u >= 3), so the column candidates 6, 7 and 12 follow candidate 3 (hand-derived: 1, 2, 3, 6, 7, 12)
+I08	I	core	inputs/I08.json	expected/I08.json		two identical edge labels u=1
+I10	I	core	inputs/I10.json	expected/I10.json		thirty-one identical node labels u=8: the wide labels stack in the column and the sides, then fallbacks (values from the reference)
+I11	I	core	inputs/I11.json	expected/I11.json		thirty-one identical edge labels u=4: the eleven column slots 1, 2, 3, 6, 7, 12, 15, 18, 21, 24, 27 (hand-derived prefix), then fallbacks
+I09	I	core	inputs/I09.json	expected/I09.json		identical anchor, units 1,2,3,4,5 (edge labels): spreads through the candidates (values from the reference)
+D01	D	core	inputs/D01.json	expected/D01.json		20 nodes on a 20-gon of radius 90 px, 20 node labels (u 3..8) then 37 edge labels (20 ring edges + 17 chords) at chord midpoints (u 2..8)
+D02	D	core	inputs/D02.json	expected/D02.json		20 nodes on a 20-gon of radius 140 px, 20 node labels (u 3..8) then 37 edge labels (20 ring edges + 17 chords) at chord midpoints (u 2..8)
+D03	D	core	inputs/D03.json	expected/D03.json		20 nodes on a 20-gon of radius 220 px, 20 node labels (u 3..8) then 37 edge labels (20 ring edges + 17 chords) at chord midpoints (u 2..8)
+D04	D	core	inputs/D04.json	expected/D04.json		20 nodes on a 20-gon of radius 400 px, 20 node labels (u 3..8) then 37 edge labels (20 ring edges + 17 chords) at chord midpoints (u 2..8)
+D05	D	core	inputs/D05.json	expected/D05.json		5x4 grid of 20 nodes (60 px apart), 20 node labels and 37 edge labels (31 grid edges + 6 diagonals)
+D06	D	core	inputs/D06.json	expected/D06.json		ring of radius 120 with another chord pattern
+D07	D	core	inputs/D07.json	expected/D07.json		ring of radius 90 with the 20 node labels only (no edge labels)
+D08	D	core	inputs/D08.json	expected/D08.json		ring of radius 90 with the 37 edge labels only
+T01	T	core	inputs/T01.json	expected/T01.json		translation of D02: shift (+64,+64) px: one whole cell; the expected file equals D02's (translation invariance, asserted)
+T02	T	core	inputs/T02.json	expected/T02.json		translation of D02: shift (-64,-64) px; the expected file equals D02's (translation invariance, asserted)
+T03	T	core	inputs/T03.json	expected/T03.json		translation of D02: cluster centred on the origin: labels straddle zero in both axes; the expected file equals D02's (translation invariance, asserted)
+T04	T	core	inputs/T04.json	expected/T04.json		translation of D02: all coordinates negative; the expected file equals D02's (translation invariance, asserted)
+T05	T	core	inputs/T05.json	expected/T05.json		translation of D02: origin-centred, off by (-37, +999999) micro-px; the expected file equals D02's (translation invariance, asserted)
+T06	T	core	inputs/T06.json	expected/T06.json		translation of D02: shift (2^40, 2^40) px (about 1.1e18 micro-px: beyond float64 integers); the expected file equals D02's (translation invariance, asserted)
+T07	T	core	inputs/T07.json	expected/T07.json		translation of D02: shift (-2^40, -2^40) px; the expected file equals D02's (translation invariance, asserted)
+T08	T	core	inputs/T08.json	expected/T08.json		translation of D02: mixed signs, odd micro-px fractions; the expected file equals D02's (translation invariance, asserted)
+T09	T	core	inputs/T09.json	expected/T09.json		translation of D02: origin-centred, half a pixel and 1 micro-px; the expected file equals D02's (translation invariance, asserted)
+T10	T	core	inputs/T10.json	expected/T10.json		translation of D02: shift of (-32 px, -32 px - 1 micro-px): boxes straddle cell boundaries elsewhere; the expected file equals D02's (translation invariance, asserted)
+N-B-1-1px	N	core	inputs/N-B-1-1px.json	expected/N-B-1-1px.json		node box right edge exactly at -64 px (a multiple of 64 px), u=2 edge label left edge 1px to the right of it: free
+N-B-1-1pxm1	N	core	inputs/N-B-1-1pxm1.json	expected/N-B-1-1pxm1.json		node box right edge exactly at -64 px (a multiple of 64 px), u=2 edge label left edge 1px-1 to the right of it: collides
+N-B0-1px	N	core	inputs/N-B0-1px.json	expected/N-B0-1px.json		node box right edge exactly at 0 px (a multiple of 64 px), u=2 edge label left edge 1px to the right of it: free
+N-B0-1pxm1	N	core	inputs/N-B0-1pxm1.json	expected/N-B0-1pxm1.json		node box right edge exactly at 0 px (a multiple of 64 px), u=2 edge label left edge 1px-1 to the right of it: collides
+N-B1-1px	N	core	inputs/N-B1-1px.json	expected/N-B1-1px.json		node box right edge exactly at 64 px (a multiple of 64 px), u=2 edge label left edge 1px to the right of it: free
+N-B1-1pxm1	N	core	inputs/N-B1-1pxm1.json	expected/N-B1-1pxm1.json		node box right edge exactly at 64 px (a multiple of 64 px), u=2 edge label left edge 1px-1 to the right of it: collides
+N-A-1x-05p02	N	core	inputs/N-A-1x-05p02.json	expected/N-A-1x-05p02.json		x axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A-1x-05p05	N	core	inputs/N-A-1x-05p05.json	expected/N-A-1x-05p05.json		x axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A-1x-05p0499999	N	core	inputs/N-A-1x-05p0499999.json	expected/N-A-1x-05p0499999.json		x axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N-A-1y-05p02	N	core	inputs/N-A-1y-05p02.json	expected/N-A-1y-05p02.json		y axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A-1y-05p05	N	core	inputs/N-A-1y-05p05.json	expected/N-A-1y-05p05.json		y axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A-1y-05p0499999	N	core	inputs/N-A-1y-05p0499999.json	expected/N-A-1y-05p0499999.json		y axis: node box edge at -64 px - 500000 micro-px, label box edge at -64 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N-A0x-05p02	N	core	inputs/N-A0x-05p02.json	expected/N-A0x-05p02.json		x axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A0x-05p05	N	core	inputs/N-A0x-05p05.json	expected/N-A0x-05p05.json		x axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A0x-05p0499999	N	core	inputs/N-A0x-05p0499999.json	expected/N-A0x-05p0499999.json		x axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N-A0y-05p02	N	core	inputs/N-A0y-05p02.json	expected/N-A0y-05p02.json		y axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A0y-05p05	N	core	inputs/N-A0y-05p05.json	expected/N-A0y-05p05.json		y axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A0y-05p0499999	N	core	inputs/N-A0y-05p0499999.json	expected/N-A0y-05p0499999.json		y axis: node box edge at 0 px - 500000 micro-px, label box edge at 0 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N-A1x-05p02	N	core	inputs/N-A1x-05p02.json	expected/N-A1x-05p02.json		x axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A1x-05p05	N	core	inputs/N-A1x-05p05.json	expected/N-A1x-05p05.json		x axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A1x-05p0499999	N	core	inputs/N-A1x-05p0499999.json	expected/N-A1x-05p0499999.json		x axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N-A1y-05p02	N	core	inputs/N-A1y-05p02.json	expected/N-A1y-05p02.json		y axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 200000 micro-px (gap 700000 micro-px; the two edges lie in different 64 px cells): collides
+N-A1y-05p05	N	core	inputs/N-A1y-05p05.json	expected/N-A1y-05p05.json		y axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 500000 micro-px (gap 1000000 micro-px; the two edges lie in different 64 px cells): free
+N-A1y-05p0499999	N	core	inputs/N-A1y-05p0499999.json	expected/N-A1y-05p0499999.json		y axis: node box edge at 64 px - 500000 micro-px, label box edge at 64 px + 499999 micro-px (gap 999999 micro-px; the two edges lie in different 64 px cells): collides
+N01	N	core	inputs/N01.json	expected/N01.json		negative coordinates: node and its label at (-200,-200) px
+N-Z1px	N	core	inputs/N-Z1px.json	expected/N-Z1px.json		straddling x=0: u=3 label (box -13.5..13.5 px) at the origin, a node box whose right edge is at -13.5 px minus the gap 1px (label left edge is -13.5 px): free
+N-Z1pxm1	N	core	inputs/N-Z1pxm1.json	expected/N-Z1pxm1.json		straddling x=0: u=3 label (box -13.5..13.5 px) at the origin, a node box whose right edge is at -13.5 px minus the gap 1px-1 (label left edge is -13.5 px): collides
+NF01	N	core	inputs/NF01.json	expected/NF01.json		node label with its own node at (+2^40,+2^40) px: default
+NF02	N	core	inputs/NF02.json	expected/NF02.json		node label with its own node at (-2^40,-2^40) px: default
+NF03	N	core	inputs/NF03.json	expected/NF03.json		node label with its own node at (+2^40,-2^40) px: default
+NF-p1px	N	core	inputs/NF-p1px.json	expected/NF-p1px.json		far +2^40 px: node box right edge at +2^40 px exactly, u=2 label left edge 1px to the right (1 micro-px resolution at 1e18): free
+NF-p1pxm1	N	core	inputs/NF-p1pxm1.json	expected/NF-p1pxm1.json		far +2^40 px: node box right edge at +2^40 px exactly, u=2 label left edge 1px-1 to the right (1 micro-px resolution at 1e18): collides
+NF-m1px	N	core	inputs/NF-m1px.json	expected/NF-m1px.json		far -2^40 px: node box right edge at -2^40 px exactly, u=2 label left edge 1px to the right (1 micro-px resolution at 1e18): free
+NF-m1pxm1	N	core	inputs/NF-m1pxm1.json	expected/NF-m1pxm1.json		far -2^40 px: node box right edge at -2^40 px exactly, u=2 label left edge 1px-1 to the right (1 micro-px resolution at 1e18): collides
+NF-P62	N	core	inputs/NF-P62.json	expected/NF-P62.json		coordinates exactly +2^62 micro-px (the allowed bound): node (2^62, 2^62-24px), its label at (2^62, 2^62)
+NF-M62	N	core	inputs/NF-M62.json	expected/NF-M62.json		coordinates exactly -2^62 micro-px: node (-2^62,-2^62), label at (-2^62, -2^62+24px)
+NF-C62	N	core	inputs/NF-C62.json	expected/NF-C62.json		collision near 2^62: node box right edge 2^62-20px, u=2 label left edge 1px-1 micro-px to its right: collides
+M-1-1px	M	core	inputs/M-1-1px.json	expected/M-1-1px.json		fraction 1 micro-px on every coordinate; node box 1px to the right of the u=2 label box: free
+M-1-1pxm1	M	core	inputs/M-1-1pxm1.json	expected/M-1-1pxm1.json		fraction 1 micro-px on every coordinate; node box 1px-1 to the right of the u=2 label box: collides (hand-derived candidate 5)
+M-500000-1px	M	core	inputs/M-500000-1px.json	expected/M-500000-1px.json		fraction 500000 micro-px on every coordinate; node box 1px to the right of the u=2 label box: free
+M-500000-1pxm1	M	core	inputs/M-500000-1pxm1.json	expected/M-500000-1pxm1.json		fraction 500000 micro-px on every coordinate; node box 1px-1 to the right of the u=2 label box: collides (hand-derived candidate 5)
+M-999999-1px	M	core	inputs/M-999999-1px.json	expected/M-999999-1px.json		fraction 999999 micro-px on every coordinate; node box 1px to the right of the u=2 label box: free
+M-999999-1pxm1	M	core	inputs/M-999999-1pxm1.json	expected/M-999999-1pxm1.json		fraction 999999 micro-px on every coordinate; node box 1px-1 to the right of the u=2 label box: collides (hand-derived candidate 5)
+M07	M	core	inputs/M07.json	expected/M07.json		own node 1 micro-px off in x: still flush vertically, default
+M08	M	core	inputs/M08.json	expected/M08.json		label B 1 micro-px closer than 1 px (vertically) to label A: collides
+M09	M	core	inputs/M09.json	expected/M09.json		label B exactly 1 px from label A vertically (fractional coordinates): free
+M10	M	core	inputs/M10.json	expected/M10.json		ring D02 shifted by (999999, 1) micro-px (every midpoint rounds differently)
+X01	X	core	inputs/X01.json	expected/X01.json		default (0,0) is free of the own node by construction for u = 1, 2, 3, 12, 40, 200 (six scenes 5000 px apart)
+X02	X	core	inputs/X02.json	expected/X02.json		label default y = cy + 20: box overlaps the own node; (0,-41) is free (5 px above the node top)
+X03	X	core	inputs/X03.json	expected/X03.json		label 20 px to the right of its node (u=2): default free (the node is at the label's left)
+X04	X	core	inputs/X04.json	expected/X04.json		as X03, default and (0,-41) blocked by other nodes: (h,-20) is taken
+X05	X	core	inputs/X05.json	expected/X05.json		as X03, candidates 1..3 blocked: candidate 4 (-h,-20) has right edge cx+6 and overlaps the OWN node (the function cannot know it is the own one), so candidate 5 (0,14) is taken
+H01	H	core	inputs/H01.json	expected/H01.json		edge label u=10^6 (box 9e6 px wide), no obstacles: default
+H02	H	core	inputs/H02.json	expected/H02.json		node label u=10^6 with its own node: default
+H03	H	core	inputs/H03.json	expected/H03.json		edge label u=10^6, one node inside the box at x = 10^6 px: (0,*) and (h,0) still hit it; (-h,0) (h = 4.5e6+10, box x -9e6-10..-10) clears it
+H04	H	core	inputs/H04.json	expected/H04.json		three identical edge labels u=10^6
+H05	H	core	inputs/H05.json	expected/H05.json		twelve identical edge labels u=10^5: the eleven column slots 1, 2, 3, 6, 7, 12, 15, 18, 21, 24, 27, then the twelfth has no free candidate (fallback)
+H06	H	core	inputs/H06.json	expected/H06.json		wide node label (u=10^6) first, then a u=1 edge label 5000 px away inside the wide box: it must move
+R01	R	core	inputs/R01.json	expected/R01.json		seeded random scene (seed 9001): 1 nodes, 17 labels, window 60 px, fraction mode 1, origin -100 px
+R02	R	core	inputs/R02.json	expected/R02.json		seeded random scene (seed 9002): 6 nodes, 7 labels, window 140 px, fraction mode 1, origin 0 px
+R03	R	core	inputs/R03.json	expected/R03.json		seeded random scene (seed 9003): 8 nodes, 13 labels, window 400 px, fraction mode 0, origin 0 px
+R04	R	core	inputs/R04.json	expected/R04.json		seeded random scene (seed 9004): 13 nodes, 9 labels, window 220 px, fraction mode 2, origin 5000 px
+R05	R	core	inputs/R05.json	expected/R05.json		seeded random scene (seed 9005): 4 nodes, 7 labels, window 140 px, fraction mode 2, origin 0 px
+R06	R	core	inputs/R06.json	expected/R06.json		seeded random scene (seed 9006): 2 nodes, 1 labels, window 60 px, fraction mode 2, origin -100 px
+R07	R	core	inputs/R07.json	expected/R07.json		seeded random scene (seed 9007): 11 nodes, 12 labels, window 140 px, fraction mode 0, origin 0 px
+R08	R	core	inputs/R08.json	expected/R08.json		seeded random scene (seed 9008): 7 nodes, 7 labels, window 400 px, fraction mode 2, origin 5000 px
+R09	R	core	inputs/R09.json	expected/R09.json		seeded random scene (seed 9009): 10 nodes, 16 labels, window 140 px, fraction mode 0, origin 5000 px
+R10	R	core	inputs/R10.json	expected/R10.json		seeded random scene (seed 9010): 6 nodes, 2 labels, window 60 px, fraction mode 0, origin 0 px
+R11	R	core	inputs/R11.json	expected/R11.json		seeded random scene (seed 9011): 4 nodes, 8 labels, window 400 px, fraction mode 1, origin -100 px
+R12	R	core	inputs/R12.json	expected/R12.json		seeded random scene (seed 9012): 5 nodes, 2 labels, window 140 px, fraction mode 1, origin 5000 px
+R13	R	core	inputs/R13.json	expected/R13.json		seeded random scene (seed 9013): 13 nodes, 16 labels, window 140 px, fraction mode 1, origin -3000 px
+R14	R	core	inputs/R14.json	expected/R14.json		seeded random scene (seed 9014): 2 nodes, 1 labels, window 140 px, fraction mode 2, origin -100 px
+R15	R	core	inputs/R15.json	expected/R15.json		seeded random scene (seed 9015): 4 nodes, 5 labels, window 60 px, fraction mode 1, origin 0 px
+R2-G01	R2	core	inputs/R2-G01.json	expected/R2-G01.json		real layout: node (N) and label (T) records of oracles-dl dl/G01.dl (milli-px x 1000; 2 nodes, 3 labels, max units 5)
+R2-G02	R2	core	inputs/R2-G02.json	expected/R2-G02.json		real layout: node (N) and label (T) records of oracles-dl dl/G02.dl (milli-px x 1000; 2 nodes, 4 labels, max units 1)
+R2-G05	R2	core	inputs/R2-G05.json	expected/R2-G05.json		real layout: node (N) and label (T) records of oracles-dl dl/G05.dl (milli-px x 1000; 20 nodes, 57 labels, max units 3)
+R2-G07	R2	core	inputs/R2-G07.json	expected/R2-G07.json		real layout: node (N) and label (T) records of oracles-dl dl/G07.dl (milli-px x 1000; 6 nodes, 8 labels, max units 24)
+R2-G08	R2	core	inputs/R2-G08.json	expected/R2-G08.json		real layout: node (N) and label (T) records of oracles-dl dl/G08.dl (milli-px x 1000; 20 nodes, 57 labels, max units 3)
+R2-G09	R2	core	inputs/R2-G09.json	expected/R2-G09.json		real layout: node (N) and label (T) records of oracles-dl dl/G09.dl (milli-px x 1000; 2 nodes, 3 labels, max units 5)
+R2-G11	R2	core	inputs/R2-G11.json	expected/R2-G11.json		real layout: node (N) and label (T) records of oracles-dl dl/G11.dl (milli-px x 1000; 2 nodes, 7 labels, max units 2)
+R2-N03	R2	core	inputs/R2-N03.json	expected/R2-N03.json		real layout: node (N) and label (T) records of oracles-dl dl/N03.dl (milli-px x 1000; 32 nodes, 48 labels, max units 4)
+R2-N09	R2	core	inputs/R2-N09.json	expected/R2-N09.json		real layout: node (N) and label (T) records of oracles-dl dl/N09.dl (milli-px x 1000; 6 nodes, 14 labels, max units 2)
+R2-N10	R2	core	inputs/R2-N10.json	expected/R2-N10.json		real layout: node (N) and label (T) records of oracles-dl dl/N10.dl (milli-px x 1000; 6 nodes, 12 labels, max units 2)
+R2-N17	R2	core	inputs/R2-N17.json	expected/R2-N17.json		real layout: node (N) and label (T) records of oracles-dl dl/N17.dl (milli-px x 1000; 28 nodes, 53 labels, max units 4)
+R2-X08	R2	core	inputs/R2-X08.json	expected/R2-X08.json		real layout: node (N) and label (T) records of oracles-dl dl/X08.dl (milli-px x 1000; 12 nodes, 18 labels, max units 4)
+R2-X10	R2	core	inputs/R2-X10.json	expected/R2-X10.json		real layout: node (N) and label (T) records of oracles-dl dl/X10.dl (milli-px x 1000; 10 nodes, 12 labels, max units 2)
+R2-X11	R2	core	inputs/R2-X11.json	expected/R2-X11.json		real layout: node (N) and label (T) records of oracles-dl dl/X11.dl (milli-px x 1000; 13 nodes, 31 labels, max units 3)
+R2-F04	R2	core	inputs/R2-F04.json	expected/R2-F04.json		real layout: node (N) and label (T) records of oracles-dl dl/F04.dl (milli-px x 1000; 201 nodes, 401 labels, max units 24)
+R2-G05h	R2	core	inputs/R2-G05h.json	expected/R2-G05h.json		real layout: node (N) and label (T) records of oracles-dl dl/G05.dl, scaled down by 2 (default positions recomputed) (milli-px x 1000; 20 nodes, 57 labels, max units 3)
+R2-G05t	R2	core	inputs/R2-G05t.json	expected/R2-G05t.json		real layout: node (N) and label (T) records of oracles-dl dl/G05.dl, scaled down by 3 (default positions recomputed) (milli-px x 1000; 20 nodes, 57 labels, max units 3)
+R2-N17h	R2	core	inputs/R2-N17h.json	expected/R2-N17h.json		real layout: node (N) and label (T) records of oracles-dl dl/N17.dl, scaled down by 2 (default positions recomputed) (milli-px x 1000; 28 nodes, 53 labels, max units 4)
+R2-F04h	R2	core	inputs/R2-F04h.json	expected/R2-F04h.json		real layout: node (N) and label (T) records of oracles-dl dl/F04.dl, scaled down by 2 (default positions recomputed) (milli-px x 1000; 201 nodes, 401 labels, max units 24)
+S01	S	stress	inputs/S01.json	expected/S01.json		24x24 grid of nodes (60 px), 576 node labels (u 2..10) then 1104 edge labels (right and down neighbours)
+S02	S	stress	inputs/S02.json	expected/S02.json		5,000 labels (2,500 node labels then 2,500 edge labels) over 2,500 random nodes in a 5000x5000 px window, fractional coordinates
+S03	S	stress	inputs/S03.json	expected/S03.json		adversarial density: 600 identical node labels u=3 on one node (all boxes in the same cells; 29 take candidates, the rest fall back with a full cost pass)

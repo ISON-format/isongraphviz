@@ -25,7 +25,7 @@ describe("public surface", () => {
   it("exports exactly the documented runtime names of design section 14", () => {
     expect(Object.keys(api).sort()).toEqual(["DEFAULT_RENDER_LIMITS", "EDGE_HIT_TOLERANCE_PX", "FIT_PADDING_PX", "IgrError", "MANDATORY_CAPABILITIES", "NODE_HIT_RADIUS_PX", "VIEWPORT_MAX_PX", "ZOOM_DEFAULT_MILLI", "ZOOM_MAX_MILLI", "ZOOM_MIN_MILLI",
       "accessibleDescription", "accessibleName", "announcementFor", "buildAccessibleModel", "buildRenderModel", "compareProjections", "effectiveVisibility", "elementKey", "fitViewport", "graphSummary", "hitTest", "initialState", "isRenderModel", "layoutToScreen", "lookupElement", "modelBytes", "modelSceneBytes",
-      "normalizeState", "parseState", "quantizePx", "quantizeSize", "reduce", "resolveSelection", "runConformance", "selectionReference", "semanticProjection", "serializeEvents", "serializeProjection", "serializeState", "stateSha256", "statusText", "summaryText", "traversalOrder", "verifyManifest"]);
+      "normalizeState", "parseState", "placeLabels", "quantizePx", "quantizeSize", "reduce", "resolveSelection", "runConformance", "selectionReference", "semanticProjection", "serializeEvents", "serializeProjection", "serializeState", "stateSha256", "statusText", "summaryText", "traversalOrder", "verifyManifest"]);
     expect(Object.keys(headless)).toEqual(["createHeadlessRenderer"]);
     expect(Object.keys(nodeKit)).toEqual(["loadCorpus"]);
     expect(typeof kit.runConformance).toBe("function");

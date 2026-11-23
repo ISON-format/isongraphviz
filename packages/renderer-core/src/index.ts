@@ -5,6 +5,7 @@ export { initialState, serializeState, normalizeState, parseState, stateSha256, 
 export { reduce, serializeEvents, fitViewport } from "./reduce.js";
 export { layoutToScreen, quantizePx, quantizeSize } from "./viewport.js";
 export { hitTest } from "./hit.js";
+export { placeLabels } from "./labelplace.js";
 export { accessibleName, accessibleDescription, graphSummary, summaryText, statusText, announcementFor, buildAccessibleModel } from "./a11y.js";
 export { verifyManifest, MANDATORY_CAPABILITIES } from "./manifest.js";
 export { semanticProjection, serializeProjection, compareProjections } from "./report.js";
@@ -17,5 +18,6 @@ export type {
   Renderer, RendererEnvironment, CapabilityManifest, CapabilityStatus, CapabilityId, Degradation, RenderReport, SemanticProjection,
   AccessibleModel, AccessibleItem, GraphSummary, RenderLimits, ExportFormat, ExportResult,
 } from "./types.js";
+export type { PlaceLabelsInput, LabelPlacement } from "./labelplace.js";
 export type { ConformanceSubject, ConformanceReport, VectorResult, CheckId, WitnessReport } from "./conformance/run.js";
 export type { Corpus } from "./conformance/corpus.js";
