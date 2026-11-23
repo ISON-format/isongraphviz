@@ -230,8 +230,21 @@ def _rec(l):
     return json.loads(l)
 
 
+def _legacy_lines(row_id):
+    """The lines of an expected list as the builder wrote them BEFORE the label placement LP/1 (R-H, 2026-11-22): the hand-built bad lists of the S rows are
+    inputs, not expected outputs, so they keep the old T positions (their T coordinates are only range-checked by the reader)."""
+    D.LP_ON[0] = False
+    try:
+        o = base.run_row(base.ROW_BY_ID[row_id])
+    finally:
+        D.LP_ON[0] = True
+    t = o.files["dl/%s.dl" % row_id].decode("utf-8")
+    assert t.endswith(chr(10))
+    return t[:-1].split(chr(10))
+
+
 def build_bad():
-    G01, G02, G11 = _lines("dl/G01.dl"), _lines("dl/G02.dl"), _lines("dl/G11.dl")
+    G01, G02, G11 = _legacy_lines("G01"), _legacy_lines("G02"), _legacy_lines("G11")
     out = {}
     SF = {}
 

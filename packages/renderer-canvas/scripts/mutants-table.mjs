@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-dl (K01..K245 with the b-variants: 251 mutants) as source patches. Every mutant is a list of exact-text
+// The K table of design 13.5 for fixtures/oracles-dl (K01..K256 with the b-variants: 262 mutants) as source patches. Every mutant is a list of exact-text
 // patches applied to a SCRATCH COPY of packages/display-list/src ("dl") and packages/renderer-canvas/src ("cv"); production code has no switchable variants
 // and no src/ is ever modified (the K197 and K198 patches apply to a scratch copy of renderer-core/src, where the state check lives). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of src/
 // cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -42,6 +42,12 @@ const D13_N = "if (rec[3] >= 2 && ++focusCount === 2) secondFocus = no;";
 const D13_THROW = 'if (secondFocus !== 0) throw schemaError(secondFocus, "D13: at most one E or N record has the focus bit");';
 const D13_LOOP = "  for (let i = 0; i < lines.length; i++) {\n    const line = lines[i]!, no = i + 1;\n    let rec: unknown;";
 const D13_PRE = '  let early = 0, c0 = 0;\n  for (let j = 0; j < lines.length && early === 0; j++) {\n    let r: any; try { r = JSON.parse(lines[j]!); } catch { continue; }\n    if (Array.isArray(r) && ((r[0] === "E" && r[2] >= 2) || (r[0] === "N" && r[3] >= 2)) && ++c0 === 2) early = j + 1;\n  }\n  if (early !== 0) throw schemaError(early, "D13 before the records");\n';
+// label placement LP/1 (design 37 rev 2; rows G12-G15 and the crowded rows, K246-K256): the exact lines of build.ts the patches hit
+const LP_CALL = "const placed = placeLabels({ nodes: lpNodes, labels: lpLabels });";
+const LP_AT = "const placedAt = (slot: number): [number, number] => [m(lpLabels[slot]!.x + BigInt(placed[slot]!.dx) * E6), m(lpLabels[slot]!.y + BigInt(placed[slot]!.dy) * E6)];";
+const LP_NODES = "for (const n of model.nodes) if (vis.nodes[n.index]) lpNodes.push({ cx: pos[n.index]!.x, cy: pos[n.index]!.y });";
+const LP_UNITS_N = "units: text.length, x: pos[n.index]!.x";
+const LP_UNITS_E = "units: plan.edgeText[e.index]!.length, x: at.x";
 const FLOORDIV_GEOM = D("geometry.ts", 'import { divRound, isqrt } from "./num.js";', 'import { divRound, floorDiv, isqrt } from "./num.js";');
 const LET_RAW = D("lines.ts", "const raw = parts[i]!;", "let raw = parts[i]!;");
 
@@ -50,8 +56,8 @@ const TRIM_RETURN = "return { x: P.x + divRound(qx * t, lam), y: P.y + divRound(
 const E_PX = "const [px, py] = g.form === 0 ? [big[0]!, big[1]!] : [big[n - 4]!, big[n - 3]!];";
 const ARROW_CALL = "const a = arrowhead(big[n - 2]!, big[n - 1]!, px, py);";
 const FLOW_E = "if (!Number.isFinite(dpr)) throw bad(\"NOT_FINITE\", \"options.dprMilli\");";
-const T_BLOCK_NODES = 'for (const n of model.nodes) {\n    const text = plan.nodeText[n.index];\n    if (text === undefined) continue;\n    const p = pos[n.index]!;\n    records.push(["T", pid[n.index]!, 0, m(p.x), m(p.y + BigInt(LABEL_DY) * E6), text]);\n  }\n';
-const T_BLOCK_EDGES = 'for (const e of model.edges) {\n    const at = edgeLabelAt[e.index];\n    if (at !== undefined) records.push(["T", at.edge, 1, at.x, at.y, plan.edgeText[e.index]!]);\n  }\n';
+const T_BLOCK_NODES = 'for (const n of model.nodes) {\n    const text = plan.nodeText[n.index];\n    if (text === undefined) continue;\n    records.push(["T", pid[n.index]!, 0, ...placedAt(nodeSlot[n.index]!), text]);\n  }\n';
+const T_BLOCK_EDGES = 'for (const e of model.edges) {\n    const at = edgeLabelAt[e.index];\n    if (at !== undefined) records.push(["T", at.edge, 1, ...placedAt(edgeSlot[e.index]!), plan.edgeText[e.index]!]);\n  }\n';
 
 export const MUTANTS = [
   // ---- numbers and geometry (N, G) ---------------------------------------------------------------------------------------------------------
@@ -422,11 +428,26 @@ export const MUTANTS = [
   m("K243", "reader does not examine the first N record", [D("read.ts", D13_N, D13_N.replace("rec[3] >= 2 &&", "rec[3] >= 2 && rec[1] !== 1 &&"))]),
   m("K244", "reader does not examine the first E record", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2 &&", "rec[2] >= 2 && rec[1] !== nodes.length + 1 &&"))]),
   m("K245", "reader applies D13 to a directed list only (an undirected list with two focus records is accepted)", [D("read.ts", D13_E, D13_E.replace("rec[2] >= 2 &&", "header!.d === 1 && rec[2] >= 2 &&")), D("read.ts", D13_N, D13_N.replace("rec[3] >= 2 &&", "header!.d === 1 && rec[3] >= 2 &&"))]),
+  // ---- label placement LP/1 (design 37 rev 2, ruling R-H, 2026-11-22; rows G12-G15 and the crowded G, N, X, Y, F, C rows) --------------------------------------
+  m("K246", "label placement skipped (every label stays at its default position)", [D("build.ts", LP_CALL, "const placed = lpLabels.map(() => ({ dx: 0, dy: 0 }));")]),
+  m("K247", "the placement offset is applied to x only (dy dropped)", [D("build.ts", LP_AT, LP_AT.replace("m(lpLabels[slot]!.y + BigInt(placed[slot]!.dy) * E6)", "m(lpLabels[slot]!.y)"))]),
+  m("K248", "the placement offset is applied to y only (dx dropped)", [D("build.ts", LP_AT, LP_AT.replace("m(lpLabels[slot]!.x + BigInt(placed[slot]!.dx) * E6)", "m(lpLabels[slot]!.x)"))]),
+  m("K249", "labels are handed to the placement in the order edge labels, then node labels (the records stay node labels first)", [D("build.ts", LP_CALL,
+    'const eo = lpLabels.filter((l) => l.kind === "edge"), no = lpLabels.filter((l) => l.kind === "node"); const res = placeLabels({ nodes: lpNodes, labels: [...eo, ...no] }); const placed = [...res.slice(eo.length), ...res.slice(0, eo.length)];')]),
+  m("K250", "the placement runs on the milli-pixel rounded defaults (the rounding is done before the placement, not after the offset)", [D("build.ts", LP_CALL,
+    "const placed = placeLabels({ nodes: lpNodes.map((n) => ({ cx: mpxBig(n.cx) * 1000n, cy: mpxBig(n.cy) * 1000n })), labels: lpLabels.map((l) => ({ ...l, x: mpxBig(l.x) * 1000n, y: mpxBig(l.y) * 1000n })) });")]),
+  m("K251", "node labels and edge labels are placed by two separate calls (the edge call does not see the node labels)", [D("build.ts", LP_CALL,
+    'const nl = lpLabels.filter((l) => l.kind === "node"), el = lpLabels.filter((l) => l.kind === "edge"); const placed = [...placeLabels({ nodes: lpNodes, labels: nl }), ...placeLabels({ nodes: lpNodes, labels: el })];')]),
+  m("K252", "hidden nodes are obstacles of the placement", [D("build.ts", LP_NODES, "for (const n of model.nodes) lpNodes.push({ cx: screenMicro(vp, n.x, n.y).x, cy: screenMicro(vp, n.x, n.y).y });")]),
+  m("K253", "the units of a label are counted before the elision (the length of the label, not of the drawn text)", [D("build.ts", LP_UNITS_N, "units: n.label.length, x: pos[n.index]!.x"), D("build.ts", LP_UNITS_E, "units: e.label.length, x: at.x")]),
+  m("K254", "node obstacles ignored (labels avoid labels only)", [D("build.ts", LP_CALL, "const placed = placeLabels({ nodes: [], labels: lpLabels });")]),
+  m("K255", "only nodes that have a drawn label are obstacles", [D("build.ts", LP_NODES, "for (const n of model.nodes) if (vis.nodes[n.index] && plan.nodeText[n.index] !== undefined) lpNodes.push({ cx: pos[n.index]!.x, cy: pos[n.index]!.y });")]),
+  m("K256", "units counted in Unicode scalars instead of UTF-16 units", [D("build.ts", LP_UNITS_N, "units: Array.from(text).length, x: pos[n.index]!.x"), D("build.ts", LP_UNITS_E, "units: Array.from(plan.edgeText[e.index]!).length, x: at.x")]),
 ];
 
 
 // ---- extra mutants of this implementation (not in the corpus table): one per behaviour pinned by the rows `ext:` (test/oracle/runner.ts, runExtra;
-// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 251 of the K table.
+// display-list/test/audit-rows.ts), which came from the independent audit of step 1. They are reported separately from the 262 of the K table.
 const BS = String.fromCharCode(92);
 export const EXTRA_MUTANTS = [
   m("X01", "audit I-1: a record kind is looked up on a plain object (inherited names pass)", [D("read.ts", "const rank = RANK.get(kind);", "const rank = ({ H: 0, n: 1, e: 2, E: 3, A: 3, N: 4, T: 5 } as Record<string, number>)[kind];")]),

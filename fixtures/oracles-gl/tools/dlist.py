@@ -3,13 +3,48 @@
 Re-implemented from the written rules.  Only what the gl: rows need: builder, label pass, serializer,
 element bounds are not needed.  Integer arithmetic only.
 """
+import hashlib
+import importlib.util
+import os
+
 import ju
+import mut
 import scn
 from ju import div_round, isqrt
 
 DL_COORD_MAX = 1 << 40
 DEFAULT_MAX_UNITS = 1_048_576
 TRIM, DEGEN, LABEL_DY, ELABEL_DY, PAR_STEP, LOOP_END = 12_000_000, 24_000_000, 24_000_000, 4_000_000, 16_000_000, 7_000_000
+
+
+# ------------------------------------------------- LP/1 (design 37 rev 2, ruling R-H of 2026-11-22): the label placement reference, read by path
+LP_REF_PATH = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "oracles-lp", "tools", "lp.py"))
+LP_REF_SHA256 = "1c62862fe9137fb1e95403a47cb58f98cda8e7d3834de6c1789716b973629b95"
+# False only for the pre-LP/1 lists that tools/regen_all.py hands to the gap and rev 6 tools (hand-built inputs, A-67), through ORACLE_GL_LP=0
+LP_ON = [os.environ.get("ORACLE_GL_LP", "1") != "0"]
+
+
+def _load_lp():
+    data = open(LP_REF_PATH, "rb").read()
+    if hashlib.sha256(data).hexdigest() != LP_REF_SHA256:
+        raise SystemExit("GATE FAILED: oracles-lp/tools/lp.py digest %s != %s" % (hashlib.sha256(data).hexdigest(), LP_REF_SHA256))
+    spec = importlib.util.spec_from_file_location("lp_reference", LP_REF_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+LP = _load_lp()
+_LP_CACHE = {}
+
+
+def lp_place(nodes, labels):
+    """place_labels of oracles-lp (pure; memoized because the mutant matrix repeats identical calls)."""
+    key = (tuple(nodes), tuple(labels))
+    r = _LP_CACHE.get(key)
+    if r is None:
+        r = _LP_CACHE[key] = LP.place_labels(list(nodes), list(labels))
+    return r
 
 
 def m(v):
@@ -66,6 +101,14 @@ def label_pass(texts_nodes, texts_edges, labels, edge_labels, max_units):
         total += l
         (kept_n if role == 0 else kept_e)[i] = t
     return kept_n, kept_e, omitted, total
+
+
+def lp_offsets(nodes, items):
+    """Whole-pixel offsets (dx, dy) of the drawn labels `items` (label-pass order); `nodes` are the micro-pixel centres of every visible node."""
+    if not LP_ON[0]:
+        return [(0, 0)] * len(items)
+    res = lp_place(nodes, [("node" if role == 0 else "edge", ju.u16len(text), x, y) for (role, _k, text, x, y) in items])
+    return res
 
 
 def build_dl(model, state, labels=True, edge_labels=True, max_units=DEFAULT_MAX_UNITS):
@@ -169,14 +212,19 @@ def build_dl(model, state, labels=True, edge_labels=True, max_units=DEFAULT_MAX_
     T_recs = []
     if labels:
         kn, ke, omitted, total = label_pass(tn, te, labels, edge_labels, max_units)
+        # the default micro-pixel positions of the drawn labels in the order of the label pass (node labels, then edge labels), then LP/1 (design 37)
+        items = []                  # (role, k, text, x, y)
         for i, k in enumerate(dn):
             if i in kn:
                 X, Y = pos[k]
-                T_recs.append(["T", pid_n[k], 0, m(X), m(Y + LABEL_DY), kn[i]])
+                items.append((0, k, kn[i], X, Y + LABEL_DY))
         for i, k in enumerate(de):
             if i in ke:
                 ax, ay = anchors[k]
-                T_recs.append(["T", pid_e[k], 1, m(ax), m(ay - ELABEL_DY), ke[i]])
+                items.append((1, k, ke[i], ax, ay - ELABEL_DY))
+        offs = lp_offsets([pos[k] for k in dn], items)
+        for (role, k, text, x, y), (dx, dy) in zip(items, offs):
+            T_recs.append(["T", pid_n[k] if role == 0 else pid_e[k], role, m(x + dx * 1_000_000), m(y + dy * 1_000_000), text])
         elided = omitted
         for i, k in enumerate(dn):
             if tn[i] != "" and tn[i] != ju.xs(model.nodes[k]["label"].replace("\t", " ").replace("\n", " ").replace("\r", " ")):

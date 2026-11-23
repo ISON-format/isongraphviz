@@ -90,7 +90,7 @@ def check(mk, A):
     LOOPS = ("../oracles-svg/scenes/loops2.scene.json", "../oracles-svg/layouts/loops2.layout.json")
     m2, st2, d2, p2, b2 = mk(LOOPS, "initial", (900, 600))
     blk = blocks_after(t, "**A.3 Directed self-loops")[0]
-    cmp("A.3 display list of G11/loops2 (X1 block)", dlist.serialize_dl(d2), x1(blk), 1553, "3f9f43587a97bdb7adbbe1465a677ae5c378f621cbffe51a0f821e09db0bf557")
+    cmp("A.3 display list of G11/loops2 (X1 block)", dlist.serialize_dl(d2), x1(blk), 1553, "6ff8514097243394205a11f23e3250c607ddca3b4c39f603916e436dbd3a8ef0")
     # ---- A.4
     blk = blocks_after(t, "**A.4 The Canvas stream (`igr-cv/1`) of `G01`**")[0]
     s1 = cvs.record_stream(d)

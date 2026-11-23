@@ -31,9 +31,9 @@ describe("Appendix A from the tracked oracle files (runs without the design file
     const { model } = await initial(O1);
     expect(textOf(serializeDisplayList(buildDisplayList(model, readState("states/Y03.state.json"))))).toBe(y03);
   });
-  it("A.3: G11 is 1553 bytes, SHA-256 3f9f4358..., and the implementation writes it", async () => {
+  it("A.3: G11 is 1553 bytes, SHA-256 6ff85140..., and the implementation writes it", async () => {
     const g11 = readOracleText("dl/G11.dl");
-    expect([len(g11), sha256(g11)]).toEqual([1553, "3f9f43587a97bdb7adbbe1465a677ae5c378f621cbffe51a0f821e09db0bf557"]);
+    expect([len(g11), sha256(g11)]).toEqual([1553, "6ff8514097243394205a11f23e3250c607ddca3b4c39f603916e436dbd3a8ef0"]);
     const { model, state } = await initial(LOOPS2);
     expect(textOf(serializeDisplayList(buildDisplayList(model, state)))).toBe(g11);
   });

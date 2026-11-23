@@ -171,3 +171,8 @@ K169	after dispose a restore event rebuilds the resources	U54,U55,U56,U57	U54,U5
 K170	status().contextLost is derived from the phase (true only in lost), not from the context	U42,U43,U54	U42,U43,U54		U33,U50,U51,U52,U55,U56,U57	KILLED
 K171	a loss event in created moves the controller to lost (preventDefault, labels.clear, onStatus)	U42,U43	U42,U43			KILLED
 K172	a loss event in created calls onStatus without a phase change	U42,U43	U42,U43			KILLED
+K173	the plan builder uses the unplaced default position of a node label (centre, 24 px below) instead of the `T` record	B01,B02,B04,B16,B20	B01,B02,B04,B16,B20		X04	KILLED
+K174	the label runs take their position from the wrong record kind: the node's `N` record (node labels) or the first point of the `E` record (edge labels)	G01,G05	G01,G05		G02,G04,G06,G07,G08,G09,G10,G11,B01,B02,B03,B04,B05,B06,B07,B08,B09,B10,B11,B12,B13,B14,B15,B16,B17,B18,B19,B20,B21,X04,X06,X08,X09,U01,U02,U03,U08,U13	KILLED
+K175	the placement offset is applied to x only (the node label's y stays at the default)	B01,B02,B04,B16,B20	B01,B02,B04,B16,B20		X04	KILLED
+K176	the placement offset is applied to y only (the node label's x stays at the default)	B02	B02			KILLED
+K177	the plan rounds the label positions to whole pixels itself instead of reading the `T` record as given	G01,B01	G01,B01		G02,G05,G06,G07,G08,G09,G10,G11,B02,B03,B04,B05,B06,B07,B08,B09,B11,B12,B14,B16,B17,B19,B21,X04,X06,X08,X09,U01,U02,U03,U13	KILLED

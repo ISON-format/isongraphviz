@@ -2,13 +2,13 @@
 
 `isongraph-visualize-display-list` is the shared library of ISONGraph Visualize milestones V6 and V7 (design `docs/isongraph-visualize-blueprint/31-CANVAS-WEBGL-DESIGN.md`, rev 4; implementation notes and findings: `docs/isongraph-visualize-blueprint/reviews/31-implementation-notes.md`). It turns an IGR/1 `RenderModel` and a `SemanticState` (both from `renderer-core`) into one renderer-neutral **display list** (integers and strings only, canonical bytes), and it holds everything that both renderers must agree on by construction: the strict reader, the pick buffer and `pickDrawn`, element bounds, the device size, the theme, the Canvas 2D replay with its recorded stream, and the cross-renderer readout.
 
-Status: **implemented, not frozen.** The independent oracle corpus `fixtures/oracles-dl/` is a DRAFT (its `SHA256SUMS` digest `8c954cdb...5746` is the reference of design 13.7 and pinned nowhere; every run is `claimable: false`). The package depends on `renderer-core` only (`scene-core` and `layout-core` are dev dependencies of the tests) and changes none of the frozen contracts. It is a **shared library, not a renderer**; that `renderer-canvas` (and later `renderer-webgl`) depend on it as well as on `renderer-core` is the declared departure CCR-2 of design 10.1 (owner decision 1).
+Status: **implemented, not frozen.** The independent oracle corpus `fixtures/oracles-dl/` is a DRAFT (its `SHA256SUMS` digest `3ac2b0cc...2e40` is the reference of design 13.7 and pinned nowhere; every run is `claimable: false`). The package depends on `renderer-core` only (`scene-core` and `layout-core` are dev dependencies of the tests) and changes none of the frozen contracts. It is a **shared library, not a renderer**; that `renderer-canvas` (and later `renderer-webgl`) depend on it as well as on `renderer-core` is the declared departure CCR-2 of design 10.1 (owner decision 1).
 
 ## What is here
 
 Core entry `.` (DOM-free; no `node:*`, no DOM lib, no `TextEncoder`: `src/utf8.ts` is a strict hand-written UTF-8):
 
-- `buildDisplayList(model, state, options?)` (the records `H n e E A N T`, 4.1-4.4), `dryLabelPass` (the label pass alone, for `probe()`), `serializeDisplayList(list, { maxBytes? })` (canonical bytes, 4.2), `parseDisplayList(bytes, limits?)` (the strict reader, rules D1-D12, 4.7).
+- `buildDisplayList(model, state, options?)` (the records `H n e E A N T`, 4.1-4.4), `dryLabelPass` (the label pass alone, for `probe()`), `serializeDisplayList(list, { maxBytes? })` (canonical bytes, 4.2), `parseDisplayList(bytes, limits?)` (the strict reader, rules D1-D12, 4.7). Label positions: since design 31 rev 7 (LP/1, ruling R-H) every `T` record sits at the default position (`(X, Y + 24 px)`, `(ax, ay - 4 px)`) plus the whole-pixel offset of `placeLabels` of `renderer-core` (design 37 rev 2), computed once per list from the drawn nodes and the drawn labels and added to the micro-pixel default before the rounding to milli-pixels; nothing else of the list changes.
 - `buildPickBuffer`, `serializePickBuffer`, `parsePickBuffer`, `createPicker(model, state)` (`pickDrawn`: nodes by delegation to the frozen `hitTest`, edges by the drawn route as an exact rational, 5.2), `elementBounds`, `serializeBounds`, `backingSize(width, height, dprMilli)` (6.4).
 - `THEME` (igr-theme/1, 4.9), the constants, `DEFAULT_*_LIMITS`.
 - `readoutFromList`, `readoutFromSvgReadout` (a structural `SvgReadoutLike`, no import of `renderer-svg`), `serializeReadout`, `compareReadouts` (9).
@@ -29,7 +29,7 @@ Build order: `scene-core`, `layout-core` and `renderer-core` must have been buil
 - `npm run smoke`: Node smoke (needs the build): the lists of three oracle examples equal the oracle bytes, round-trip through the strict reader; the pick buffer and the readout of `G01`.
 - On Windows always go through these scripts: `scripts/vitest.mjs` restores an upper-case drive letter (see `packages/renderer-core/README.md`).
 
-The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U21`, the demo, the browser smoke and the **mutation matrix** for the whole K table (251 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
+The renderer rows (tier `both`, the renderer side), the subject rows `U01`-`U21`, the demo, the browser smoke and the **mutation matrix** for the whole K table (262 mutants over this package's and `renderer-canvas`'s sources) are in `packages/renderer-canvas`.
 
 ## Tests and oracle
 

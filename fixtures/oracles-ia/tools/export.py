@@ -1,11 +1,47 @@
 """Export, PNG container, igr-svg/1 and igr-dl/1 writers (own re-implementation), headless, manifests."""
+import hashlib
+import importlib.util
+import os
 import re
 import struct
+import sys
 import zlib
 
 from base import *  # noqa
 import base
 from companion import build_tree, tree_bytes
+
+# =============================================================== LP/1 (design 37 rev 2, ruling R-H): the label placement
+# The placement is the independent Python reference of fixtures/oracles-lp (tools/lp.py), loaded BY PATH and gated by its digest
+# (this file never reads TypeScript and loads no other tool of another corpus).
+# ORACLE_IA_LP=0 gives the pre-LP/1 default positions (used only to prove that the generator, otherwise unchanged, reproduces the old corpus).
+LP_REF_PATH = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "oracles-lp", "tools", "lp.py"))
+LP_REF_SHA256 = "1c62862fe9137fb1e95403a47cb58f98cda8e7d3834de6c1789716b973629b95"
+LP_ON = os.environ.get("ORACLE_IA_LP", "1") != "0"
+
+
+def _load_lp():
+    data = open(LP_REF_PATH, "rb").read()
+    if hashlib.sha256(data).hexdigest() != LP_REF_SHA256:
+        raise SystemExit("GATE FAILED: oracles-lp/tools/lp.py digest %s != %s" % (hashlib.sha256(data).hexdigest(), LP_REF_SHA256))
+    wb = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True      # no __pycache__ in the sibling corpus
+    spec = importlib.util.spec_from_file_location("lp_reference_ia", LP_REF_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    sys.dont_write_bytecode = wb
+    return mod
+
+
+LP = _load_lp()
+
+
+def lp_offsets(S, vn, items):
+    """items: [(kind, units, x, y)] in the order node labels (visible-node order) then edge labels (visible-edge order);
+    x, y the default micro-pixel position. One call per document; the nodes are every visible node centre. Returns [(dx, dy)] whole pixels."""
+    if not LP_ON:
+        return [(0, 0)] * len(items)
+    return LP.place_labels([S[i] for i in vn], items)
 
 # =============================================================== igr-svg/1 writer (design 30)
 CSS = """.igr-svg{font:12px sans-serif}
@@ -178,6 +214,20 @@ def render_svg(m, st, xml_decl=False, prefix="igr", labels=True, edge_labels=Tru
                 continue
             total += u16len(d)
             keep[el] = d
+    # LP/1: one placement per document over the drawn labels (node labels, then edge labels)
+    lp_pos = {}
+    if keep:
+        order = [el for el in [("n", i) for i in vn] + ([("e", i) for i in ve] if edge_labels else []) if el in keep]
+        items = []
+        for el in order:
+            if el[0] == "n":
+                X, Y = S[el[1]]
+                items.append(("node", u16len(keep[el]), X, Y + 24 * 10 ** 6))
+            else:
+                anc = geo[el[1]][2]
+                items.append(("edge", u16len(keep[el]), anc[0], anc[1] - 4 * 10 ** 6))
+        for el, it, (dx, dy) in zip(order, items, lp_offsets(S, vn, items)):
+            lp_pos[el] = (it[2] + dx * 10 ** 6, it[3] + dy * 10 ** 6)
     L.append('<g class="igr-nodes">')
     for i in vn:
         n = m.nodes[i]
@@ -196,7 +246,7 @@ def render_svg(m, st, xml_decl=False, prefix="igr", labels=True, edge_labels=Tru
             L.append('<circle class="igr-ring-foc" cx="%s" cy="%s" r="18"/>' % (cx, cy))
         L.append('<circle class="igr-shape" cx="%s" cy="%s" r="10"/>' % (cx, cy))
         if el in keep:
-            L.append('<text class="igr-label" x="%s" y="%s" text-anchor="middle">%s</text>' % (cx, fmt(Y + 24 * 10 ** 6), TEXT(keep[el])))
+            L.append('<text class="igr-label" x="%s" y="%s" text-anchor="middle">%s</text>' % (fmt(lp_pos[el][0]), fmt(lp_pos[el][1]), TEXT(keep[el])))
         L.append("</g>")
     L.append("</g>")
     L.append('<g class="igr-edges">')
@@ -217,7 +267,7 @@ def render_svg(m, st, xml_decl=False, prefix="igr", labels=True, edge_labels=Tru
         L.append('<path class="igr-line" d="%s"%s/>' % (D, (' marker-end="url(#%s-arrow)"' % prefix) if m.directed else ""))
         L.append('<path class="igr-pick" d="%s"/>' % D)
         if el in keep:
-            L.append('<text class="igr-elabel" x="%s" y="%s" text-anchor="middle">%s</text>' % (fmt(anc[0]), fmt(anc[1] - 4 * 10 ** 6), TEXT(keep[el])))
+            L.append('<text class="igr-elabel" x="%s" y="%s" text-anchor="middle">%s</text>' % (fmt(lp_pos[el][0]), fmt(lp_pos[el][1]), TEXT(keep[el])))
         L.append("</g>")
     L.append("</g>")
     L.append("</svg>")
@@ -273,6 +323,7 @@ def render_dl(m, st, labels=True, edge_labels=True, max_label_units=1048576):
     if labels:
         total = 0
         stopped = False
+        drawn = []
         cand = [("n", i) for i in vn] + ([("e", i) for i in ve] if edge_labels else [])
         for el in cand:
             s = m.nodes[el[1]]["label"] if el[0] == "n" else m.edges[el[1]]["label"]
@@ -283,12 +334,19 @@ def render_dl(m, st, labels=True, edge_labels=True, max_label_units=1048576):
                 stopped = True
                 continue
             total += u16len(d)
+            drawn.append((el, d))
+        # LP/1: one placement per document over the drawn labels (node labels, then edge labels)
+        items = []
+        for el, d in drawn:
             if el[0] == "n":
                 X, Y = S[el[1]]
-                recs.append(["T", pid_n[el[1]], 0, mpx(X), mpx(Y + 24 * 10 ** 6), d])
+                items.append(("node", u16len(d), X, Y + 24 * 10 ** 6))
             else:
                 anc = geo[el[1]][2]
-                recs.append(["T", pid_e[el[1]], 1, mpx(anc[0]), mpx(anc[1] - 4 * 10 ** 6), d])
+                items.append(("edge", u16len(d), anc[0], anc[1] - 4 * 10 ** 6))
+        for (el, d), it, (dx, dy) in zip(drawn, items, lp_offsets(S, vn, items)):
+            recs.append(["T", pid_n[el[1]] if el[0] == "n" else pid_e[el[1]], 0 if el[0] == "n" else 1,
+                         mpx(it[2] + dx * 10 ** 6), mpx(it[3] + dy * 10 ** 6), d])
     # T records: all role 0 ascending pid then role 1 ascending pid (already in that order)
     return "".join(cj(r) + "\n" for r in recs).encode("utf-8")
 

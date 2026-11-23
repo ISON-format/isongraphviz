@@ -1,5 +1,5 @@
 // src/build.ts - buildDisplayList and dryLabelPass (design 4.4, 4.5). A pure function of the model, the state and three options.
-import { IgrError, effectiveVisibility, isRenderModel, lookupElement, serializeState } from "isongraph-visualize-renderer-core";
+import { IgrError, effectiveVisibility, isRenderModel, lookupElement, placeLabels, serializeState } from "isongraph-visualize-renderer-core";
 import type { ModelEdge, ModelNode, RenderModel, SemanticState } from "isongraph-visualize-renderer-core";
 import { DL_COORD_MAX, DL_FORMAT, ELABEL_DY, LABEL_DY } from "./constants.js";
 import { arrowhead, degenerate, distance, isDegenerate, parallel, selfLoop, straight, type Pt, type Route } from "./geometry.js";
@@ -86,7 +86,8 @@ export function buildDisplayList(model: RenderModel, state: SemanticState, optio
   const nodes: WireNode[] = [], edges: WireEdge[] = [];
   for (const n of model.nodes) if (vis.nodes[n.index]) nodes.push({ id: n.ref.id, type: n.ref.type });
   const records: DlRecord[] = [];
-  const edgeLabelAt: ({ x: number; y: number; edge: number } | undefined)[] = [];
+  /** Default (unplaced) edge label positions in micro-pixels: (ax, ay - ELABEL_DY px) (4.4(g)); placed and rounded when the T records are written. */
+  const edgeLabelAt: ({ x: bigint; y: bigint; edge: number } | undefined)[] = [];
   let edgePid = nd;
   for (const e of model.edges) {
     if (!vis.edges[e.index]) continue;
@@ -110,7 +111,7 @@ export function buildDisplayList(model: RenderModel, state: SemanticState, optio
       records.push(["A", edgePid, ...a.map(Number)]);
     }
     const text = plan.edgeText[e.index];
-    if (text !== undefined) edgeLabelAt[e.index] = { x: m(g.ax), y: m(g.ay - BigInt(ELABEL_DY) * E6), edge: edgePid };
+    if (text !== undefined) edgeLabelAt[e.index] = { x: g.ax, y: g.ay - BigInt(ELABEL_DY) * E6, edge: edgePid };
   }
   for (const n of model.nodes) {
     if (!vis.nodes[n.index]) continue;
@@ -119,15 +120,33 @@ export function buildDisplayList(model: RenderModel, state: SemanticState, optio
     const flags = (selNode.has(n.index) ? 1 : 0) + (focusNode === n.index ? 2 : 0);
     records.push(["N", pid[n.index]!, (c < 8 ? c : 8), flags, m(p.x), m(p.y)]);
   }
+  // ---- label placement (design 37, LP/1): one call for all drawn labels; the whole-pixel offsets are added to the micro-pixel defaults BEFORE m() ----
+  const lpNodes: { cx: bigint; cy: bigint }[] = [];
+  for (const n of model.nodes) if (vis.nodes[n.index]) lpNodes.push({ cx: pos[n.index]!.x, cy: pos[n.index]!.y });
+  const lpLabels: { kind: "node" | "edge"; units: number; x: bigint; y: bigint }[] = [];
+  const nodeSlot: number[] = [], edgeSlot: number[] = [];
   for (const n of model.nodes) {
     const text = plan.nodeText[n.index];
     if (text === undefined) continue;
-    const p = pos[n.index]!;
-    records.push(["T", pid[n.index]!, 0, m(p.x), m(p.y + BigInt(LABEL_DY) * E6), text]);
+    nodeSlot[n.index] = lpLabels.length;
+    lpLabels.push({ kind: "node", units: text.length, x: pos[n.index]!.x, y: pos[n.index]!.y + BigInt(LABEL_DY) * E6 });
   }
   for (const e of model.edges) {
     const at = edgeLabelAt[e.index];
-    if (at !== undefined) records.push(["T", at.edge, 1, at.x, at.y, plan.edgeText[e.index]!]);
+    if (at === undefined) continue;
+    edgeSlot[e.index] = lpLabels.length;
+    lpLabels.push({ kind: "edge", units: plan.edgeText[e.index]!.length, x: at.x, y: at.y });
+  }
+  const placed = placeLabels({ nodes: lpNodes, labels: lpLabels });
+  const placedAt = (slot: number): [number, number] => [m(lpLabels[slot]!.x + BigInt(placed[slot]!.dx) * E6), m(lpLabels[slot]!.y + BigInt(placed[slot]!.dy) * E6)];
+  for (const n of model.nodes) {
+    const text = plan.nodeText[n.index];
+    if (text === undefined) continue;
+    records.push(["T", pid[n.index]!, 0, ...placedAt(nodeSlot[n.index]!), text]);
+  }
+  for (const e of model.edges) {
+    const at = edgeLabelAt[e.index];
+    if (at !== undefined) records.push(["T", at.edge, 1, ...placedAt(edgeSlot[e.index]!), plan.edgeText[e.index]!]);
   }
   if (overflow) throw new IgrError("INVALID_INPUT", "OUT_OF_RANGE", "dl.coord", "a display-list coordinate exceeds 2^40 milli-pixels");
   return {

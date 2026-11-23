@@ -539,3 +539,18 @@ K242	K
 K243	K						
 K244	K						
 K245	K						
+G12	G	both	scenes/lpfrac.scene.json	layouts/lpfrac.layout.json	{"size":{"height":600,"width":900},"state":"states/G12.state.json"}	dl/G12.dl	
+G13	G	both	scenes/lphid.scene.json	layouts/lphid.layout.json	{"size":{"height":600,"width":900},"state":"states/G13.state.json"}	dl/G13.dl	
+G14	G	both	scenes/lpunl.scene.json	layouts/lpunl.layout.json	{"size":{"height":600,"width":900},"state":"states/G14.state.json"}	dl/G14.dl	
+G15	G	both	scenes/lpastral.scene.json	layouts/lpastral.layout.json	{"size":{"height":600,"width":900},"state":"states/G15.state.json"}	dl/G15.dl	
+K246	K						
+K247	K						
+K248	K						
+K249	K						
+K250	K						
+K251	K						
+K252	K						
+K253	K						
+K254	K						
+K255	K						
+K256	K						

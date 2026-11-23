@@ -4,7 +4,7 @@ Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere; the
 `scenes/`, `layouts/`, `states/` files, required by design 32 15.1, has not been done). Produced against design 32 (`32-INTERACTION-A11Y-EXPORT-DESIGN.md`, written against **rev 2**, refreshed against **rev 3**: rev 3 changes no expected file, `EXPECT.tsv` row or input file; extended against **rev 4** by the rev 4 round below: rows only, appended; the rulings R32-14 and R32-15 of 2026-11-21 add rows `G45`-`G140` and mutants `K312`-`K346` in the round below, rows only, appended) by an oracle author who
 was given only that design, designs 27 (rev 5), 30 (rev 4) and 31 (rev 5), `docs/specs/IGS-1.md`, `docs/specs/IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures
 (`fixtures/oracles`, `fixtures/oracles-igl`) and the file-format conventions (README, `EXPECT.tsv`, `SHA256SUMS`, `generated/GENERATED.tsv`) of the other corpora.
-Read `AMBIGUITIES.md` before judging any mismatch: it lists 105 places where the design was ambiguous, contradictory or could not be built, with the reading used (A-01 to A-70 the first round, A-71 to A-74 the rev 3 refresh, A-75 to A-84 the gap round, A-85 to A-94 the rev 4 round, A-95 to A-105 the R32-14 / R32-15 round; its sections `RESOLVED-IN-REV4` and `Correction of K158` say what rev 4 settled).
+Read `AMBIGUITIES.md` before judging any mismatch: it lists 107 places where the design was ambiguous, contradictory or could not be built, with the reading used (A-01 to A-70 the first round, A-71 to A-74 the rev 3 refresh, A-75 to A-84 the gap round, A-85 to A-94 the rev 4 round, A-95 to A-105 the R32-14 / R32-15 round, A-106 and A-107 the label placement round (R-H); its sections `RESOLVED-IN-REV4` and `Correction of K158` say what rev 4 settled).
 
 ## Independence statement
 
@@ -13,7 +13,7 @@ Read `AMBIGUITIES.md` before judging any mismatch: it lists 105 places where the
   `tools/companion.py` (tree, live text, plan, executor, simulated DOM, gate), `tools/export.py` (the oracle's **own** `igr-svg/1` and `igr-dl/1` writers re-implemented from designs 30 and 31,
   PNG container, export manifest, bundle verification, manifest composition, headless), `tools/rows_a.py` and `tools/rows_b.py` (the rows), `tools/corpus.py` (scene registry, helpers),
   `tools/appendix_a.py` (extraction of the Appendix A blocks from the design file), `tools/parity.py`, `tools/readme.py`, `tools/gen.py` (driver, self-checks, mutant matrix, `SHA256SUMS`).
-* The author did **not** read, import, copy or run any TypeScript, anything under `packages/`, any `reviews/*.md` or author-notes file, or any tool code of another corpus.
+* The author did **not** read, import, copy or run any TypeScript, anything under `packages/`, any `reviews/*.md` or author-notes file, or any tool code of another corpus, with one exception added by the label-placement regeneration (R-H, 2026-11-22): `tools/export.py` loads the Python reference `fixtures/oracles-lp/tools/lp.py` by path (digest-gated) for the LP/1 label positions.
   Tracked expected files of `fixtures/oracles-svg` and `fixtures/oracles-dl` (and their `EXPECT.tsv`) were read **only** by `tools/parity.py` to produce `PARITY.tsv`; no byte is copied from them and nothing in this corpus refers to another corpus.
 * Self-contained: `scenes/O1.scene.json` and `layouts/O1.layout.json` are byte copies of the frozen `igs:O1` and `igl:F01` files (digests asserted at generation time:
   scene `e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc`, layout `2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db`). Every other scene, layout and state is
@@ -128,23 +128,25 @@ and compared with the tracked expected files (read-only): **21 of 21 MATCH**.
 | svg:G02 | MATCH | `76474a5b812ecce7dae8d9ea35dc9bc98bd7c5d37b1b5e4d5ad9429ef184a651` |
 | svg:G03 | MATCH | `16d1055540c56aea5098d048a2b1f4f799a1317aab6932b42bde2c2b0623795e` |
 | svg:G04 | MATCH | `44a938943ea1759616f76d692fcb582b8126cbdb4ae2a8cec2223757767841e7` |
-| svg:G05 | MATCH | `a6b0b2507ed30c096a806701dbe7c213c9c8271314bc0502da7dd9688bafaa16` |
+| svg:G05 | MATCH | `95c3f5822e5fe179d957147ce6a39d8a75323a5204084f552ba6dea65e75e3c3` |
 | svg:G06 | MATCH | `d1613175d8f308b7992cf9bcaa9b6b4fa111bffc9d7ab542868cfe017a674ca1` |
-| svg:G07 | MATCH | `e392eed2960fb4c42131f4ba4807dc5a1c2b169ead7bbde8644c9f76f3870667` |
-| svg:G08 | MATCH | `af73e0758f492f47bda48931455c9aa4195210cd97d1b089b08a715fb20160e7` |
-| svg:G09 | MATCH | `d44918c4f929db1dc3d0966d98edd8ad577015dda361a56e0b37c2e518c1539c` |
+| svg:G07 | MATCH | `f0b471bb1015267f4c48a3d8e0d03b58860578c3bb9d9e7359618300e70f382d` |
+| svg:G08 | MATCH | `a76f27d101a07aee6a7f475d1382906fd14b1da63178d7726bffb8ffa8b3c548` |
+| svg:G09 | MATCH | `6b6ec74b9cac6b29209e0632fa18f2c7b6bd7a5181147882a7789b987d18f122` |
 | svg:G10 | MATCH | `79cc814ad18114c716d6d8a00a8c0de8908fa3e62213f067067009abf87c022a` |
 | dl:G01 | MATCH | `62e9d45ed682602b4b4dae6503a92029566fb0cabf6e73f8a9a50893fcff4ebd` |
 | dl:G02 | MATCH | `df97fef0ccf331cb13e10eff773275a73f1d7d40723c429d57ab585ba0cd8a89` |
 | dl:G03 | MATCH | `1479ea2f69730b1deedd47fffaa4b46aa32be8d3939785ef27b552d3562591bc` |
 | dl:G04 | MATCH | `e04ea3feca829633000f026abbb2a6c24b7f1a92ad2aad5c94975ac4215336ba` |
-| dl:G05 | MATCH | `fb7a0a3d5c5ed1fc4b63769427267d9d18371b4f949031b33e21b981ba92fb1d` |
+| dl:G05 | MATCH | `4ee2bdb8d9c491069aeb6ae1e73189db176332077e6e7ee5d2dbb81f336db649` |
 | dl:G06 | MATCH | `b6d1af23b35a98c95758db4c288949a55798d6214e34aef4a8a050706b6c2d09` |
-| dl:G07 | MATCH | `32208bb6519fdc5cfcde67cd6cf10758d5a9fa8d5e3f8171aeebcc0b684e808d` |
-| dl:G08 | MATCH | `e637658e0fe4d5cfe94eb536612d80c8a87561dd9f2fa2fc2f05d0c1a6d99140` |
-| dl:G09 | MATCH | `03e58c5efd0768587e1c070009699b85b7efdbe44aafe57f55edb373ea518359` |
+| dl:G07 | MATCH | `08163eac74759d2398b02beb8644b1a27c6e53a9f6ae975c23f7bced75617287` |
+| dl:G08 | MATCH | `37da8cf38901912e1f5491c8b37666bf86628d02bf19296e05872d4c8b15a0b4` |
+| dl:G09 | MATCH | `40bbb44d6c878ae1d5c4f0d1a95bb2c33eacb323f81533d06471d89c9bca04dc` |
 | dl:G10 | MATCH | `84229c3b9447c1628265da655c14463c2685cbab2692d2d1d79b7b7089bb2953` |
 | svg:O05 | MATCH | `28624a30c9cb0afe4bacaa981c383ff0662f7d90ce7c62554ee8c57a982d6671` |
+
+**Label placement (LP/1, design 37 rev 3, label width 9 px per UTF-16 unit; ruling R-H of 2026-11-22).** The renderers now place labels by LP/1 and the DRAFT corpora `oracles-svg` and `oracles-dl` were regenerated; this corpus's own writers (`tools/export.py`, `lp_offsets`) call the independent Python reference `fixtures/oracles-lp/tools/lp.py` (loaded by path, its SHA-256 gated in `tools/export.py`; no TypeScript is read) once per document over the drawn labels (node labels in visible-node order, then edge labels in visible-edge order; obstacles: every visible node). The parity table above is the result against the **regenerated** corpora (before the regeneration `svg:G05`, `svg:G07`, `svg:G08`, `svg:G09`, `dl:G05`, `dl:G07`, `dl:G08` and `dl:G09` read MISMATCH with the old writer: 13 of 21). **No expected file of this corpus other than `PARITY.tsv` changed**: the labels of `O1` (the only graph whose svg or display-list bytes any row embeds: `data/O1.svg`, `data/O1.decl.svg`, `data/O1.dl`, `headless/H02.bin` and every manifest, hash and size derived from them) have no collision at their default positions, so LP/1 leaves every one of them where it was (`tools/labelmove_check.py` proves this and the byte identity of every other file; `ORACLE_IA_LP=0` gives the pre-LP/1 writers and the generator then reproduces the previous corpus byte for byte). `README.md`, `AMBIGUITIES.md` (one section appended) and `SHA256SUMS` are index files.
 
 ## Mutants (`MUTANTS.tsv`)
 
@@ -557,3 +559,4 @@ Every one of these rows is a `companion` composition row (or the svg-native cont
 * `X24` is an oversize input recorded as a generated vector (`generated/GENERATED.tsv`): 1,048,577 bytes of 0x41, one over the 1,048,576-byte manifest limit.
 * No row needed a search-built input; no seeded search is recorded. Tier D has no files by design.
 * Expected files are never regenerated to make code pass; additions take new ids (design 0.12).
+* Exception, ruling R-H (2026-11-22): the DRAFT bytes that depend on label positions may be regenerated from the new design; for this corpus that changed `PARITY.tsv` only (see above; `tools/labelmove_check.py`).

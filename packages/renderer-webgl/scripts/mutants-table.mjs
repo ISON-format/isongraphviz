@@ -1,4 +1,4 @@
-// The K table of design 13.5 for fixtures/oracles-gl (K01..K172: 172 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
+// The K table of design 13.5 for fixtures/oracles-gl (K01..K177: 177 mutants) as source patches. Every mutant is a list of exact-text patches applied to a
 // SCRATCH COPY of packages/renderer-webgl/src ("gl"); production code has no switchable variants and the package's src/ is never modified (display-list is
 // not copied: no mutant of this table lives there). A patch whose `find` text does not occur exactly `count` times is a harness error, so a refactoring of
 // src/ cannot silently turn a mutant into a no-op. The mutations are this implementation's own realization of the one-line texts of the corpus table (13.5:
@@ -27,6 +27,15 @@ const FOC_CNCE = "...[...cn, ...ce].filter((e) => (e[1] & 2) !== 0).map((e) => e
 const FOC_DECL = "const focused = new Set<number>([" + FOC_LAYERS + FOC_CNCE + "]);\n    ";
 const FOC_THROW = 'if (focused.size > 1) throw fail("G12", "at most one element is focused");';
 const LOST_AGAIN = '      } else if (was === "failed") {\n';
+
+// the label runs of the plan (K173-K177, ruling R-H, label placement LP/1): `planGl` copies the `T` records of the list, whose x and y already carry the placement;
+// each mutant is a plan builder that does not read them as given. The list builder (display-list) is not copied into the scratch directory: its own mutants live in oracles-dl.
+const TEXTS = '  const texts = list.records.filter((r): r is TextRecord => r[0] === "T") as TextRecord[];';
+const NL = String.fromCharCode(10);
+const labelRuns = (body) => G("plan.ts", TEXTS,
+  "  const nodeAt = new Map<number, readonly number[]>();" + NL + "  const edgeAt = new Map<number, readonly number[]>();" + NL +
+  '  for (const r of list.records) { if (r[0] === "N") nodeAt.set(r[1] as number, [r[4] as number, r[5] as number]); else if (r[0] === "E") edgeAt.set(r[1] as number, [r[4] as number, r[5] as number]); }' + NL +
+  '  const texts = (list.records.filter((r): r is TextRecord => r[0] === "T") as TextRecord[]).map((t): TextRecord => { ' + body + " });");
 
 export const MUTANTS = [
   // ---- the plan encoding (G, B) --------------------------------------------------------------------------------------------------------------
@@ -266,4 +275,15 @@ export const MUTANTS = [
     G("control.ts", 'if (was === "ready") options.labels?.clear();', 'if (was === "ready" || was === "created") options.labels?.clear();'),
   ]),
   m("K172", "a loss event in created calls onStatus without a phase change", [G("control.ts", '    if (phase === "created" || phase === "disposed") return;\n    event.preventDefault();', '    if (phase === "created") { notify(); return; }\n    if (phase === "disposed") return;\n    event.preventDefault();')]),
+  // ---- K173-K177: the label runs of the plan (the label placement LP/1, ruling R-H: the plan reads the placed `T` records as given) --------------------------------
+  m("K173", "the plan builder uses the unplaced default position of a node label (centre, 24 px below) instead of the `T` record",
+    [labelRuns('const c = t[2] === 0 ? nodeAt.get(t[1]) : undefined; return c === undefined ? t : ["T", t[1], 0, c[0]!, c[1]! + 24000, t[5]];')]),
+  m("K174", "the label runs take their position from the wrong record kind: the node's `N` record (node labels) or the first point of the `E` record (edge labels)",
+    [labelRuns('const c = (t[2] === 0 ? nodeAt : edgeAt).get(t[1]); return c === undefined ? t : ["T", t[1], t[2], c[0]!, c[1]!, t[5]];')]),
+  m("K175", "the placement offset is applied to x only (the node label's y stays at the default)",
+    [labelRuns('const c = t[2] === 0 ? nodeAt.get(t[1]) : undefined; return c === undefined ? t : ["T", t[1], 0, t[3], c[1]! + 24000, t[5]];')]),
+  m("K176", "the placement offset is applied to y only (the node label's x stays at the default)",
+    [labelRuns('const c = t[2] === 0 ? nodeAt.get(t[1]) : undefined; return c === undefined ? t : ["T", t[1], 0, c[0]!, t[4], t[5]];')]),
+  m("K177", "the plan rounds the label positions to whole pixels itself instead of reading the `T` record as given",
+    [labelRuns('const r = (v: number): number => Math.floor(v / 1000 + 0.5) * 1000; return ["T", t[1], t[2], r(t[3]), r(t[4]), t[5]];')]),
 ];

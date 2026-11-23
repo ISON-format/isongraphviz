@@ -1,6 +1,6 @@
 # IGR-DL/1 and IGR-CV/1 oracle corpus (`oracles-dl`)
 
-Status: **DRAFT** (not frozen; no digest is pinned). Revision note: design 31 is now rev 6 (text only: rules R31-01 to R31-04 for this corpus, owner-adopted); 37 rows and mutants were appended for it. A further 45 ids (rows S44-S64, mutants K222-K245) were appended for rule D13 of design 31 4.7 (the single-focus rule of the list reader, R31-05, ruled 2026-11-22); see the last section. Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (56 entries, A-47 to A-52 added after the gap review, A-53 to A-56 and a rev 6 disposition section after design 31 rev 6, A-57 to A-60 and a D13 disposition section after rule D13) before judging any mismatch.
+Status: **DRAFT** (not frozen; no digest is pinned). Revision note: design 31 is now rev 6 (text only: rules R31-01 to R31-04 for this corpus, owner-adopted); 37 rows and mutants were appended for it. A further 45 ids (rows S44-S64, mutants K222-K245) were appended for rule D13 of design 31 4.7 (the single-focus rule of the list reader, R31-05, ruled 2026-11-22). Design 31 is now rev 7 (2026-11-22): the label placement LP/1 (design 37 rev 3, ruling R-H): the `T` positions of every expected list and the `fillText` positions of every expected call stream are regenerated, and 15 ids (rows G12-G15, mutants K246-K256) were appended; see the last section. Produced against design 31 rev 5 (`31-CANVAS-WEBGL-DESIGN.md`; first written against rev 2, regenerated for rev 3 and refreshed for rev 5, whose only rule change for this corpus is the single-focus rule of the stream reader) by an oracle author who was given only that design, `27-IGR1-DESIGN.md` (rev 5), `30-SVG-RENDERER-DESIGN.md` (rev 4), `IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only **data**, the scenes, layouts, states and expected SVG documents of `fixtures/oracles-svg` (the digest of its `SHA256SUMS`, `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd`, is checked by the generator and a mismatch stops it). Read `AMBIGUITIES.md` (67 entries, A-47 to A-52 added after the gap review, A-53 to A-56 and a rev 6 disposition section after design 31 rev 6, A-57 to A-60 and a D13 disposition section after rule D13, A-61 to A-67 and an LP/1 disposition section after ruling R-H) before judging any mismatch.
 
 ## Independence statement
 
@@ -11,11 +11,11 @@ Status: **DRAFT** (not frozen; no digest is pinned). Revision note: design 31 is
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **540 rows** (432 of the rev 5 generation, the 26 gap rows, the 37 rows of the rev 6 section and the 45 rows of the D13 section). `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **555 rows** (432 of the rev 5 generation, the 26 gap rows, the 37 rows of the rev 6 section, the 45 rows of the D13 section and the 15 rows of the LP/1 section). `scene`, `layout` are paths relative to this directory (`../oracles/...`, `../oracles-igl/...`, `../oracles-svg/...` for reused data, `scenes/...`, `layouts/...` for authored); `input` is a path or inline JSON (starts with `{` or `[`); `expected` a path or empty; `error` is `CODE/REASON` or empty; a row with an `error` has no expected file.
 
 | Family | Rows | with an error | what |
 |---|---|---|---|
-| G | 11 | 0 | golden display lists |
+| G | 15 | 0 | golden display lists (G12-G15: label placement) |
 | N | 17 | 3 | numbers and geometry |
 | X | 13 | 0 | text |
 | Y | 20 | 4 | state hooks |
@@ -29,8 +29,8 @@ Status: **DRAFT** (not frozen; no digest is pinned). Revision note: design 31 is
 | R | 63 | 24 | readouts |
 | U | 21 | 5 | the Canvas renderer (lifecycle scripts, outcome files; U15-U21 witness rows) |
 | D | 6 | 0 | differential (runtime; no files) |
-| K | 251 | 0 | mutants (empty cells) |
-| **total** | **540** | **117** | D and K rows (257) have empty cells by design; U10 has neither a file nor an expected cell |
+| K | 262 | 0 | mutants (empty cells) |
+| **total** | **555** | **117** | D and K rows (268) have empty cells by design; U10 has neither a file nor an expected cell |
 
 | Directory | Content |
 |---|---|
@@ -395,3 +395,22 @@ The rejected rows state the line in the inline input as `"expect_line"` (A-57); 
 **Independence.** Written from design 31 4.7 (D1-D13) and 13.2-13.3 by an oracle author who did not read `packages/display-list/src/read.ts` (or any other `src/` file) before the rows and their expected lines were written; the display-list oracle runner was read only to learn how an `S` row input is dispatched (by form); standard library only, no TypeScript was run. `tools/gen.py` does not know these rows; to rebuild only the additions, restore the corpus from version control and run `python -B -I tools/rev7_dl.py && python -B -I tools/rev7_finish_dl.py`.
 
 **Not covered (recorded in AMBIGUITIES).** A-57 the line number has no field in the `S` grammar (an `expect_line` key was added); A-59 the order of D13 against the whole-list rules D4 and D5 (no row); A-60 where the lists and ids live.
+
+## Additions for the label placement LP/1 (design 37 rev 3, design 31 rev 7, ruling R-H; rows G12-G15, mutants K246-K256)
+
+Ruling R-H (owner decision of 2026-11-22): label overlaps are fixed in the real renderer code, the new placement is the default and the expected bytes of the DRAFT corpora are regenerated, an explicit exception to the ledger rule R-C that covers only the label-position content. The reference builder `tools/dl.py` calls the reference placement of `fixtures/oracles-lp/tools/lp.py` once per list with the drawn nodes (model node order, micro-pixel positions) and the drawn labels (node labels in node order, then edge labels in edge order; units = UTF-16 length of the drawn text; default position `(X, Y + 24 px)` or `(ax, ay - 4 px)` in micro-pixels), and writes every `T` at `m(default + offset)` and every `fillText` at the same position.
+
+**What changed, proved.** `python -B -I tools/labelmove_check.py` compares this corpus with `git show HEAD:fixtures/oracles-dl/...` (the pre-LP/1 corpus): every file is byte-identical, except the `.dl` lists and `.calls` streams that hold a moved label, which become identical when the x and y of every `T` record and of every `fillText` call are replaced by a constant (the script prints the number of files changed and labels moved), the append-only files (`EXPECT.tsv`, `MUTANTS.tsv`, `AMBIGUITIES.md`: the old content is an exact prefix) and the index files (`README.md`, `SHA256SUMS`, `APPENDIX-A.tsv`). Which rows are regenerated and which hand-built inputs are not: A-62.
+
+| Row | Scene | What |
+|---|---|---|
+| G12 | `lpfrac` (2 nodes, zoom 1001) | two one-unit node labels 9.99999 px apart: they collide in micro-pixels, but the milli-pixel positions are exactly 10 px apart (A-63); the second label moves up 41 px |
+| G13 | `lphid` (3 nodes, `h` hidden) | a hidden node on the second candidate position of the colliding label: it takes no part |
+| G14 | `lpunl` (3 nodes, `s:` has no label) | the same with the third node drawn and unlabelled: it is an obstacle |
+| G15 | `lpastral` (astral label, 4 UTF-16 units) | units are UTF-16 units: the label collides with its neighbour 17 px away |
+
+**Mutants K246-K256** (switches of `lp_offsets` in `tools/dl.py`, run over every non-K row of the generator and the new rows, in `MUTANTS.tsv`): K246 placement skipped, K247 offset on x only, K248 on y only, K249 labels handed over edge labels first, K250 placement on the milli-rounded defaults, K251 node and edge labels placed by two calls, K252 hidden nodes are obstacles, K253 units counted before the elision, K254 node obstacles ignored, K255 only labelled nodes are obstacles, K256 units counted in scalars. All eleven are killed by their named rows.
+
+**Regeneration.** `python -B -I tools/regen_all.py OUTDIR` runs the whole chain (`gen.py`, the gap, rev 6, rev 7 tools on the pre-LP/1 lists, `lp_dl.py`) into OUTDIR; the result is byte-identical for every `PYTHONHASHSEED`. The gate of the generator on `oracles-svg` covers its scenes, layouts and states (A-64).
+
+**Independence.** Written from design 37 rev 3 and design 31 4.4(g); no TypeScript and no `packages/*` file was read. The placement function is not reimplemented here: it is the reference of `fixtures/oracles-lp` (digest-checked), so the corpus proves that the display list builder integrates the placement (inputs, order, rounding) as the text says; the placement itself is pinned by `fixtures/oracles-lp`.

@@ -185,6 +185,35 @@ def plan_header(d, draws, sizes, nt, cn, ce):
 _LAST_STRING = [""]
 
 
+def label_runs(d):
+    """The label runs of the plan: the `T` records of the list, as given (7.2, 4.4(g)): after LP/1 (design 37) their x and y already carry the placement.
+    K173-K177 (R-H) are the ways a plan builder could go wrong instead of reading them."""
+    Trec = [r for r in d.records if r[0] == "T"]
+    if not any(mut.on(k) for k in ("K173", "K174", "K175", "K176", "K177")):
+        return Trec
+    Npos = {r[1]: (r[4], r[5]) for r in d.records if r[0] == "N"}
+    Epos = {r[1]: (r[4], r[5]) for r in d.records if r[0] == "E"}
+    out = []
+    for t in Trec:
+        _, pid, role, x, y, text = t
+        if role == 0 and pid in Npos:
+            cx, cy = Npos[pid]
+            if mut.on("K173"):                  # the unplaced default position (the fixed offset of rev 6: 24 px below the node centre)
+                x, y = cx, cy + dlist.LABEL_DY // 1000
+            elif mut.on("K174"):                # the position of the wrong record kind: the node's own `N` record
+                x, y = cx, cy
+            elif mut.on("K175"):                # the placement offset applied to x only
+                y = cy + dlist.LABEL_DY // 1000
+            elif mut.on("K176"):                # the placement offset applied to y only
+                x = cx
+        elif role == 1 and pid in Epos and mut.on("K174"):   # the wrong record kind for an edge label: the first point of its `E` record
+            x, y = Epos[pid]
+        if mut.on("K177"):                      # the plan's own rounding (whole pixels) instead of the T record as given
+            x, y = div_round(x, 1000) * 1000, div_round(y, 1000) * 1000
+        out.append(["T", pid, role, x, y, text])
+    return out
+
+
 def build_plan(d, max_bytes=DEFAULT_MAX_GL):
     W, H = d.width, d.height
     G = guard()
@@ -193,7 +222,7 @@ def build_plan(d, max_bytes=DEFAULT_MAX_GL):
     Erec = {r[1]: r for r in d.records if r[0] == "E"}
     Arec = {r[1]: r for r in d.records if r[0] == "A"}
     Nrec = [r for r in d.records if r[0] == "N"]
-    Trec = [r for r in d.records if r[0] == "T"]
+    Trec = label_runs(d)
     if mut.on("K17") and not Trec:
         Nrec = []  # buffers depend on the label options
 

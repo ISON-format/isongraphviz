@@ -55,7 +55,7 @@ def render(rows, rep, mm, parity):
     A("  `tools/companion.py` (tree, live text, plan, executor, simulated DOM, gate), `tools/export.py` (the oracle's **own** `igr-svg/1` and `igr-dl/1` writers re-implemented from designs 30 and 31,")
     A("  PNG container, export manifest, bundle verification, manifest composition, headless), `tools/rows_a.py` and `tools/rows_b.py` (the rows), `tools/corpus.py` (scene registry, helpers),")
     A("  `tools/appendix_a.py` (extraction of the Appendix A blocks from the design file), `tools/parity.py`, `tools/readme.py`, `tools/gen.py` (driver, self-checks, mutant matrix, `SHA256SUMS`).")
-    A("* The author did **not** read, import, copy or run any TypeScript, anything under `packages/`, any `reviews/*.md` or author-notes file, or any tool code of another corpus.")
+    A("* The author did **not** read, import, copy or run any TypeScript, anything under `packages/`, any `reviews/*.md` or author-notes file, or any tool code of another corpus, with one exception added by the label-placement regeneration (R-H, 2026-11-22): `tools/export.py` loads the Python reference `fixtures/oracles-lp/tools/lp.py` by path (digest-gated) for the LP/1 label positions.")
     A("  Tracked expected files of `fixtures/oracles-svg` and `fixtures/oracles-dl` (and their `EXPECT.tsv`) were read **only** by `tools/parity.py` to produce `PARITY.tsv`; no byte is copied from them and nothing in this corpus refers to another corpus.")
     A("* Self-contained: `scenes/O1.scene.json` and `layouts/O1.layout.json` are byte copies of the frozen `igs:O1` and `igl:F01` files (digests asserted at generation time:")
     A("  scene `e8a4357a01a4f47f46a18b8f1c22c15a9f8c26cb06ed6b31588cd5c11407a1dc`, layout `2f37ccf2d351dc8e6b742b5b4d7fe87fc182226a2ba2cf02ffbf832af66b23db`). Every other scene, layout and state is")
@@ -120,4 +120,5 @@ def render(rows, rep, mm, parity):
     A("* `X24` is an oversize input recorded as a generated vector (`generated/GENERATED.tsv`): 1,048,577 bytes of 0x41, one over the 1,048,576-byte manifest limit.")
     A("* No row needed a search-built input; no seeded search is recorded. Tier D has no files by design.")
     A("* Expected files are never regenerated to make code pass; additions take new ids (design 0.12).")
+    A("* Exception, ruling R-H (2026-11-22): the DRAFT bytes that depend on label positions may be regenerated from the new design; for this corpus that changed `PARITY.tsv` only (see above; `tools/labelmove_check.py`).")
     return "\n".join(L) + "\n"

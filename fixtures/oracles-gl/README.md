@@ -1,9 +1,9 @@
 # IGR-GL/1 oracle corpus (`oracles-gl`)
 
-Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere). **Revision note, design 31 rev 6 (2026-11-20):** the design was folded with the owner-adopted wording R31-07..R31-11 (text only, no Appendix byte, no shader byte); 30 rows were **appended** (B24, W48-W50, X19, X20, U50-U57, K157-K172, the last section), no existing row, id, expected file or mutant was touched, and the entries A-47 to A-52 and a resolved-in-rev-6 section were appended to `AMBIGUITIES.md`. Produced against design 31 (`31-CANVAS-WEBGL-DESIGN.md`, **rev 5**, 1,821 lines; first written against rev 2, regenerated against rev 3 and again against rev 5) by an
+Status: **DRAFT** (not frozen; no digest of `SHA256SUMS` is pinned anywhere). **Revision note, design 31 rev 7 (2026-11-22, ruling R-H):** the label placement LP/1 (design 37 rev 3) moves labels in the display list, so the label runs of 16 expected plans (`B01`-`B06`, `B05b`, `B16`, `B20`, `G05`, `G07`, `G08`, `G10`, `G11`, `X04`, `X09`) were regenerated (73 label runs, only the `x` and `y` of `T` lines, proved by `tools/labelmove_check.py`); five mutants K173-K177 were appended; no other expected byte, row, id or input changed (last section, AMBIGUITIES A-53 to A-57). **Revision note, design 31 rev 6 (2026-11-20):** the design was folded with the owner-adopted wording R31-07..R31-11 (text only, no Appendix byte, no shader byte); 30 rows were **appended** (B24, W48-W50, X19, X20, U50-U57, K157-K172, the last section), no existing row, id, expected file or mutant was touched, and the entries A-47 to A-52 and a resolved-in-rev-6 section were appended to `AMBIGUITIES.md`. Produced against design 31 (`31-CANVAS-WEBGL-DESIGN.md`, **rev 5**, 1,821 lines; first written against rev 2, regenerated against rev 3 and again against rev 5) by an
 independent oracle author who was given that design, design 30 rev 4 and design 27 rev 5, `docs/specs/IGS-1.md`, `IGL-1.md`, `docs/conformance/README.md`, the frozen fixtures
 (`fixtures/oracles`, `fixtures/oracles-igl`) and, as read-only data, the scenes, layouts, states and expected SVG documents of the draft corpus `fixtures/oracles-svg`
-(its `SHA256SUMS` digest `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd` is asserted before anything is generated), plus the formats
+(before anything is generated the generator asserts that the 100 lines of its `SHA256SUMS` that cover the data it reads, `scenes/`, `layouts/` and `states/`, are the ones pinned in `tools/svg_data_pins.txt`; the whole digest was `63a198339b40417d1a039058e9e61b5f21fa1a5c887be29decd5c3bef97cccbd` before the label placement LP/1, ruling R-H, and the expected `svg/` documents are no longer pinned: `tools/parity_svg.py` compares them with this list), plus the formats
 (README, EXPECT.tsv, SHA256SUMS, generated/GENERATED.tsv) of the other draft corpora. Read `AMBIGUITIES.md` before judging any mismatch: it lists every place where the design was
 ambiguous, contradictory or could not be built, the literal reading used, and why; design defects are flagged.
 
@@ -22,7 +22,7 @@ ambiguous, contradictory or could not be built, the literal reading used, and wh
 
 ## What is here
 
-`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **366 rows** (the 279 rows, one per id of design 13.6, the 57 gap rows after rev 5 and the 30 rows after rev 6, see the last two sections).
+`EXPECT.tsv`: header `id group tier scene layout input expected error` (13.2), **371 rows** (the 279 rows, one per id of design 13.6, the 57 gap rows after rev 5, the 30 rows after rev 6 and the 5 mutants after rev 7, see the last three sections).
 
 | Family | Rows | Content | Expected files |
 |---|---|---|---|
@@ -35,10 +35,10 @@ ambiguous, contradictory or could not be built, the literal reading used, and wh
 | U | 51 | the WebGL renderer (headless), the context controller | scripts/, plan/, states/, json/, calls/, gllog/ |
 | P | 16 | the capability probe | json/Pnn.probe.json + gllog/Pnn.log |
 | D | 5 | differential (runtime) | no files (self-checks of the generator, README) |
-| K | 172 | mutants | no files (MUTANTS.tsv) |
-| **total** | **366** | | |
+| K | 177 | mutants | no files (MUTANTS.tsv) |
+| **total** | **371** | | |
 
-Rows with empty cells by design: D (5) and K (172); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W46, W48, W49, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
+Rows with empty cells by design: D (5) and K (177); U10 is a kit run with neither file nor expected cell; W01 and the B-row "also" cases are described below. Rows with an `error` cell: B10, W02-W46, W48, W49, X07 (and the two rows E10, E11 that carry both a log and an error, AMBIGUITIES A-06).
 
 | Directory | Content |
 |---|---|
@@ -98,7 +98,7 @@ Every authored layout is read under the viewport `{center_x 450000, center_y 300
 | A.1 display list of G01 (X1 block) | **REPRODUCED** | bytes equal; size mine 637 / design 637; sha mine 62e9d45ed682602b... / design 62e9d45ed682602b... |
 | A.2 display list differs from A.1 in exactly the three printed lines | **REPRODUCED** |  |
 | A.2 display list size and SHA-256 (figure) | **REPRODUCED** | size mine 637 / design 637; sha mine 48c82389e35751c8... / design 48c82389e35751c8... |
-| A.3 display list of G11/loops2 (X1 block) | **REPRODUCED** | bytes equal; size mine 1553 / design 1553; sha mine 3f9f43587a97bdb7... / design 3f9f43587a97bdb7... |
+| A.3 display list of G11/loops2 (X1 block) | **REPRODUCED** | bytes equal; size mine 1553 / design 1553; sha mine 6ff8514097243394... / design 6ff8514097243394... |
 | A.4 Canvas stream of G01 (X1 block) | **REPRODUCED** | bytes equal; size mine 1042 / design 1042; sha mine 7ec2e46cf221854f... / design 7ec2e46cf221854f... |
 | A.4 Canvas stream of the A.2 state (figure, row C02) | **REPRODUCED** | size mine 1455 / design 1455; sha mine 6cbb962e795d2979... / design 6cbb962e795d2979... |
 | A.5 prefix block (X1: 836 bytes) | **REPRODUCED** | bytes equal; size mine 836 / design 836; sha mine c5d81633112a6003... / design c5d81633112a6003... |
@@ -141,7 +141,8 @@ The full matrix is `MUTANTS.tsv` (columns mutant, description, named killers, ki
 
 ## Self-checks the generator makes (all must pass before a file is written)
 
-* ok: digest of the consumed oracles-svg/SHA256SUMS is 63a19833...cccbd
+* ok: tools/svg_data_pins.txt digest is 1eaf761a...aa91
+* ok: the 100 pinned oracles-svg data lines (scenes, layouts, states) are all in its SHA256SUMS
 * ok: external files read are verified against their own SHA256SUMS
 * ok: 24 authored scene/layout files pass the lite checks
 * ok: G01 readout from the plan equals the readout from the list
@@ -155,7 +156,6 @@ The full matrix is `MUTANTS.tsv` (columns mutant, description, named killers, ki
 * ok: G09 readout from the plan equals the readout from the list
 * ok: G10 readout from the plan equals the readout from the list
 * ok: G11 readout from the plan equals the readout from the list
-* ok: C-V5 parity: node centres, path numbers and label positions of 54 V5 documents (svg G, N, X, Y rows) equal the list's integers (refused: N11:INVALID_INPUT/OUT_OF_RANGE, N12:INVALID_INPUT/OUT_OF_RANGE)
 * ok: B01 an edge with largest coordinate 16777215 is kept (kind 1) and one with 16777216 is clipped (kind 0)
 * ok: B11 has a clipped coordinate with fraction >= 1/2 (floorDiv would differ)
 * ok: B12 has a clipped coordinate with fraction >= 1/2 (floorDiv would differ)
@@ -3940,3 +3940,19 @@ Not written, by the task's own limits: R31-05, R31-06, R31-11 (c), R30-31-01 (op
 **Mutant matrix of K157-K172.** 16 of 16 killed, every named row changing (computed by `tools/rev6_gen.py`, the matrix is in `MUTANTS.tsv`). Each mutant was run over the new rows and over every existing row it can reach (all bad plans, all readouts of plans, the planner outputs of the G and B rows, the 29 existing controller rows). Rows that change although not named: `K159` also changes the existing `X14` (the readout of the clipped focused edge of `W47.b`); `K170` also changes `U33`, `U50`-`U52`, `U55`-`U57`. No mutant changes an existing row of another kind. `K158` changes no existing planner row: no existing row has a focused clipped edge, which is why `B24` was needed.
 
 **Digest.** The digest of the new `SHA256SUMS` cannot be recorded in this file (the README is one of the files it covers); it is given in the hand-over. For reference, the digest of `SHA256SUMS` before these additions was `b87ff2918a63f2acec56674b0b45b375f572ed8649340ca3bd7874d6a4084c5e`.
+
+## Additions after design 31 rev 7 (label placement LP/1, ruling R-H of 2026-11-22; mutants K173-K177)
+
+The owner decided that label overlaps are fixed in the real renderer code with a new default placement (design `37-LABEL-PLACEMENT-DESIGN.md`, LP/1 rev 3) and that the expected label-position bytes of the DRAFT corpora are regenerated (an explicit exception to the ledger rule R-C that covers only label positions). The display list builder of this corpus (`tools/dlist.py`) now applies LP/1 by calling the reference `place_labels` of `fixtures/oracles-lp/tools/lp.py` (read by path, digest pinned: A-53); the plan copies the `T` records into its label runs unchanged.
+
+| What | Result |
+|---|---|
+| Expected files that changed | 16 plans, `plan/B01 B02 B03 B04 B05 B05b B06 B16 B20 G05 G07 G08 G10 G11 X04 X09.glplan`; 73 label runs (the label lines of the plans), only the `x` and `y` of `T` lines |
+| Expected files that did not change | 286 of the 308 files are byte-identical (the 16 plans and 5 index files differ, and `SHA256SUMS`): every `bad/`, `calls/`, `gllog/`, `json/`, `shaders/`, `xr/`, `scripts/`, `inputs/`, `scenes/`, `layouts/`, `states/` file; the readouts, logs and manifests carry no label position |
+| Appendix A | A.3 only: the quoted SHA-256 of the display list of `G11`/`loops2` is `6ff8514097243394205a11f23e3250c607ddca3b4c39f603916e436dbd3a8ef0` (bytes of the design's block equal this oracle's list) |
+| Rows, ids, inputs, file paths | unchanged; 5 mutant rows K173-K177 appended (EXPECT.tsv 371 rows) |
+| Mutants K173-K177 | 5 of 5 killed by the regenerated plans (MUTANTS.tsv); each is also a text patch of `packages/renderer-webgl/src/plan.ts` in the harness |
+| Gate | the oracles-svg gate is the 100 pinned scenes, layouts and states lines (`tools/svg_data_pins.txt`), A-54 |
+| Independent confirmation | `tools/parity_svg.py` compares the list's `T` integers with the `<text>` positions of the LP/1 SVG documents of `oracles-svg` (run last, against whatever state that corpus is in); the bytes of design 31 A.3 equal this oracle's list |
+
+**Proof that nothing else changed.** `python -B -I tools/labelmove_check.py` (run from the repository: the old side is `git show HEAD:fixtures/oracles-gl/<path>`; `--old-dir DIR` reads a copy of the old corpus instead) masks the `x` and `y` of every `T` line of a `.glplan` file on both sides, requires the masked files to be byte-identical (this also covers the header, which carries the buffer sizes), requires every other file to be byte-identical or an append-only / index file, and lists the labels moved. Regenerate the whole corpus with `python -B -I tools/regen_all.py OUTDIR`.

@@ -250,3 +250,14 @@ K242	reader does not examine the last E or N record of the list	S55	S55			killed
 K243	reader does not examine the first N record	S52	S52		S55	killed
 K244	reader does not examine the first E record	S51	S51		S64	killed
 K245	reader applies D13 to a directed list only (an undirected list with two focus records is accepted)	S64	S64			killed
+K246	label placement skipped (every label stays at its default position)	G08,G12	G08,G12		C03,C07,C19,C20,F04,G05,G07,G09,G11,G13,G14,G15,N01,N02,N03,N05,N06,N07,N08,N16,N17,X02,X03,X04,X05,X10,X11,Y08,Y11,Y12,Y17	killed
+K247	the placement offset is applied to x only (dy dropped)	G08,G12,G13	G08,G12,G13		C03,C07,C19,C20,F04,G05,G07,G09,G11,G14,G15,N01,N02,N03,N05,N06,N07,N08,N16,N17,X02,X03,X04,X05,X10,Y08,Y11,Y12	killed
+K248	the placement offset is applied to y only (dx dropped)	G08,G11	G08,G11		C03,C07,C19,F04,G05,G14,N01,N02,N08,N16,N17,X11,Y08,Y11,Y12,Y17	killed
+K249	labels are handed to the placement in the order edge labels, then node labels (the records stay node labels first)	G08,N17	G08,N17		F04,G09,N02,N03,N05,N16	killed
+K250	the placement runs on the milli-pixel rounded defaults (the rounding is done before the placement, not after the offset)	G12	G12			killed
+K251	node labels and edge labels are placed by two separate calls (the edge call does not see the node labels)	G08,N17	G08,N17		F04,G09,N02,N03,N05,N16	killed
+K252	hidden nodes are obstacles of the placement	G13	G13			killed
+K253	the units of a label are counted before the elision (the length of the label, not of the drawn text)	F04,G07	F04,G07			killed
+K254	node obstacles ignored (labels avoid labels only)	G08,G14	G08,G14		C03,C07,F04,G05,G07,G09,N01,N02,N03,N05,N06,N07,N16,N17,X02,X03,X04,X05,X11,Y08,Y11,Y12,Y17	killed
+K255	only nodes that have a drawn label are obstacles	G14	G14			killed
+K256	units counted in Unicode scalars instead of UTF-16 units	G15	G15			killed

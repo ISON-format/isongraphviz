@@ -35,12 +35,12 @@ describe.skipIf(md === undefined)(md === undefined ? `Appendix A extraction (${N
     expect(sha256(doc)).toBe("48c82389e35751c8db74db13e12c1345222d3dd01df16791fb9bd2bec931194e");
     expect(text).toContain("The list is 637 bytes, SHA-256 `48c82389e35751c8db74db13e12c1345222d3dd01df16791fb9bd2bec931194e`");
   });
-  it("A.3: the directed self-loops (row G11) are the block, 1553 bytes, SHA-256 3f9f4358...", async () => {
+  it("A.3: the directed self-loops (row G11) are the block, 1553 bytes, SHA-256 6ff85140...", async () => {
     const { model, state } = await initial(LOOPS2);
     const doc = textOf(serializeDisplayList(buildDisplayList(model, state)));
     expect(doc).toBe(blockAfter(text, "**A.3 Directed self-loops") + "\n");
     expect(bytes(doc)).toBe(1553);
-    expect(sha256(doc)).toBe("3f9f43587a97bdb7adbbe1465a677ae5c378f621cbffe51a0f821e09db0bf557");
+    expect(sha256(doc)).toBe("6ff8514097243394205a11f23e3250c607ddca3b4c39f603916e436dbd3a8ef0");
   });
   it("A.4: the Canvas stream of G01 is the block, 1042 bytes, SHA-256 7ec2e46c...; the stream of the A.2 state is 1455 bytes, SHA-256 6cbb962e...", async () => {
     const { model, state } = await initial(O1);

@@ -12,11 +12,11 @@ const impl: GlImpl = { ...gl, composeWebglRenderer, dl: { ...dl, ...cv } } as un
 const oracle = loadOracle(ORACLE_DIR);
 
 describe("the corpus", () => {
-  it("SHA256SUMS verifies and its digest is the reference digest c5596057...", () => {
+  it("SHA256SUMS verifies and its digest is the reference digest e7717091...", () => {
     expect(verifySums(ORACLE_DIR)).toEqual([]);
     expect(sumsDigest(ORACLE_DIR)).toBe(ORACLE_DIGEST);
   });
-  it("has 366 ids", () => { expect(oracle.rows.length).toBe(366); });
+  it("has 371 ids", () => { expect(oracle.rows.length).toBe(371); });
 });
 
 for (const t of ["core", "both", "subject"]) {

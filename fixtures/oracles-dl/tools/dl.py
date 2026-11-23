@@ -8,6 +8,9 @@ import unicodedata
 from core import (M, IgrError, S, cj, cjb, div_round, floor_div, isqrt, len16, eff_hidden, state_sets,
                   screen_xy, validate_state, serialize_state, q_milli, check_point, hit_test)
 import core
+import hashlib
+import importlib.util
+import os
 
 DL_FORMAT = "igr-dl/1"
 DEFAULT_MAX_DL_BYTES = 67_108_864
@@ -24,6 +27,73 @@ PALETTE = [(42, 120, 214), (235, 104, 52), (27, 175, 122), (237, 161, 0), (232, 
            (0, 131, 0), (74, 58, 167), (227, 73, 72), (122, 121, 117)]
 PICK_SEG = 16
 EDGE_TOL = 6000
+
+
+# ------------------------------------------------- LP/1 (design 37 rev 2): the label placement reference, read by path
+LP_REF_PATH = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "oracles-lp", "tools", "lp.py"))
+LP_REF_SHA256 = "1c62862fe9137fb1e95403a47cb58f98cda8e7d3834de6c1789716b973629b95"
+# False only for the hand-built bad lists of the S rows (inputs, not outputs: they keep the pre-LP/1 label positions) and, through the environment
+# variable ORACLE_DL_LP=0, for the pre-LP/1 lists that tools/regen_all.py hands to the gap, rev 6 and rev 7 tools
+LP_ON = [os.environ.get("ORACLE_DL_LP", "1") != "0"]
+
+
+def _load_lp():
+    data = open(LP_REF_PATH, "rb").read()
+    if hashlib.sha256(data).hexdigest() != LP_REF_SHA256:
+        raise SystemExit("GATE FAILED: oracles-lp/tools/lp.py digest %s != %s" % (hashlib.sha256(data).hexdigest(), LP_REF_SHA256))
+    spec = importlib.util.spec_from_file_location("lp_reference", LP_REF_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+LP = _load_lp()
+_LP_CACHE = {}
+
+
+def lp_place(nodes, labels):
+    """place_labels of oracles-lp (pure; memoized because the mutant matrix repeats identical calls)."""
+    key = (tuple(nodes), tuple(labels))
+    r = _LP_CACHE.get(key)
+    if r is None:
+        r = _LP_CACHE[key] = LP.place_labels(list(nodes), list(labels))
+    return r
+
+
+def lp_offsets(model, nv, scr, kept, defs):
+    """Whole-pixel offsets (dx, dy) of the drawn labels `kept` (label-pass order) whose default micro-pixel positions are `defs`."""
+    if not LP_ON[0] or M("K246"):
+        return [(0, 0)] * len(kept)
+    obst = model["nodes"] if M("K252") else nv
+    nodes = [] if M("K254") else [scr[n["index"]] for n in obst]
+    if M("K255"):
+        drawn = {idx for (kind, idx, _t, _r) in kept if kind == "n"}
+        nodes = [scr[n["index"]] for n in obst if n["index"] in drawn]
+    items = []
+    for (kind, idx, text, raw), (x, y) in zip(kept, defs):
+        units = len16(raw) if M("K253") else (len(text) if M("K256") else len16(text))
+        items.append(("node" if kind == "n" else "edge", units, x, y))
+    if M("K250"):
+        # placement from the milli-rounded defaults (the rounding done before the placement, not after the offset)
+        nodes = [(m_px(a) * 1000, m_px(b) * 1000) for (a, b) in nodes]
+        items = [(k, u, m_px(x) * 1000, m_px(y) * 1000) for (k, u, x, y) in items]
+    if M("K249"):
+        order = [i for i, t in enumerate(items) if t[0] == "edge"] + [i for i, t in enumerate(items) if t[0] == "node"]
+        res = lp_place(nodes, [items[i] for i in order])
+        out = [None] * len(items)
+        for j, i in enumerate(order):
+            out[i] = res[j]
+        return out
+    if M("K251"):
+        ni = [i for i, t in enumerate(items) if t[0] == "node"]
+        ei = [i for i, t in enumerate(items) if t[0] == "edge"]
+        out = [None] * len(items)
+        for grp in (ni, ei):
+            res = lp_place(nodes, [items[i] for i in grp])
+            for j, i in enumerate(grp):
+                out[i] = res[j]
+        return out
+    return lp_place(nodes, items)
 
 
 # --------------------------------------------------------------------- text
@@ -458,14 +528,22 @@ def build_dl(model, state, options=None):
         kcls = c % 8 if M("K54") else min(c, 8)
         nrecs.append(["N", pid_n[n["index"]], kcls, flags(n["index"] in sn, n["index"] == fn), m_px(X), m_px(Y)])
     kept, fid = label_pass(model, state, opts, nv, ev, scr, routes_by)
+    defs = []                       # the default micro-pixel positions of the drawn labels, in the order of the label pass
     for kind, idx, text, raw in kept:
         if kind == "n":
             X, Y = scr[idx]
-            trecs.append(("n", ["T", pid_n[idx], 0, m_px(X), m_px(Y + 24 * S), text]))
+            defs.append((X, Y + 24 * S))
         else:
-            r = routes_by[idx]
-            ax, ay = r["anchor"]
-            trecs.append(("e", ["T", pid_e[idx], 1, m_px(ax), m_px(ay - 4 * S), text]))
+            ax, ay = routes_by[idx]["anchor"]
+            defs.append((ax, ay - 4 * S))
+    offs = lp_offsets(model, nv, scr, kept, defs)
+    for (kind, idx, text, raw), (x, y), (dx, dy) in zip(kept, defs, offs):
+        px_ = x if M("K248") else x + dx * S      # K248: y only (dx dropped)
+        py_ = y if M("K247") else y + dy * S      # K247: x only (dy dropped)
+        if kind == "n":
+            trecs.append(("n", ["T", pid_n[idx], 0, m_px(px_), m_px(py_), text]))
+        else:
+            trecs.append(("e", ["T", pid_e[idx], 1, m_px(px_), m_px(py_), text]))
     if M("K48"):
         trecs = [t for t in trecs if t[0] == "e"] + [t for t in trecs if t[0] == "n"]
     records = []
