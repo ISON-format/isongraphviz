@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graph playground</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1f2328; --muted: #59636e; --line: #d0d7de; --page: #eef1f4; --panel: #ffffff; --stage: #f7f8fa;
+    --accent: #0b57d0; --accent-ink: #ffffff; --danger: #b3261e;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 15px; line-height: 1.4;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); }
+  .page { max-width: 1240px; margin: 0 auto; padding: 12px 16px 24px; }
+  header.top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 4px; }
+  header.top h1 { font-size: 1.25rem; margin: 0; flex: 1 1 auto; }
+  .help { margin: 4px 0 10px; color: var(--muted); font-size: .86rem; }
+  .help kbd { font: inherit; font-size: .8rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--panel); color: var(--ink); }
+
+  button, input[type="search"] { font: inherit; color: inherit; }
+  button { cursor: pointer; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 5px 10px; min-height: 32px; transition: background-color .12s; }
+  button:hover { background: #f0f3f6; }
+  button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  button:disabled { opacity: .5; cursor: default; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .segmented { display: inline-flex; }
+  .segmented button { border-radius: 0; margin-left: -1px; }
+  .segmented button:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+  .segmented button:last-child { border-radius: 0 6px 6px 0; }
+
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .searchbox { position: relative; flex: 1 1 15rem; max-width: 26rem; }
+  .searchbox input { width: 100%; min-height: 34px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+  #results { position: absolute; z-index: 30; left: 0; right: 0; top: 100%; margin: 2px 0 0; padding: 2px; list-style: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 6px 18px rgba(31, 35, 40, .16); max-height: 18rem; overflow: auto; }
+  #results[hidden] { display: none; }
+  #results li { padding: 5px 8px; border-radius: 4px; cursor: pointer; display: flex; gap: 8px; align-items: baseline; }
+  #results li[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); }
+  #results li .sub { color: var(--muted); font-size: .82rem; margin-left: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #results li[aria-selected="true"] .sub { color: inherit; opacity: .85; }
+  #results li .kind { font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; opacity: .75; min-width: 2.6rem; }
+  #results .note { cursor: default; color: var(--muted); font-size: .82rem; }
+  .zoomread { min-width: 3.6rem; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 12px; align-items: start; }
+  .stagewrap { min-width: 0; }
+  #stage { position: relative; height: clamp(360px, 66vh, 700px); background: var(--stage); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; color: #222; }
+  #graph { position: absolute; inset: 0; overflow: hidden; touch-action: none; outline-offset: -3px; }
+  #graph canvas, #graph svg { display: block; }
+  #graph .demo-status { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  #graph:focus-visible { outline: 3px solid var(--accent); }
+  #stage.grabbing, #stage.grabbing * { cursor: grabbing; }
+  #stage.over-node #graph { cursor: grab; }
+  #overlay { position: absolute; left: 0; top: 0; pointer-events: none; }
+  #tooltip { position: absolute; z-index: 10; pointer-events: none; max-width: 15rem; background: #1f2328; color: #fff; border-radius: 6px; padding: 6px 9px; font-size: .8rem; box-shadow: 0 4px 14px rgba(0, 0, 0, .28); }
+  #tooltip[hidden] { display: none; }
+  #tooltip .h { font-weight: 600; margin-bottom: 2px; }
+  #tooltip .r { display: flex; gap: 8px; }
+  #tooltip .r span:first-child { color: #aeb7c2; min-width: 4.2rem; }
+  #tooltip .r span:last-child { overflow-wrap: anywhere; }
+  .minimap { border: 1px solid var(--line); border-radius: 6px; background: var(--stage); overflow: hidden; line-height: 0; }
+  #minimap { display: block; cursor: crosshair; touch-action: none; }
+  .previewtag { position: absolute; left: 10px; top: 10px; z-index: 6; background: var(--accent); color: var(--accent-ink); border-radius: 999px; padding: 2px 10px; font-size: .78rem; }
+  .previewtag[hidden] { display: none; }
+  #readout { margin: 6px 2px 0; color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
+
+  aside.panel { display: flex; flex-direction: column; gap: 8px; }
+  fieldset, .card { margin: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 6px 12px 8px; min-width: 0; }
+  legend { font-weight: 600; font-size: .86rem; padding: 0 4px; }
+  .card h2 { font-size: .86rem; margin: 0 0 6px; }
+  .opt { display: flex; align-items: center; gap: 8px; padding: 1px 0; cursor: pointer; }
+  .opt input { width: 16px; height: 16px; margin: 0; }
+  .opt .n { margin-left: auto; color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
+  .swatch { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, .25); flex: none; }
+  .filterfoot { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  #filtercount { font-size: .84rem; color: var(--muted); flex: 1; }
+  #selection, #layoutinfo { font-size: .84rem; color: var(--muted); margin: 0 0 6px; overflow-wrap: anywhere; }
+  #message { min-height: 1.4em; margin: 8px 2px 0; font-size: .86rem; }
+  #message.err { color: var(--danger); }
+
+  @media (max-width: 820px) {
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    #stage { height: clamp(320px, 58vh, 560px); }
+    aside.panel { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); align-items: start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <h1>Graph playground</h1>
+    <div class="segmented" role="group" aria-label="Rendering host">
+      <button id="host-canvas" type="button" aria-pressed="true">Canvas host</button>
+      <button id="host-svg" type="button" aria-pressed="false">SVG host</button>
+    </div>
+  </header>
+  <p class="help" id="help">
+    Hover a node or an edge: highlight it and its neighbours. Drag a node: move it. Drag the background: pan. Wheel: zoom. Double-click: fit.
+    Keys with the graph focused: <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd> zoom and fit, arrows move the focus, <kbd>Ctrl</kbd>+arrows pan, <kbd>Alt</kbd>+<kbd>Shift</kbd>+arrows nudge the selected (or focused) node. Search: <kbd>/</kbd> or click the box, type, <kbd>&#8593;</kbd> <kbd>&#8595;</kbd>, <kbd>Enter</kbd>. Click or drag in the minimap to move the view.
+  </p>
+
+  <div class="bar">
+    <div class="searchbox">
+      <input id="q" type="search" role="combobox" aria-label="Search nodes and edges by id, label or type" aria-expanded="false" aria-controls="results" aria-autocomplete="list" autocomplete="off" spellcheck="false" placeholder="Search nodes and edges">
+      <ul id="results" role="listbox" aria-label="Search results" hidden></ul>
+    </div>
+    <button id="fit" type="button" aria-label="Fit the graph to the view">Fit</button>
+    <button id="zoom-in" type="button" aria-label="Zoom in">+</button>
+    <button id="zoom-out" type="button" aria-label="Zoom out">&minus;</button>
+    <button id="zoom-sel" type="button" aria-label="Zoom to the selection">Zoom to selection</button>
+    <span id="zoomread" class="zoomread" aria-label="Zoom level">100%</span>
+  </div>
+
+  <div class="grid">
+    <div class="stagewrap">
+      <div id="stage">
+        <div id="graph" role="group" tabindex="-1" aria-label="Graph"></div>
+        <canvas id="overlay" aria-hidden="true"></canvas>
+        <div id="tooltip" role="tooltip" hidden></div>
+        <div id="previewtag" class="previewtag" hidden>Moving node: preview, committed on release</div>
+      </div>
+      <p id="readout"></p>
+    </div>
+    <aside class="panel" aria-label="Minimap, filters and layout">
+      <div class="card">
+        <h2>Minimap</h2>
+        <div class="minimap" id="minimap-box"><canvas id="minimap" role="img" aria-label="Minimap of the whole graph with the current view frame. Click or drag to move the view."></canvas></div>
+      </div>
+      <fieldset id="types-set"><legend>Node types</legend></fieldset>
+      <fieldset id="rels-set"><legend>Relations</legend></fieldset>
+      <div class="card">
+        <div class="filterfoot">
+          <span id="filtercount" aria-live="polite">Nothing hidden.</span>
+          <button id="clear-filters" type="button" aria-label="Clear all filters">Clear filters</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Selection</h2>
+        <p id="selection">Nothing selected.</p>
+        <h2>Layout</h2>
+        <p id="layoutinfo"></p>
+        <button id="reset-layout" type="button" aria-label="Reset node positions to the original layout">Reset layout</button>
+      </div>
+    </aside>
+  </div>
+  <p id="message" role="status" aria-live="polite">loading ...</p>
+</div>
+<script src="out/playground-data.js"></script>
+<script src="out/playground.js"></script>
+</body>
+</html>

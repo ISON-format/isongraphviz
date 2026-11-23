@@ -12,6 +12,7 @@
 // not valid on graphics-symbol, 9.7), Escape clears; a shift+arrow step leaves the live text `1 selected.`; the marquee keys work; a click on a node selects it and a
 // press with a selection and any modifier keeps it; the gate (svg-native: G9-MAP and G11-PAGE pass) and the export (no PNG) run; Tab leaves; toggling back restores
 // the companion with one Tab stop and working keys.
+// After the demo page this script runs scripts/playground-smoke.mjs (the playground page, demo/playground.html: hover, drag, search and filter, pan, zoom and minimap; its own list of what it asserts is in that file).
 // NOT claimed: cross-browser behaviour, assistive technology, touch, visual quality, performance, that a press on an SVG node moves the semantic focus (it does not in this
 // Chromium run, finding C-2: reported by the script, not asserted), that the focusRestore option has an observable effect through the binder's flow (it does not: the page
 // source test pins the option), the pan reveal with a zoomed-in viewport, reduced motion, a real wheel, a real drag, or the click-to-focus-container step of 17.4.
@@ -207,3 +208,5 @@ try {
   if (errors.length > 0) fail(`console errors: ${errors.join(" | ")}`);
   if (!process.exitCode) console.log(`browser smoke ok (Chromium ${browser.version()}, one engine, smoke only)`);
 } catch (e) { fail(String(e && e.stack ? e.stack : e)); } finally { if (browser) await browser.close(); server.close(); }
+// the playground page: its own Chromium run (same engine, same secure-context server approach); its failures set the same exit code
+await import("./playground-smoke.mjs");

@@ -1,0 +1,68 @@
+nodes.person
+id name
+alice "Alice Archer"
+bob "Bob Banerjee"
+carol "Carol Chen"
+dave "Dave Diaz"
+erin "Erin Eze"
+frank "Frank Fox"
+grace "Grace Gill"
+
+nodes.company
+id name
+acme "Acme Corp"
+globex "Globex"
+initech "Initech"
+umbrella "Umbrella Ltd"
+
+nodes.project
+id name
+apollo "Project Apollo"
+borealis "Project Borealis"
+cedar "Project Cedar"
+delta "Project Delta"
+ember "Project Ember"
+
+edges.WORKS_AT
+source target
+:person:alice :company:acme
+:person:bob :company:acme
+:person:carol :company:globex
+:person:dave :company:globex
+:person:erin :company:initech
+:person:frank :company:umbrella
+:person:grace :company:initech
+
+edges.KNOWS
+source target
+:person:alice :person:bob
+:person:alice :person:carol
+:person:carol :person:erin
+:person:dave :person:frank
+:person:erin :person:grace
+
+edges.LEADS
+source target
+:person:alice :project:apollo
+:person:carol :project:borealis
+:person:erin :project:cedar
+:person:frank :project:delta
+:person:grace :project:ember
+
+edges.WORKS_ON
+source target
+:person:bob :project:apollo
+:person:dave :project:borealis
+:person:grace :project:cedar
+
+edges.FUNDS
+source target
+:company:acme :project:apollo
+:company:globex :project:borealis
+:company:initech :project:cedar
+:company:umbrella :project:delta
+
+edges.PARTNERS_WITH
+source target
+:company:acme :company:globex
+:company:initech :company:umbrella
