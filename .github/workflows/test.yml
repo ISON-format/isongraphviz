@@ -1,0 +1,77 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  suites:
+    name: build, typecheck, tests, smoke (Node ${{ matrix.node }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22", "24"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - name: install (npm ci, lockfiles, no install scripts)
+        run: tools/ci/run-all.sh install
+      - name: build and typecheck
+        run: tools/ci/run-all.sh build typecheck
+      - name: fast suites
+        run: tools/ci/run-all.sh test
+      - name: slow suites
+        run: tools/ci/run-all.sh test:slow
+      - name: smoke
+        run: tools/ci/run-all.sh smoke bench:smoke
+
+  browser:
+    name: browser smoke and demo checks (Chromium)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - run: tools/ci/run-all.sh install
+      - run: tools/ci/run-all.sh build
+      - name: install Chromium (the version pinned by playwright-core in the lockfiles)
+        run: packages/scene-core/node_modules/.bin/playwright-core install --with-deps chromium
+      - run: tools/ci/run-all.sh demo:build
+      - run: tools/ci/run-all.sh demo:check
+      - run: tools/ci/run-all.sh smoke:browser
+
+  mutants:
+    name: mutation matrices
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+      - run: tools/ci/run-all.sh install
+      - run: tools/ci/run-all.sh build
+      - name: mutation matrices (documented equivalent survivors are allowed, anything else fails)
+        run: tools/ci/run-all.sh mutants mutate
