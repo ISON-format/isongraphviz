@@ -107,9 +107,11 @@ export async function world(o: { directed?: boolean; nodes: string[]; edges?: Ed
 void nodeOf;
 
 // ------------------------------------------------------------------ bytes printed in design 29 section 14 (read from the document, not retyped)
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 const DOC = fileURLToPath(new URL("../../../docs/isongraph-visualize-blueprint/29-LOD-DESIGN.md", import.meta.url));
+/** The design document is git-ignored (kept local), so a clean clone (CI) does not have it: tests that compare against its printed bytes then check the pinned hash and length only. */
+export const DOC_PRESENT = existsSync(DOC);
 let docLinesCache: string[] | undefined;
 /** The fenced one-line JSON blocks of the document starting with `prefix`. */
 export function docJsonLines(prefix: string): string[] {
